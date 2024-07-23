@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */; };
 		AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */; };
-		AB22AD402C4E8D9D00C9A0F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3F2C4E8D9D00C9A0F3 /* ViewController.swift */; };
-		AB22AD432C4E8D9D00C9A0F3 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD422C4E8D9D00C9A0F3 /* Base */; };
 		AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */; };
 		AB22AD482C4E8D9F00C9A0F3 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD472C4E8D9F00C9A0F3 /* Base */; };
 		AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD502C4E92C100C9A0F3 /* SnapKit */; };
@@ -21,8 +19,6 @@
 		AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AB22AD3F2C4E8D9D00C9A0F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AB22AD422C4E8D9D00C9A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB22AD472C4E8D9F00C9A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB22AD492C4E8D9F00C9A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -41,6 +37,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		057925172C4F927100834EC6 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */,
+				AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		057925182C4F927C00834EC6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */,
+				AB22AD462C4E8D9F00C9A0F3 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		AB22AD2F2C4E8D9D00C9A0F3 = {
 			isa = PBXGroup;
 			children = (
@@ -60,13 +74,9 @@
 		AB22AD3A2C4E8D9D00C9A0F3 /* BookTalk */ = {
 			isa = PBXGroup;
 			children = (
-				AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */,
-				AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */,
-				AB22AD3F2C4E8D9D00C9A0F3 /* ViewController.swift */,
-				AB22AD412C4E8D9D00C9A0F3 /* Main.storyboard */,
-				AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */,
-				AB22AD462C4E8D9F00C9A0F3 /* LaunchScreen.storyboard */,
 				AB22AD492C4E8D9F00C9A0F3 /* Info.plist */,
+				057925182C4F927C00834EC6 /* Resources */,
+				057925172C4F927100834EC6 /* Sources */,
 			);
 			path = BookTalk;
 			sourceTree = "<group>";
@@ -139,7 +149,6 @@
 			files = (
 				AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */,
 				AB22AD482C4E8D9F00C9A0F3 /* Base in Resources */,
-				AB22AD432C4E8D9D00C9A0F3 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +159,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB22AD402C4E8D9D00C9A0F3 /* ViewController.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 			);
@@ -159,14 +167,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AB22AD412C4E8D9D00C9A0F3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AB22AD422C4E8D9D00C9A0F3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		AB22AD462C4E8D9F00C9A0F3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -307,11 +307,12 @@
 				DEVELOPMENT_TEAM = BTX96P3YD4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -320,9 +321,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = min.BookTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -336,11 +341,12 @@
 				DEVELOPMENT_TEAM = BTX96P3YD4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -349,9 +355,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = min.BookTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
