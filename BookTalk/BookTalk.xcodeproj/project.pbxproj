@@ -79,9 +79,9 @@
 		057925442C4FF51400834EC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				ABD10DE62C516D26005F290E /* Category */,
 				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
 				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
-				0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
@@ -113,6 +113,14 @@
 				057925172C4F927100834EC6 /* Sources */,
 			);
 			path = BookTalk;
+			sourceTree = "<group>";
+		};
+		ABD10DE62C516D26005F290E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
