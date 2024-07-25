@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
-		0579253D2C4FF4D100834EC6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */; };
+		0579253D2C4FF4D100834EC6 /* FirstCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253C2C4FF4D100834EC6 /* FirstCategoryViewController.swift */; };
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
 		057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925402C4FF4DC00834EC6 /* GoalViewController.swift */; };
 		057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925422C4FF4E100834EC6 /* MyViewController.swift */; };
@@ -21,14 +21,14 @@
 		AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD532C4E92C700C9A0F3 /* Then */; };
 		AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */; };
 		ABD10DF02C51711A005F290E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DEF2C51711A005F290E /* BaseViewController.swift */; };
-		ABD10DF82C52514F005F290E /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* CategoryCollectionViewCell.swift */; };
+		ABD10DF82C52514F005F290E /* FirstCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */; };
 		ABD10DFA2C52562B005F290E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF92C52562B005F290E /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		0579253C2C4FF4D100834EC6 /* FirstCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryViewController.swift; sourceTree = "<group>"; };
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
 		057925402C4FF4DC00834EC6 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		057925422C4FF4E100834EC6 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		AB22AD492C4E8D9F00C9A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryType.swift; sourceTree = "<group>"; };
 		ABD10DEF2C51711A005F290E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		ABD10DF72C52514F005F290E /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		ABD10DF92C52562B005F290E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,7 +154,7 @@
 		ABD10DF32C525112005F290E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				ABD10DF72C52514F005F290E /* CategoryCollectionViewCell.swift */,
+				ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 		ABD10DF42C525116005F290E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */,
+				0579253C2C4FF4D100834EC6 /* FirstCategoryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,12 +247,12 @@
 			files = (
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				ABD10DFA2C52562B005F290E /* Constant.swift in Sources */,
-				0579253D2C4FF4D100834EC6 /* CategoryViewController.swift in Sources */,
+				0579253D2C4FF4D100834EC6 /* FirstCategoryViewController.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				ABD10DF02C51711A005F290E /* BaseViewController.swift in Sources */,
-				ABD10DF82C52514F005F290E /* CategoryCollectionViewCell.swift in Sources */,
+				ABD10DF82C52514F005F290E /* FirstCategoryCollectionViewCell.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
 				AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */,

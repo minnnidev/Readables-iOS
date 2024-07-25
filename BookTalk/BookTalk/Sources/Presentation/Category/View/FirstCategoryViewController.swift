@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 import Then
 
-final class CategoryViewController: BaseViewController {
+final class FirstCategoryViewController: BaseViewController {
 
-    private let categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private let firstCategoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ final class CategoryViewController: BaseViewController {
     }
 
     override func setViews() {
-        categoryCollectionView.do {
+        firstCategoryCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
 
             $0.collectionViewLayout = flowLayout
@@ -35,11 +35,11 @@ final class CategoryViewController: BaseViewController {
     }
 
     override func setConstraints() {
-        [categoryCollectionView].forEach {
+        [firstCategoryCollectionView].forEach {
             view.addSubview($0)
         }
 
-        categoryCollectionView.snp.makeConstraints {
+        firstCategoryCollectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(35)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
@@ -48,23 +48,23 @@ final class CategoryViewController: BaseViewController {
     }
 
     private func registerCell() {
-        categoryCollectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
+        firstCategoryCollectionView.register(FirstCategoryCollectionViewCell.self, forCellWithReuseIdentifier: FirstCategoryCollectionViewCell.identifier)
     }
 
     private func setCollectionView() {
-        categoryCollectionView.dataSource = self
-        categoryCollectionView.delegate = self
+        firstCategoryCollectionView.dataSource = self
+        firstCategoryCollectionView.delegate = self
     }
 }
 
-extension CategoryViewController: UICollectionViewDataSource {
+extension FirstCategoryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return FirstCategoryType.allCases.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstCategoryCollectionViewCell.identifier, for: indexPath) as? FirstCategoryCollectionViewCell else { return UICollectionViewCell() }
 
         cell.bind(FirstCategoryType.allCases[indexPath.item].title)
 
@@ -72,7 +72,7 @@ extension CategoryViewController: UICollectionViewDataSource {
     }
 }
 
-extension CategoryViewController: UICollectionViewDelegateFlowLayout {
+extension FirstCategoryViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (ScreenSize.width-40-16)/2, height: 60)
