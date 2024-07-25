@@ -36,8 +36,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         }
 
         categoryNameLabel.do {
-            $0.font = .systemFont(ofSize: 17, weight: .semibold)
-            $0.text = "카테고리"
+            $0.font = .systemFont(ofSize: 18, weight: .semibold)
             $0.textColor = .black
         }
     }
@@ -51,5 +50,9 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(24)
         }
+    }
+
+    func bind(_ title: String) {
+        categoryNameLabel.text = title
     }
 }
