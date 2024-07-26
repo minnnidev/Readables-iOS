@@ -54,7 +54,6 @@ class MainTabBarController: UITabBarController {
             rootViewController: MyViewController()
         )
         
-        home.navigationBar.isHidden = true
         viewControllers = [home, category, openTalk, goal, my]
     }
     
@@ -79,7 +78,7 @@ class MainTabBarController: UITabBarController {
         
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.tabBarItem = tabBarItem
-        navigationController.navigationBar.tintColor = .black
+        navigationController.navigationBar.tintColor = .white
         
         return navigationController
     }
