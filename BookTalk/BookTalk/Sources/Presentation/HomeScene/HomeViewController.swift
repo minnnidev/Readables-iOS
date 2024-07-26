@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SafeAreaBrush
+
 class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -29,6 +31,7 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
     
     func setupUI() {
+        fillSafeArea(position: .top, color: .accentGreen)
         configureNavBar()
         setupConstraints()
     }
