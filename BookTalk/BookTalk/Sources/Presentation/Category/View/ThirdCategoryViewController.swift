@@ -12,7 +12,10 @@ import Then
 final class ThirdCategoryViewController: BaseViewController {
 
     private let sortView = UIView()
+    private let sortButton = UIButton()
     private let booksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+
+    private let viewModel = ThirdCategoryViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +29,22 @@ final class ThirdCategoryViewController: BaseViewController {
     }
 
     override func setViews() {
+        view.backgroundColor = .white
+
         sortView.do {
-            $0.backgroundColor = .red
+            $0.backgroundColor = .white
+        }
+
+        sortButton.do {
+            $0.setTitle("일주일 인기순", for: .normal)
+            $0.setTitleColor(.black, for: .normal)
+            $0.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+            $0.semanticContentAttribute = .forceRightToLeft
+            $0.setPreferredSymbolConfiguration(.init(scale: .small), forImageIn: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
+            $0.tintColor = .black
+            $0.showsMenuAsPrimaryAction = true
+            $0.menu = UIMenu(children: createMenus())
         }
 
         booksCollectionView.do {
@@ -41,8 +58,17 @@ final class ThirdCategoryViewController: BaseViewController {
     }
 
     override func setConstraints() {
+        [sortButton].forEach {
+            sortView.addSubview($0)
+        }
+
         [sortView, booksCollectionView].forEach {
             view.addSubview($0)
+        }
+
+        sortButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.centerY.equalToSuperview()
         }
 
         sortView.snp.makeConstraints {
@@ -64,6 +90,24 @@ final class ThirdCategoryViewController: BaseViewController {
     private func setCollectionView() {
         booksCollectionView.dataSource = self
         booksCollectionView.delegate = self
+    }
+
+    private func createMenus() -> [UIAction] {
+        var actions: [UIAction] = .init()
+
+        BookSortType.allCases.forEach { sortType in
+            let action: UIAction = .init(
+                title: sortType.title,
+                handler: { [weak self] _ in
+                    self?.sortButton.titleLabel?.text = sortType.title
+                    self?.viewModel.send(action: .sort(sortType))
+                }
+            )
+
+            actions.append(action)
+        }
+
+        return actions
     }
 }
 
