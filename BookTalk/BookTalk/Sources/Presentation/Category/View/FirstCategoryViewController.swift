@@ -55,6 +55,13 @@ final class FirstCategoryViewController: BaseViewController {
         firstCategoryCollectionView.dataSource = self
         firstCategoryCollectionView.delegate = self
     }
+
+    private func pushToSecondCategoryViewController() {
+        // TODO: 카테고리에 맞는 파라미터 추가
+        let secondCategoryViewController = SecondCategoryViewController()
+
+        navigationController?.pushViewController(secondCategoryViewController, animated: true)
+    }
 }
 
 extension FirstCategoryViewController: UICollectionViewDataSource {
@@ -69,6 +76,10 @@ extension FirstCategoryViewController: UICollectionViewDataSource {
         cell.bind(FirstCategoryType.allCases[indexPath.item].title)
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pushToSecondCategoryViewController()
     }
 }
 
