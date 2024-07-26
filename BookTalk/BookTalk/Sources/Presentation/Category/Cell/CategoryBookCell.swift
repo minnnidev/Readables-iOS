@@ -1,5 +1,5 @@
 //
-//  BannerCell.swift
+//  CategoryBookCell.swift
 //  BookTalk
 //
 //  Created by 김민 on 7/26/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class BannerCell: UITableViewCell {
+final class CategoryBookCell: UITableViewCell {
+    
+    static let identifier = "CategoryBookCell"
 
-    static let identifier = "BannerCell"
-
-    private let bannerImageView = UIImageView()
+    private let bookImageView = UIImageView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,27 +19,27 @@ final class BannerCell: UITableViewCell {
         setViews()
         setConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setViews() {
         selectionStyle = .none
         
         contentView.backgroundColor = .clear
 
-        bannerImageView.do {
+        bookImageView.do {
             $0.backgroundColor = .gray100
         }
     }
 
     private func setConstraints() {
-        [bannerImageView].forEach {
+        [bookImageView].forEach {
             contentView.addSubview($0)
         }
 
-        bannerImageView.snp.makeConstraints {
+        bookImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }

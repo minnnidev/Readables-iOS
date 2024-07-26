@@ -9,5 +9,5 @@ import Foundation
 
 final class SecondCategoryViewModel {
     
-    let sections: [CategorySectionKind] = [.banner, .category]
+    let sections: [CategorySectionKind] = [.banner, .category, .allBookButton]
 }

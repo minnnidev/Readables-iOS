@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoryTitleCell: UICollectionViewCell {
+final class CategoryTitleCell: UITableViewCell {
 
     static let identifier = "CategoryTitleCell"
 
@@ -15,8 +15,8 @@ final class CategoryTitleCell: UICollectionViewCell {
     private let chevronImageView = UIImageView()
     private let secondCategoryTitleLabel = UILabel()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         setViews()
         setConstraints()
@@ -27,6 +27,8 @@ final class CategoryTitleCell: UICollectionViewCell {
     }
 
     private func setViews() {
+        selectionStyle = .none
+
         contentView.backgroundColor = .clear
 
         firstCategoryTitleLabel.do {
@@ -54,6 +56,7 @@ final class CategoryTitleCell: UICollectionViewCell {
         }
 
         firstCategoryTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(24)
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(12)
         }
