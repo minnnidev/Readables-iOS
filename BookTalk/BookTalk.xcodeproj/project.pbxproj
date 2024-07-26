@@ -20,8 +20,10 @@
 		AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD502C4E92C100C9A0F3 /* SnapKit */; };
 		AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD532C4E92C700C9A0F3 /* Then */; };
 		AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */; };
-		ABD10DF82C52514F005F290E /* FirstCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */; };
 		AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC62C5260E000CE43CB /* UIColor+.swift */; };
+		AB2E7BD62C53B36D00CE43CB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BD52C53B36D00CE43CB /* BaseViewController.swift */; };
+		AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BD72C53B37500CE43CB /* Constant.swift */; };
+		ABD10DF82C52514F005F290E /* FirstCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +40,10 @@
 		AB22AD472C4E8D9F00C9A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB22AD492C4E8D9F00C9A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryType.swift; sourceTree = "<group>"; };
-		ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		AB2E7BC62C5260E000CE43CB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		AB2E7BD52C53B36D00CE43CB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AB2E7BD72C53B37500CE43CB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		ABD10DF72C52514F005F290E /* FirstCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,24 @@
 			path = BookTalk;
 			sourceTree = "<group>";
 		};
+		AB2E7BC22C5260A100CE43CB /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E7BC32C5260AB00CE43CB /* Extension */,
+				AB2E7BD52C53B36D00CE43CB /* BaseViewController.swift */,
+				AB2E7BD72C53B37500CE43CB /* Constant.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		AB2E7BC32C5260AB00CE43CB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E7BC62C5260E000CE43CB /* UIColor+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		ABD10DE62C516D26005F290E /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,22 +168,6 @@
 				0579253C2C4FF4D100834EC6 /* FirstCategoryViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		AB2E7BC22C5260A100CE43CB /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				AB2E7BC32C5260AB00CE43CB /* Extension */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		AB2E7BC32C5260AB00CE43CB /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				AB2E7BC62C5260E000CE43CB /* UIColor+.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,9 +253,11 @@
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
+				AB2E7BD62C53B36D00CE43CB /* BaseViewController.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCollectionViewCell.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
+				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */,
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
