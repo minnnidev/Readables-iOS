@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		054543352C5374D900E64948 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543342C5374D900E64948 /* SearchViewController.swift */; };
+		054543382C53758700E64948 /* SafeAreaBrush in Frameworks */ = {isa = PBXBuildFile; productRef = 054543372C53758700E64948 /* SafeAreaBrush */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
 		0579253D2C4FF4D100834EC6 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */; };
@@ -23,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		054543342C5374D900E64948 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054543382C53758700E64948 /* SafeAreaBrush in Frameworks */,
 				AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */,
 				AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */,
 			);
@@ -92,6 +96,7 @@
 			children = (
 				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
 				0545432E2C53725200E64948 /* HomeScene */,
+				054543342C5374D900E64948 /* SearchViewController.swift */,
 				0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
@@ -161,6 +166,7 @@
 			packageProductDependencies = (
 				AB22AD502C4E92C100C9A0F3 /* SnapKit */,
 				AB22AD532C4E92C700C9A0F3 /* Then */,
+				054543372C53758700E64948 /* SafeAreaBrush */,
 			);
 			productName = BookTalk;
 			productReference = AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */;
@@ -193,6 +199,7 @@
 			packageReferences = (
 				AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AB22AD522C4E92C700C9A0F3 /* XCRemoteSwiftPackageReference "Then" */,
+				054543362C53758700E64948 /* XCRemoteSwiftPackageReference "SafeAreaBrush" */,
 			);
 			productRefGroup = AB22AD392C4E8D9D00C9A0F3 /* Products */;
 			projectDirPath = "";
@@ -220,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				0579253D2C4FF4D100834EC6 /* CategoryViewController.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
@@ -461,6 +469,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		054543362C53758700E64948 /* XCRemoteSwiftPackageReference "SafeAreaBrush" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WallabyStuff/SafeAreaBrush.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -480,6 +496,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		054543372C53758700E64948 /* SafeAreaBrush */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054543362C53758700E64948 /* XCRemoteSwiftPackageReference "SafeAreaBrush" */;
+			productName = SafeAreaBrush;
+		};
 		AB22AD502C4E92C100C9A0F3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */;
