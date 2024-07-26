@@ -1,5 +1,5 @@
 //
-//  CategoryCollectionViewCell.swift
+//  FirstCategoryCell.swift
 //  BookTalk
 //
 //  Created by 김민 on 7/25/24.
@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 import Then
 
-final class FirstCategoryCollectionViewCell: UICollectionViewCell {
+final class FirstCategoryCell: UICollectionViewCell {
 
-    static let identifier = "CategoryCollectionViewCell"
+    static let identifier = "FirstCategoryCell"
 
     private let categoryNameLabel = UILabel()
 

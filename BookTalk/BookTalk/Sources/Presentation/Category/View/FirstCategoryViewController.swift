@@ -50,7 +50,7 @@ final class FirstCategoryViewController: BaseViewController {
     }
 
     private func registerCell() {
-        firstCategoryCollectionView.register(FirstCategoryCollectionViewCell.self, forCellWithReuseIdentifier: FirstCategoryCollectionViewCell.identifier)
+        firstCategoryCollectionView.register(FirstCategoryCell.self, forCellWithReuseIdentifier: FirstCategoryCell.identifier)
     }
 
     private func setCollectionView() {
@@ -73,7 +73,7 @@ extension FirstCategoryViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstCategoryCollectionViewCell.identifier, for: indexPath) as? FirstCategoryCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstCategoryCell.identifier, for: indexPath) as? FirstCategoryCell else { return UICollectionViewCell() }
 
         cell.bind(FirstCategoryType.allCases[indexPath.item].title)
 
