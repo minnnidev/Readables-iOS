@@ -14,18 +14,4 @@ enum CategorySectionKind {
     case allBookButton
     case newBooks
     case popularBooks
-
-    var sectionHeight: CGFloat {
-        switch self {
-            
-        case .banner:
-            return CGFloat(160)
-            
-        case .category, .allBookButton:
-            return CGFloat(60)
-            
-        case .newBooks, .popularBooks:
-            return CGFloat(218)
-        }
-    }
 }

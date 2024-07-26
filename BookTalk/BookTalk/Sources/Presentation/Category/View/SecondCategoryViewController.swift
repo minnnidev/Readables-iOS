@@ -71,7 +71,9 @@ extension SecondCategoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch viewModel.sections[indexPath.section] {
+        let section = viewModel.sections[indexPath.section]
+
+        switch section {
         case .banner:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BannerCell.identifier, for: indexPath) as? BannerCell else { return UITableViewCell() }
 
@@ -90,6 +92,8 @@ extension SecondCategoryViewController: UITableViewDataSource {
         case .newBooks, .popularBooks:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryBookCell.identifier, for: indexPath) as? CategoryBookCell else { return UITableViewCell() }
 
+            cell.bind(section == .newBooks ? viewModel.newBooks : viewModel.popularBooks)
+
             return cell
         }
     }
@@ -98,8 +102,13 @@ extension SecondCategoryViewController: UITableViewDataSource {
 extension SecondCategoryViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section = viewModel.sections[indexPath.section]
-        let height = section.sectionHeight
-        return section == .category || section == .allBookButton ? tableView.estimatedRowHeight : height
+        switch viewModel.sections[indexPath.section] {
+
+        case .banner:
+            return 160
+
+        case .category, .allBookButton, .newBooks, .popularBooks:
+            return UITableView.automaticDimension
+        }
     }
 }

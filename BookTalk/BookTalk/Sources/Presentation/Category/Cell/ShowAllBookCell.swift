@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShowAllBookCell: UITableViewCell {
+final class ShowAllBookCell: UITableViewCell {
 
     static let identifier = "ShowAllBookCell"
 
