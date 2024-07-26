@@ -8,22 +8,50 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Actions
+    
+    @objc private func searchIconTapped() {
+        let searchVC = SearchViewController()
+        
+        navigationItem.title = ""
+        navigationController?.pushViewController(searchVC, animated: true)
     }
-    */
+}
 
+// MARK: - UI Setup
+
+private extension HomeViewController {
+    
+    func setupUI() {
+        configureNavBar()
+        setupConstraints()
+    }
+    
+    func configureNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .accentGreen
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        let searchIcon = UIBarButtonItem(
+            image: UIImage(systemName: "magnifyingglass"),
+            style: .plain,
+            target: self,
+            action: #selector(searchIconTapped)
+        )
+        
+        searchIcon.tintColor = .white
+        navigationItem.rightBarButtonItem = searchIcon
+    }
+    
+    func setupConstraints() {
+        
+    }
 }
