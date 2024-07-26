@@ -99,7 +99,7 @@ final class ThirdCategoryViewController: BaseViewController {
             let action: UIAction = .init(
                 title: sortType.title,
                 handler: { [weak self] _ in
-                    self?.sortButton.titleLabel?.text = sortType.title
+                    self?.sortButton.setTitle(sortType.title, for: .normal)
                     self?.viewModel.send(action: .sort(sortType))
                 }
             )
