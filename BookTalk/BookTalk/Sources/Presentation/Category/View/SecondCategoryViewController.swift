@@ -111,4 +111,12 @@ extension SecondCategoryViewController: UITableViewDelegate {
             return UITableView.automaticDimension
         }
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard viewModel.sections[indexPath.section] == .allBookButton else { return }
+
+        let thirdCategoryViewController = ThirdCategoryViewController()
+        thirdCategoryViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(thirdCategoryViewController, animated: true)
+    }
 }

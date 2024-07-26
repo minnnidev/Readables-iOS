@@ -32,6 +32,7 @@
 		AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BE62C53D2A300CE43CB /* ShowAllBookCell.swift */; };
 		AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */; };
 		AB2E7BED2C53DB2200CE43CB /* CategoryBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BEC2C53DB2200CE43CB /* CategoryBooks.swift */; };
+		AB2E7BF22C53EDD800CE43CB /* ThirdCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF12C53EDD800CE43CB /* ThirdCategoryViewController.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		AB2E7BE62C53D2A300CE43CB /* ShowAllBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllBookCell.swift; sourceTree = "<group>"; };
 		AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImageCell.swift; sourceTree = "<group>"; };
 		AB2E7BEC2C53DB2200CE43CB /* CategoryBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryBooks.swift; sourceTree = "<group>"; };
+		AB2E7BF12C53EDD800CE43CB /* ThirdCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCategoryViewController.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +243,7 @@
 			children = (
 				0579253C2C4FF4D100834EC6 /* FirstCategoryViewController.swift */,
 				AB2E7BD92C53B3F300CE43CB /* SecondCategoryViewController.swift */,
+				AB2E7BF12C53EDD800CE43CB /* ThirdCategoryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			files = (
 				AB2E7BE52C53C97800CE43CB /* CategoryBookCell.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
+				AB2E7BF22C53EDD800CE43CB /* ThirdCategoryViewController.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* CategoryBooks.swift in Sources */,
