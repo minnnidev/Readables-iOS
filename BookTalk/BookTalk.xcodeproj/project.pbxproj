@@ -166,14 +166,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		ABD10DE62C516D26005F290E /* Category */ = {
+		AB2E7BE82C53D5D400CE43CB /* Enum */ = {
 			isa = PBXGroup;
 			children = (
 				AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */,
+				AB2E7BDB2C53B64800CE43CB /* CategorySectionKind.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		ABD10DE62C516D26005F290E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E7BE82C53D5D400CE43CB /* Enum */,
 				ABD10DF32C525112005F290E /* Cell */,
 				ABD10DF42C525116005F290E /* View */,
 				AB2E7BDD2C53B6FA00CE43CB /* ViewModel */,
-				AB2E7BDB2C53B64800CE43CB /* CategorySectionKind.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
