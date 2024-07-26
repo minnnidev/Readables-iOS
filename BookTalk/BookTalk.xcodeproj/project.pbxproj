@@ -51,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0545432E2C53725200E64948 /* HomeScene */ = {
+			isa = PBXGroup;
+			children = (
+				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
+			);
+			path = HomeScene;
+			sourceTree = "<group>";
+		};
 		057925172C4F927100834EC6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
-				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
+				0545432E2C53725200E64948 /* HomeScene */,
 				0579253C2C4FF4D100834EC6 /* CategoryViewController.swift */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
