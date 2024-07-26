@@ -32,7 +32,7 @@ final class FirstCategoryCell: UICollectionViewCell {
         contentView.do {
             $0.layer.cornerRadius = 10
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.lightGray.cgColor
+            $0.layer.borderColor = UIColor.gray100.cgColor
         }
 
         categoryNameLabel.do {
