@@ -21,8 +21,10 @@ final class FirstCategoryViewController: BaseViewController {
     }
 
     override func setNavigationBar() {
-        navigationItem.title = "카테고리"
         navigationController?.navigationBar.prefersLargeTitles = true
+
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.title = "카테고리"
     }
 
     override func setViews() {
