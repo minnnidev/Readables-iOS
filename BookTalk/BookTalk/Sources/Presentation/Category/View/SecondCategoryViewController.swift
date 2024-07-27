@@ -113,10 +113,20 @@ extension SecondCategoryViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard viewModel.sections[indexPath.section] == .allBookButton else { return }
+        switch viewModel.sections[indexPath.section] {
 
-        let thirdCategoryViewController = ThirdCategoryViewController()
-        thirdCategoryViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(thirdCategoryViewController, animated: true)
+        case .category:
+            let modalViewController = CategorySelectModaViewController()
+            modalViewController.modalPresentationStyle = .pageSheet
+            present(modalViewController, animated: true)
+
+        case .allBookButton:
+            let thirdCategoryViewController = ThirdCategoryViewController()
+            thirdCategoryViewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(thirdCategoryViewController, animated: true)
+
+        case .banner, .newBooks, .popularBooks:
+            return
+        }
     }
 }

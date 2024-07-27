@@ -35,6 +35,7 @@
 		AB2E7BF22C53EDD800CE43CB /* ThirdCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF12C53EDD800CE43CB /* ThirdCategoryViewController.swift */; };
 		AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF52C53F68200CE43CB /* BookSortType.swift */; };
 		AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF72C53F71B00CE43CB /* ThirdCategoryViewModel.swift */; };
+		AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		AB2E7BF12C53EDD800CE43CB /* ThirdCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCategoryViewController.swift; sourceTree = "<group>"; };
 		AB2E7BF52C53F68200CE43CB /* BookSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSortType.swift; sourceTree = "<group>"; };
 		AB2E7BF72C53F71B00CE43CB /* ThirdCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCategoryViewModel.swift; sourceTree = "<group>"; };
+		AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectModaViewController.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +252,7 @@
 				0579253C2C4FF4D100834EC6 /* FirstCategoryViewController.swift */,
 				AB2E7BD92C53B3F300CE43CB /* SecondCategoryViewController.swift */,
 				AB2E7BF12C53EDD800CE43CB /* ThirdCategoryViewController.swift */,
+				AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* CategoryBooks.swift in Sources */,
 				0579253D2C4FF4D100834EC6 /* FirstCategoryViewController.swift in Sources */,
+				AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
