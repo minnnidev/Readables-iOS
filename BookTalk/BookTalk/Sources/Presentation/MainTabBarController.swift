@@ -54,7 +54,6 @@ class MainTabBarController: UITabBarController {
             rootViewController: MyViewController()
         )
         
-        home.navigationBar.isHidden = true
         viewControllers = [home, category, openTalk, goal, my]
     }
     
