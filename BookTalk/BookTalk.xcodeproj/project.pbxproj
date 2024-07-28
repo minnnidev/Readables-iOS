@@ -37,6 +37,7 @@
 		AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */; };
 		AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BFD2C5602A500CE43CB /* Category.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
+		AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		AB22AD492C4E8D9F00C9A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryType.swift; sourceTree = "<group>"; };
 		AB2E7BC62C5260E000CE43CB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		AB2E7BD72C53B37500CE43CB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		AB2E7BD92C53B3F300CE43CB /* SecondCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCategoryViewController.swift; sourceTree = "<group>"; };
 		AB2E7BDB2C53B64800CE43CB /* CategorySectionKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySectionKind.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		AB2E7BC22C5260A100CE43CB /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				AB2E7BCC2C53ADE300CE43CB /* Base */,
 				AB2E7BC32C5260AB00CE43CB /* Extension */,
 				AB2E7BD72C53B37500CE43CB /* Constant.swift */,
 			);
@@ -257,6 +260,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AB2E7BCC2C53ADE300CE43CB /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,6 +363,7 @@
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
+				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
