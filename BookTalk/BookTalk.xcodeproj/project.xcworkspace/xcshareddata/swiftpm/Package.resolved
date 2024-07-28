@@ -1,15 +1,6 @@
 {
-  "originHash" : "1a5db707245cf22ab94eadcdc88c843f8c3dac73dce1484835e180502baf67a5",
+  "originHash" : "2ad69c0deaec8838f2417eb6e8d288b30a36442bc22243bc0f5ee813f88e20a7",
   "pins" : [
-    {
-      "identity" : "safeareabrush",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WallabyStuff/SafeAreaBrush.git",
-      "state" : {
-        "revision" : "4943d253687368afbea7ea09c19530a0361ed613",
-        "version" : "1.0.4"
-      }
-    },
     {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
