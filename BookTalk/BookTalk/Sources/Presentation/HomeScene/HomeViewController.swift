@@ -18,8 +18,6 @@ class HomeViewController: UIViewController {
     
     @objc private func searchIconTapped() {
         let searchVC = SearchViewController()
-        
-        navigationItem.title = ""
         navigationController?.pushViewController(searchVC, animated: true)
     }
 }
