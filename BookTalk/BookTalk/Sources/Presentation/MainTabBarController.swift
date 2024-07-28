@@ -78,7 +78,7 @@ class MainTabBarController: UITabBarController {
         
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.tabBarItem = tabBarItem
-        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.tintColor = .black
         
         return navigationController
     }

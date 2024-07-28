@@ -31,14 +31,12 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
     
     func setupUI() {
-        fillSafeArea(position: .top, color: .accentGreen)
         configureNavBar()
         setupConstraints()
     }
     
     func configureNavBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .accentGreen
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -50,7 +48,6 @@ private extension HomeViewController {
             action: #selector(searchIconTapped)
         )
         
-        searchIcon.tintColor = .white
         navigationItem.rightBarButtonItem = searchIcon
     }
     
