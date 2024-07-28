@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import SnapKit
 import Then
 
@@ -89,8 +90,16 @@ final class CategorySelectModaViewController: BaseViewController {
     }
 
     private func addTarget() {
-        dismissButton.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
-        completeButton.addTarget(self, action: #selector(completeButtonDidTapped), for: .touchUpInside)
+        dismissButton.addTarget(
+            self,
+            action: #selector(dismissButtonDidTapped),
+            for: .touchUpInside
+        )
+        completeButton.addTarget(
+            self, 
+            action: #selector(completeButtonDidTapped),
+            for: .touchUpInside
+        )
     }
 
     @objc private func dismissButtonDidTapped() {
@@ -115,11 +124,19 @@ extension CategorySelectModaViewController: UIPickerViewDataSource {
 
 extension CategorySelectModaViewController: UIPickerViewDelegate {
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        titleForRow row: Int,
+        forComponent component: Int
+    ) -> String? {
         Category.secondCategories[row]
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // TODO: 
+    func pickerView(
+        _ pickerView: UIPickerView,
+        didSelectRow row: Int,
+        inComponent component: Int
+    ) {
+        // TODO:
     }
 }

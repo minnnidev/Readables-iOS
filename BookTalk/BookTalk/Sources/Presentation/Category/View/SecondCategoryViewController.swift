@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class SecondCategoryViewController: BaseViewController {
 
     private let secondCategoryTableView = UITableView(frame: .zero)
