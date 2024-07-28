@@ -32,7 +32,6 @@ final class CategoryTitleCell: UITableViewCell {
         contentView.backgroundColor = .clear
 
         firstCategoryTitleLabel.do {
-            $0.text = "철학"
             $0.font = .systemFont(ofSize: 23, weight: .bold)
             $0.textColor = .accentGreen
         }
@@ -44,7 +43,6 @@ final class CategoryTitleCell: UITableViewCell {
         }
 
         secondCategoryTitleLabel.do {
-            $0.text = "철학의 세계"
             $0.font = .systemFont(ofSize: 23, weight: .bold)
             $0.textColor = .accentGreen
         }
@@ -71,5 +69,10 @@ final class CategoryTitleCell: UITableViewCell {
             $0.centerY.equalTo(firstCategoryTitleLabel)
             $0.leading.equalTo(chevronImageView.snp.trailing).offset(4)
         }
+    }
+
+    func bind(_ category: Category) {
+        firstCategoryTitleLabel.text = category.firstCatgory
+        secondCategoryTitleLabel.text = category.secondCategory
     }
 }

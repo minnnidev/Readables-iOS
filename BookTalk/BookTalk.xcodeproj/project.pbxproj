@@ -36,6 +36,7 @@
 		AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF52C53F68200CE43CB /* BookSortType.swift */; };
 		AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF72C53F71B00CE43CB /* ThirdCategoryViewModel.swift */; };
 		AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */; };
+		AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BFD2C5602A500CE43CB /* Category.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		AB2E7BF52C53F68200CE43CB /* BookSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSortType.swift; sourceTree = "<group>"; };
 		AB2E7BF72C53F71B00CE43CB /* ThirdCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCategoryViewModel.swift; sourceTree = "<group>"; };
 		AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectModaViewController.swift; sourceTree = "<group>"; };
+		AB2E7BFD2C5602A500CE43CB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				AB2E7BEC2C53DB2200CE43CB /* CategoryBooks.swift */,
+				AB2E7BFD2C5602A500CE43CB /* Category.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */,
+				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
 				AB2E7BDF2C53B70700CE43CB /* SecondCategoryViewModel.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,

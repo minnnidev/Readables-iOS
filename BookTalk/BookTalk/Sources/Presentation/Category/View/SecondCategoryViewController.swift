@@ -82,6 +82,10 @@ extension SecondCategoryViewController: UITableViewDataSource {
         case .category:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTitleCell.identifier, for: indexPath) as? CategoryTitleCell else { return UITableViewCell() }
 
+            // TODO: 카테고리 분류에 따른 수정
+            let category: Category = .init(firstCatgory: "철학", secondCategory: "철학의 세계")
+            cell.bind(category)
+
             return cell
 
         case .allBookButton:
