@@ -30,7 +30,7 @@ class MainTabBarController: UITabBarController {
             title: "카테고리",
             unselectedImage: "square.grid.2x2",
             selectedImage: "square.grid.2x2.fill",
-            rootViewController: CategoryViewController()
+            rootViewController: FirstCategoryViewController()
         )
         
         let openTalk = createNavigationController(
