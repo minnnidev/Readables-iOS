@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SafeAreaBrush
-
 class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
