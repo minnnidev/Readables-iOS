@@ -5,10 +5,10 @@
 //  Created by RAFA on 7/29/24.
 //
 
-import UIKit
+import Foundation
 
 struct HomeBooks {
     let title: String
     let author: String
-    let coverImage: UIImage?
+    let coverImageURL: String
 }
