@@ -94,7 +94,9 @@
 		0545432E2C53725200E64948 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				054543952C57493400E64948 /* Cell */,
 				054543932C5748E200E64948 /* View */,
+				054543942C57491800E64948 /* ViewModel */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -113,6 +115,36 @@
 				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		054543942C57491800E64948 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		054543952C57493400E64948 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				054543962C57494700E64948 /* TableViewCell */,
+				054543972C57494E00E64948 /* CollectionViewCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		054543962C57494700E64948 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		054543972C57494E00E64948 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 		057925172C4F927100834EC6 /* Sources */ = {
