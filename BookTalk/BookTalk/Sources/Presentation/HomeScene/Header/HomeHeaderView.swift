@@ -44,8 +44,7 @@ private extension HomeHeaderView {
     
     func setupUI() {
         contentView.backgroundColor = .white
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(rightArrowIcon)
+        [titleLabel, rightArrowIcon].forEach { contentView.addSubview($0) }
         
         configureComponents()
         setupConstraints()
