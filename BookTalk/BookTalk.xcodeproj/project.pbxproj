@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		054543352C5374D900E64948 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543342C5374D900E64948 /* SearchViewController.swift */; };
+		054543922C57483400E64948 /* HomeBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543912C57483400E64948 /* HomeBooks.swift */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		054543342C5374D900E64948 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		054543912C57483400E64948 /* HomeBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBooks.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
 			);
 			path = HomeScene;
+			sourceTree = "<group>";
+		};
+		0545438C2C5747E300E64948 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				054543912C57483400E64948 /* HomeBooks.swift */,
+			);
+			name = Home;
 			sourceTree = "<group>";
 		};
 		057925172C4F927100834EC6 /* Sources */ = {
@@ -214,6 +224,7 @@
 		AB2E7BEB2C53DAFE00CE43CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0545438C2C5747E300E64948 /* Home */,
 				AB2E7BEE2C53DB6100CE43CB /* Category */,
 			);
 			path = Model;
@@ -360,6 +371,7 @@
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* CategoryBookCell.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
+				054543922C57483400E64948 /* HomeBooks.swift in Sources */,
 				AB2E7BF22C53EDD800CE43CB /* ThirdCategoryViewController.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
