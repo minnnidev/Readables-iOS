@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		054543352C5374D900E64948 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543342C5374D900E64948 /* SearchViewController.swift */; };
+		054543922C57483400E64948 /* HomeBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543912C57483400E64948 /* HomeBooks.swift */; };
+		054543992C5749F300E64948 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543982C5749F300E64948 /* HomeViewModel.swift */; };
+		0545439B2C574B9000E64948 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439A2C574B9000E64948 /* HomeSection.swift */; };
+		054543A02C5750B200E64948 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439F2C5750B200E64948 /* MockData.swift */; };
+		054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A12C5751DD00E64948 /* SuggestionCell.swift */; };
+		054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A32C57520C00E64948 /* RecommendationBookCell.swift */; };
+		054543A62C57523B00E64948 /* RecommendationBookCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */; };
+		054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A82C57531C00E64948 /* HomeHeaderView.swift */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
@@ -43,6 +51,14 @@
 
 /* Begin PBXFileReference section */
 		054543342C5374D900E64948 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		054543912C57483400E64948 /* HomeBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBooks.swift; sourceTree = "<group>"; };
+		054543982C5749F300E64948 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0545439A2C574B9000E64948 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
+		0545439F2C5750B200E64948 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		054543A12C5751DD00E64948 /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
+		054543A32C57520C00E64948 /* RecommendationBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCell.swift; sourceTree = "<group>"; };
+		054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCollectionCell.swift; sourceTree = "<group>"; };
+		054543A82C57531C00E64948 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
@@ -92,9 +108,72 @@
 		0545432E2C53725200E64948 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
-				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
+				054543A72C57530A00E64948 /* Header */,
+				054543952C57493400E64948 /* Cell */,
+				054543932C5748E200E64948 /* View */,
+				054543942C57491800E64948 /* ViewModel */,
 			);
 			path = HomeScene;
+			sourceTree = "<group>";
+		};
+		0545438C2C5747E300E64948 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				054543912C57483400E64948 /* HomeBooks.swift */,
+				0545439A2C574B9000E64948 /* HomeSection.swift */,
+				0545439F2C5750B200E64948 /* MockData.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		054543932C5748E200E64948 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		054543942C57491800E64948 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				054543982C5749F300E64948 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		054543952C57493400E64948 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				054543962C57494700E64948 /* TableViewCell */,
+				054543972C57494E00E64948 /* CollectionViewCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		054543962C57494700E64948 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				054543A12C5751DD00E64948 /* SuggestionCell.swift */,
+				054543A32C57520C00E64948 /* RecommendationBookCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		054543972C57494E00E64948 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		054543A72C57530A00E64948 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				054543A82C57531C00E64948 /* HomeHeaderView.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		057925172C4F927100834EC6 /* Sources */ = {
@@ -214,6 +293,7 @@
 		AB2E7BEB2C53DAFE00CE43CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0545438C2C5747E300E64948 /* Home */,
 				AB2E7BEE2C53DB6100CE43CB /* Category */,
 			);
 			path = Model;
@@ -360,6 +440,8 @@
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* CategoryBookCell.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
+				054543922C57483400E64948 /* HomeBooks.swift in Sources */,
+				054543A62C57523B00E64948 /* RecommendationBookCollectionCell.swift in Sources */,
 				AB2E7BF22C53EDD800CE43CB /* ThirdCategoryViewController.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
@@ -367,12 +449,18 @@
 				AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
+				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
+				054543A02C5750B200E64948 /* MockData.swift in Sources */,
+				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
+				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SecondCategoryViewController.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
+				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
+				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
 				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
