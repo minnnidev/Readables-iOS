@@ -176,6 +176,14 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		054543AA2C5786B000E64948 /* SearchScene */ = {
+			isa = PBXGroup;
+			children = (
+				054543342C5374D900E64948 /* SearchViewController.swift */,
+			);
+			path = SearchScene;
+			sourceTree = "<group>";
+		};
 		057925172C4F927100834EC6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +219,7 @@
 				ABD10DE62C516D26005F290E /* Category */,
 				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
 				0545432E2C53725200E64948 /* HomeScene */,
-				054543342C5374D900E64948 /* SearchViewController.swift */,
+				054543AA2C5786B000E64948 /* SearchScene */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
