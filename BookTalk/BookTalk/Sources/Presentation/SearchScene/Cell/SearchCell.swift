@@ -15,21 +15,14 @@ final class SearchCell: UITableViewCell {
     // MARK: - Properties
     
     private let coverImageView = UIImageView()
-    
     private let titleLabel = UILabel()
     private let authorLabel = UILabel()
     private let publisherLabel = UILabel()
     private let publicationDateLabel = UILabel()
     private let bookInfoStackView = UIStackView()
-    
     private let availabilityLabel = UILabel()
-    
     private let favoriteButton = UIButton(type: .system)
-    private let bookmarkButton = UIButton(type: .system)
-    private let buttonStackView = UIStackView()
-    
     private var isFavorite: Bool = false
-    private var isBookmarked: Bool = false
     
     // MARK: - Lifecycle
     
@@ -50,20 +43,15 @@ final class SearchCell: UITableViewCell {
         updateFavoriteButton()
     }
     
-    @objc private func bookmarkButtonDidTap() {
-        isBookmarked.toggle()
-        updateBookmarkButton()
-    }
-    
     // MARK: - Helpers
     
-    func bind(_ book: SearchBook) {
-        coverImageView.image = UIImage(named: "\(book.coverImageURL)")
-        titleLabel.text = book.title
-        authorLabel.text = book.author
+    func bind(_ book: DetailBookInfo) {
+        coverImageView.image = UIImage(named: "\(book.basicBookInfo.coverImageURL)")
+        titleLabel.text = book.basicBookInfo.title
+        authorLabel.text = book.basicBookInfo.author
         publisherLabel.text = book.publisher
         publicationDateLabel.text = book.publicationDate
-        if book.availability {
+        if book.isAvailable {
             availabilityLabel.text = "대출 가능"
             availabilityLabel.textColor = .systemGreen
         } else {
@@ -71,23 +59,12 @@ final class SearchCell: UITableViewCell {
             availabilityLabel.textColor = .systemRed
         }
         isFavorite = book.isFavorite
-        isBookmarked = book.isBookmarked
         updateFavoriteButton()
-        updateBookmarkButton()
     }
     
     private func updateFavoriteButton() {
         let imageName = isFavorite ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName)?
-            .withConfiguration(
-                UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
-            ), for: .normal
-        )
-    }
-    
-    private func updateBookmarkButton() {
-        let imageName = isBookmarked ? "bookmark.fill" : "bookmark"
-        bookmarkButton.setImage(UIImage(systemName: imageName)?
             .withConfiguration(
                 UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
             ), for: .normal
@@ -149,24 +126,10 @@ final class SearchCell: UITableViewCell {
             $0.tintColor = .systemRed
             $0.addTarget(self, action: #selector(favoriteButtonDidTap), for: .touchUpInside)
         }
-        
-        bookmarkButton.do {
-            $0.tintColor = .accentGreen
-            $0.addTarget(self, action: #selector(bookmarkButtonDidTap), for: .touchUpInside)
-        }
-        
-        buttonStackView.do {
-            $0.addArrangedSubview(favoriteButton)
-            $0.addArrangedSubview(bookmarkButton)
-            $0.axis = .horizontal
-            $0.alignment = .fill
-            $0.distribution = .fillEqually
-            $0.spacing = 5
-        }
     }
     
     private func setConstraints() {
-        [coverImageView, bookInfoStackView, buttonStackView].forEach {
+        [coverImageView, bookInfoStackView, favoriteButton].forEach {
             contentView.addSubview($0)
         }
         
@@ -182,7 +145,7 @@ final class SearchCell: UITableViewCell {
             $0.right.equalToSuperview().inset(15)
         }
         
-        buttonStackView.snp.makeConstraints {
+        favoriteButton.snp.makeConstraints {
             $0.bottom.equalTo(coverImageView.snp.bottom)
             $0.right.equalTo(-15)
         }
