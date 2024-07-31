@@ -29,7 +29,8 @@ final class RecommendationBookCell: UITableViewCell {
         collectionView.contentInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
+        setViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +42,27 @@ final class RecommendationBookCell: UITableViewCell {
     func bind(_ basicBookInfo: [BasicBookInfo]) {
         self.basicBookInfo = basicBookInfo
         collectionView.reloadData()
+    }
+    
+    // MARK: - Set UI
+    
+    private func setViews() {
+        collectionView.do {
+            $0.dataSource = self
+            $0.delegate = self
+            $0.register(
+                RecommendationBookCollectionCell.self,
+                forCellWithReuseIdentifier: "RecommendationBookCollectionCell"
+            )
+        }
+    }
+    
+    private func setConstraints() {
+        contentView.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
 
@@ -74,6 +96,7 @@ extension RecommendationBookCell: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension RecommendationBookCell: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBook = basicBookInfo[indexPath.item]
         print("DEBUG: Selected \"\(selectedBook)\"")
@@ -106,32 +129,5 @@ extension RecommendationBookCell: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         return 20
-    }
-}
-
-// MARK: - UI Setup
-
-private extension RecommendationBookCell {
-    
-    func setupUI() {
-        contentView.addSubview(collectionView)
-        
-        configureCollectionView()
-        setupConstraints()
-    }
-    
-    func configureCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(
-            RecommendationBookCollectionCell.self,
-            forCellWithReuseIdentifier: "RecommendationBookCollectionCell"
-        )
-    }
-    
-    func setupConstraints() {
-        collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
 }
