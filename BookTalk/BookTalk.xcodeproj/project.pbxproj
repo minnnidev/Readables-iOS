@@ -17,6 +17,7 @@
 		054543A62C57523B00E64948 /* RecommendationBookCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */; };
 		054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A82C57531C00E64948 /* HomeHeaderView.swift */; };
 		054543F02C5A230200E64948 /* SearchBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543EF2C5A230200E64948 /* SearchBook.swift */; };
+		054543F22C5A233600E64948 /* SearchMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F12C5A233600E64948 /* SearchMockData.swift */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
@@ -61,6 +62,7 @@
 		054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCollectionCell.swift; sourceTree = "<group>"; };
 		054543A82C57531C00E64948 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		054543EF2C5A230200E64948 /* SearchBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBook.swift; sourceTree = "<group>"; };
+		054543F12C5A233600E64948 /* SearchMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMockData.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				054543EF2C5A230200E64948 /* SearchBook.swift */,
+				054543F12C5A233600E64948 /* SearchMockData.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
+				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
