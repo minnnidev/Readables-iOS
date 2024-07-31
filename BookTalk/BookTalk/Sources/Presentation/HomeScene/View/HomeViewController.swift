@@ -26,6 +26,7 @@ class HomeViewController: BaseViewController {
     
     @objc private func searchIconTapped() {
         let searchVC = SearchViewController()
+        searchVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
