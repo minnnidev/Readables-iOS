@@ -12,11 +12,10 @@ final class SearchViewController: BaseViewController {
     // MARK: - Properties
     
     private let viewModel = SearchViewModel()
-    private let tableView = UITableView(frame: .zero, style: .plain)
     private let searchBar = UISearchBar()
-    private var inSearchMode: Bool {
-        return !(searchBar.text?.isEmpty ?? true)
-    }
+    private var isSearching: Bool = false
+    private var searchHistory: [String] = []
+    private let tableView = UITableView(frame: .zero, style: .plain)
     
     // MARK: - Lifecycle
 
@@ -87,20 +86,23 @@ final class SearchViewController: BaseViewController {
     
     override func setViews() {
         view.backgroundColor = .white
-        view.addSubview(tableView)
         
         tableView.do {
             $0.dataSource = self
             $0.delegate = self
+            $0.separatorStyle = .none
             $0.rowHeight = UITableView.automaticDimension
             $0.estimatedRowHeight = 160
             $0.keyboardDismissMode = .interactive
             $0.automaticallyAdjustsScrollIndicatorInsets = false
+            $0.register(SearchHistoryCell.self, forCellReuseIdentifier: "SearchHistoryCell")
             $0.register(SearchCell.self, forCellReuseIdentifier: "SearchCell")
         }
     }
     
     override func setConstraints() {
+        view.addSubview(tableView)
+        
         tableView.snp.makeConstraints {
             $0.centerX.left.bottom.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -112,43 +114,119 @@ final class SearchViewController: BaseViewController {
 
 extension SearchViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return inSearchMode ? viewModel.filteredBooks.count : viewModel.allBooks.count
+        if isSearching && !viewModel.filteredBooks.isEmpty {
+            return viewModel.filteredBooks.count
+        } else {
+            return searchHistory.count > 0 ? searchHistory.count : 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "SearchCell",
-            for: indexPath
-        ) as? SearchCell else {
-            return UITableViewCell()
-        }
-
-        let books = inSearchMode ? viewModel.filteredBooks : viewModel.allBooks
-        
-        if indexPath.row < books.count {
-            let book = books[indexPath.row]
+        if isSearching && !viewModel.filteredBooks.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as? SearchCell else {
+                return UITableViewCell()
+            }
+            let book = viewModel.filteredBooks[indexPath.row]
             cell.selectionStyle = .none
             cell.bind(book)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchHistoryCell", for: indexPath) as? SearchHistoryCell else {
+                return UITableViewCell()
+            }
+            cell.selectionStyle = .none
+            if searchHistory.count > 0 {
+                cell.delegate = self
+                cell.bind(searchHistory[indexPath.row])
+            } else {
+                cell.bind("최근 검색어가 없습니다.")
+            }
+            return cell
         }
-        
-        return cell
     }
 }
 
 // MARK: - UITableViewDelegate
 
 extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !isSearching && searchHistory.count > 0 {
+            let selectedHistory = searchHistory[indexPath.row]
+            searchBar.text = selectedHistory
+            isSearching = true
+            viewModel.filterBooks(searchText: selectedHistory.lowercased())
+        }
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        if isSearching && !viewModel.filteredBooks.isEmpty {
+            tableView.separatorStyle = .singleLine
+            cell.separatorInset = .zero
+        } else if !isSearching && searchHistory.count > 0 {
+            tableView.separatorStyle = .singleLine
+            cell.separatorInset = .zero
+        } else {
+            tableView.separatorStyle = .none
+        }
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        didEndDisplaying cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        if isSearching && !viewModel.filteredBooks.isEmpty {
+            tableView.separatorStyle = .singleLine
+            cell.separatorInset = .zero
+        } else if !isSearching && searchHistory.count > 0 {
+            tableView.separatorStyle = .singleLine
+            cell.separatorInset = .zero
+        } else {
+            tableView.separatorStyle = .none
+        }
+    }
 }
 
 // MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.filterBooks(searchText: searchText.lowercased())
+        if searchText.isEmpty {
+            isSearching = false
+            viewModel.filterBooks(searchText: "")
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            isSearching = true
+            viewModel.filterBooks(searchText: searchText.lowercased())
+            
+            if !searchHistory.contains(searchText) {
+                searchHistory.append(searchText)
+            }
+        }
+    }
+}
+
+// MARK: - SearchHistoryCellDelegate
+
+extension SearchViewController: SearchHistoryCellDelegate {
+    func didTapDeleteButton(cell: SearchHistoryCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        searchHistory.remove(at: indexPath.row)
+        tableView.reloadData()
     }
 }
