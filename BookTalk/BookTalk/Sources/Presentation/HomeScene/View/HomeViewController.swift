@@ -138,7 +138,7 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.bind(with: viewModel.sections[indexPath.section - 1].books)
+        cell.bind(viewModel.sections[indexPath.section - 1].basicBookInfo)
         return cell
     }
 }

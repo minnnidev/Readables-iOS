@@ -10,11 +10,12 @@ import UIKit
 import SnapKit
 import Then
 
-class RecommendationBookCell: UITableViewCell {
+final class RecommendationBookCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private var books: [HomeBooks] = []
+    private var basicBookInfo: [BasicBookInfo] = []
+    private var detailBookInfo: [DetailBookInfo] = []
     private let collectionView: UICollectionView
     
     // MARK: - Lifecycle
@@ -37,8 +38,8 @@ class RecommendationBookCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func bind(with books: [HomeBooks]) {
-        self.books = books
+    func bind(_ basicBookInfo: [BasicBookInfo]) {
+        self.basicBookInfo = basicBookInfo
         collectionView.reloadData()
     }
 }
@@ -51,7 +52,7 @@ extension RecommendationBookCell: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return books.count
+        return basicBookInfo.count
     }
     
     func collectionView(
@@ -64,7 +65,8 @@ extension RecommendationBookCell: UICollectionViewDataSource {
         ) as? RecommendationBookCollectionCell else {
             return UICollectionViewCell()
         }
-        cell.bind(with: books[indexPath.item])
+        let basicInfo = basicBookInfo[indexPath.item]
+        cell.bind(basicInfo)
         return cell
     }
 }
@@ -73,8 +75,8 @@ extension RecommendationBookCell: UICollectionViewDataSource {
 
 extension RecommendationBookCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let bookTitle = books[indexPath.item].title
-        print("DEBUG: Selected \"\(bookTitle)\"")
+        let selectedBook = basicBookInfo[indexPath.item]
+        print("DEBUG: Selected \"\(selectedBook)\"")
     }
 }
 
