@@ -18,6 +18,6 @@ final class HomeViewModel {
     var sectionsDidChange: (([HomeSection]) -> Void)?
     
     func fetchSections() {
-        self.sections = MockData.sections
+        self.sections = HomeMockData.sections
     }
 }

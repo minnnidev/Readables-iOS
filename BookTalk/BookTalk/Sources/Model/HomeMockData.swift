@@ -1,5 +1,5 @@
 //
-//  MockData.swift
+//  HomeMockData.swift
 //  BookTalk
 //
 //  Created by RAFA on 7/29/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MockData {
+struct HomeMockData {
     static let sections: [HomeSection] = [
         HomeSection(
             header: "현재 핫한 오픈톡",

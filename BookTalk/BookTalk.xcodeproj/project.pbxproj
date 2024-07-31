@@ -11,7 +11,7 @@
 		054543922C57483400E64948 /* HomeBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543912C57483400E64948 /* HomeBooks.swift */; };
 		054543992C5749F300E64948 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543982C5749F300E64948 /* HomeViewModel.swift */; };
 		0545439B2C574B9000E64948 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439A2C574B9000E64948 /* HomeSection.swift */; };
-		054543A02C5750B200E64948 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439F2C5750B200E64948 /* MockData.swift */; };
+		054543A02C5750B200E64948 /* HomeMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439F2C5750B200E64948 /* HomeMockData.swift */; };
 		054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A12C5751DD00E64948 /* SuggestionCell.swift */; };
 		054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A32C57520C00E64948 /* RecommendationBookCell.swift */; };
 		054543A62C57523B00E64948 /* RecommendationBookCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */; };
@@ -54,7 +54,7 @@
 		054543912C57483400E64948 /* HomeBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBooks.swift; sourceTree = "<group>"; };
 		054543982C5749F300E64948 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0545439A2C574B9000E64948 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
-		0545439F2C5750B200E64948 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		0545439F2C5750B200E64948 /* HomeMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMockData.swift; sourceTree = "<group>"; };
 		054543A12C5751DD00E64948 /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
 		054543A32C57520C00E64948 /* RecommendationBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCell.swift; sourceTree = "<group>"; };
 		054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCollectionCell.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 			children = (
 				054543912C57483400E64948 /* HomeBooks.swift */,
 				0545439A2C574B9000E64948 /* HomeSection.swift */,
-				0545439F2C5750B200E64948 /* MockData.swift */,
+				0545439F2C5750B200E64948 /* HomeMockData.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -460,7 +460,7 @@
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
-				054543A02C5750B200E64948 /* MockData.swift in Sources */,
+				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SecondCategoryViewController.swift in Sources */,
