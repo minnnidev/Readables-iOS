@@ -45,20 +45,20 @@ final class SearchCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func bind(_ book: DetailBookInfo) {
-        coverImageView.image = UIImage(named: "\(book.basicBookInfo.coverImageURL)")
-        titleLabel.text = book.basicBookInfo.title
-        authorLabel.text = book.basicBookInfo.author
-        publisherLabel.text = book.publisher
-        publicationDateLabel.text = book.publicationDate
-        if book.isAvailable {
+    func bind(_ detailBookInfo: DetailBookInfo) {
+        coverImageView.image = UIImage(named: "\(detailBookInfo.basicBookInfo.coverImageURL)")
+        titleLabel.text = detailBookInfo.basicBookInfo.title
+        authorLabel.text = detailBookInfo.basicBookInfo.author
+        publisherLabel.text = detailBookInfo.publisher
+        publicationDateLabel.text = detailBookInfo.publicationDate
+        if detailBookInfo.isAvailable {
             availabilityLabel.text = "대출 가능"
             availabilityLabel.textColor = .systemGreen
         } else {
             availabilityLabel.text = "대출 불가능"
             availabilityLabel.textColor = .systemRed
         }
-        isFavorite = book.isFavorite
+        isFavorite = detailBookInfo.isFavorite
         updateFavoriteButton()
     }
     
