@@ -183,7 +183,7 @@
 		054543AA2C5786B000E64948 /* SearchScene */ = {
 			isa = PBXGroup;
 			children = (
-				054543342C5374D900E64948 /* SearchViewController.swift */,
+				054543F32C5A23FA00E64948 /* View */,
 			);
 			path = SearchScene;
 			sourceTree = "<group>";
@@ -195,6 +195,14 @@
 				054543F12C5A233600E64948 /* SearchMockData.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		054543F32C5A23FA00E64948 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				054543342C5374D900E64948 /* SearchViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		057925172C4F927100834EC6 /* Sources */ = {
