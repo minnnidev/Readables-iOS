@@ -18,6 +18,7 @@
 		054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A82C57531C00E64948 /* HomeHeaderView.swift */; };
 		054543F02C5A230200E64948 /* SearchBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543EF2C5A230200E64948 /* SearchBook.swift */; };
 		054543F22C5A233600E64948 /* SearchMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F12C5A233600E64948 /* SearchMockData.swift */; };
+		054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F62C5A249200E64948 /* SearchViewModel.swift */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
@@ -63,6 +64,7 @@
 		054543A82C57531C00E64948 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		054543EF2C5A230200E64948 /* SearchBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBook.swift; sourceTree = "<group>"; };
 		054543F12C5A233600E64948 /* SearchMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMockData.swift; sourceTree = "<group>"; };
+		054543F62C5A249200E64948 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		054543F42C5A244A00E64948 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				054543F62C5A249200E64948 /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
+				054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SecondCategoryViewController.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
