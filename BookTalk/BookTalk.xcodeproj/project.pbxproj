@@ -274,10 +274,10 @@
 		057925442C4FF51400834EC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				ABD10DE62C516D26005F290E /* Category */,
 				056F2FEE2C5B4E3600931302 /* MainTab */,
 				0545432E2C53725200E64948 /* Home */,
 				054543AA2C5786B000E64948 /* Search */,
+				ABD10DE62C516D26005F290E /* Category */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
