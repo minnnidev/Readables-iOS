@@ -113,7 +113,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0545432E2C53725200E64948 /* HomeScene */ = {
+		0545432E2C53725200E64948 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				054543A72C57530A00E64948 /* Header */,
@@ -121,7 +121,7 @@
 				054543932C5748E200E64948 /* View */,
 				054543942C57491800E64948 /* ViewModel */,
 			);
-			path = HomeScene;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		0545438C2C5747E300E64948 /* Home */ = {
@@ -183,14 +183,14 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		054543AA2C5786B000E64948 /* SearchScene */ = {
+		054543AA2C5786B000E64948 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				054543F52C5A245700E64948 /* Cell */,
 				054543F32C5A23FA00E64948 /* View */,
 				054543F42C5A244A00E64948 /* ViewModel */,
 			);
-			path = SearchScene;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		054543EE2C5A22F100E64948 /* Search */ = {
@@ -268,8 +268,8 @@
 			children = (
 				ABD10DE62C516D26005F290E /* Category */,
 				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
-				0545432E2C53725200E64948 /* HomeScene */,
-				054543AA2C5786B000E64948 /* SearchScene */,
+				0545432E2C53725200E64948 /* Home */,
+				054543AA2C5786B000E64948 /* Search */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
