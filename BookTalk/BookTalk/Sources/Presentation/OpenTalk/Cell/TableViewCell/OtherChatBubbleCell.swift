@@ -83,7 +83,7 @@ final class OtherChatBubbleCell: UITableViewCell {
         bubbleView.snp.makeConstraints {
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(8)
             $0.leading.equalTo(nicknameLabel)
-            $0.width.lessThanOrEqualTo(220)
+            $0.width.lessThanOrEqualTo(250)
             $0.bottom.equalToSuperview()
         }
 

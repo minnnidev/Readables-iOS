@@ -55,7 +55,7 @@ final class MyChatBubbleCell: UITableViewCell {
         bubbleView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(12)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.width.lessThanOrEqualTo(220)
+            $0.width.lessThanOrEqualTo(250)
             $0.bottom.equalToSuperview()
         }
 
