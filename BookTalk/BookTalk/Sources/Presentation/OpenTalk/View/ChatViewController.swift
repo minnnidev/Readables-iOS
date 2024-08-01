@@ -24,6 +24,7 @@ final class ChatViewController: BaseViewController {
 
         setDelegate()
         registerCell()
+        setKeyboardNotifications()
     }
 
     override func setNavigationBar() {
@@ -46,6 +47,7 @@ final class ChatViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = true
             $0.backgroundColor = UIColor(hex: 0xFFDCDC) // TODO: 색상 변경
             $0.separatorStyle = .none
+            $0.keyboardDismissMode = .onDrag
         }
 
         textInputView.do {
@@ -53,7 +55,6 @@ final class ChatViewController: BaseViewController {
         }
 
         messageTextField.do {
-            $0.placeholder = "대화를 입력해 주세요"
             $0.layer.borderColor = UIColor.gray100.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 10
@@ -80,11 +81,11 @@ final class ChatViewController: BaseViewController {
 
         textInputView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(60)
+            $0.height.equalTo(55)
         }
 
         messageTextField.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().offset(8)
+            $0.top.leading.equalToSuperview().offset(8)
             $0.trailing.equalTo(sendButton.snp.leading).offset(-8)
             $0.bottom.equalToSuperview().offset(-8)
         }
@@ -103,6 +104,40 @@ final class ChatViewController: BaseViewController {
     private func registerCell() {
         chatTableView.register(OtherChatBubbleCell.self, forCellReuseIdentifier: OtherChatBubbleCell.identifier)
         chatTableView.register(MyChatBubbleCell.self, forCellReuseIdentifier: MyChatBubbleCell.identifier)
+    }
+
+    private func setKeyboardNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+
+            textInputView.snp.updateConstraints {
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-keyboardHeight)
+            }
+
+            view.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        textInputView.snp.updateConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        view.layoutIfNeeded()
     }
 
     @objc private func menuButtonDidTapped() {
