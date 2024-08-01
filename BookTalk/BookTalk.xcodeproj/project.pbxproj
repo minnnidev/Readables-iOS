@@ -234,6 +234,14 @@
 			path = BookInfo;
 			sourceTree = "<group>";
 		};
+		056F2FEE2C5B4E3600931302 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
 		057925172C4F927100834EC6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				ABD10DE62C516D26005F290E /* Category */,
-				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
+				056F2FEE2C5B4E3600931302 /* MainTab */,
 				0545432E2C53725200E64948 /* Home */,
 				054543AA2C5786B000E64948 /* Search */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
