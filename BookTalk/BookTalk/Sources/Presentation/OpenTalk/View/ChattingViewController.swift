@@ -14,6 +14,8 @@ final class ChattingViewController: BaseViewController {
 
     private let chatTableView = UITableView(frame: .zero)
 
+    private let viewModel = ChatViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,7 +62,8 @@ final class ChattingViewController: BaseViewController {
     }
 
     private func registerCell() {
-        chatTableView.register(OtherChatViewCell.self, forCellReuseIdentifier: OtherChatViewCell.identifier)
+        chatTableView.register(OtherChatBubbleCell.self, forCellReuseIdentifier: OtherChatBubbleCell.identifier)
+        chatTableView.register(MyChatBubbleCell.self, forCellReuseIdentifier: MyChatBubbleCell.identifier)
     }
 
     @objc private func menuButtonDidTapped() {
@@ -71,12 +74,24 @@ final class ChattingViewController: BaseViewController {
 extension ChattingViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.chats.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherChatViewCell.identifier, for: indexPath) as? OtherChatViewCell else { return OtherChatViewCell() }
+        let random = [0, 1].randomElement()!
 
-        return cell
+        if random == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherChatBubbleCell.identifier, for: indexPath) as? OtherChatBubbleCell else { return UITableViewCell() }
+
+            cell.bind(with: viewModel.chats[indexPath.row])
+
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyChatBubbleCell.identifier, for: indexPath) as? MyChatBubbleCell else { return UITableViewCell() }
+
+            cell.bind(with: viewModel.chats[indexPath.row].message)
+
+            return cell
+        }
     }
 }

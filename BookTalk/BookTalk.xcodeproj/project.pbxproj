@@ -28,7 +28,10 @@
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChattingViewController.swift */; };
-		AB0C0F652C5BF3E3007812C5 /* OtherChatViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F642C5BF3E3007812C5 /* OtherChatViewCell.swift */; };
+		AB0C0F652C5BF3E3007812C5 /* OtherChatBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F642C5BF3E3007812C5 /* OtherChatBubbleCell.swift */; };
+		AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F662C5BFC53007812C5 /* MyChatBubbleCell.swift */; };
+		AB0C0F6A2C5BFDBE007812C5 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */; };
+		AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */; };
 		AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */; };
 		AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */; };
 		AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */; };
@@ -79,7 +82,10 @@
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
-		AB0C0F642C5BF3E3007812C5 /* OtherChatViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChatViewCell.swift; sourceTree = "<group>"; };
+		AB0C0F642C5BF3E3007812C5 /* OtherChatBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChatBubbleCell.swift; sourceTree = "<group>"; };
+		AB0C0F662C5BFC53007812C5 /* MyChatBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatBubbleCell.swift; sourceTree = "<group>"; };
+		AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -299,6 +305,7 @@
 				AB0C0F5D2C5BE279007812C5 /* Enum */,
 				AB0C0F572C5BD975007812C5 /* Cell */,
 				AB0C0F562C5BD96F007812C5 /* View */,
+				AB0C0F6B2C5BFE51007812C5 /* ViewModel */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -340,9 +347,26 @@
 		AB0C0F632C5BF0FC007812C5 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				AB0C0F642C5BF3E3007812C5 /* OtherChatViewCell.swift */,
+				AB0C0F642C5BF3E3007812C5 /* OtherChatBubbleCell.swift */,
+				AB0C0F662C5BFC53007812C5 /* MyChatBubbleCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		AB0C0F682C5BFDB0007812C5 /* OpenTalk */ = {
+			isa = PBXGroup;
+			children = (
+				AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */,
+			);
+			path = OpenTalk;
+			sourceTree = "<group>";
+		};
+		AB0C0F6B2C5BFE51007812C5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		AB22AD2F2C4E8D9D00C9A0F3 = {
@@ -423,6 +447,7 @@
 				0545438C2C5747E300E64948 /* Home */,
 				054543EE2C5A22F100E64948 /* Search */,
 				AB2E7BEE2C53DB6100CE43CB /* Category */,
+				AB0C0F682C5BFDB0007812C5 /* OpenTalk */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -576,6 +601,7 @@
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* CategoryBooks.swift in Sources */,
 				AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */,
+				AB0C0F6A2C5BFDBE007812C5 /* ChatModel.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
@@ -585,10 +611,11 @@
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
-				AB0C0F652C5BF3E3007812C5 /* OtherChatViewCell.swift in Sources */,
+				AB0C0F652C5BF3E3007812C5 /* OtherChatBubbleCell.swift in Sources */,
 				054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SecondCategoryViewController.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
+				AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
 				AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
@@ -604,6 +631,7 @@
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */,
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
+				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
 				AB0C0F612C5BE9B1007812C5 /* ChattingViewController.swift in Sources */,
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
 				AB2E7BDF2C53B70700CE43CB /* SecondCategoryViewModel.swift in Sources */,

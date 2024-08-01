@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class OtherChatViewCell: UITableViewCell {
+final class OtherChatBubbleCell: UITableViewCell {
 
     static let identifier = "ChatViewCell"
 
@@ -46,7 +46,6 @@ final class OtherChatViewCell: UITableViewCell {
         }
 
         nicknameLabel.do {
-            $0.text = "닉네임"
             $0.font = .systemFont(ofSize: 13, weight: .regular)
             $0.textColor = .black
         }
@@ -57,7 +56,6 @@ final class OtherChatViewCell: UITableViewCell {
         }
 
         chatMessageLabel.do {
-            $0.text = "안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용안녕하세용"
             $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.textColor = .black
             $0.numberOfLines = 0
@@ -93,5 +91,10 @@ final class OtherChatViewCell: UITableViewCell {
             $0.top.leading.equalToSuperview().offset(12)
             $0.trailing.bottom.equalToSuperview().offset(-12)
         }
+    }
+
+    func bind(with chatModel: ChatModel) {
+        nicknameLabel.text = chatModel.nickname
+        chatMessageLabel.text = chatModel.message
     }
 }
