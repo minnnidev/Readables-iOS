@@ -25,6 +25,8 @@
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
 		057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925402C4FF4DC00834EC6 /* GoalViewController.swift */; };
 		057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925422C4FF4E100834EC6 /* MyViewController.swift */; };
+		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
+		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */; };
 		AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */; };
 		AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */; };
@@ -72,6 +74,8 @@
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
 		057925402C4FF4DC00834EC6 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		057925422C4FF4E100834EC6 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
+		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -278,11 +282,45 @@
 				0545432E2C53725200E64948 /* Home */,
 				054543AA2C5786B000E64948 /* Search */,
 				ABD10DE62C516D26005F290E /* Category */,
-				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
+				AB0C0F552C5BD557007812C5 /* OpenTalk */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		AB0C0F552C5BD557007812C5 /* OpenTalk */ = {
+			isa = PBXGroup;
+			children = (
+				AB0C0F5D2C5BE279007812C5 /* Enum */,
+				AB0C0F572C5BD975007812C5 /* Cell */,
+				AB0C0F562C5BD96F007812C5 /* View */,
+			);
+			path = OpenTalk;
+			sourceTree = "<group>";
+		};
+		AB0C0F562C5BD96F007812C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AB0C0F572C5BD975007812C5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		AB0C0F5D2C5BE279007812C5 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		AB22AD2F2C4E8D9D00C9A0F3 = {
@@ -519,6 +557,7 @@
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
+				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
@@ -528,6 +567,7 @@
 				AB2E7BDA2C53B3F300CE43CB /* SecondCategoryViewController.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
+				AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
