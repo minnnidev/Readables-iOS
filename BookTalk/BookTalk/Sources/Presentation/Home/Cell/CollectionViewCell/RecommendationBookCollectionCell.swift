@@ -30,9 +30,9 @@ final class RecommendationBookCollectionCell: UICollectionViewCell {
     
     // MARK: - Helpers
     
-    func bind(with book: HomeBooks) {
-        imageView.image = UIImage(named: "\(book.coverImageURL)")
-        titleLabel.text = book.title
+    func bind(_ basicBookInfo: BasicBookInfo) {
+        imageView.image = UIImage(named: "\(basicBookInfo.coverImageURL)")
+        titleLabel.text = basicBookInfo.title
     }
 }
 

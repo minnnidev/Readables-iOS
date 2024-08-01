@@ -26,6 +26,7 @@ class HomeViewController: BaseViewController {
     
     @objc private func searchIconTapped() {
         let searchVC = SearchViewController()
+        searchVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
@@ -137,7 +138,7 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.bind(with: viewModel.sections[indexPath.section - 1].books)
+        cell.bind(viewModel.sections[indexPath.section - 1].basicBookInfo)
         return cell
     }
 }

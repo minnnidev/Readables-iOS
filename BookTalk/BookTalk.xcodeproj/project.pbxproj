@@ -8,14 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		054543352C5374D900E64948 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543342C5374D900E64948 /* SearchViewController.swift */; };
-		054543922C57483400E64948 /* HomeBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543912C57483400E64948 /* HomeBooks.swift */; };
 		054543992C5749F300E64948 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543982C5749F300E64948 /* HomeViewModel.swift */; };
 		0545439B2C574B9000E64948 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439A2C574B9000E64948 /* HomeSection.swift */; };
-		054543A02C5750B200E64948 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439F2C5750B200E64948 /* MockData.swift */; };
+		054543A02C5750B200E64948 /* HomeMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439F2C5750B200E64948 /* HomeMockData.swift */; };
 		054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A12C5751DD00E64948 /* SuggestionCell.swift */; };
 		054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A32C57520C00E64948 /* RecommendationBookCell.swift */; };
 		054543A62C57523B00E64948 /* RecommendationBookCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */; };
 		054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A82C57531C00E64948 /* HomeHeaderView.swift */; };
+		054543F22C5A233600E64948 /* SearchMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F12C5A233600E64948 /* SearchMockData.swift */; };
+		054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F62C5A249200E64948 /* SearchViewModel.swift */; };
+		054543F92C5A24D000E64948 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F82C5A24D000E64948 /* SearchCell.swift */; };
+		054544152C5AA80700E64948 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544142C5AA80700E64948 /* BookInfo.swift */; };
+		054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
@@ -51,14 +55,18 @@
 
 /* Begin PBXFileReference section */
 		054543342C5374D900E64948 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		054543912C57483400E64948 /* HomeBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBooks.swift; sourceTree = "<group>"; };
 		054543982C5749F300E64948 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0545439A2C574B9000E64948 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
-		0545439F2C5750B200E64948 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		0545439F2C5750B200E64948 /* HomeMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMockData.swift; sourceTree = "<group>"; };
 		054543A12C5751DD00E64948 /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
 		054543A32C57520C00E64948 /* RecommendationBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCell.swift; sourceTree = "<group>"; };
 		054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCollectionCell.swift; sourceTree = "<group>"; };
 		054543A82C57531C00E64948 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
+		054543F12C5A233600E64948 /* SearchMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMockData.swift; sourceTree = "<group>"; };
+		054543F62C5A249200E64948 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		054543F82C5A24D000E64948 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		054544142C5AA80700E64948 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
+		054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +113,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0545432E2C53725200E64948 /* HomeScene */ = {
+		0545432E2C53725200E64948 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				054543A72C57530A00E64948 /* Header */,
@@ -113,15 +121,14 @@
 				054543932C5748E200E64948 /* View */,
 				054543942C57491800E64948 /* ViewModel */,
 			);
-			path = HomeScene;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		0545438C2C5747E300E64948 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				054543912C57483400E64948 /* HomeBooks.swift */,
 				0545439A2C574B9000E64948 /* HomeSection.swift */,
-				0545439F2C5750B200E64948 /* MockData.swift */,
+				0545439F2C5750B200E64948 /* HomeMockData.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -176,12 +183,63 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		054543AA2C5786B000E64948 /* SearchScene */ = {
+		054543AA2C5786B000E64948 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				054543F52C5A245700E64948 /* Cell */,
+				054543F32C5A23FA00E64948 /* View */,
+				054543F42C5A244A00E64948 /* ViewModel */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		054543EE2C5A22F100E64948 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				054543F12C5A233600E64948 /* SearchMockData.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		054543F32C5A23FA00E64948 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				054543342C5374D900E64948 /* SearchViewController.swift */,
 			);
-			path = SearchScene;
+			path = View;
+			sourceTree = "<group>";
+		};
+		054543F42C5A244A00E64948 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				054543F62C5A249200E64948 /* SearchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		054543F52C5A245700E64948 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */,
+				054543F82C5A24D000E64948 /* SearchCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		054544132C5AA7F100E64948 /* BookInfo */ = {
+			isa = PBXGroup;
+			children = (
+				054544142C5AA80700E64948 /* BookInfo.swift */,
+			);
+			path = BookInfo;
+			sourceTree = "<group>";
+		};
+		056F2FEE2C5B4E3600931302 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
+			);
+			path = MainTab;
 			sourceTree = "<group>";
 		};
 		057925172C4F927100834EC6 /* Sources */ = {
@@ -216,10 +274,10 @@
 		057925442C4FF51400834EC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				056F2FEE2C5B4E3600931302 /* MainTab */,
+				0545432E2C53725200E64948 /* Home */,
+				054543AA2C5786B000E64948 /* Search */,
 				ABD10DE62C516D26005F290E /* Category */,
-				057925382C4FF34A00834EC6 /* MainTabBarController.swift */,
-				0545432E2C53725200E64948 /* HomeScene */,
-				054543AA2C5786B000E64948 /* SearchScene */,
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
@@ -301,7 +359,9 @@
 		AB2E7BEB2C53DAFE00CE43CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				054544132C5AA7F100E64948 /* BookInfo */,
 				0545438C2C5747E300E64948 /* Home */,
+				054543EE2C5A22F100E64948 /* Search */,
 				AB2E7BEE2C53DB6100CE43CB /* Category */,
 			);
 			path = Model;
@@ -446,9 +506,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
+				054543F92C5A24D000E64948 /* SearchCell.swift in Sources */,
+				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* CategoryBookCell.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
-				054543922C57483400E64948 /* HomeBooks.swift in Sources */,
 				054543A62C57523B00E64948 /* RecommendationBookCollectionCell.swift in Sources */,
 				AB2E7BF22C53EDD800CE43CB /* ThirdCategoryViewController.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
@@ -460,9 +521,10 @@
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
-				054543A02C5750B200E64948 /* MockData.swift in Sources */,
+				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
+				054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SecondCategoryViewController.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
@@ -471,6 +533,7 @@
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
+				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
@@ -481,6 +544,7 @@
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
 				AB2E7BDF2C53B70700CE43CB /* SecondCategoryViewModel.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
+				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

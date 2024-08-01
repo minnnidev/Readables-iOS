@@ -9,5 +9,5 @@ import Foundation
 
 struct HomeSection {
     let header: String
-    let books: [HomeBooks]
+    let basicBookInfo: [BasicBookInfo]
 }
