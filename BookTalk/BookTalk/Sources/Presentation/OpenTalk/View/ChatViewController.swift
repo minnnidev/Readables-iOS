@@ -25,6 +25,7 @@ final class ChatViewController: BaseViewController {
         setDelegate()
         registerCell()
         setKeyboardNotifications()
+        addTapGesture()
     }
 
     override func setNavigationBar() {
@@ -122,6 +123,15 @@ final class ChatViewController: BaseViewController {
         )
     }
 
+    func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
@@ -157,13 +167,19 @@ extension ChatViewController: UITableViewDataSource {
         let chat = viewModel.chats[indexPath.row]
 
         if chat.isMine {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: OtherChatBubbleCell.identifier, for: indexPath) as? OtherChatBubbleCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: OtherChatBubbleCell.identifier,
+                for: indexPath
+            ) as? OtherChatBubbleCell else { return UITableViewCell() }
 
             cell.bind(with: chat)
 
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyChatBubbleCell.identifier, for: indexPath) as? MyChatBubbleCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: MyChatBubbleCell.identifier,
+                for: indexPath
+            ) as? MyChatBubbleCell else { return UITableViewCell() }
 
             cell.bind(with: chat.message)
 
