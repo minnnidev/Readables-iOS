@@ -58,6 +58,8 @@ final class ChatViewController: BaseViewController {
             $0.layer.borderColor = UIColor.gray100.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 10
+            $0.leftView = UIView(frame: .init(x: 0, y: 0, width: 10, height: 0))
+            $0.leftViewMode = .always
         }
 
         sendButton.do {
