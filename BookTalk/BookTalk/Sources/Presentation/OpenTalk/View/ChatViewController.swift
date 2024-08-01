@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ChattingViewController: BaseViewController {
+final class ChatViewController: BaseViewController {
 
     private let chatTableView = UITableView(frame: .zero)
 
@@ -71,7 +71,7 @@ final class ChattingViewController: BaseViewController {
     }
 }
 
-extension ChattingViewController: UITableViewDataSource {
+extension ChatViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.chats.count
