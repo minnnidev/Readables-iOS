@@ -190,7 +190,10 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == bookCollectionView {
-            // TODO: 디테일뷰로 이동
+            // TODO: 디테일뷰로 이동이지만 임시로 채팅뷰로 바로 이동하도록 구현
+            let chattingVC = ChattingViewController()
+            chattingVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(chattingVC, animated: true)
         }
     }
 }
