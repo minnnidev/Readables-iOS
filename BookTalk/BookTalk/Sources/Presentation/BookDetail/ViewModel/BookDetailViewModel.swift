@@ -43,7 +43,38 @@ final class BookDetailViewModel {
         return "\(bookInfo.distance ?? 0.0)미터"
     }
     
+    var isLiked: Bool = false
+    var isDisliked: Bool = false
+    var isBookmarked: Bool = false
+    var onFloatingButtonTapped: (() -> Void)?
+    var onLikeButtonTapped: (() -> Void)?
+    var onDislikeButtonTapped: (() -> Void)?
+    var onBookmarkButtonTapped: (() -> Void)?
+    var areChildButtonsVisible: Bool = false
+    
     init(bookInfo: DetailBookInfo) {
         self.bookInfo = bookInfo
+    }
+    
+    func toggleFloatingButton() {
+        areChildButtonsVisible.toggle()
+        onFloatingButtonTapped?()
+    }
+    
+    func likeButtonDidTap() {
+        isLiked.toggle()
+        if isLiked { isDisliked = false }
+        onLikeButtonTapped?()
+    }
+    
+    func dislikeButtonDidTap() {
+        isDisliked.toggle()
+        if isDisliked { isLiked = false }
+        onDislikeButtonTapped?()
+    }
+    
+    func bookmarkButtonDidTap() {
+        isBookmarked.toggle()
+        onBookmarkButtonTapped?()
     }
 }
