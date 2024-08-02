@@ -140,6 +140,7 @@ extension HomeViewController: UITableViewDataSource {
         ) as? RecommendationBookCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
         cell.selectionStyle = .none
         cell.bind(viewModel.sections[indexPath.section - 1].bookInfo)
         return cell
@@ -188,5 +189,20 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.section == 0 ? UITableView.automaticDimension : 200
+    }
+}
+
+// MARK: - RecommendationBookCellDelegate
+
+extension HomeViewController: RecommendationBookCellDelegate {
+    
+    func recommendationBookCell(
+        _ cell: RecommendationBookCell,
+        didSelectBook book: DetailBookInfo
+    ) {
+        let detailViewModel = BookDetailViewModel(bookInfo: book)
+        let detailVC = BookDetailViewController()
+        detailVC.viewModel = detailViewModel
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
