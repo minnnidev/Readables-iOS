@@ -31,8 +31,11 @@ final class HomeViewController: BaseViewController {
     }
     
     @objc private func headerViewTapped(_ sender: UITapGestureRecognizer) {
-        guard let headerView = sender.view as? HomeHeaderView else { return }
-        guard let section = headerView.section else { return }
+        guard let headerView = sender.view as? HomeHeaderView,
+              let section = headerView.section
+        else {
+            return
+        }
         
         let headerTitle = viewModel.sections[section - 1].header
         print("DEBUG: Selected \"\(headerTitle)\"")
@@ -138,7 +141,7 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.selectionStyle = .none
-        cell.bind(viewModel.sections[indexPath.section - 1].basicBookInfo)
+        cell.bind(viewModel.sections[indexPath.section - 1].bookInfo)
         return cell
     }
 }
@@ -159,9 +162,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return nil
-        }
+        if section == 0 { return nil }
         
         guard let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: "HomeHeaderView"
@@ -186,11 +187,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return UITableView.automaticDimension
-        }
-        
-        return 200
+        return indexPath.section == 0 ? UITableView.automaticDimension : 200
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
