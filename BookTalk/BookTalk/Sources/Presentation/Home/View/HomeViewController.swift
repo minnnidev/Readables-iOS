@@ -203,6 +203,7 @@ extension HomeViewController: RecommendationBookCellDelegate {
         let detailViewModel = BookDetailViewModel(bookInfo: book)
         let detailVC = BookDetailViewController()
         detailVC.viewModel = detailViewModel
+        detailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
