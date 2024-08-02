@@ -29,7 +29,7 @@ final class SearchViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Bind
+    // MARK: - Helpers
     
     private func bind() {
         viewModel.onBooksUpdated = { [weak self] in

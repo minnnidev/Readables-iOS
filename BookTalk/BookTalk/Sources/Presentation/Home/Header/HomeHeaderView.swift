@@ -15,7 +15,6 @@ final class HomeHeaderView: UITableViewHeaderFooterView {
     // MARK: - Properties
     
     var section: Int?
-    
     private let titleLabel = UILabel()
     private let rightArrowIcon = UIImageView()
     
@@ -23,7 +22,8 @@ final class HomeHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        setupUI()
+        setViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -32,25 +32,16 @@ final class HomeHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - Helpers
     
-    func bind(with title: String, section: Int) {
+    func bind(_ title: String, section: Int) {
         titleLabel.text = title
         self.section = section
     }
-}
-
-// MARK: - UI Setup
-
-private extension HomeHeaderView {
     
-    func setupUI() {
+    // MARK: - Set UI
+    
+    private func setViews() {
         contentView.backgroundColor = .white
-        [titleLabel, rightArrowIcon].forEach { contentView.addSubview($0) }
         
-        configureComponents()
-        setupConstraints()
-    }
-    
-    func configureComponents() {
         titleLabel.do {
             $0.numberOfLines = 2
             $0.font = .systemFont(ofSize: 20, weight: .medium)
@@ -63,7 +54,9 @@ private extension HomeHeaderView {
         }
     }
     
-    func setupConstraints() {
+    private func setConstraints() {
+        [titleLabel, rightArrowIcon].forEach { contentView.addSubview($0) }
+        
         titleLabel.snp.makeConstraints {
             $0.top.left.bottom.equalToSuperview().inset(15)
             $0.right.equalTo(rightArrowIcon.snp.left).offset(-15)

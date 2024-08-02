@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -38,7 +38,7 @@ class HomeViewController: BaseViewController {
         print("DEBUG: Selected \"\(headerTitle)\"")
     }
     
-    // MARK: - Bind
+    // MARK: - Helpers
     
     private func bind() {
         viewModel.sectionsDidChange = { [weak self] sections in
@@ -127,7 +127,7 @@ extension HomeViewController: UITableViewDataSource {
             }
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
-            cell.bind(with: "OOO님, 오늘의 추천 도서를 확인해보세요!")
+            cell.bind("OOO님, 오늘의 추천 도서를 확인해보세요!")
             return cell
         }
         
@@ -169,7 +169,7 @@ extension HomeViewController: UITableViewDelegate {
             return nil
         }
         
-        headerView.bind(with: viewModel.sections[section - 1].header, section: section)
+        headerView.bind(viewModel.sections[section - 1].header, section: section)
         
         let tapGesture = UITapGestureRecognizer(
             target: self,
