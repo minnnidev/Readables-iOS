@@ -32,6 +32,7 @@
 		AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F662C5BFC53007812C5 /* MyChatBubbleCell.swift */; };
 		AB0C0F6A2C5BFDBE007812C5 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */; };
 		AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */; };
+		AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F772C5F639C007812C5 /* ChatMenuViewController.swift */; };
 		AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */; };
 		AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */; };
 		AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */; };
@@ -86,6 +87,7 @@
 		AB0C0F662C5BFC53007812C5 /* MyChatBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatBubbleCell.swift; sourceTree = "<group>"; };
 		AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		AB0C0F772C5F639C007812C5 /* ChatMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewController.swift; sourceTree = "<group>"; };
 		AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			children = (
 				0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */,
 				AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */,
+				AB0C0F772C5F639C007812C5 /* ChatMenuViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */,
+				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
 				AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */,

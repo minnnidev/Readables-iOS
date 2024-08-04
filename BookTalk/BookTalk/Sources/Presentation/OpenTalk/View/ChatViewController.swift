@@ -16,7 +16,7 @@ final class ChatViewController: BaseViewController {
     private let textInputView = UIView()
     private let messageTextField = UITextField()
     private let sendButton = UIButton()
-
+    
     private let viewModel = ChatViewModel()
 
     override func viewDidLoad() {
@@ -153,8 +153,10 @@ final class ChatViewController: BaseViewController {
     }
 
     @objc private func menuButtonDidTapped() {
-        // TODO: 사이드바 등장
+        let chatMenuVC = ChatMenuViewController()
+        navigationController?.pushViewController(chatMenuVC, animated: true)
     }
+    
 }
 
 extension ChatViewController: UITableViewDataSource {
