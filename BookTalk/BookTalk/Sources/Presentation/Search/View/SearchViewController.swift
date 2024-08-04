@@ -29,7 +29,7 @@ final class SearchViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Bind
+    // MARK: - Helpers
     
     private func bind() {
         viewModel.onBooksUpdated = { [weak self] in
@@ -224,6 +224,7 @@ extension SearchViewController: UISearchBarDelegate {
 // MARK: - SearchHistoryCellDelegate
 
 extension SearchViewController: SearchHistoryCellDelegate {
+    
     func didTapDeleteButton(cell: SearchHistoryCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         searchHistory.remove(at: indexPath.row)

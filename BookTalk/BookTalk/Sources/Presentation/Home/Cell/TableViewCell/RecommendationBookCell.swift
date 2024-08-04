@@ -10,10 +10,18 @@ import UIKit
 import SnapKit
 import Then
 
+protocol RecommendationBookCellDelegate: AnyObject {
+    func recommendationBookCell(
+        _ cell: RecommendationBookCell,
+        didSelectBook book: DetailBookInfo
+    )
+}
+
 final class RecommendationBookCell: UITableViewCell {
     
     // MARK: - Properties
     
+    weak var delegate: RecommendationBookCellDelegate?
     private var basicBookInfo: [BasicBookInfo] = []
     private var detailBookInfo: [DetailBookInfo] = []
     private let collectionView: UICollectionView
@@ -39,8 +47,9 @@ final class RecommendationBookCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func bind(_ basicBookInfo: [BasicBookInfo]) {
-        self.basicBookInfo = basicBookInfo
+    func bind(_ detailBookInfo: [DetailBookInfo]) {
+        self.basicBookInfo = detailBookInfo.map { $0.basicBookInfo }
+        self.detailBookInfo = detailBookInfo
         collectionView.reloadData()
     }
     
@@ -87,8 +96,8 @@ extension RecommendationBookCell: UICollectionViewDataSource {
         ) as? RecommendationBookCollectionCell else {
             return UICollectionViewCell()
         }
-        let basicInfo = basicBookInfo[indexPath.item]
-        cell.bind(basicInfo)
+        let basicBookInfo = basicBookInfo[indexPath.item]
+        cell.bind(basicBookInfo)
         return cell
     }
 }
@@ -98,8 +107,8 @@ extension RecommendationBookCell: UICollectionViewDataSource {
 extension RecommendationBookCell: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedBook = basicBookInfo[indexPath.item]
-        print("DEBUG: Selected \"\(selectedBook)\"")
+        let selectedBook = detailBookInfo[indexPath.item]
+        delegate?.recommendationBookCell(self, didSelectBook: selectedBook)
     }
 }
 
