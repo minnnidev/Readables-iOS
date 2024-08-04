@@ -20,6 +20,8 @@ final class ChatMenuViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setDelegate()
+        registerCell()
     }
 
     override func setViews() {
@@ -27,7 +29,7 @@ final class ChatMenuViewController: BaseViewController {
 
         chatMenuTableView.do {
             $0.showsVerticalScrollIndicator = false
-            $0.backgroundColor = .red
+            $0.backgroundColor = .clear
         }
 
         bottomLineView.do {
@@ -74,6 +76,68 @@ final class ChatMenuViewController: BaseViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(60)
+        }
+    }
+
+    private func setDelegate() {
+        chatMenuTableView.dataSource = self
+    }
+
+    private func registerCell() {
+        chatMenuTableView.register(
+            NowReadingCell.self,
+            forCellReuseIdentifier: NowReadingCell.identifier
+        )
+        chatMenuTableView.register(
+            MyReadingProgressCell.self,
+            forCellReuseIdentifier: MyReadingProgressCell.identifier
+        )
+        chatMenuTableView.register(
+            CompletedReadingCell.self,
+            forCellReuseIdentifier: CompletedReadingCell.identifier
+        )
+    }
+}
+
+extension ChatMenuViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return ChatMenuSectionType.allCases.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let sectionType = ChatMenuSectionType(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+
+        switch sectionType {
+        case .nowReading:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: NowReadingCell.identifier,
+                for: indexPath
+            ) as? NowReadingCell else { return UITableViewCell() }
+
+            return cell
+
+        case .myProgress:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: MyReadingProgressCell.identifier,
+                for: indexPath
+            ) as? MyReadingProgressCell else { return UITableViewCell() }
+
+            return cell
+
+        case .completedReading:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CompletedReadingCell.identifier,
+                for: indexPath
+            ) as? CompletedReadingCell else { return UITableViewCell() }
+
+            return cell
         }
     }
 }
