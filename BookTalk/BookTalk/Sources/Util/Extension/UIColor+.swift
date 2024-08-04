@@ -24,6 +24,7 @@ extension UIColor {
     // MARK: Core
 
     static let accentGreen: UIColor = .init(hex: 0x2B7746)
+    static let bubbleGreen: UIColor = .init(hex: 0xDBF1E3)
 
     // MARK: Grayscale
 
