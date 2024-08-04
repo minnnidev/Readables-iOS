@@ -12,6 +12,7 @@ import Then
 
 final class ChatMenuViewController: BaseViewController {
 
+    private let chatMenuTableView = UITableView()
     private let bottomLineView = UIView()
     private let bottomView = UIView()
     private let shareGoalButton = UIButton()
@@ -19,15 +20,15 @@ final class ChatMenuViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-    }
-
-    override func setNavigationBar() {
-        
     }
 
     override func setViews() {
         view.backgroundColor = .white
+
+        chatMenuTableView.do {
+            $0.showsVerticalScrollIndicator = false
+            $0.backgroundColor = .red
+        }
 
         bottomLineView.do {
             $0.backgroundColor = .gray100
@@ -46,11 +47,16 @@ final class ChatMenuViewController: BaseViewController {
     }
 
     override func setConstraints() {
-        [bottomLineView, bottomView].forEach {
+        [chatMenuTableView, bottomLineView, bottomView].forEach {
             view.addSubview($0)
         }
 
         bottomView.addSubview(shareGoalButton)
+
+        chatMenuTableView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-70)
+        }
 
         bottomLineView.snp.makeConstraints {
             $0.bottom.equalTo(bottomView.snp.top)
