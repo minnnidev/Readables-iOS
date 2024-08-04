@@ -14,15 +14,14 @@ final class SuggestionCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private let backgroundImageView = UIImageView()
-    private let suggestionLabel = UILabel()
+    let backgroundImageView = UIImageView()
+    let suggestionLabel = UILabel()
     
     // MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -31,13 +30,24 @@ final class SuggestionCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func bind(_ text: String) {
+    func bind(with text: String) {
         suggestionLabel.text = text
     }
+}
+
+// MARK: - UI Setup
+
+private extension SuggestionCell {
     
-    // MARK: - Set UI
+    func setupUI() {
+        contentView.addSubview(backgroundImageView)
+        backgroundImageView.addSubview(suggestionLabel)
+        
+        configureComponents()
+        setupConstraints()
+    }
     
-    private func setViews() {
+    func configureComponents() {
         backgroundImageView.do {
             $0.image = UIImage(named: "homeBackgroundImage")
             $0.contentMode = .scaleAspectFill
@@ -50,10 +60,7 @@ final class SuggestionCell: UITableViewCell {
         }
     }
     
-    private func setConstraints() {
-        contentView.addSubview(backgroundImageView)
-        backgroundImageView.addSubview(suggestionLabel)
-        
+    func setupConstraints() {
         backgroundImageView.snp.makeConstraints {
             $0.centerX.left.bottom.equalToSuperview()
             $0.top.equalTo(contentView.safeAreaLayoutGuide.snp.top)
