@@ -21,8 +21,7 @@ final class RecommendationBookCollectionCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setViews()
-        setConstraints()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -35,19 +34,27 @@ final class RecommendationBookCollectionCell: UICollectionViewCell {
         imageView.image = UIImage(named: "\(basicBookInfo.coverImageURL)")
         titleLabel.text = basicBookInfo.title
     }
+}
+
+// MARK: - UI Setup
+
+private extension RecommendationBookCollectionCell {
     
-    // MARK: - Set UI
+    func setupUI() {
+        contentView.addSubview(imageView)
+        
+        configureImageView()
+        setupConstraints()
+    }
     
-    private func setViews() {
+    func configureImageView() {
         imageView.do {
             $0.backgroundColor = .gray100
             $0.contentMode = .scaleAspectFit
         }
     }
     
-    private func setConstraints() {
-        contentView.addSubview(imageView)
-        
+    func setupConstraints() {
         imageView.snp.makeConstraints {
             $0.centerX.top.left.equalToSuperview()
             $0.bottom.equalToSuperview().inset(15)

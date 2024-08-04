@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeViewController: BaseViewController {
+class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -31,17 +31,14 @@ final class HomeViewController: BaseViewController {
     }
     
     @objc private func headerViewTapped(_ sender: UITapGestureRecognizer) {
-        guard let headerView = sender.view as? HomeHeaderView,
-              let section = headerView.section
-        else {
-            return
-        }
+        guard let headerView = sender.view as? HomeHeaderView else { return }
+        guard let section = headerView.section else { return }
         
         let headerTitle = viewModel.sections[section - 1].header
         print("DEBUG: Selected \"\(headerTitle)\"")
     }
     
-    // MARK: - Helpers
+    // MARK: - Bind
     
     private func bind() {
         viewModel.sectionsDidChange = { [weak self] sections in
@@ -130,7 +127,7 @@ extension HomeViewController: UITableViewDataSource {
             }
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
-            cell.bind("OOO님, 오늘의 추천 도서를 확인해보세요!")
+            cell.bind(with: "OOO님, 오늘의 추천 도서를 확인해보세요!")
             return cell
         }
         
@@ -140,9 +137,8 @@ extension HomeViewController: UITableViewDataSource {
         ) as? RecommendationBookCell else {
             return UITableViewCell()
         }
-        cell.delegate = self
         cell.selectionStyle = .none
-        cell.bind(viewModel.sections[indexPath.section - 1].bookInfo)
+        cell.bind(viewModel.sections[indexPath.section - 1].basicBookInfo)
         return cell
     }
 }
@@ -163,7 +159,9 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 { return nil }
+        if section == 0 {
+            return nil
+        }
         
         guard let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: "HomeHeaderView"
@@ -171,7 +169,7 @@ extension HomeViewController: UITableViewDelegate {
             return nil
         }
         
-        headerView.bind(viewModel.sections[section - 1].header, section: section)
+        headerView.bind(with: viewModel.sections[section - 1].header, section: section)
         
         let tapGesture = UITapGestureRecognizer(
             target: self,
@@ -188,22 +186,18 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? UITableView.automaticDimension : 200
+        if indexPath.section == 0 {
+            return UITableView.automaticDimension
+        }
+        
+        return 200
     }
-}
-
-// MARK: - RecommendationBookCellDelegate
-
-extension HomeViewController: RecommendationBookCellDelegate {
     
-    func recommendationBookCell(
-        _ cell: RecommendationBookCell,
-        didSelectBook book: DetailBookInfo
-    ) {
-        let detailViewModel = BookDetailViewModel(bookInfo: book)
-        let detailVC = BookDetailViewController()
-        detailVC.viewModel = detailViewModel
-        detailVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(detailVC, animated: true)
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
 }
