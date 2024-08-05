@@ -8,6 +8,7 @@
 import Foundation
 
 enum FirstCategoryType: CaseIterable {
+    case generalWorks
     case philosophy
     case religion
     case socialScience
@@ -20,6 +21,8 @@ enum FirstCategoryType: CaseIterable {
 
     var title: String {
         switch self {
+        case .generalWorks:
+            return "총류"
         case .philosophy:
             return "철학"
         case .religion:
