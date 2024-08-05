@@ -256,6 +256,45 @@
 			path = MainTab;
 			sourceTree = "<group>";
 		};
+		056F30472C60D4E400931302 /* BookDetail */ = {
+			isa = PBXGroup;
+			children = (
+				056F304A2C60D4F800931302 /* Cell */,
+				056F30492C60D4F600931302 /* View */,
+				056F30482C60D4F100931302 /* ViewModel */,
+			);
+			path = BookDetail;
+			sourceTree = "<group>";
+		};
+		056F30482C60D4F100931302 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		056F30492C60D4F600931302 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		056F304A2C60D4F800931302 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				056F304C2C60D51100931302 /* TableViewCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		056F304C2C60D51100931302 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
 		057925172C4F927100834EC6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				056F2FEE2C5B4E3600931302 /* MainTab */,
+				056F30472C60D4E400931302 /* BookDetail */,
 				0545432E2C53725200E64948 /* Home */,
 				054543AA2C5786B000E64948 /* Search */,
 				ABD10DE62C516D26005F290E /* Category */,
