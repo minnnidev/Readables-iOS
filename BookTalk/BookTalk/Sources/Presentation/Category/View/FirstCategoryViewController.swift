@@ -51,7 +51,10 @@ final class FirstCategoryViewController: BaseViewController {
     }
 
     private func registerCell() {
-        firstCategoryCollectionView.register(FirstCategoryCell.self, forCellWithReuseIdentifier: FirstCategoryCell.identifier)
+        firstCategoryCollectionView.register(
+            FirstCategoryCell.self,
+            forCellWithReuseIdentifier: FirstCategoryCell.identifier
+        )
     }
 
     private func setCollectionView() {
@@ -59,9 +62,9 @@ final class FirstCategoryViewController: BaseViewController {
         firstCategoryCollectionView.delegate = self
     }
 
-    private func pushToSecondCategoryViewController() {
-        // TODO: 카테고리에 맞는 파라미터 추가
-        let secondCategoryViewController = SecondCategoryViewController()
+    private func pushToSecondCategoryViewController(_ firstCategoryType: FirstCategoryType) {
+        let viewModel = SecondCategoryViewModel(firstCategoryType: firstCategoryType)
+        let secondCategoryViewController = SecondCategoryViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(secondCategoryViewController, animated: true)
     }
@@ -82,7 +85,7 @@ extension FirstCategoryViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToSecondCategoryViewController()
+        pushToSecondCategoryViewController(FirstCategoryType.allCases[indexPath.row])
     }
 }
 

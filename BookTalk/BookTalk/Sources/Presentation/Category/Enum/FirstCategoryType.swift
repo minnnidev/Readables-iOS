@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FirstCategoryType: CaseIterable {
+enum FirstCategoryType: Int, CaseIterable {
     case generalWorks
     case philosophy
     case religion

@@ -14,8 +14,18 @@ final class SecondCategoryViewController: BaseViewController {
 
     private let secondCategoryTableView = UITableView(frame: .zero)
 
-    private let viewModel = SecondCategoryViewModel()
+    private let viewModel: SecondCategoryViewModel
 
+    init(viewModel: SecondCategoryViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,8 +34,7 @@ final class SecondCategoryViewController: BaseViewController {
     }
 
     override func setNavigationBar() {
-        // TODO: Navigation bar title 대주제에 맞게 수정
-        navigationItem.title = "철학"
+        navigationItem.title = viewModel.firstCategoryType.title
         navigationItem.largeTitleDisplayMode = .never
     }
 
@@ -85,8 +94,10 @@ extension SecondCategoryViewController: UITableViewDataSource {
         case .category:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTitleCell.identifier, for: indexPath) as? CategoryTitleCell else { return UITableViewCell() }
 
-            // TODO: 카테고리 분류에 따른 수정
-            let category: Category = .init(firstCatgory: "철학", secondCategory: "철학의 세계")
+            let category: Category = .init(
+                firstCatgory: viewModel.firstCategoryType.title,
+                secondCategory: "철학의 세계"
+            )
             cell.bind(category)
 
             return cell
