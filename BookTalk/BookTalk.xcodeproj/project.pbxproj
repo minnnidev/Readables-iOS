@@ -61,6 +61,7 @@
 		AB2E7BFA2C54A53900CE43CB /* CategorySelectModaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */; };
 		AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BFD2C5602A500CE43CB /* Category.swift */; };
 		AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7C032C565B3A00CE43CB /* FirstCategoryViewController.swift */; };
+		AB3F15462C611DC100C77E13 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F15452C611DC100C77E13 /* Observable.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,7 @@
 		AB2E7BF92C54A53900CE43CB /* CategorySelectModaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectModaViewController.swift; sourceTree = "<group>"; };
 		AB2E7BFD2C5602A500CE43CB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		AB2E7C032C565B3A00CE43CB /* FirstCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCategoryViewController.swift; sourceTree = "<group>"; };
+		AB3F15452C611DC100C77E13 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -453,6 +455,7 @@
 				AB2E7BCC2C53ADE300CE43CB /* Base */,
 				AB2E7BC32C5260AB00CE43CB /* Extension */,
 				AB2E7BD72C53B37500CE43CB /* Constant.swift */,
+				AB3F15452C611DC100C77E13 /* Observable.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB3F15462C611DC100C77E13 /* Observable.swift in Sources */,
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
