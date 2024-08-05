@@ -13,12 +13,12 @@ final class SearchViewController: BaseViewController {
     
     private let viewModel = SearchViewModel()
     private let searchBar = UISearchBar()
+    private let tableView = UITableView(frame: .zero, style: .plain)
     private var isSearching: Bool = false
     private var searchHistory: [String] = []
-    private let tableView = UITableView(frame: .zero, style: .plain)
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -29,7 +29,41 @@ final class SearchViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Bind
+    // MARK: - Set UI
+    
+    override func setNavigationBar() {
+        searchBar.delegate = self
+        searchBar.autocapitalizationType = .none
+        searchBar.autocorrectionType = .no
+        searchBar.spellCheckingType = .no
+        searchBar.placeholder = "책 이름 / 작가 이름"
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+    }
+    
+    override func setViews() {
+        view.backgroundColor = .white
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 160
+        tableView.keyboardDismissMode = .interactive
+        tableView.automaticallyAdjustsScrollIndicatorInsets = false
+        tableView.register(SearchHistoryCell.self, forCellReuseIdentifier: "SearchHistoryCell")
+        tableView.register(SearchCell.self, forCellReuseIdentifier: "SearchCell")
+    }
+    
+    override func setConstraints() {
+        view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints {
+            $0.centerX.left.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
+    }
+    
+    // MARK: - Helpers
     
     private func bind() {
         viewModel.onBooksUpdated = { [weak self] in
@@ -37,7 +71,14 @@ final class SearchViewController: BaseViewController {
         }
     }
     
-    // MARK: - Helpers
+    private func navigateToBookDetail(with book: DetailBookInfo) {
+        let detailViewModel = BookDetailViewModel(bookInfo: book)
+        let detailVC = BookDetailViewController()
+        detailVC.viewModel = detailViewModel
+        detailVC.hidesBottomBarWhenPushed = true
+        navigationItem.title = ""
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
     
     private func setupKeyboardNotifications() {
         NotificationCenter.default.addObserver(
@@ -56,8 +97,7 @@ final class SearchViewController: BaseViewController {
     
     @objc private func handleKeyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        else {
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
             return
         }
         
@@ -70,43 +110,6 @@ final class SearchViewController: BaseViewController {
     @objc private func handleKeyboardWillHide(notification: NSNotification) {
         tableView.contentInset.bottom = 0
         tableView.verticalScrollIndicatorInsets.bottom = 0
-    }
-    
-    // MARK: - Set UI
-    
-    override func setNavigationBar() {
-        searchBar.delegate = self
-        searchBar.autocapitalizationType = .none
-        searchBar.autocorrectionType = .no
-        searchBar.spellCheckingType = .no
-        searchBar.placeholder = "책 이름 / 작가 이름"
-        searchBar.sizeToFit()
-        navigationItem.titleView = searchBar
-    }
-    
-    override func setViews() {
-        view.backgroundColor = .white
-        
-        tableView.do {
-            $0.dataSource = self
-            $0.delegate = self
-            $0.separatorStyle = .none
-            $0.rowHeight = UITableView.automaticDimension
-            $0.estimatedRowHeight = 160
-            $0.keyboardDismissMode = .interactive
-            $0.automaticallyAdjustsScrollIndicatorInsets = false
-            $0.register(SearchHistoryCell.self, forCellReuseIdentifier: "SearchHistoryCell")
-            $0.register(SearchCell.self, forCellReuseIdentifier: "SearchCell")
-        }
-    }
-    
-    override func setConstraints() {
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints {
-            $0.centerX.left.bottom.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-        }
     }
 }
 
@@ -132,6 +135,7 @@ extension SearchViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             let book = viewModel.filteredBooks[indexPath.row]
+            cell.delegate = self
             cell.selectionStyle = .none
             cell.bind(book)
             return cell
@@ -156,7 +160,10 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !isSearching && searchHistory.count > 0 {
+        if isSearching && !viewModel.filteredBooks.isEmpty {
+            let selectedBook = viewModel.filteredBooks[indexPath.row]
+            navigateToBookDetail(with: selectedBook)
+        } else if !isSearching && searchHistory.count > 0 {
             let selectedHistory = searchHistory[indexPath.row]
             searchBar.text = selectedHistory
             isSearching = true
@@ -167,22 +174,6 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
-        if isSearching && !viewModel.filteredBooks.isEmpty {
-            tableView.separatorStyle = .singleLine
-            cell.separatorInset = .zero
-        } else if !isSearching && searchHistory.count > 0 {
-            tableView.separatorStyle = .singleLine
-            cell.separatorInset = .zero
-        } else {
-            tableView.separatorStyle = .none
-        }
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        didEndDisplaying cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
         if isSearching && !viewModel.filteredBooks.isEmpty {
@@ -224,9 +215,19 @@ extension SearchViewController: UISearchBarDelegate {
 // MARK: - SearchHistoryCellDelegate
 
 extension SearchViewController: SearchHistoryCellDelegate {
+    
     func didTapDeleteButton(cell: SearchHistoryCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         searchHistory.remove(at: indexPath.row)
         tableView.reloadData()
+    }
+}
+
+// MARK: - SearchCellDelegate
+
+extension SearchViewController: SearchCellDelegate {
+    
+    func searchCell(_ cell: SearchCell, didSelectBook book: DetailBookInfo) {
+        navigateToBookDetail(with: book)
     }
 }

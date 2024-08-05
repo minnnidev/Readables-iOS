@@ -33,7 +33,7 @@ final class CategoryTitleCell: UITableViewCell {
 
         firstCategoryTitleLabel.do {
             $0.font = .systemFont(ofSize: 23, weight: .bold)
-            $0.textColor = .accentGreen
+            $0.textColor = .accentOrange
         }
 
         chevronImageView.do {
@@ -44,7 +44,7 @@ final class CategoryTitleCell: UITableViewCell {
 
         secondCategoryTitleLabel.do {
             $0.font = .systemFont(ofSize: 23, weight: .bold)
-            $0.textColor = .accentGreen
+            $0.textColor = .accentOrange
         }
     }
 

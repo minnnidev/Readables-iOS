@@ -9,12 +9,7 @@ import Foundation
 
 final class SearchViewModel {
     
-    private(set) var allBooks: [DetailBookInfo] = [] {
-        didSet {
-            
-        }
-    }
-    
+    private(set) var allBooks: [DetailBookInfo] = []
     private(set) var filteredBooks: [DetailBookInfo] = [] {
         didSet {
             onBooksUpdated?()
@@ -36,7 +31,6 @@ final class SearchViewModel {
                 $0.basicBookInfo.author.lowercased().contains(searchText.lowercased())
             }
         }
-        onBooksUpdated?()
     }
     
     private func loadBooks() {

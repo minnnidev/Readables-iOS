@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -127,7 +127,7 @@ extension HomeViewController: UITableViewDataSource {
             }
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
-            cell.bind(with: "OOO님, 오늘의 추천 도서를 확인해보세요!")
+            cell.bind("OOO님, 오늘의 추천 도서를 확인해보세요!")
             return cell
         }
         
@@ -137,8 +137,13 @@ extension HomeViewController: UITableViewDataSource {
         ) as? RecommendationBookCell else {
             return UITableViewCell()
         }
+        
+        let sectionIndex = indexPath.section - 1
+        let bookInfo = viewModel.sections[sectionIndex].bookInfo
+        
         cell.selectionStyle = .none
-        cell.bind(viewModel.sections[indexPath.section - 1].basicBookInfo)
+        cell.bind(bookInfo)
+        cell.delegate = self
         return cell
     }
 }
@@ -159,9 +164,7 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return nil
-        }
+        if section == 0 { return nil }
         
         guard let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: "HomeHeaderView"
@@ -186,18 +189,22 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return UITableView.automaticDimension
-        }
-        
-        return 200
+        return indexPath.section == 0 ? UITableView.automaticDimension : 200
     }
+}
+
+// MARK: - RecommendationBookCellDelegate
+
+extension HomeViewController: RecommendationBookCellDelegate {
     
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        } else {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
+    func recommendationBookCell(
+        _ cell: RecommendationBookCell,
+        didSelectBook book: DetailBookInfo
+    ) {
+        let detailViewModel = BookDetailViewModel(bookInfo: book)
+        let detailVC = BookDetailViewController()
+        detailVC.viewModel = detailViewModel
+        detailVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

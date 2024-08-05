@@ -10,9 +10,16 @@ import UIKit
 import SnapKit
 import Then
 
+protocol SearchCellDelegate: AnyObject {
+    func searchCell(_ cell: SearchCell, didSelectBook book: DetailBookInfo)
+}
+
 final class SearchCell: UITableViewCell {
     
     // MARK: - Properties
+    
+    weak var delegate: SearchCellDelegate?
+    private var detailBookInfo: DetailBookInfo?
     
     private let coverImageView = UIImageView()
     private let titleLabel = UILabel()
@@ -46,18 +53,14 @@ final class SearchCell: UITableViewCell {
     // MARK: - Helpers
     
     func bind(_ detailBookInfo: DetailBookInfo) {
-        coverImageView.image = UIImage(named: "\(detailBookInfo.basicBookInfo.coverImageURL)")
+        self.detailBookInfo = detailBookInfo
+        coverImageView.image = UIImage(named: detailBookInfo.basicBookInfo.coverImageURL)
         titleLabel.text = detailBookInfo.basicBookInfo.title
         authorLabel.text = detailBookInfo.basicBookInfo.author
         publisherLabel.text = detailBookInfo.publisher
         publicationDateLabel.text = detailBookInfo.publicationDate
-        if detailBookInfo.isAvailable {
-            availabilityLabel.text = "대출 가능"
-            availabilityLabel.textColor = .systemGreen
-        } else {
-            availabilityLabel.text = "대출 불가능"
-            availabilityLabel.textColor = .systemRed
-        }
+        availabilityLabel.text = detailBookInfo.isAvailable ? "대출 가능" : "대출 불가능"
+        availabilityLabel.textColor = detailBookInfo.isAvailable ? .systemGreen : .systemRed
         isFavorite = detailBookInfo.isFavorite
         updateFavoriteButton()
     }
