@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class CategorySelectModaViewController: BaseViewController {
+final class CategorySelectModalViewController: BaseViewController {
 
     private let titleLabel = UILabel()
     private let dismissButton = UIButton()
@@ -111,7 +111,7 @@ final class CategorySelectModaViewController: BaseViewController {
     }
 }
 
-extension CategorySelectModaViewController: UIPickerViewDataSource {
+extension CategorySelectModalViewController: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -122,7 +122,7 @@ extension CategorySelectModaViewController: UIPickerViewDataSource {
     }
 }
 
-extension CategorySelectModaViewController: UIPickerViewDelegate {
+extension CategorySelectModalViewController: UIPickerViewDelegate {
 
     func pickerView(
         _ pickerView: UIPickerView,
