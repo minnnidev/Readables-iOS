@@ -42,6 +42,7 @@
 		AB22AD482C4E8D9F00C9A0F3 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB22AD472C4E8D9F00C9A0F3 /* Base */; };
 		AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD502C4E92C100C9A0F3 /* SnapKit */; };
 		AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD532C4E92C700C9A0F3 /* Then */; };
+		AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB23BF092C638EA300E12702 /* CategorySelectModalViewModel.swift */; };
 		AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */; };
 		AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC62C5260E000CE43CB /* UIColor+.swift */; };
 		AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */; };
@@ -101,6 +102,7 @@
 		AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB22AD472C4E8D9F00C9A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB22AD492C4E8D9F00C9A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB23BF092C638EA300E12702 /* CategorySelectModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectModalViewModel.swift; sourceTree = "<group>"; };
 		AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryType.swift; sourceTree = "<group>"; };
 		AB2E7BC62C5260E000CE43CB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 			children = (
 				AB2E7BDE2C53B70700CE43CB /* SecondCategoryViewModel.swift */,
 				AB2E7BF72C53F71B00CE43CB /* ThirdCategoryViewModel.swift */,
+				AB23BF092C638EA300E12702 /* CategorySelectModalViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				AB2E7BDF2C53B70700CE43CB /* SecondCategoryViewModel.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
+				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

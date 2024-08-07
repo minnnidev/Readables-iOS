@@ -134,7 +134,8 @@ extension SecondCategoryViewController: UITableViewDelegate {
         switch viewModel.sections[indexPath.section] {
 
         case .category:
-            let modalViewController = CategorySelectModalViewController()
+            let viewModel = CategorySelectModalViewModel(firstCategory: viewModel.firstCategoryType)
+            let modalViewController = CategorySelectModalViewController(viewModel: viewModel)
             modalViewController.modalPresentationStyle = .pageSheet
             present(modalViewController, animated: true)
 
