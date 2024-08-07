@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
+protocol CategorySelectModalViewControllerDelegate: AnyObject {
+    func subcategorySelected(subcategory: String)
+}
+
 final class CategorySelectModalViewController: BaseViewController {
 
     private let titleLabel = UILabel()
@@ -19,6 +23,8 @@ final class CategorySelectModalViewController: BaseViewController {
     private let completeButton = UIButton()
 
     private let viewModel: CategorySelectModalViewModel
+
+    weak var delegate: CategorySelectModalViewControllerDelegate?
 
     init(viewModel: CategorySelectModalViewModel) {
         self.viewModel = viewModel
@@ -35,6 +41,7 @@ final class CategorySelectModalViewController: BaseViewController {
 
         setPickerView()
         addTarget()
+        bind()
     }
 
     override func setViews() {
@@ -114,11 +121,22 @@ final class CategorySelectModalViewController: BaseViewController {
         )
     }
 
+    private func bind() {
+        viewModel.send(action: .subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체"))
+
+        pickerView.selectRow(
+            viewModel.subcategoryIndex ?? 0,
+            inComponent: 0,
+            animated: true
+        )
+    }
+
     @objc private func dismissButtonDidTapped() {
         dismiss(animated: true)
     }
 
     @objc private func completeButtonDidTapped() {
+        delegate?.subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체")
         dismiss(animated: true)
     }
 }
@@ -142,5 +160,15 @@ extension CategorySelectModalViewController: UIPickerViewDelegate {
         forComponent component: Int
     ) -> String? {
         return viewModel.firstCategory.subcategories[row]
+    }
+
+    func pickerView(
+        _ pickerView: UIPickerView,
+        didSelectRow row: Int,
+        inComponent component: Int
+    ) {
+        viewModel.send(
+            action: .subcategorySelected(subcategory: viewModel.firstCategory.subcategories[row])
+        )
     }
 }

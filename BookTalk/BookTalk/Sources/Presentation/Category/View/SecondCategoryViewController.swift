@@ -12,9 +12,13 @@ import Then
 
 final class SecondCategoryViewController: BaseViewController {
 
+    // MARK: - Properties
+
     private let secondCategoryTableView = UITableView(frame: .zero)
 
     private let viewModel: SecondCategoryViewModel
+
+    // MARK: - Initializer
 
     init(viewModel: SecondCategoryViewModel) {
         self.viewModel = viewModel
@@ -25,13 +29,18 @@ final class SecondCategoryViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setCollectionView()
         registerCell()
+        bind()
     }
+
+    // MARK: - Helpers
 
     override func setNavigationBar() {
         navigationItem.title = viewModel.firstCategoryType.title
@@ -70,7 +79,15 @@ final class SecondCategoryViewController: BaseViewController {
         secondCategoryTableView.register(ShowAllBookCell.self, forCellReuseIdentifier: ShowAllBookCell.identifier)
         secondCategoryTableView.register(CategoryBookCell.self, forCellReuseIdentifier: CategoryBookCell.identifier)
     }
+
+    private func bind() {
+        viewModel.secondCategory.subscribe { [weak self] _ in
+            self?.secondCategoryTableView.reloadData()
+        }
+    }
 }
+
+// MARK: - UITableViewDataSource
 
 extension SecondCategoryViewController: UITableViewDataSource {
 
@@ -96,7 +113,7 @@ extension SecondCategoryViewController: UITableViewDataSource {
 
             let category: Category = .init(
                 firstCatgory: viewModel.firstCategoryType.title,
-                secondCategory: "철학의 세계"
+                secondCategory: viewModel.secondCategory.value
             )
             cell.bind(category)
 
@@ -117,6 +134,9 @@ extension SecondCategoryViewController: UITableViewDataSource {
     }
 }
 
+
+// MARK: - UITableViewDelegate
+
 extension SecondCategoryViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -134,9 +154,15 @@ extension SecondCategoryViewController: UITableViewDelegate {
         switch viewModel.sections[indexPath.section] {
 
         case .category:
-            let viewModel = CategorySelectModalViewModel(firstCategory: viewModel.firstCategoryType)
+            let viewModel = CategorySelectModalViewModel(
+                firstCategory: viewModel.firstCategoryType,
+                subcategory: viewModel.secondCategory.value
+            )
             let modalViewController = CategorySelectModalViewController(viewModel: viewModel)
+
             modalViewController.modalPresentationStyle = .pageSheet
+            modalViewController.delegate = self
+
             present(modalViewController, animated: true)
 
         case .allBookButton:
@@ -147,5 +173,14 @@ extension SecondCategoryViewController: UITableViewDelegate {
         case .banner, .newBooks, .popularBooks:
             return
         }
+    }
+}
+
+// MARK: - CategorySelectModalViewControllerDelegate
+
+extension SecondCategoryViewController: CategorySelectModalViewControllerDelegate {
+
+    func subcategorySelected(subcategory: String) {
+        viewModel.send(action: .setSubcategory(subcategory: subcategory))
     }
 }
