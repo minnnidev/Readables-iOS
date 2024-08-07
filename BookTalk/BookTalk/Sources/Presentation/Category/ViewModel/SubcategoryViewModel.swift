@@ -7,16 +7,22 @@
 
 import Foundation
 
-final class SecondCategoryViewModel {
+final class SubcategoryViewModel {
+
+    // MARK: - Actions
 
     enum Action {
-        case setSubcategory(subcategory: String)
+        case setSubcategory(subcategoryName: String)
     }
+
+    // MARK: - Properties
 
     let sections: [CategorySectionKind] = [.banner, .category, .allBookButton, .popularBooks, .newBooks]
     let popularBooks: CategoryBooks = .init(headerTitle: "7월 4주차 TOP 10", books: [])
     let newBooks: CategoryBooks = .init(headerTitle: "신작 도서", books: [])
-    var secondCategory = Observable("전체")
+    var subcategory = Observable("전체")
+
+    // MARK: - Initializer
 
     let firstCategoryType: CategoryType
 
@@ -24,10 +30,12 @@ final class SecondCategoryViewModel {
         self.firstCategoryType = firstCategoryType
     }
 
+    // MARK: - Helpers
+
     func send(action: Action) {
         switch action {
-        case let .setSubcategory(subcategory):
-            secondCategory.value = subcategory
+        case let .setSubcategory(subcategoryName):
+            subcategory.value = subcategoryName
         }
     }
 }

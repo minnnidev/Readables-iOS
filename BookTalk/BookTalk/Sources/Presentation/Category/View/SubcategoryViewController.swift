@@ -10,17 +10,17 @@ import UIKit
 import SnapKit
 import Then
 
-final class SecondCategoryViewController: BaseViewController {
+final class SubcategoryViewController: BaseViewController {
 
     // MARK: - Properties
 
-    private let secondCategoryTableView = UITableView(frame: .zero)
+    private let subcategoryTableView = UITableView(frame: .zero)
 
-    private let viewModel: SecondCategoryViewModel
+    private let viewModel: SubcategoryViewModel
 
     // MARK: - Initializer
 
-    init(viewModel: SecondCategoryViewModel) {
+    init(viewModel: SubcategoryViewModel) {
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
@@ -50,7 +50,7 @@ final class SecondCategoryViewController: BaseViewController {
     override func setViews() {
         view.backgroundColor = .white
 
-        secondCategoryTableView.do {
+        subcategoryTableView.do {
             $0.backgroundColor = .clear
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init(top: 0, left: 12, bottom: 0, right: 12)
@@ -58,38 +58,38 @@ final class SecondCategoryViewController: BaseViewController {
     }
 
     override func setConstraints() {
-        [secondCategoryTableView].forEach {
+        [subcategoryTableView].forEach {
             view.addSubview($0)
         }
 
-        secondCategoryTableView.snp.makeConstraints {
+        subcategoryTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
         }
     }
 
     private func setCollectionView() {
-        secondCategoryTableView.dataSource = self
-        secondCategoryTableView.delegate = self
+        subcategoryTableView.dataSource = self
+        subcategoryTableView.delegate = self
     }
 
     private func registerCell() {
-        secondCategoryTableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.identifier)
-        secondCategoryTableView.register(CategoryTitleCell.self, forCellReuseIdentifier: CategoryTitleCell.identifier)
-        secondCategoryTableView.register(ShowAllBookCell.self, forCellReuseIdentifier: ShowAllBookCell.identifier)
-        secondCategoryTableView.register(CategoryBookCell.self, forCellReuseIdentifier: CategoryBookCell.identifier)
+        subcategoryTableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.identifier)
+        subcategoryTableView.register(CategoryTitleCell.self, forCellReuseIdentifier: CategoryTitleCell.identifier)
+        subcategoryTableView.register(ShowAllBookCell.self, forCellReuseIdentifier: ShowAllBookCell.identifier)
+        subcategoryTableView.register(CategoryBookCell.self, forCellReuseIdentifier: CategoryBookCell.identifier)
     }
 
     private func bind() {
-        viewModel.secondCategory.subscribe { [weak self] _ in
-            self?.secondCategoryTableView.reloadData()
+        viewModel.subcategory.subscribe { [weak self] _ in
+            self?.subcategoryTableView.reloadData()
         }
     }
 }
 
 // MARK: - UITableViewDataSource
 
-extension SecondCategoryViewController: UITableViewDataSource {
+extension SubcategoryViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.sections.count
@@ -113,7 +113,7 @@ extension SecondCategoryViewController: UITableViewDataSource {
 
             let category: Category = .init(
                 firstCatgory: viewModel.firstCategoryType.title,
-                secondCategory: viewModel.secondCategory.value
+                subcategory: viewModel.subcategory.value
             )
             cell.bind(category)
 
@@ -137,7 +137,7 @@ extension SecondCategoryViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension SecondCategoryViewController: UITableViewDelegate {
+extension SubcategoryViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch viewModel.sections[indexPath.section] {
@@ -156,7 +156,7 @@ extension SecondCategoryViewController: UITableViewDelegate {
         case .category:
             let viewModel = CategorySelectModalViewModel(
                 firstCategory: viewModel.firstCategoryType,
-                subcategory: viewModel.secondCategory.value
+                subcategory: viewModel.subcategory.value
             )
             let modalViewController = CategorySelectModalViewController(viewModel: viewModel)
 
@@ -166,7 +166,7 @@ extension SecondCategoryViewController: UITableViewDelegate {
             present(modalViewController, animated: true)
 
         case .allBookButton:
-            let thirdCategoryViewController = ThirdCategoryViewController()
+            let thirdCategoryViewController = AllBookImagesViewController()
             thirdCategoryViewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(thirdCategoryViewController, animated: true)
 
@@ -178,9 +178,9 @@ extension SecondCategoryViewController: UITableViewDelegate {
 
 // MARK: - CategorySelectModalViewControllerDelegate
 
-extension SecondCategoryViewController: CategorySelectModalViewControllerDelegate {
+extension SubcategoryViewController: CategorySelectModalViewControllerDelegate {
 
     func subcategorySelected(subcategory: String) {
-        viewModel.send(action: .setSubcategory(subcategory: subcategory))
+        viewModel.send(action: .setSubcategory(subcategoryName: subcategory))
     }
 }

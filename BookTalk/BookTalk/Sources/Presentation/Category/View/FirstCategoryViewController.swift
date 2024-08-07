@@ -62,9 +62,9 @@ final class FirstCategoryViewController: BaseViewController {
         firstCategoryCollectionView.delegate = self
     }
 
-    private func pushToSecondCategoryViewController(_ firstCategoryType: CategoryType) {
-        let viewModel = SecondCategoryViewModel(firstCategoryType: firstCategoryType)
-        let secondCategoryViewController = SecondCategoryViewController(viewModel: viewModel)
+    private func pushTosubcategoryViewController(_ firstCategoryType: CategoryType) {
+        let viewModel = SubcategoryViewModel(firstCategoryType: firstCategoryType)
+        let secondCategoryViewController = SubcategoryViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(secondCategoryViewController, animated: true)
     }
@@ -85,7 +85,7 @@ extension FirstCategoryViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToSecondCategoryViewController(CategoryType.allCases[indexPath.row])
+        pushTosubcategoryViewController(CategoryType.allCases[indexPath.row])
     }
 }
 
