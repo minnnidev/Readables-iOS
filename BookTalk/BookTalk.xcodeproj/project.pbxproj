@@ -43,7 +43,7 @@
 		AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD502C4E92C100C9A0F3 /* SnapKit */; };
 		AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = AB22AD532C4E92C700C9A0F3 /* Then */; };
 		AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB23BF092C638EA300E12702 /* CategorySelectModalViewModel.swift */; };
-		AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */; };
+		AB2E7BC12C525CC700CE43CB /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC02C525CC700CE43CB /* CategoryType.swift */; };
 		AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BC62C5260E000CE43CB /* UIColor+.swift */; };
 		AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */; };
 		AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BD72C53B37500CE43CB /* Constant.swift */; };
@@ -103,7 +103,7 @@
 		AB22AD472C4E8D9F00C9A0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB22AD492C4E8D9F00C9A0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB23BF092C638EA300E12702 /* CategorySelectModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectModalViewModel.swift; sourceTree = "<group>"; };
-		AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryType.swift; sourceTree = "<group>"; };
+		AB2E7BC02C525CC700CE43CB /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		AB2E7BC62C5260E000CE43CB /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		AB2E7BCD2C53ADF700CE43CB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		AB2E7BD72C53B37500CE43CB /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 		AB2E7BE82C53D5D400CE43CB /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				AB2E7BC02C525CC700CE43CB /* FirstCategoryType.swift */,
+				AB2E7BC02C525CC700CE43CB /* CategoryType.swift */,
 				AB2E7BDB2C53B64800CE43CB /* CategorySectionKind.swift */,
 				AB2E7BF52C53F68200CE43CB /* BookSortType.swift */,
 			);
@@ -692,7 +692,7 @@
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
-				AB2E7BC12C525CC700CE43CB /* FirstCategoryType.swift in Sources */,
+				AB2E7BC12C525CC700CE43CB /* CategoryType.swift in Sources */,
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
 				AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */,

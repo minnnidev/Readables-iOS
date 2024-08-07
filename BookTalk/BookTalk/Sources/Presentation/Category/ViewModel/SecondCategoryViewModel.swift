@@ -14,9 +14,9 @@ final class SecondCategoryViewModel {
     let newBooks: CategoryBooks = .init(headerTitle: "신작 도서", books: [])
     let secondCategory = Observable("전체")
 
-    let firstCategoryType: FirstCategoryType
+    let firstCategoryType: CategoryType
 
-    init(firstCategoryType: FirstCategoryType) {
+    init(firstCategoryType: CategoryType) {
         self.firstCategoryType = firstCategoryType
     }
 }

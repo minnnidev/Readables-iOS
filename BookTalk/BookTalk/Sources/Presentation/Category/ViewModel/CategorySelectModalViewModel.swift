@@ -9,9 +9,9 @@ import Foundation
 
 final class CategorySelectModalViewModel {
 
-    let firstCategory: FirstCategoryType
+    let firstCategory: CategoryType
 
-    init(firstCategory: FirstCategoryType) {
+    init(firstCategory: CategoryType) {
         self.firstCategory = firstCategory
     }
 }

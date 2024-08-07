@@ -62,7 +62,7 @@ final class FirstCategoryViewController: BaseViewController {
         firstCategoryCollectionView.delegate = self
     }
 
-    private func pushToSecondCategoryViewController(_ firstCategoryType: FirstCategoryType) {
+    private func pushToSecondCategoryViewController(_ firstCategoryType: CategoryType) {
         let viewModel = SecondCategoryViewModel(firstCategoryType: firstCategoryType)
         let secondCategoryViewController = SecondCategoryViewController(viewModel: viewModel)
 
@@ -73,19 +73,19 @@ final class FirstCategoryViewController: BaseViewController {
 extension FirstCategoryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return FirstCategoryType.allCases.count
+        return CategoryType.allCases.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstCategoryCell.identifier, for: indexPath) as? FirstCategoryCell else { return UICollectionViewCell() }
 
-        cell.bind(FirstCategoryType.allCases[indexPath.item].title)
+        cell.bind(CategoryType.allCases[indexPath.item].title)
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToSecondCategoryViewController(FirstCategoryType.allCases[indexPath.row])
+        pushToSecondCategoryViewController(CategoryType.allCases[indexPath.row])
     }
 }
 
