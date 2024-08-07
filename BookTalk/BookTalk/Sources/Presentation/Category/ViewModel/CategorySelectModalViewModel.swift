@@ -12,7 +12,6 @@ final class CategorySelectModalViewModel {
     // MARK: - Actions
 
     enum Action {
-        case setPickerViewSelectedRow(subcategory: String)
         case subcategorySelected(subcategory: String)
     }
 
@@ -36,9 +35,6 @@ final class CategorySelectModalViewModel {
 
     func send(action: Action) {
         switch action {
-        case let .setPickerViewSelectedRow(subcategory):
-            subcategoryIndex = findsubcategoryIndex(of: subcategory)
-
         case let .subcategorySelected(subcategory):
             self.selectedSubcategory = subcategory
             subcategoryIndex = findsubcategoryIndex(of: subcategory)

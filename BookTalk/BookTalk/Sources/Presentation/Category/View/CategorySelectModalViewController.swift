@@ -122,7 +122,9 @@ final class CategorySelectModalViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.send(action: .subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체"))
+        viewModel.send(
+            action: .subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체")
+        )
 
         pickerView.selectRow(
             viewModel.subcategoryIndex ?? 0,
@@ -147,7 +149,10 @@ extension CategorySelectModalViewController: UIPickerViewDataSource {
         return 1
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        numberOfRowsInComponent component: Int
+    ) -> Int {
         return viewModel.firstCategory.subcategories.count
     }
 }
