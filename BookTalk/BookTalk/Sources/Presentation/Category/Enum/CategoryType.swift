@@ -44,7 +44,7 @@ enum CategoryType: Int, CaseIterable {
         }
     }
 
-    var subCategories: [String] {
+    var subcategories: [String] {
         switch self {
         case .generalWorks:
             return [

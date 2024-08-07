@@ -130,7 +130,7 @@ extension CategorySelectModalViewController: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel.firstCategory.subCategories.count
+        return viewModel.firstCategory.subcategories.count
     }
 }
 
@@ -141,6 +141,6 @@ extension CategorySelectModalViewController: UIPickerViewDelegate {
         titleForRow row: Int,
         forComponent component: Int
     ) -> String? {
-        return viewModel.firstCategory.subCategories[row]
+        return viewModel.firstCategory.subcategories[row]
     }
 }
