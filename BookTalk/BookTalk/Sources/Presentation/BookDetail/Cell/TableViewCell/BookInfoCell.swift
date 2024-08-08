@@ -113,13 +113,33 @@ final class BookInfoCell: BaseTableViewCell {
     
     // MARK: - Helpers
     
-    func bind( _ viewModel: BookDetailViewModel) {
-        bookImageView.image = UIImage(named: "\(viewModel.coverImageURL)")
-        titleLabel.text = viewModel.title
-        authorLabel.text = viewModel.author
-        publisherLabel.text = viewModel.publisher
-        publicationDateLabel.text = viewModel.publicationDate
-        availabilityLabel.text = viewModel.availabilityText
-        availabilityLabel.textColor = viewModel.availabilityTextColor
+    func bind(_ viewModel: BookDetailViewModel) {
+        viewModel.output.coverImageURL.subscribe { [weak self] urlString in
+            self?.bookImageView.image = UIImage(named: urlString)
+        }
+        
+        viewModel.output.title.subscribe { [weak self] title in
+            self?.titleLabel.text = title
+        }
+        
+        viewModel.output.author.subscribe { [weak self] author in
+            self?.authorLabel.text = author
+        }
+        
+        viewModel.output.publisher.subscribe { [weak self] publisher in
+            self?.publisherLabel.text = publisher
+        }
+        
+        viewModel.output.publicationDate.subscribe { [weak self] publicationDate in
+            self?.publicationDateLabel.text = publicationDate
+        }
+        
+        viewModel.output.availabilityText.subscribe { [weak self] availabilityText in
+            self?.availabilityLabel.text = availabilityText
+        }
+        
+        viewModel.output.availabilityTextColor.subscribe { [weak self] textColor in
+            self?.availabilityLabel.textColor = textColor
+        }
     }
 }
