@@ -12,10 +12,14 @@ import Then
 
 final class ChatMenuViewController: BaseViewController {
 
+    // MARK: - Properties
+
     private let chatMenuTableView = UITableView()
     private let bottomLineView = UIView()
     private let bottomView = UIView()
     private let shareGoalButton = UIButton()
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +28,16 @@ final class ChatMenuViewController: BaseViewController {
         registerCell()
     }
 
+    // MARK: - UI Setup
+
     override func setViews() {
         view.backgroundColor = .white
 
         chatMenuTableView.do {
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
+            $0.separatorStyle = .none
+            $0.estimatedRowHeight = 300
         }
 
         bottomLineView.do {
@@ -43,7 +51,7 @@ final class ChatMenuViewController: BaseViewController {
         shareGoalButton.do {
             $0.setTitle("오픈톡에 목표 공유하기", for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = UIColor(hex: 0xFFCC00) // TODO: 색상
+            $0.backgroundColor = UIColor.accentOrange
             $0.layer.cornerRadius = 10
         }
     }
@@ -79,8 +87,11 @@ final class ChatMenuViewController: BaseViewController {
         }
     }
 
+    // MARK: - Helpers
+
     private func setDelegate() {
         chatMenuTableView.dataSource = self
+        chatMenuTableView.delegate = self
     }
 
     private func registerCell() {
@@ -98,6 +109,8 @@ final class ChatMenuViewController: BaseViewController {
         )
     }
 }
+
+// MARK: - UITableViewDataSource
 
 extension ChatMenuViewController: UITableViewDataSource {
 
@@ -139,5 +152,15 @@ extension ChatMenuViewController: UITableViewDataSource {
 
             return cell
         }
+    }
+}
+
+extension ChatMenuViewController: UITableViewDelegate {
+
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
