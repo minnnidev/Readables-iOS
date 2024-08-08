@@ -112,7 +112,7 @@ extension SubcategoryViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTitleCell.identifier, for: indexPath) as? CategoryTitleCell else { return UITableViewCell() }
 
             let category: Category = .init(
-                firstCatgory: viewModel.firstCategoryType.title,
+                firstCategory: viewModel.firstCategoryType.title,
                 subcategory: viewModel.subcategory.value
             )
             cell.bind(category)

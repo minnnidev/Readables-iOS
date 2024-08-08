@@ -8,6 +8,6 @@
 import Foundation
 
 struct Category {
-    let firstCatgory: String
+    let firstCategory: String
     let subcategory: String
 }

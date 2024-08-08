@@ -72,7 +72,7 @@ final class CategoryTitleCell: UITableViewCell {
     }
 
     func bind(_ category: Category) {
-        firstCategoryTitleLabel.text = category.firstCatgory
+        firstCategoryTitleLabel.text = category.firstCategory
         subcategoryTitleLabel.text = category.subcategory
     }
 }
