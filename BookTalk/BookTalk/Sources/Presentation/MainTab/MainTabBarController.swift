@@ -68,7 +68,7 @@ final class MainTabBarController: UITabBarController {
         
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
-        tabBar.tintColor = .black
+        tabBar.tintColor = .accentOrange
         
         let tabBarItem = UITabBarItem(
             title: title,
