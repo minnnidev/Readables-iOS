@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class NowReadingPeopleCell: UITableViewCell {
+final class ReadingPeopleCell: UITableViewCell {
 
     static let identifier = "NowReadingPeopleCell"
 

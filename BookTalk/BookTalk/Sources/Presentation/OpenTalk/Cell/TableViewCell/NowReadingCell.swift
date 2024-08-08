@@ -79,8 +79,8 @@ final class NowReadingCell: UITableViewCell {
 
     private func registerCell() {
         nowReadingPeopleTableView.register(
-            NowReadingPeopleCell.self,
-            forCellReuseIdentifier: NowReadingPeopleCell.identifier
+            ReadingPeopleCell.self,
+            forCellReuseIdentifier: ReadingPeopleCell.identifier
         )
     }
 }
@@ -99,9 +99,9 @@ extension NowReadingCell: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: NowReadingPeopleCell.identifier,
+            withIdentifier: ReadingPeopleCell.identifier,
             for: indexPath
-        ) as? NowReadingPeopleCell else { return UITableViewCell() }
+        ) as? ReadingPeopleCell else { return UITableViewCell() }
 
         return cell
     }

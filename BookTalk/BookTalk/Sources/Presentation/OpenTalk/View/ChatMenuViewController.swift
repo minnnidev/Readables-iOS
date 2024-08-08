@@ -40,50 +40,27 @@ final class ChatMenuViewController: BaseViewController {
             $0.estimatedRowHeight = 300
         }
 
-        bottomLineView.do {
-            $0.backgroundColor = .gray100
-        }
-
-        bottomView.do {
-            $0.backgroundColor = .white
-        }
-
         shareGoalButton.do {
             $0.setTitle("오픈톡에 목표 공유하기", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = UIColor.accentOrange
-            $0.layer.cornerRadius = 10
         }
     }
 
     override func setConstraints() {
-        [chatMenuTableView, bottomLineView, bottomView].forEach {
+        [chatMenuTableView, shareGoalButton].forEach {
             view.addSubview($0)
         }
 
-        bottomView.addSubview(shareGoalButton)
-
         chatMenuTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-70)
-        }
-
-        bottomLineView.snp.makeConstraints {
-            $0.bottom.equalTo(bottomView.snp.top)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(1)
-        }
-
-        bottomView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(70)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
 
         shareGoalButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(60)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(70)
         }
     }
 
