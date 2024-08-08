@@ -7,20 +7,17 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 protocol SearchCellDelegate: AnyObject {
-    func searchCell(_ cell: SearchCell, didSelectBook book: DetailBookInfo)
+    func searchCell(_ cell: SearchResultCell, didSelectBook book: DetailBookInfo)
 }
 
-final class SearchCell: UITableViewCell {
+final class SearchResultCell: BaseTableViewCell {
     
     // MARK: - Properties
     
     weak var delegate: SearchCellDelegate?
-    private var detailBookInfo: DetailBookInfo?
     
+    private var detailBookInfo: DetailBookInfo?
     private let coverImageView = UIImageView()
     private let titleLabel = UILabel()
     private let authorLabel = UILabel()
@@ -31,18 +28,6 @@ final class SearchCell: UITableViewCell {
     private let favoriteButton = UIButton(type: .system)
     private var isFavorite: Bool = false
     
-    // MARK: - Lifecycle
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Actions
     
     @objc private func favoriteButtonDidTap() {
@@ -50,33 +35,9 @@ final class SearchCell: UITableViewCell {
         updateFavoriteButton()
     }
     
-    // MARK: - Helpers
+    // MARK: - Base
     
-    func bind(_ detailBookInfo: DetailBookInfo) {
-        self.detailBookInfo = detailBookInfo
-        coverImageView.image = UIImage(named: detailBookInfo.basicBookInfo.coverImageURL)
-        titleLabel.text = detailBookInfo.basicBookInfo.title
-        authorLabel.text = detailBookInfo.basicBookInfo.author
-        publisherLabel.text = detailBookInfo.publisher
-        publicationDateLabel.text = detailBookInfo.publicationDate
-        availabilityLabel.text = detailBookInfo.isAvailable ? "대출 가능" : "대출 불가능"
-        availabilityLabel.textColor = detailBookInfo.isAvailable ? .systemGreen : .systemRed
-        isFavorite = detailBookInfo.isFavorite
-        updateFavoriteButton()
-    }
-    
-    private func updateFavoriteButton() {
-        let imageName = isFavorite ? "heart.fill" : "heart"
-        favoriteButton.setImage(UIImage(systemName: imageName)?
-            .withConfiguration(
-                UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
-            ), for: .normal
-        )
-    }
-    
-    // MARK: - Set UI
-    
-    private func setViews() {
+    override func setViews() {
         coverImageView.do {
             $0.backgroundColor = .gray100
             $0.contentMode = .scaleAspectFill
@@ -131,7 +92,7 @@ final class SearchCell: UITableViewCell {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         [coverImageView, bookInfoStackView, favoriteButton].forEach {
             contentView.addSubview($0)
         }
@@ -152,5 +113,29 @@ final class SearchCell: UITableViewCell {
             $0.bottom.equalTo(coverImageView.snp.bottom)
             $0.right.equalTo(-15)
         }
+    }
+    
+    // MARK: - Helpers
+    
+    func bind(_ detailBookInfo: DetailBookInfo) {
+        self.detailBookInfo = detailBookInfo
+        coverImageView.image = UIImage(named: detailBookInfo.basicBookInfo.coverImageURL)
+        titleLabel.text = detailBookInfo.basicBookInfo.title
+        authorLabel.text = detailBookInfo.basicBookInfo.author
+        publisherLabel.text = detailBookInfo.publisher
+        publicationDateLabel.text = detailBookInfo.publicationDate
+        availabilityLabel.text = detailBookInfo.isAvailable ? "대출 가능" : "대출 불가능"
+        availabilityLabel.textColor = detailBookInfo.isAvailable ? .systemGreen : .systemRed
+        isFavorite = detailBookInfo.isFavorite
+        updateFavoriteButton()
+    }
+    
+    private func updateFavoriteButton() {
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        favoriteButton.setImage(UIImage(systemName: imageName)?
+            .withConfiguration(
+                UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+            ), for: .normal
+        )
     }
 }

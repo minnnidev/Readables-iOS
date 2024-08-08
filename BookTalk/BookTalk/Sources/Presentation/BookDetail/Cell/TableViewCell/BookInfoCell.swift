@@ -7,10 +7,7 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class BookInfoCell: UITableViewCell {
+final class BookInfoCell: BaseTableViewCell {
     
     // MARK: - Properties
     
@@ -23,33 +20,9 @@ final class BookInfoCell: UITableViewCell {
     private let bookInfoStackView = UIStackView()
     private let joinOpenTalkButton = UIButton(type: .system)
     
-    // MARK: - Lifecycle
+    // MARK: - Base
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Helpers
-    
-    func bind( _ viewModel: BookDetailViewModel) {
-        bookImageView.image = UIImage(named: "\(viewModel.coverImageURL)")
-        titleLabel.text = viewModel.title
-        authorLabel.text = viewModel.author
-        publisherLabel.text = viewModel.publisher
-        publicationDateLabel.text = viewModel.publicationDate
-        availabilityLabel.text = viewModel.availabilityText
-        availabilityLabel.textColor = viewModel.availabilityTextColor
-    }
-    
-    // MARK: - Set UI
-    
-    private func setViews() {
+    override func setViews() {
         bookImageView.do {
             $0.contentMode = .scaleAspectFit
             $0.backgroundColor = .gray100
@@ -106,7 +79,7 @@ final class BookInfoCell: UITableViewCell {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         [bookImageView, titleLabel, bookInfoStackView, joinOpenTalkButton].forEach {
             contentView.addSubview($0)
         }
@@ -136,5 +109,17 @@ final class BookInfoCell: UITableViewCell {
             $0.bottom.equalToSuperview().offset(-15)
             $0.height.equalTo(50)
         }
+    }
+    
+    // MARK: - Helpers
+    
+    func bind( _ viewModel: BookDetailViewModel) {
+        bookImageView.image = UIImage(named: "\(viewModel.coverImageURL)")
+        titleLabel.text = viewModel.title
+        authorLabel.text = viewModel.author
+        publisherLabel.text = viewModel.publisher
+        publicationDateLabel.text = viewModel.publicationDate
+        availabilityLabel.text = viewModel.availabilityText
+        availabilityLabel.textColor = viewModel.availabilityTextColor
     }
 }

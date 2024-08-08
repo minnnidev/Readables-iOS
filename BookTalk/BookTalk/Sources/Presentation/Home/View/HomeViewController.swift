@@ -21,7 +21,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
+        
         viewModel.fetchSections()
     }
     
@@ -41,15 +41,7 @@ final class HomeViewController: BaseViewController {
         print("DEBUG: Selected \"\(headerTitle)\"")
     }
     
-    // MARK: - Bind
-    
-    private func bind() {
-        viewModel.sectionsDidChange = { [weak self] sections in
-            self?.tableView.reloadData()
-        }
-    }
-    
-    // MARK: - Set UI
+    // MARK: - Base
     
     override func setNavigationBar() {
         let appearance = UINavigationBarAppearance()
@@ -71,8 +63,6 @@ final class HomeViewController: BaseViewController {
         view.addSubview(tableView)
         
         tableView.do {
-            $0.dataSource = self
-            $0.delegate = self
             $0.separatorStyle = .none
             $0.contentInsetAdjustmentBehavior = .never
             $0.automaticallyAdjustsScrollIndicatorInsets = false
@@ -81,7 +71,24 @@ final class HomeViewController: BaseViewController {
             $0.sectionHeaderHeight = UITableView.automaticDimension
             $0.rowHeight = UITableView.automaticDimension
             $0.contentInset = UIEdgeInsets(top: -23, left: 0, bottom: -20, right: 0)
-            
+        }
+    }
+    
+    override func setConstraints() {
+        tableView.snp.makeConstraints {
+            $0.centerX.left.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+    }
+    
+    override func setDelegate() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    override func registerCell() {
+        tableView.do {
             $0.register(
                 SuggestionCell.self,
                 forCellReuseIdentifier: suggestionID
@@ -99,11 +106,9 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    override func setConstraints() {
-        tableView.snp.makeConstraints {
-            $0.centerX.left.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+    override func bind() {
+        viewModel.sectionsDidChange = { [weak self] sections in
+            self?.tableView.reloadData()
         }
     }
 }

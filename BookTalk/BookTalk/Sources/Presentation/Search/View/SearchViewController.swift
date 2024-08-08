@@ -17,24 +17,23 @@ final class SearchViewController: BaseViewController {
     private var searchHistory: [String] = []
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let historyID = SearchHistoryCell.identifier
-    private let searchResultID = SearchCell.identifier
+    private let searchResultID = SearchResultCell.identifier
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
-        setupKeyboardNotifications()
+        
+        setKeyboardNotifications()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Set UI
+    // MARK: - Base
     
     override func setNavigationBar() {
-        searchBar.delegate = self
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.spellCheckingType = .no
@@ -45,15 +44,11 @@ final class SearchViewController: BaseViewController {
     
     override func setViews() {
         view.backgroundColor = .white
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 160
         tableView.keyboardDismissMode = .interactive
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
-        tableView.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
-        tableView.register(SearchCell.self, forCellReuseIdentifier: searchResultID)
     }
     
     override func setConstraints() {
@@ -65,13 +60,25 @@ final class SearchViewController: BaseViewController {
         }
     }
     
-    // MARK: - Helpers
+    override func setDelegate() {
+        searchBar.delegate = self
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
     
-    private func bind() {
+    override func registerCell() {
+        tableView.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
+        tableView.register(SearchResultCell.self, forCellReuseIdentifier: searchResultID)
+    }
+    
+    override func bind() {
         viewModel.onBooksUpdated = { [weak self] in
             self?.tableView.reloadData()
         }
     }
+    
+    // MARK: - Helpers
     
     private func navigateToBookDetail(with book: DetailBookInfo) {
         let detailViewModel = BookDetailViewModel(bookInfo: book)
@@ -82,7 +89,7 @@ final class SearchViewController: BaseViewController {
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    private func setupKeyboardNotifications() {
+    private func setKeyboardNotifications() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleKeyboardWillShow(notification:)),
@@ -99,7 +106,8 @@ final class SearchViewController: BaseViewController {
     
     @objc private func handleKeyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect 
+        else {
             return
         }
         
@@ -136,7 +144,7 @@ extension SearchViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: searchResultID,
                 for: indexPath
-            ) as? SearchCell else {
+            ) as? SearchResultCell else {
                 return UITableViewCell()
             }
             let book = viewModel.filteredBooks[indexPath.row]
@@ -233,9 +241,9 @@ extension SearchViewController: SearchHistoryCellDelegate {
 
 // MARK: - SearchCellDelegate
 
-extension SearchViewController: SearchCellDelegate {
+extension SearchViewController: SearchResultCellDelegate {
     
-    func searchCell(_ cell: SearchCell, didSelectBook book: DetailBookInfo) {
+    func searchResultCell(_ cell: SearchResultCell, didSelectBook book: DetailBookInfo) {
         navigateToBookDetail(with: book)
     }
 }

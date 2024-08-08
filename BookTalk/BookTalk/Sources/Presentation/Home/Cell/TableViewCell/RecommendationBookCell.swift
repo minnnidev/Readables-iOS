@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 protocol RecommendationBookCellDelegate: AnyObject {
     func recommendationBookCell(
         _ cell: RecommendationBookCell,
@@ -17,7 +14,7 @@ protocol RecommendationBookCellDelegate: AnyObject {
     )
 }
 
-final class RecommendationBookCell: UITableViewCell {
+final class RecommendationBookCell: BaseTableViewCell {
     
     // MARK: - Properties
     
@@ -25,8 +22,9 @@ final class RecommendationBookCell: UITableViewCell {
     private var basicBookInfo: [BasicBookInfo] = []
     private var detailBookInfo: [DetailBookInfo] = []
     private let collectionView: UICollectionView
+    private let identifier = RecommendationBookCollectionCell.identifier
     
-    // MARK: - Lifecycle
+    // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
@@ -37,12 +35,32 @@ final class RecommendationBookCell: UITableViewCell {
         collectionView.contentInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Base
+    
+    override func setConstraints() {
+        contentView.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    override func setDelegate() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
+    
+    override func registerCell() {
+        collectionView.register(
+            RecommendationBookCollectionCell.self,
+            forCellWithReuseIdentifier: identifier
+        )
     }
     
     // MARK: - Helpers
@@ -51,27 +69,6 @@ final class RecommendationBookCell: UITableViewCell {
         self.detailBookInfo = detailBookInfo
         self.basicBookInfo = detailBookInfo.map { $0.basicBookInfo }
         collectionView.reloadData()
-    }
-    
-    // MARK: - Set UI
-    
-    private func setViews() {
-        collectionView.do {
-            $0.dataSource = self
-            $0.delegate = self
-            $0.register(
-                RecommendationBookCollectionCell.self,
-                forCellWithReuseIdentifier: "RecommendationBookCollectionCell"
-            )
-        }
-    }
-    
-    private func setConstraints() {
-        contentView.addSubview(collectionView)
-        
-        collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     }
 }
 
@@ -91,7 +88,7 @@ extension RecommendationBookCell: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "RecommendationBookCollectionCell",
+            withReuseIdentifier: identifier,
             for: indexPath
         ) as? RecommendationBookCollectionCell else {
             return UICollectionViewCell()
