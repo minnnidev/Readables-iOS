@@ -10,29 +10,47 @@ import UIKit
 import SnapKit
 import Then
 
-final class SecondCategoryViewController: BaseViewController {
+final class SubcategoryViewController: BaseViewController {
 
-    private let secondCategoryTableView = UITableView(frame: .zero)
+    // MARK: - Properties
 
-    private let viewModel = SecondCategoryViewModel()
+    private let subcategoryTableView = UITableView(frame: .zero)
+
+    private let viewModel: SubcategoryViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: SubcategoryViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setCollectionView()
         registerCell()
+        bind()
     }
 
+    // MARK: - Helpers
+
     override func setNavigationBar() {
-        // TODO: Navigation bar title 대주제에 맞게 수정
-        navigationItem.title = "철학"
+        navigationItem.title = viewModel.firstCategoryType.title
         navigationItem.largeTitleDisplayMode = .never
     }
 
     override func setViews() {
         view.backgroundColor = .white
 
-        secondCategoryTableView.do {
+        subcategoryTableView.do {
             $0.backgroundColor = .clear
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init(top: 0, left: 12, bottom: 0, right: 12)
@@ -40,30 +58,38 @@ final class SecondCategoryViewController: BaseViewController {
     }
 
     override func setConstraints() {
-        [secondCategoryTableView].forEach {
+        [subcategoryTableView].forEach {
             view.addSubview($0)
         }
 
-        secondCategoryTableView.snp.makeConstraints {
+        subcategoryTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
         }
     }
 
     private func setCollectionView() {
-        secondCategoryTableView.dataSource = self
-        secondCategoryTableView.delegate = self
+        subcategoryTableView.dataSource = self
+        subcategoryTableView.delegate = self
     }
 
     private func registerCell() {
-        secondCategoryTableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.identifier)
-        secondCategoryTableView.register(CategoryTitleCell.self, forCellReuseIdentifier: CategoryTitleCell.identifier)
-        secondCategoryTableView.register(ShowAllBookCell.self, forCellReuseIdentifier: ShowAllBookCell.identifier)
-        secondCategoryTableView.register(CategoryBookCell.self, forCellReuseIdentifier: CategoryBookCell.identifier)
+        subcategoryTableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.identifier)
+        subcategoryTableView.register(CategoryTitleCell.self, forCellReuseIdentifier: CategoryTitleCell.identifier)
+        subcategoryTableView.register(ShowAllBookCell.self, forCellReuseIdentifier: ShowAllBookCell.identifier)
+        subcategoryTableView.register(CategoryBookCell.self, forCellReuseIdentifier: CategoryBookCell.identifier)
+    }
+
+    private func bind() {
+        viewModel.subcategory.subscribe { [weak self] _ in
+            self?.subcategoryTableView.reloadData()
+        }
     }
 }
 
-extension SecondCategoryViewController: UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension SubcategoryViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.sections.count
@@ -85,8 +111,10 @@ extension SecondCategoryViewController: UITableViewDataSource {
         case .category:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTitleCell.identifier, for: indexPath) as? CategoryTitleCell else { return UITableViewCell() }
 
-            // TODO: 카테고리 분류에 따른 수정
-            let category: Category = .init(firstCatgory: "철학", secondCategory: "철학의 세계")
+            let category: Category = .init(
+                firstCategory: viewModel.firstCategoryType.title,
+                subcategory: viewModel.subcategory.value
+            )
             cell.bind(category)
 
             return cell
@@ -106,7 +134,10 @@ extension SecondCategoryViewController: UITableViewDataSource {
     }
 }
 
-extension SecondCategoryViewController: UITableViewDelegate {
+
+// MARK: - UITableViewDelegate
+
+extension SubcategoryViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch viewModel.sections[indexPath.section] {
@@ -123,17 +154,33 @@ extension SecondCategoryViewController: UITableViewDelegate {
         switch viewModel.sections[indexPath.section] {
 
         case .category:
-            let modalViewController = CategorySelectModaViewController()
+            let viewModel = CategorySelectModalViewModel(
+                firstCategory: viewModel.firstCategoryType,
+                subcategory: viewModel.subcategory.value
+            )
+            let modalViewController = CategorySelectModalViewController(viewModel: viewModel)
+
             modalViewController.modalPresentationStyle = .pageSheet
+            modalViewController.delegate = self
+
             present(modalViewController, animated: true)
 
         case .allBookButton:
-            let thirdCategoryViewController = ThirdCategoryViewController()
+            let thirdCategoryViewController = AllBookImagesViewController()
             thirdCategoryViewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(thirdCategoryViewController, animated: true)
 
         case .banner, .newBooks, .popularBooks:
             return
         }
+    }
+}
+
+// MARK: - CategorySelectModalViewControllerDelegate
+
+extension SubcategoryViewController: CategorySelectModalViewControllerDelegate {
+
+    func subcategorySelected(subcategory: String) {
+        viewModel.send(action: .setSubcategory(subcategoryName: subcategory))
     }
 }

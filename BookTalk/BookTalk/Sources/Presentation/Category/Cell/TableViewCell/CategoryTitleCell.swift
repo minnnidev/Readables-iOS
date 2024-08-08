@@ -13,7 +13,7 @@ final class CategoryTitleCell: UITableViewCell {
 
     private let firstCategoryTitleLabel = UILabel()
     private let chevronImageView = UIImageView()
-    private let secondCategoryTitleLabel = UILabel()
+    private let subcategoryTitleLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -42,14 +42,14 @@ final class CategoryTitleCell: UITableViewCell {
             $0.contentMode = .scaleAspectFit
         }
 
-        secondCategoryTitleLabel.do {
+        subcategoryTitleLabel.do {
             $0.font = .systemFont(ofSize: 23, weight: .bold)
             $0.textColor = .accentOrange
         }
     }
 
     private func setConstraints() {
-        [firstCategoryTitleLabel, chevronImageView, secondCategoryTitleLabel].forEach {
+        [firstCategoryTitleLabel, chevronImageView, subcategoryTitleLabel].forEach {
             contentView.addSubview($0)
         }
 
@@ -65,14 +65,14 @@ final class CategoryTitleCell: UITableViewCell {
             $0.height.equalTo(15)
         }
 
-        secondCategoryTitleLabel.snp.makeConstraints {
+        subcategoryTitleLabel.snp.makeConstraints {
             $0.centerY.equalTo(firstCategoryTitleLabel)
             $0.leading.equalTo(chevronImageView.snp.trailing).offset(4)
         }
     }
 
     func bind(_ category: Category) {
-        firstCategoryTitleLabel.text = category.firstCatgory
-        secondCategoryTitleLabel.text = category.secondCategory
+        firstCategoryTitleLabel.text = category.firstCategory
+        subcategoryTitleLabel.text = category.subcategory
     }
 }

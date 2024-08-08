@@ -51,7 +51,10 @@ final class FirstCategoryViewController: BaseViewController {
     }
 
     private func registerCell() {
-        firstCategoryCollectionView.register(FirstCategoryCell.self, forCellWithReuseIdentifier: FirstCategoryCell.identifier)
+        firstCategoryCollectionView.register(
+            FirstCategoryCell.self,
+            forCellWithReuseIdentifier: FirstCategoryCell.identifier
+        )
     }
 
     private func setCollectionView() {
@@ -59,9 +62,9 @@ final class FirstCategoryViewController: BaseViewController {
         firstCategoryCollectionView.delegate = self
     }
 
-    private func pushToSecondCategoryViewController() {
-        // TODO: 카테고리에 맞는 파라미터 추가
-        let secondCategoryViewController = SecondCategoryViewController()
+    private func pushTosubcategoryViewController(_ firstCategoryType: CategoryType) {
+        let viewModel = SubcategoryViewModel(firstCategoryType: firstCategoryType)
+        let secondCategoryViewController = SubcategoryViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(secondCategoryViewController, animated: true)
     }
@@ -70,19 +73,19 @@ final class FirstCategoryViewController: BaseViewController {
 extension FirstCategoryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return FirstCategoryType.allCases.count
+        return CategoryType.allCases.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstCategoryCell.identifier, for: indexPath) as? FirstCategoryCell else { return UICollectionViewCell() }
 
-        cell.bind(FirstCategoryType.allCases[indexPath.item].title)
+        cell.bind(CategoryType.allCases[indexPath.item].title)
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToSecondCategoryViewController()
+        pushTosubcategoryViewController(CategoryType.allCases[indexPath.row])
     }
 }
 
