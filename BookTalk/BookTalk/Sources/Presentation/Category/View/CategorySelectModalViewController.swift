@@ -10,7 +10,11 @@ import UIKit
 import SnapKit
 import Then
 
-final class CategorySelectModaViewController: BaseViewController {
+protocol CategorySelectModalViewControllerDelegate: AnyObject {
+    func subcategorySelected(subcategory: String)
+}
+
+final class CategorySelectModalViewController: BaseViewController {
 
     private let titleLabel = UILabel()
     private let dismissButton = UIButton()
@@ -18,11 +22,26 @@ final class CategorySelectModaViewController: BaseViewController {
     private let pickerView = UIPickerView()
     private let completeButton = UIButton()
 
+    private let viewModel: CategorySelectModalViewModel
+
+    weak var delegate: CategorySelectModalViewControllerDelegate?
+
+    init(viewModel: CategorySelectModalViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setPickerView()
         addTarget()
+        bind()
     }
 
     override func setViews() {
@@ -102,34 +121,50 @@ final class CategorySelectModaViewController: BaseViewController {
         )
     }
 
+    private func bind() {
+        viewModel.send(
+            action: .subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체")
+        )
+
+        pickerView.selectRow(
+            viewModel.subcategoryIndex ?? 0,
+            inComponent: 0,
+            animated: true
+        )
+    }
+
     @objc private func dismissButtonDidTapped() {
         dismiss(animated: true)
     }
 
     @objc private func completeButtonDidTapped() {
+        delegate?.subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체")
         dismiss(animated: true)
     }
 }
 
-extension CategorySelectModaViewController: UIPickerViewDataSource {
+extension CategorySelectModalViewController: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Category.secondCategories.count
+    func pickerView(
+        _ pickerView: UIPickerView,
+        numberOfRowsInComponent component: Int
+    ) -> Int {
+        return viewModel.firstCategory.subcategories.count
     }
 }
 
-extension CategorySelectModaViewController: UIPickerViewDelegate {
+extension CategorySelectModalViewController: UIPickerViewDelegate {
 
     func pickerView(
         _ pickerView: UIPickerView,
         titleForRow row: Int,
         forComponent component: Int
     ) -> String? {
-        Category.secondCategories[row]
+        return viewModel.firstCategory.subcategories[row]
     }
 
     func pickerView(
@@ -137,6 +172,8 @@ extension CategorySelectModaViewController: UIPickerViewDelegate {
         didSelectRow row: Int,
         inComponent component: Int
     ) {
-        // TODO:
+        viewModel.send(
+            action: .subcategorySelected(subcategory: viewModel.firstCategory.subcategories[row])
+        )
     }
 }

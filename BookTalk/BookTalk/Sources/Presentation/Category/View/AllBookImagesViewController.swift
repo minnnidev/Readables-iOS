@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ThirdCategoryViewController: BaseViewController {
+final class AllBookImagesViewController: BaseViewController {
 
     private let sortView = UIView()
     private let sortButton = UIButton()
@@ -112,7 +112,7 @@ final class ThirdCategoryViewController: BaseViewController {
     }
 }
 
-extension ThirdCategoryViewController: UICollectionViewDataSource {
+extension AllBookImagesViewController: UICollectionViewDataSource {
 
     func collectionView(
         _ collectionView: UICollectionView,
@@ -134,7 +134,7 @@ extension ThirdCategoryViewController: UICollectionViewDataSource {
     }
 }
 
-extension ThirdCategoryViewController: UICollectionViewDelegateFlowLayout {
+extension AllBookImagesViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
