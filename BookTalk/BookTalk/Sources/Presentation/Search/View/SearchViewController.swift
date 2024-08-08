@@ -13,11 +13,11 @@ final class SearchViewController: BaseViewController {
     
     private let viewModel = SearchViewModel()
     private let searchBar = UISearchBar()
+    private let tableView = UITableView(frame: .zero, style: .plain)
     private var isSearching: Bool = false
     private var searchHistory: [String] = []
-    private let tableView = UITableView(frame: .zero, style: .plain)
     private let historyID = SearchHistoryCell.identifier
-    private let searchResultID = SearchResultCell.identifier
+    private let resultID = SearchResultCell.identifier
     
     // MARK: - Lifecycle
     
@@ -55,8 +55,7 @@ final class SearchViewController: BaseViewController {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints {
-            $0.centerX.left.bottom.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -68,12 +67,14 @@ final class SearchViewController: BaseViewController {
     }
     
     override func registerCell() {
-        tableView.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
-        tableView.register(SearchResultCell.self, forCellReuseIdentifier: searchResultID)
+        tableView.do {
+            $0.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
+            $0.register(SearchResultCell.self, forCellReuseIdentifier: resultID)
+        }
     }
     
     override func bind() {
-        viewModel.onBooksUpdated = { [weak self] in
+        viewModel.filteredBooksObservable.subscribe { [weak self] _ in
             self?.tableView.reloadData()
         }
     }
@@ -106,7 +107,7 @@ final class SearchViewController: BaseViewController {
     
     @objc private func handleKeyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect 
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         else {
             return
         }
@@ -132,17 +133,29 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearching && !viewModel.filteredBooks.isEmpty {
-            return viewModel.filteredBooks.count
-        } else {
-            return searchHistory.count > 0 ? searchHistory.count : 1
-        }
+        return viewModel.filteredBooks.isEmpty ?
+               (searchHistory.isEmpty ? 1 : searchHistory.count) : viewModel.filteredBooks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isSearching && !viewModel.filteredBooks.isEmpty {
+        if viewModel.filteredBooks.isEmpty {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: searchResultID,
+                withIdentifier: historyID,
+                for: indexPath
+            ) as? SearchHistoryCell else {
+                return UITableViewCell()
+            }
+            cell.selectionStyle = .none
+            if searchHistory.isEmpty {
+                cell.bind("최근 검색어가 없습니다.")
+            } else {
+                cell.delegate = self
+                cell.bind(searchHistory[indexPath.row])
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: resultID,
                 for: indexPath
             ) as? SearchResultCell else {
                 return UITableViewCell()
@@ -151,21 +164,6 @@ extension SearchViewController: UITableViewDataSource {
             cell.delegate = self
             cell.selectionStyle = .none
             cell.bind(book)
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: historyID,
-                for: indexPath
-            ) as? SearchHistoryCell else {
-                return UITableViewCell()
-            }
-            cell.selectionStyle = .none
-            if searchHistory.count > 0 {
-                cell.delegate = self
-                cell.bind(searchHistory[indexPath.row])
-            } else {
-                cell.bind("최근 검색어가 없습니다.")
-            }
             return cell
         }
     }
@@ -176,13 +174,12 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isSearching && !viewModel.filteredBooks.isEmpty {
+        if !viewModel.filteredBooks.isEmpty {
             let selectedBook = viewModel.filteredBooks[indexPath.row]
             navigateToBookDetail(with: selectedBook)
-        } else if !isSearching && searchHistory.count > 0 {
+        } else if !searchHistory.isEmpty {
             let selectedHistory = searchHistory[indexPath.row]
             searchBar.text = selectedHistory
-            isSearching = true
             viewModel.filterBooks(searchText: selectedHistory.lowercased())
         }
     }
@@ -192,15 +189,9 @@ extension SearchViewController: UITableViewDelegate {
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        if isSearching && !viewModel.filteredBooks.isEmpty {
-            tableView.separatorStyle = .singleLine
-            cell.separatorInset = .zero
-        } else if !isSearching && searchHistory.count > 0 {
-            tableView.separatorStyle = .singleLine
-            cell.separatorInset = .zero
-        } else {
-            tableView.separatorStyle = .none
-        }
+        cell.separatorInset = .zero
+        tableView.separatorStyle =
+            viewModel.filteredBooks.isEmpty && searchHistory.isEmpty ? .none : .singleLine
     }
 }
 
@@ -210,7 +201,6 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            isSearching = false
             viewModel.filterBooks(searchText: "")
         }
     }
@@ -218,9 +208,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let searchText = searchBar.text, !searchText.isEmpty {
-            isSearching = true
             viewModel.filterBooks(searchText: searchText.lowercased())
-            
             if !searchHistory.contains(searchText) {
                 searchHistory.append(searchText)
             }

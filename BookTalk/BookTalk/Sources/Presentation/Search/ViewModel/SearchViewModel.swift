@@ -9,24 +9,26 @@ import Foundation
 
 final class SearchViewModel {
     
-    private(set) var allBooks: [DetailBookInfo] = []
-    private(set) var filteredBooks: [DetailBookInfo] = [] {
-        didSet {
-            onBooksUpdated?()
-        }
-    }
+    // MARK: - Properties
     
-    var onBooksUpdated: (() -> Void)?
+    private(set) var allBooks: [DetailBookInfo] = []
+    private let filteredBooksRelay = Observable<[DetailBookInfo]>([])
+    var filteredBooks: [DetailBookInfo] { return filteredBooksRelay.value }
+    var filteredBooksObservable: Observable<[DetailBookInfo]> { return filteredBooksRelay }
+    
+    // MARK: - Initializer
     
     init() {
         loadBooks()
     }
     
+    // MARK: - Helpers
+    
     func filterBooks(searchText: String) {
         if searchText.isEmpty {
-            filteredBooks = []
+            filteredBooksRelay.value = []
         } else {
-            filteredBooks = allBooks.filter {
+            filteredBooksRelay.value = allBooks.filter {
                 $0.basicBookInfo.title.lowercased().contains(searchText.lowercased()) ||
                 $0.basicBookInfo.author.lowercased().contains(searchText.lowercased())
             }

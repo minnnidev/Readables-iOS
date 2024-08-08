@@ -8,6 +8,7 @@
 import UIKit
 
 protocol SearchResultCellDelegate: AnyObject {
+    
     func searchResultCell(_ cell: SearchResultCell, didSelectBook book: DetailBookInfo)
 }
 

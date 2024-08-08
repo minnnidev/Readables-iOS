@@ -8,6 +8,7 @@
 import UIKit
 
 protocol SearchHistoryCellDelegate: AnyObject {
+    
     func didTapDeleteButton(cell: SearchHistoryCell)
 }
 
@@ -16,6 +17,7 @@ final class SearchHistoryCell: BaseTableViewCell {
     // MARK: - Properties
     
     weak var delegate: SearchHistoryCellDelegate?
+    
     private let titleLabel = UILabel()
     private let deleteButton = UIButton()
     
