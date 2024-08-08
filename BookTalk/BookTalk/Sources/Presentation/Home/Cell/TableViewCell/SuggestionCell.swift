@@ -30,7 +30,7 @@ final class SuggestionCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func bind(with text: String) {
+    func bind(_ text: String) {
         suggestionLabel.text = text
     }
 }
