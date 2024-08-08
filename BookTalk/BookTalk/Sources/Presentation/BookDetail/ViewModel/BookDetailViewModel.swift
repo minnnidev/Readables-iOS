@@ -35,14 +35,8 @@ final class BookDetailViewModel {
     // MARK: - Properties
     
     private let bookInfo: DetailBookInfo
-    
-    lazy var input: Input = {
-        return createInput()
-    }()
-    
-    lazy var output: Output = {
-        return createOutput()
-    }()
+    lazy var input: Input = { return createInput() }()
+    lazy var output: Output = { return createOutput() }()
     
     // MARK: - Initializer
     
