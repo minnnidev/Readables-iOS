@@ -166,7 +166,7 @@ final class BookDetailViewController: BaseViewController {
     }
     
     private func updateDislikeButtonState() {
-        let imageName = 
+        let imageName =
             viewModel.output.isDisliked.value ? "hand.thumbsdown.fill" : "hand.thumbsdown"
         dislikeButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
@@ -198,13 +198,13 @@ final class BookDetailViewController: BaseViewController {
     private func rotateFloatingButton(isVisible: Bool) {
         let fromValue: CGFloat = isVisible ? 0 : .pi / 4
         let toValue: CGFloat = isVisible ? .pi / 4 : 0
-        
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.fromValue = fromValue
         animation.toValue = toValue
         animation.duration = 0.3
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
+        
         floatingButton.layer.add(animation, forKey: nil)
     }
 }
