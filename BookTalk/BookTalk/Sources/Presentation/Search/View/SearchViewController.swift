@@ -13,9 +13,11 @@ final class SearchViewController: BaseViewController {
     
     private let viewModel = SearchViewModel()
     private let searchBar = UISearchBar()
-    private let tableView = UITableView(frame: .zero, style: .plain)
     private var isSearching: Bool = false
     private var searchHistory: [String] = []
+    private let tableView = UITableView(frame: .zero, style: .plain)
+    private let historyID = SearchHistoryCell.identifier
+    private let searchResultID = SearchCell.identifier
     
     // MARK: - Lifecycle
     
@@ -50,8 +52,8 @@ final class SearchViewController: BaseViewController {
         tableView.estimatedRowHeight = 160
         tableView.keyboardDismissMode = .interactive
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
-        tableView.register(SearchHistoryCell.self, forCellReuseIdentifier: "SearchHistoryCell")
-        tableView.register(SearchCell.self, forCellReuseIdentifier: "SearchCell")
+        tableView.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
+        tableView.register(SearchCell.self, forCellReuseIdentifier: searchResultID)
     }
     
     override func setConstraints() {
@@ -131,7 +133,10 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isSearching && !viewModel.filteredBooks.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as? SearchCell else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: searchResultID,
+                for: indexPath
+            ) as? SearchCell else {
                 return UITableViewCell()
             }
             let book = viewModel.filteredBooks[indexPath.row]
@@ -140,7 +145,10 @@ extension SearchViewController: UITableViewDataSource {
             cell.bind(book)
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchHistoryCell", for: indexPath) as? SearchHistoryCell else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: historyID,
+                for: indexPath
+            ) as? SearchHistoryCell else {
                 return UITableViewCell()
             }
             cell.selectionStyle = .none

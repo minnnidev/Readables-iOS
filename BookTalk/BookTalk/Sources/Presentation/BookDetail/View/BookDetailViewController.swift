@@ -12,13 +12,13 @@ final class BookDetailViewController: BaseViewController {
     // MARK: - Properties
     
     var viewModel: BookDetailViewModel!
-    
     private var favoriteButton = UIBarButtonItem()
     private let floatingButton = UIButton(type: .system)
     private let likeButton = UIButton(type: .system)
     private let dislikeButton = UIButton(type: .system)
-    
     private let tableView = UITableView(frame: .zero, style: .plain)
+    private let bookInfoID = BookInfoCell.identifier
+    private let nearbyID = NearbyCell.identifier
     
     // MARK: - Lifecycle
     
@@ -150,8 +150,8 @@ final class BookDetailViewController: BaseViewController {
         tableView.do {
             $0.dataSource = self
             $0.separatorInset = .zero
-            $0.register(BookInfoCell.self, forCellReuseIdentifier: "BookInfoCell")
-            $0.register(NearbyCell.self, forCellReuseIdentifier: "NearbyCell")
+            $0.register(BookInfoCell.self, forCellReuseIdentifier: bookInfoID)
+            $0.register(NearbyCell.self, forCellReuseIdentifier: nearbyID)
         }
         
         floatingButton.do {
@@ -234,7 +234,7 @@ extension BookDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "BookInfoCell",
+                withIdentifier: bookInfoID,
                 for: indexPath
             ) as? BookInfoCell else {
                 return UITableViewCell()
@@ -244,7 +244,7 @@ extension BookDetailViewController: UITableViewDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "NearbyCell",
+                withIdentifier: nearbyID,
                 for: indexPath
             ) as? NearbyCell else {
                 return UITableViewCell()

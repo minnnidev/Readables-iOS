@@ -13,6 +13,9 @@ final class HomeViewController: BaseViewController {
     
     private let viewModel = HomeViewModel()
     private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let suggestionID = SuggestionCell.identifier
+    private let headerID = HomeHeaderView.identifier
+    private let recommendationID = RecommendationBookCell.identifier
     
     // MARK: - Lifecycle
     
@@ -81,17 +84,17 @@ final class HomeViewController: BaseViewController {
             
             $0.register(
                 SuggestionCell.self,
-                forCellReuseIdentifier: "SuggestionCell"
+                forCellReuseIdentifier: suggestionID
             )
             
             $0.register(
                 HomeHeaderView.self,
-                forHeaderFooterViewReuseIdentifier: "HomeHeaderView"
+                forHeaderFooterViewReuseIdentifier: headerID
             )
             
             $0.register(
                 RecommendationBookCell.self,
-                forCellReuseIdentifier: "RecommendationBookCell"
+                forCellReuseIdentifier: recommendationID
             )
         }
     }
@@ -120,7 +123,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: "SuggestionCell",
+                withIdentifier: suggestionID,
                 for: indexPath
             ) as? SuggestionCell else {
                 return UITableViewCell()
@@ -132,7 +135,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "RecommendationBookCell",
+            withIdentifier: recommendationID,
             for: indexPath
         ) as? RecommendationBookCell else {
             return UITableViewCell()
@@ -167,7 +170,7 @@ extension HomeViewController: UITableViewDelegate {
         if section == 0 { return nil }
         
         guard let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: "HomeHeaderView"
+            withIdentifier: headerID
         ) as? HomeHeaderView else {
             return nil
         }
