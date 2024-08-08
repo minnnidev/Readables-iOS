@@ -1,5 +1,5 @@
 //
-//  SearchCell.swift
+//  SearchResultCell.swift
 //  BookTalk
 //
 //  Created by RAFA on 7/31/24.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol SearchCellDelegate: AnyObject {
-    func searchCell(_ cell: SearchResultCell, didSelectBook book: DetailBookInfo)
+protocol SearchResultCellDelegate: AnyObject {
+    func searchResultCell(_ cell: SearchResultCell, didSelectBook book: DetailBookInfo)
 }
 
 final class SearchResultCell: BaseTableViewCell {
     
     // MARK: - Properties
     
-    weak var delegate: SearchCellDelegate?
+    weak var delegate: SearchResultCellDelegate?
     
     private var detailBookInfo: DetailBookInfo?
     private let coverImageView = UIImageView()
