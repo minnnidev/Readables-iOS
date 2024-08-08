@@ -9,15 +9,13 @@ import UIKit
 
 final class HomeViewModel {
     
-    private(set) var sections: [HomeSection] = [] {
-        didSet {
-            sectionsDidChange?(sections)
-        }
-    }
+    // MARK: - Properties
     
-    var sectionsDidChange: (([HomeSection]) -> Void)?
+    private let sectionsRelay = Observable<[HomeSection]>([])
+    var sections: [HomeSection] { return sectionsRelay.value }
+    var sectionsObservable: Observable<[HomeSection]> { return sectionsRelay }
     
-    func fetchSections() {
-        self.sections = HomeMockData.sections
-    }
+    // MARK: - Helpers
+    
+    func fetchSections() { sectionsRelay.value = HomeMockData.sections }
 }

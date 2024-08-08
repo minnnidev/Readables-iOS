@@ -8,6 +8,7 @@
 import UIKit
 
 protocol RecommendationBookCellDelegate: AnyObject {
+    
     func recommendationBookCell(
         _ cell: RecommendationBookCell,
         didSelectBook book: DetailBookInfo
@@ -19,6 +20,7 @@ final class RecommendationBookCell: BaseTableViewCell {
     // MARK: - Properties
     
     weak var delegate: RecommendationBookCellDelegate?
+    
     private var basicBookInfo: [BasicBookInfo] = []
     private var detailBookInfo: [DetailBookInfo] = []
     private let collectionView: UICollectionView

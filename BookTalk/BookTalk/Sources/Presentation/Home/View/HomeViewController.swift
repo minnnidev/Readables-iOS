@@ -107,7 +107,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func bind() {
-        viewModel.sectionsDidChange = { [weak self] sections in
+        viewModel.sectionsObservable.subscribe { [weak self] _ in
             self?.tableView.reloadData()
         }
     }
