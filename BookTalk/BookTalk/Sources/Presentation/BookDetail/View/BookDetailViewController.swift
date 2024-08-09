@@ -20,6 +20,17 @@ final class BookDetailViewController: BaseViewController {
     private let bookInfoID = BookInfoCell.identifier
     private let nearbyID = NearbyCell.identifier
     
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addTarget()
+        bind()
+        registerCell()
+        setDelegate()
+    }
+    
     // MARK: - Actions
     
     @objc private func handleFavoriteButton() {
@@ -38,7 +49,33 @@ final class BookDetailViewController: BaseViewController {
         viewModel.input.dislikeButtonTap()
     }
     
-    // MARK: - Base
+    private func addTarget() {
+        floatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
+        dislikeButton.addTarget(self, action: #selector(handleDislikeButton), for: .touchUpInside)
+    }
+    
+    // MARK: - Bind
+    
+    private func bind() {
+        viewModel.output.isFavorite.subscribe { [weak self] _ in
+            self?.updateFavoriteButtonState()
+        }
+        
+        viewModel.output.areChildButtonsVisible.subscribe { [weak self] _ in
+            self?.updateChildButtonVisibility()
+        }
+        
+        viewModel.output.isLiked.subscribe { [weak self] _ in
+            self?.updateLikeButtonState()
+        }
+        
+        viewModel.output.isDisliked.subscribe { [weak self] _ in
+            self?.updateDislikeButtonState()
+        }
+    }
+    
+    // MARK: - Set UI
     
     override func setNavigationBar() {
         favoriteButton = UIBarButtonItem(
@@ -115,39 +152,15 @@ final class BookDetailViewController: BaseViewController {
         }
     }
     
-    override func setDelegate() {
-        tableView.dataSource = self
-    }
-    
-    override func registerCell() {
+    private func registerCell() {
         tableView.do {
             $0.register(BookInfoCell.self, forCellReuseIdentifier: bookInfoID)
             $0.register(NearbyCell.self, forCellReuseIdentifier: nearbyID)
         }
     }
     
-    override func addTarget() {
-        floatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
-        likeButton.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
-        dislikeButton.addTarget(self, action: #selector(handleDislikeButton), for: .touchUpInside)
-    }
-    
-    override func bind() {
-        viewModel.output.isFavorite.subscribe { [weak self] _ in
-            self?.updateFavoriteButtonState()
-        }
-        
-        viewModel.output.areChildButtonsVisible.subscribe { [weak self] _ in
-            self?.updateChildButtonVisibility()
-        }
-        
-        viewModel.output.isLiked.subscribe { [weak self] _ in
-            self?.updateLikeButtonState()
-        }
-        
-        viewModel.output.isDisliked.subscribe { [weak self] _ in
-            self?.updateDislikeButtonState()
-        }
+    private func setDelegate() {
+        tableView.dataSource = self
     }
     
     // MARK: - Helpers
