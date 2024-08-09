@@ -9,13 +9,45 @@ import UIKit
 
 final class HomeViewModel {
     
+    // MARK: - Interactions
+    
+    struct Input {
+        let loadBooks: () -> Void
+    }
+    
+    struct Output {
+        let sections: Observable<[HomeSection]>
+    }
+    
     // MARK: - Properties
     
     private let sectionsRelay = Observable<[HomeSection]>([])
-    var sections: [HomeSection] { return sectionsRelay.value }
-    var sectionsObservable: Observable<[HomeSection]> { return sectionsRelay }
+    lazy var input: Input = { return bindInput() }()
+    lazy var output: Output = { return transform() }()
+    
+    // MARK: - Initializer
+    
+    init() {
+        fetchSections()
+    }
     
     // MARK: - Helpers
     
-    func fetchSections() { sectionsRelay.value = HomeMockData.sections }
+    private func fetchSections() {
+        sectionsRelay.value = HomeMockData.sections
+    }
+    
+    private func bindInput() -> Input {
+        return Input(
+            loadBooks: { [weak self] in
+                self?.fetchSections()
+            }
+        )
+    }
+    
+    private func transform() -> Output {
+        return Output(
+            sections: sectionsRelay
+        )
+    }
 }
