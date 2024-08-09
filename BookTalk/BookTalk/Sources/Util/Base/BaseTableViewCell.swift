@@ -17,8 +17,6 @@ class BaseTableViewCell: UITableViewCell {
         
         setViews()
         setConstraints()
-        setDelegate()
-        registerCell()
     }
     
     required init?(coder: NSCoder) {
@@ -28,8 +26,4 @@ class BaseTableViewCell: UITableViewCell {
     func setViews() { }
     
     func setConstraints() { }
-    
-    func setDelegate() { }
-    
-    func registerCell() { }
 }
