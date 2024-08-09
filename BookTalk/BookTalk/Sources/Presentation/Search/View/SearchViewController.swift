@@ -25,13 +25,27 @@ final class SearchViewController: BaseViewController {
         super.viewDidLoad()
         
         setKeyboardNotifications()
+        viewModel.input.loadBooks()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    private func bind() {
+        viewModel.output.filteredBooks.subscribe { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+        
+        viewModel.output.isKeywordSearch.subscribe { [weak self] isKeywordSearch in
+            self?.searchBar.placeholder =
+                isKeywordSearch ? "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+        }
+    }
+    
+    // MARK: - Set UI
     
     override func setNavigationBar() {
         searchBar.autocapitalizationType = .none
@@ -59,23 +73,17 @@ final class SearchViewController: BaseViewController {
         }
     }
     
-    override func setDelegate() {
+    private func setDelegate() {
         searchBar.delegate = self
         
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    override func registerCell() {
+    private func registerCell() {
         tableView.do {
             $0.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
             $0.register(SearchResultCell.self, forCellReuseIdentifier: resultID)
-        }
-    }
-    
-    override func bind() {
-        viewModel.filteredBooksObservable.subscribe { [weak self] _ in
-            self?.tableView.reloadData()
         }
     }
     
@@ -133,12 +141,20 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.filteredBooks.isEmpty ?
-               (searchHistory.isEmpty ? 1 : searchHistory.count) : viewModel.filteredBooks.count
+        let hasFilteredBooks = !viewModel.output.filteredBooks.value.isEmpty
+        let hasSearchHistory = !searchHistory.isEmpty
+        
+        if hasFilteredBooks {
+            return viewModel.output.filteredBooks.value.count
+        } else if hasSearchHistory {
+            return searchHistory.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if viewModel.filteredBooks.isEmpty {
+        if viewModel.output.filteredBooks.value.isEmpty {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: historyID,
                 for: indexPath
@@ -160,7 +176,7 @@ extension SearchViewController: UITableViewDataSource {
             ) as? SearchResultCell else {
                 return UITableViewCell()
             }
-            let book = viewModel.filteredBooks[indexPath.row]
+            let book = viewModel.output.filteredBooks.value[indexPath.row]
             cell.delegate = self
             cell.selectionStyle = .none
             cell.bind(book)
@@ -174,13 +190,13 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !viewModel.filteredBooks.isEmpty {
-            let selectedBook = viewModel.filteredBooks[indexPath.row]
+        if !viewModel.output.filteredBooks.value.isEmpty {
+            let selectedBook = viewModel.output.filteredBooks.value[indexPath.row]
             navigateToBookDetail(with: selectedBook)
         } else if !searchHistory.isEmpty {
             let selectedHistory = searchHistory[indexPath.row]
             searchBar.text = selectedHistory
-            viewModel.filterBooks(searchText: selectedHistory.lowercased())
+            viewModel.input.searchTextChanged(selectedHistory.lowercased())
         }
     }
     
@@ -191,7 +207,8 @@ extension SearchViewController: UITableViewDelegate {
     ) {
         cell.separatorInset = .zero
         tableView.separatorStyle =
-            viewModel.filteredBooks.isEmpty && searchHistory.isEmpty ? .none : .singleLine
+            viewModel.output.filteredBooks.value.isEmpty && searchHistory.isEmpty ? 
+                .none : .singleLine
     }
 }
 
@@ -201,14 +218,14 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            viewModel.filterBooks(searchText: "")
+            viewModel.input.searchTextChanged(searchText)
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let searchText = searchBar.text, !searchText.isEmpty {
-            viewModel.filterBooks(searchText: searchText.lowercased())
+            viewModel.input.searchTextChanged(searchText.lowercased())
             if !searchHistory.contains(searchText) {
                 searchHistory.append(searchText)
             }
