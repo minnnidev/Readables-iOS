@@ -59,7 +59,7 @@ final class GoalViewController: BaseViewController {
         view.backgroundColor = .white
 
         goalTableView.do { 
-            $0.backgroundColor = .red
+            $0.backgroundColor = .clear
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init()
             $0.separatorStyle = .none
@@ -94,6 +94,11 @@ final class GoalViewController: BaseViewController {
             GoalChartCell.self,
             forCellReuseIdentifier: GoalChartCell.identifier
         )
+
+        goalTableView.register(
+            CategoryBookCell.self,
+            forCellReuseIdentifier: CategoryBookCell.identifier
+        )
     }
 
     private func setDelegate() {
@@ -122,7 +127,9 @@ extension GoalViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch viewModel.goalSections[indexPath.section] {
+        let sectionType = viewModel.goalSections[indexPath.section]
+
+        switch sectionType {
         case .chart:
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: GoalChartCell.identifier,
@@ -135,11 +142,24 @@ extension GoalViewController: UITableViewDataSource {
             )
 
             return cell
-        case .progressGoal:
-            return UITableViewCell()
 
-        case .completedGoal:
-            return UITableViewCell()
+        case .progressGoal, .completedGoal:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CategoryBookCell.identifier,
+                for: indexPath
+            ) as? CategoryBookCell else { return UITableViewCell() }
+
+            if sectionType == .progressGoal {
+                cell.bind(
+                    .init(headerTitle: "애벌래 님이 진행중인 목표 ⚡", books: [])
+                )
+            } else if sectionType == .completedGoal {
+                cell.bind(
+                    .init(headerTitle: "애벌래 님이 완료한 목표 📚", books: [])
+                )
+            }
+
+            return cell
         }
     }
 }
