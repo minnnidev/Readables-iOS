@@ -7,10 +7,7 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class NearbyCell: UITableViewCell {
+final class NearbyCell: BaseTableViewCell {
     
     // MARK: - Properties
     
@@ -19,21 +16,9 @@ final class NearbyCell: UITableViewCell {
     private let distanceLabel = UILabel()
     private let nearbyInfoStackView = UIStackView()
     
-    // MARK: - Lifecycle
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Set UI
     
-    private func setViews() {
+    override func setViews() {
         titleLabel.do {
             $0.text = "대출 가능한 주변 도서관"
             $0.textColor = .black
@@ -64,7 +49,7 @@ final class NearbyCell: UITableViewCell {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         contentView.addSubview(nearbyInfoStackView)
         
         mapView.snp.makeConstraints {

@@ -7,10 +7,7 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class BookInfoCell: UITableViewCell {
+final class BookInfoCell: BaseTableViewCell {
     
     // MARK: - Properties
     
@@ -23,33 +20,41 @@ final class BookInfoCell: UITableViewCell {
     private let bookInfoStackView = UIStackView()
     private let joinOpenTalkButton = UIButton(type: .system)
     
-    // MARK: - Lifecycle
+    // MARK: - Bind
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Helpers
-    
-    func bind( _ viewModel: BookDetailViewModel) {
-        bookImageView.image = UIImage(named: "\(viewModel.coverImageURL)")
-        titleLabel.text = viewModel.title
-        authorLabel.text = viewModel.author
-        publisherLabel.text = viewModel.publisher
-        publicationDateLabel.text = viewModel.publicationDate
-        availabilityLabel.text = viewModel.availabilityText
-        availabilityLabel.textColor = viewModel.availabilityTextColor
+    func bind(_ viewModel: BookDetailViewModel) {
+        viewModel.output.coverImageURL.subscribe { [weak self] urlString in
+            self?.bookImageView.image = UIImage(named: urlString)
+        }
+        
+        viewModel.output.title.subscribe { [weak self] title in
+            self?.titleLabel.text = title
+        }
+        
+        viewModel.output.author.subscribe { [weak self] author in
+            self?.authorLabel.text = author
+        }
+        
+        viewModel.output.publisher.subscribe { [weak self] publisher in
+            self?.publisherLabel.text = publisher
+        }
+        
+        viewModel.output.publicationDate.subscribe { [weak self] publicationDate in
+            self?.publicationDateLabel.text = publicationDate
+        }
+        
+        viewModel.output.availabilityText.subscribe { [weak self] availabilityText in
+            self?.availabilityLabel.text = availabilityText
+        }
+        
+        viewModel.output.availabilityTextColor.subscribe { [weak self] textColor in
+            self?.availabilityLabel.textColor = textColor
+        }
     }
     
     // MARK: - Set UI
     
-    private func setViews() {
+    override func setViews() {
         bookImageView.do {
             $0.contentMode = .scaleAspectFit
             $0.backgroundColor = .gray100
@@ -106,7 +111,7 @@ final class BookInfoCell: UITableViewCell {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         [bookImageView, titleLabel, bookInfoStackView, joinOpenTalkButton].forEach {
             contentView.addSubview($0)
         }

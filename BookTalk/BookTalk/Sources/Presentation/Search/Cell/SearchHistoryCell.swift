@@ -7,32 +7,19 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 protocol SearchHistoryCellDelegate: AnyObject {
+    
     func didTapDeleteButton(cell: SearchHistoryCell)
 }
 
-final class SearchHistoryCell: UITableViewCell {
+final class SearchHistoryCell: BaseTableViewCell {
     
     // MARK: - Properties
     
     weak var delegate: SearchHistoryCellDelegate?
+    
     private let titleLabel = UILabel()
     private let deleteButton = UIButton()
-    
-    // MARK: - Lifecycle
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     // MARK: - Actions
     
@@ -40,7 +27,7 @@ final class SearchHistoryCell: UITableViewCell {
         delegate?.didTapDeleteButton(cell: self)
     }
     
-    // MARK: - Helpers
+    // MARK: - Bind
     
     func bind(_ text: String) {
         titleLabel.text = text
@@ -49,7 +36,7 @@ final class SearchHistoryCell: UITableViewCell {
     
     // MARK: - Set UI
     
-    private func setViews() {
+    override func setViews() {
         titleLabel.do {
             $0.text = "최근 검색어"
             $0.textColor = .black
@@ -64,7 +51,7 @@ final class SearchHistoryCell: UITableViewCell {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         [titleLabel, deleteButton].forEach { contentView.addSubview($0) }
         
         titleLabel.snp.makeConstraints {

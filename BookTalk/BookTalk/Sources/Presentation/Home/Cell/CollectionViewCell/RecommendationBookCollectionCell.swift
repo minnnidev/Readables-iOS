@@ -7,29 +7,14 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class RecommendationBookCollectionCell: UICollectionViewCell {
+final class RecommendationBookCollectionCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     
-    // MARK: - Lifecycle
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Helpers
+    // MARK: - Bind
     
     func bind(_ basicBookInfo: BasicBookInfo) {
         imageView.image = UIImage(named: "\(basicBookInfo.coverImageURL)")
@@ -38,14 +23,14 @@ final class RecommendationBookCollectionCell: UICollectionViewCell {
     
     // MARK: - Set UI
     
-    private func setViews() {
+    override func setViews() {
         imageView.do {
             $0.backgroundColor = .gray100
             $0.contentMode = .scaleAspectFit
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         contentView.addSubview(imageView)
         
         imageView.snp.makeConstraints {

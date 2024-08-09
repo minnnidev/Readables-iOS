@@ -24,114 +24,58 @@ final class BookDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addTarget()
         bind()
+        registerCell()
+        setDelegate()
     }
     
     // MARK: - Actions
     
     @objc private func handleFavoriteButton() {
-        viewModel.favoriteButtonDidTap()
+        viewModel.input.favoriteButtonTap()
     }
     
     @objc private func floatingButtonDidTap() {
-        viewModel.toggleFloatingButton()
+        viewModel.output.areChildButtonsVisible.value.toggle()
     }
     
     @objc private func handleLikeButton() {
-        viewModel.likeButtonDidTap()
+        viewModel.input.likeButtonTap()
     }
     
     @objc private func handleDislikeButton() {
-        viewModel.dislikeButtonDidTap()
+        viewModel.input.dislikeButtonTap()
     }
     
-    @objc private func handleBookmarkButton() {
-        viewModel.bookmarkButtonDidTap()
+    private func addTarget() {
+        floatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
+        dislikeButton.addTarget(self, action: #selector(handleDislikeButton), for: .touchUpInside)
     }
     
-    // MARK: - Button Animations
-    
-    private func updateChildButtonVisibility() {
-        let buttons: [UIButton] = [likeButton, dislikeButton]
-        if viewModel.areChildButtonsVisible {
-            buttons.forEach { button in
-                button.layer.transform = CATransform3DMakeScale(0.4, 0.4, 1)
-                UIView.animate(
-                    withDuration: 0.3,
-                    delay: 0.2,
-                    usingSpringWithDamping: 0.55,
-                    initialSpringVelocity: 0.3,
-                    options: [.curveEaseInOut],
-                    animations: {
-                        button.layer.transform = CATransform3DIdentity
-                        button.alpha = 1.0
-                    }
-                )
-            }
-        } else {
-            UIView.animate(withDuration: 0.15, delay: 0.2) {
-                buttons.forEach { button in
-                    button.layer.transform = CATransform3DMakeScale(0.4, 0.4, 0.1)
-                    button.alpha = 0.0
-                }
-            }
-        }
-        rotateFloatingButton()
-    }
-    
-    private func rotateFloatingButton() {
-        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-        let fromValue = viewModel.areChildButtonsVisible ? 0 : CGFloat.pi / 4
-        let toValue = viewModel.areChildButtonsVisible ? CGFloat.pi / 4 : 0
-        animation.fromValue = fromValue
-        animation.toValue = toValue
-        animation.duration = 0.3
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
-        floatingButton.layer.add(animation, forKey: nil)
-    }
-    
-    // MARK: - Helpers
+    // MARK: - Bind
     
     private func bind() {
-        viewModel.onFavoriteButtonTapped = { [weak self] in
+        viewModel.output.isFavorite.subscribe { [weak self] _ in
             self?.updateFavoriteButtonState()
         }
         
-        viewModel.onFloatingButtonTapped = { [weak self] in
+        viewModel.output.areChildButtonsVisible.subscribe { [weak self] _ in
             self?.updateChildButtonVisibility()
         }
         
-        viewModel.onLikeButtonTapped = { [weak self] in
-            self?.updateLikeButtonState()
-            self?.updateDislikeButtonState()
-        }
-        
-        viewModel.onDislikeButtonTapped = { [weak self] in
-            self?.updateDislikeButtonState()
+        viewModel.output.isLiked.subscribe { [weak self] _ in
             self?.updateLikeButtonState()
         }
-    }
-    
-    private func updateFavoriteButtonState() {
-        let imageName = viewModel.isFavorite ? "heart.fill" : "heart"
-        favoriteButton.image = UIImage(systemName: imageName)
         
-        let tintColor: UIColor = viewModel.isFavorite ? .systemRed : .black
-        favoriteButton.tintColor = tintColor
+        viewModel.output.isDisliked.subscribe { [weak self] _ in
+            self?.updateDislikeButtonState()
+        }
     }
     
-    private func updateLikeButtonState() {
-        let imageName = viewModel.isLiked ? "hand.thumbsup.fill" : "hand.thumbsup"
-        likeButton.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-    
-    private func updateDislikeButtonState() {
-        let imageName = viewModel.isDisliked ? "hand.thumbsdown.fill" : "hand.thumbsdown"
-        dislikeButton.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-    
-    // MARK: - UI Setup
+    // MARK: - Set UI
     
     override func setNavigationBar() {
         favoriteButton = UIBarButtonItem(
@@ -146,13 +90,7 @@ final class BookDetailViewController: BaseViewController {
     
     override func setViews() {
         view.backgroundColor = .white
-        
-        tableView.do {
-            $0.dataSource = self
-            $0.separatorInset = .zero
-            $0.register(BookInfoCell.self, forCellReuseIdentifier: bookInfoID)
-            $0.register(NearbyCell.self, forCellReuseIdentifier: nearbyID)
-        }
+        tableView.separatorInset = .zero
         
         floatingButton.do {
             var config = UIButton.Configuration.filled()
@@ -163,7 +101,6 @@ final class BookDetailViewController: BaseViewController {
             $0.configuration = config
             $0.layer.shadowRadius = 10
             $0.layer.shadowOpacity = 0.3
-            $0.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
         }
         
         [likeButton, dislikeButton].forEach {
@@ -178,13 +115,11 @@ final class BookDetailViewController: BaseViewController {
         likeButton.do {
             $0.configuration?.baseBackgroundColor = .systemBlue
             $0.setImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
-            $0.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
         }
 
         dislikeButton.do {
             $0.configuration?.baseBackgroundColor = .systemRed
             $0.setImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
-            $0.addTarget(self, action: #selector(handleDislikeButton), for: .touchUpInside)
         }
     }
     
@@ -195,8 +130,7 @@ final class BookDetailViewController: BaseViewController {
          dislikeButton].forEach { view.addSubview($0) }
         
         tableView.snp.makeConstraints {
-            $0.centerX.left.bottom.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.edges.equalToSuperview()
         }
         
         floatingButton.snp.makeConstraints {
@@ -216,6 +150,75 @@ final class BookDetailViewController: BaseViewController {
             $0.centerX.equalTo(floatingButton).offset(-15)
             $0.bottom.equalTo(floatingButton.snp.top).offset(-10)
         }
+    }
+    
+    private func registerCell() {
+        tableView.do {
+            $0.register(BookInfoCell.self, forCellReuseIdentifier: bookInfoID)
+            $0.register(NearbyCell.self, forCellReuseIdentifier: nearbyID)
+        }
+    }
+    
+    private func setDelegate() {
+        tableView.dataSource = self
+    }
+    
+    // MARK: - Helpers
+    
+    private func updateFavoriteButtonState() {
+        let imageName = viewModel.output.isFavorite.value ? "heart.fill" : "heart"
+        favoriteButton.image = UIImage(systemName: imageName)
+        
+        let tintColor: UIColor = viewModel.output.isFavorite.value ? .systemRed : .black
+        favoriteButton.tintColor = tintColor
+    }
+    
+    private func updateLikeButtonState() {
+        let imageName = viewModel.output.isLiked.value ? "hand.thumbsup.fill" : "hand.thumbsup"
+        likeButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    private func updateDislikeButtonState() {
+        let imageName =
+            viewModel.output.isDisliked.value ? "hand.thumbsdown.fill" : "hand.thumbsdown"
+        dislikeButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    private func updateChildButtonVisibility() {
+        let buttons: [UIButton] = [likeButton, dislikeButton]
+        let isVisible = viewModel.output.areChildButtonsVisible.value
+        let transform: CATransform3D =
+            isVisible ? CATransform3DIdentity : CATransform3DMakeScale(0.4, 0.4, 1)
+        let alpha: CGFloat = isVisible ? 1.0 : 0.0
+        let duration: TimeInterval = isVisible ? 0.3 : 0.15
+        
+        buttons.forEach { button in
+            UIView.animate(
+                withDuration: duration,
+                delay: 0.2,
+                usingSpringWithDamping: 0.55,
+                initialSpringVelocity: 0.3,
+                options: [.curveEaseInOut],
+                animations: {
+                    button.layer.transform = transform
+                    button.alpha = alpha
+                }
+            )
+        }
+        rotateFloatingButton(isVisible: isVisible)
+    }
+    
+    private func rotateFloatingButton(isVisible: Bool) {
+        let fromValue: CGFloat = isVisible ? 0 : .pi / 4
+        let toValue: CGFloat = isVisible ? .pi / 4 : 0
+        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = 0.3
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        
+        floatingButton.layer.add(animation, forKey: nil)
     }
 }
 

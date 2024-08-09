@@ -15,6 +15,7 @@ struct BasicBookInfo {
 
 struct DetailBookInfo {
     let basicBookInfo: BasicBookInfo
+    let keywords: [String]
     let publisher: String
     let publicationDate: String
     let isAvailable: Bool

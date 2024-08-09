@@ -7,47 +7,22 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class SuggestionCell: UITableViewCell {
+final class SuggestionCell: BaseTableViewCell {
     
     // MARK: - Properties
     
     let backgroundImageView = UIImageView()
     let suggestionLabel = UILabel()
     
-    // MARK: - Lifecycle
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Helpers
+    // MARK: - Bind
     
     func bind(_ text: String) {
         suggestionLabel.text = text
     }
-}
-
-// MARK: - UI Setup
-
-private extension SuggestionCell {
     
-    func setupUI() {
-        contentView.addSubview(backgroundImageView)
-        backgroundImageView.addSubview(suggestionLabel)
-        
-        configureComponents()
-        setupConstraints()
-    }
+    // MARK: - Set UI
     
-    func configureComponents() {
+    override func setViews() {
         backgroundImageView.do {
             $0.image = UIImage(named: "homeBackgroundImage")
             $0.contentMode = .scaleAspectFill
@@ -60,7 +35,10 @@ private extension SuggestionCell {
         }
     }
     
-    func setupConstraints() {
+    override func setConstraints() {
+        contentView.addSubview(backgroundImageView)
+        backgroundImageView.addSubview(suggestionLabel)
+        
         backgroundImageView.snp.makeConstraints {
             $0.centerX.left.bottom.equalToSuperview()
             $0.top.equalTo(contentView.safeAreaLayoutGuide.snp.top)

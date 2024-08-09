@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
     
     // MARK: - Lifecycle
     
@@ -68,7 +68,7 @@ class MainTabBarController: UITabBarController {
         
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
-        tabBar.tintColor = .black
+        tabBar.tintColor = .accentOrange
         
         let tabBarItem = UITabBarItem(
             title: title,

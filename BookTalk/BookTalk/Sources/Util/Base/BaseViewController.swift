@@ -18,10 +18,6 @@ class BaseViewController: UIViewController {
         setNavigationBar()
         setViews()
         setConstraints()
-        setDelegate()
-        registerCell()
-        addTarget()
-        bind()
     }
 
     /// navigation bar 설정
@@ -32,16 +28,4 @@ class BaseViewController: UIViewController {
 
     /// view hierarchy, constraints 설정
     func setConstraints() { }
-    
-    /// delegate 설정
-    func setDelegate() { }
-    
-    /// cell 등록
-    func registerCell() { }
-    
-    /// button target 추가
-    func addTarget() { }
-    
-    /// binding
-    func bind() { }
 }
