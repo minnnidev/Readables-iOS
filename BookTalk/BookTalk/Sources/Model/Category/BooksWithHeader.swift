@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CategoryBooks {
+struct BooksWithHeader {
     let headerTitle: String
     var books: [Book]
 }

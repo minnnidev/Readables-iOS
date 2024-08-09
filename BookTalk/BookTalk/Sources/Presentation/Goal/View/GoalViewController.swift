@@ -96,8 +96,8 @@ final class GoalViewController: BaseViewController {
         )
 
         goalTableView.register(
-            CategoryBookCell.self,
-            forCellReuseIdentifier: CategoryBookCell.identifier
+            BookWithHeaderCell.self,
+            forCellReuseIdentifier: BookWithHeaderCell.identifier
         )
     }
 
@@ -145,9 +145,9 @@ extension GoalViewController: UITableViewDataSource {
 
         case .progressGoal, .completedGoal:
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: CategoryBookCell.identifier,
+                withIdentifier: BookWithHeaderCell.identifier,
                 for: indexPath
-            ) as? CategoryBookCell else { return UITableViewCell() }
+            ) as? BookWithHeaderCell else { return UITableViewCell() }
 
             if sectionType == .progressGoal {
                 cell.bind(

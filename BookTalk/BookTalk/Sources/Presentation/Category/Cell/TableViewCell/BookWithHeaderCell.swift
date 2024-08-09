@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoryBookCell: BaseTableViewCell {
+final class BookWithHeaderCell: BaseTableViewCell {
 
     // MARK: - Properties
 
@@ -79,14 +79,14 @@ final class CategoryBookCell: BaseTableViewCell {
         bookCollectionView.delegate = self
     }
 
-    func bind(_ model: CategoryBooks) {
+    func bind(_ model: BooksWithHeader) {
         headerLabel.text = "\(model.headerTitle)"
 
         // TODO: image bind
     }
 }
 
-extension CategoryBookCell: UICollectionViewDataSource {
+extension BookWithHeaderCell: UICollectionViewDataSource {
 
     func collectionView(
         _ collectionView: UICollectionView,
@@ -108,7 +108,7 @@ extension CategoryBookCell: UICollectionViewDataSource {
     }
 }
 
-extension CategoryBookCell: UICollectionViewDelegateFlowLayout {
+extension BookWithHeaderCell: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
