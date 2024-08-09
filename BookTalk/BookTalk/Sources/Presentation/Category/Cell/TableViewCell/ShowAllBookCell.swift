@@ -7,25 +7,16 @@
 
 import UIKit
 
-final class ShowAllBookCell: UITableViewCell {
+final class ShowAllBookCell: BaseTableViewCell {
 
-    static let identifier = "ShowAllBookCell"
+    // MARK: - Properties
 
     private let showAllBookLabel = UILabel()
     private let chevronImageView = UIImageView()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    // MARK: - UI Setup
 
-        setViews()
-        setConstraints()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
         
         contentView.backgroundColor = .white
@@ -41,7 +32,7 @@ final class ShowAllBookCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [showAllBookLabel, chevronImageView].forEach {
             contentView.addSubview($0)
         }

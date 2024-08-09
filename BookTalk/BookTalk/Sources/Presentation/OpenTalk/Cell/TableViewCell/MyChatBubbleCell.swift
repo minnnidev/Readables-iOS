@@ -7,28 +7,16 @@
 
 import UIKit
 
-import SnapKit
-import Then
+final class MyChatBubbleCell: BaseTableViewCell {
 
-final class MyChatBubbleCell: UITableViewCell {
-
-    static let identifier = "MyChatViewCell"
+    // MARK: - Properties
 
     private let chatMessageLabel = UILabel()
     private let bubbleView = UIView()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    // MARK: - UI Setup
 
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
 
         backgroundColor = .clear
@@ -45,7 +33,7 @@ final class MyChatBubbleCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [bubbleView].forEach {
             contentView.addSubview($0)
         }
@@ -64,6 +52,8 @@ final class MyChatBubbleCell: UITableViewCell {
             $0.trailing.bottom.equalToSuperview().offset(-12)
         }
     }
+
+    // MARK: - Helpers
 
     func bind(with message: String) {
         chatMessageLabel.text = message

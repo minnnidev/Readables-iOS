@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ReadingPeopleCell: UITableViewCell {
-
-    static let identifier = "NowReadingPeopleCell"
+final class ReadingPeopleCell: BaseTableViewCell {
 
     // MARK: - Properties
 
@@ -20,22 +18,9 @@ final class ReadingPeopleCell: UITableViewCell {
     private let nicknameLabel = UILabel()
     private let percentLabel = UILabel()
 
-    // MARK: - Initializer
+    // MARK: - UI Setup
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - Helpers
-
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
         
         contentView.backgroundColor = .clear
@@ -55,7 +40,7 @@ final class ReadingPeopleCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [profileImageView, nicknameLabel, percentLabel].forEach {
             contentView.addSubview($0)
         }

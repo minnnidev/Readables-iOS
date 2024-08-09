@@ -7,24 +7,15 @@
 
 import UIKit
 
-final class BannerCell: UITableViewCell {
+final class BannerCell: BaseTableViewCell {
 
-    static let identifier = "BannerCell"
+    // MARK: - Properties
 
     private let bannerImageView = UIImageView()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    // MARK: - UI Setup
 
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
         
         contentView.backgroundColor = .clear
@@ -34,7 +25,7 @@ final class BannerCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [bannerImageView].forEach {
             contentView.addSubview($0)
         }

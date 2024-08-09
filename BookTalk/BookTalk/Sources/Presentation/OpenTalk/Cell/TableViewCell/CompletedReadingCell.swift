@@ -7,12 +7,7 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
-final class CompletedReadingCell: UITableViewCell {
-
-    static let identifier = "CompletedReadingCell"
+final class CompletedReadingCell: BaseTableViewCell {
 
     // MARK: - Properties
 
@@ -24,19 +19,17 @@ final class CompletedReadingCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        setViews()
-        setConstraints()
         setDelegate()
         registerCell()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - UI Setup
 
-    private func setViews() {
+    override func setViews() {
         contentView.backgroundColor = .clear
 
         titleLabel.do {
@@ -52,7 +45,7 @@ final class CompletedReadingCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [titleLabel, completedReadingPeopleTableView].forEach {
             contentView.addSubview($0)
         }

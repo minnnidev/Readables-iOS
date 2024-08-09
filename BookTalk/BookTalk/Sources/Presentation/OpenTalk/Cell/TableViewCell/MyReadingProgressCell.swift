@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class MyReadingProgressCell: UITableViewCell {
-
-    static let identifier = "MyReadingProgressCell"
+final class MyReadingProgressCell: BaseTableViewCell {
 
     // MARK: - Properties
 
@@ -22,22 +20,9 @@ final class MyReadingProgressCell: UITableViewCell {
     private let progressView = UIProgressView()
     private let updateButton = UIButton()
 
-    // MARK: - Initializer
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     // MARK: - UI Setup
 
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
 
         contentView.backgroundColor = .clear
@@ -69,7 +54,7 @@ final class MyReadingProgressCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [titleLabel, percentLabel, myProfileImage, progressView, updateButton].forEach {
             contentView.addSubview($0)
         }
