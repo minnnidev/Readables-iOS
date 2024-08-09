@@ -22,7 +22,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.fetchSections()
+        viewModel.input.loadBooks()
     }
     
     // MARK: - Actions
@@ -37,11 +37,19 @@ final class HomeViewController: BaseViewController {
         guard let headerView = sender.view as? HomeHeaderView else { return }
         guard let section = headerView.section else { return }
         
-        let headerTitle = viewModel.sections[section - 1].header
+        let headerTitle = viewModel.output.sections.value[section - 1].header
         print("DEBUG: Selected \"\(headerTitle)\"")
     }
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    private func bind() {
+        viewModel.output.sections.subscribe { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Set UI
     
     override func setNavigationBar() {
         let appearance = UINavigationBarAppearance()
@@ -82,12 +90,12 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    override func setDelegate() {
+    private func setDelegate() {
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    override func registerCell() {
+    private func registerCell() {
         tableView.do {
             $0.register(
                 SuggestionCell.self,
@@ -105,12 +113,6 @@ final class HomeViewController: BaseViewController {
             )
         }
     }
-    
-    override func bind() {
-        viewModel.sectionsObservable.subscribe { [weak self] _ in
-            self?.tableView.reloadData()
-        }
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -118,7 +120,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sections.count + 1
+        return viewModel.output.sections.value.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -147,7 +149,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         let sectionIndex = indexPath.section - 1
-        let bookInfo = viewModel.sections[sectionIndex].bookInfo
+        let bookInfo = viewModel.output.sections.value[sectionIndex].bookInfo
         
         cell.selectionStyle = .none
         cell.bind(bookInfo)
@@ -163,7 +165,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section != 0 else { return }
         
-        let sectionHeader = viewModel.sections[indexPath.section - 1].header
+        let sectionHeader = viewModel.output.sections.value[indexPath.section - 1].header
         print("DEBUG: Selected \"\(sectionHeader)\"")
     }
     
@@ -180,7 +182,7 @@ extension HomeViewController: UITableViewDelegate {
             return nil
         }
         
-        headerView.bind(with: viewModel.sections[section - 1].header, section: section)
+        headerView.bind(with: viewModel.output.sections.value[section - 1].header, section: section)
         
         let tapGesture = UITapGestureRecognizer(
             target: self,
