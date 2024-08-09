@@ -377,6 +377,7 @@
 				AB0C0F552C5BD557007812C5 /* OpenTalk */,
 				ABED44072C6650910073398A /* Goal */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
+				ABED44142C6668FE0073398A /* Component */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -571,7 +572,6 @@
 			isa = PBXGroup;
 			children = (
 				ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */,
-				AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -638,6 +638,14 @@
 				ABED44122C665DD90073398A /* GoalModel.swift */,
 			);
 			path = Goal;
+			sourceTree = "<group>";
+		};
+		ABED44142C6668FE0073398A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
