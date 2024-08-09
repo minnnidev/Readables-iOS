@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol BookWithHeaderCellDelegate: AnyObject {
+    func bookImageTapped()
+}
+
 final class BookWithHeaderCell: BaseTableViewCell {
 
     // MARK: - Properties
 
     private let headerLabel = UILabel()
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+
+    weak var delegate: BookWithHeaderCellDelegate?
 
     // MARK: - Initializer
 
@@ -105,6 +111,10 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
         ) as? BookImageCell else { return UICollectionViewCell() }
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.bookImageTapped()
     }
 }
 

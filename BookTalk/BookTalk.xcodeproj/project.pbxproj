@@ -79,6 +79,7 @@
 		ABED44132C665DD90073398A /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44122C665DD90073398A /* GoalModel.swift */; };
 		ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44182C666F6E0073398A /* GoalChartCell.swift */; };
 		ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441B2C6670940073398A /* GoalSectionType.swift */; };
+		ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441D2C66793C0073398A /* DetailGoalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +154,7 @@
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 		ABED44182C666F6E0073398A /* GoalChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalChartCell.swift; sourceTree = "<group>"; };
 		ABED441B2C6670940073398A /* GoalSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionType.swift; sourceTree = "<group>"; };
+		ABED441D2C66793C0073398A /* DetailGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -626,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
+				ABED441D2C66793C0073398A /* DetailGoalViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -752,6 +755,7 @@
 			files = (
 				AB3F15462C611DC100C77E13 /* Observable.swift in Sources */,
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
+				ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */,
 				ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,

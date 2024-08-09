@@ -113,6 +113,8 @@ final class GoalViewController: BaseViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension GoalViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -159,14 +161,30 @@ extension GoalViewController: UITableViewDataSource {
                 )
             }
 
+            cell.delegate = self
+
             return cell
         }
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension GoalViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+// MARK: - BookWithHeaderCellDelegate
+
+extension GoalViewController: BookWithHeaderCellDelegate {
+
+    func bookImageTapped() {
+        // TODO: book id 등 구별할 수 있는 요소로 수정
+
+        let detailVC = DetailGoalViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
