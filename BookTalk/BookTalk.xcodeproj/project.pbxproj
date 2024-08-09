@@ -369,7 +369,7 @@
 				054543AA2C5786B000E64948 /* Search */,
 				ABD10DE62C516D26005F290E /* Category */,
 				AB0C0F552C5BD557007812C5 /* OpenTalk */,
-				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
+				ABED44072C6650910073398A /* Goal */,
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
 			);
 			path = Presentation;
@@ -596,6 +596,22 @@
 				AB2E7BD92C53B3F300CE43CB /* SubcategoryViewController.swift */,
 				AB2E7BF12C53EDD800CE43CB /* AllBookImagesViewController.swift */,
 				AB2E7BF92C54A53900CE43CB /* CategorySelectModalViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ABED44072C6650910073398A /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				ABED44082C6650970073398A /* View */,
+			);
+			path = Goal;
+			sourceTree = "<group>";
+		};
+		ABED44082C6650970073398A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
