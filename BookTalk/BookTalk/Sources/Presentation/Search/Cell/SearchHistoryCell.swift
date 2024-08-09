@@ -27,7 +27,14 @@ final class SearchHistoryCell: BaseTableViewCell {
         delegate?.didTapDeleteButton(cell: self)
     }
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(_ text: String) {
+        titleLabel.text = text
+        deleteButton.isHidden = (text == "최근 검색어가 없습니다.")
+    }
+    
+    // MARK: - Set UI
     
     override func setViews() {
         titleLabel.do {
@@ -57,12 +64,5 @@ final class SearchHistoryCell: BaseTableViewCell {
             $0.right.equalToSuperview().offset(-10)
             $0.left.equalTo(titleLabel.snp.right).offset(10)
         }
-    }
-    
-    // MARK: - Helpers
-    
-    func bind(_ text: String) {
-        titleLabel.text = text
-        deleteButton.isHidden = (text == "최근 검색어가 없습니다.")
     }
 }

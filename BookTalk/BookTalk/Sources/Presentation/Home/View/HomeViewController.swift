@@ -23,6 +23,8 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         
         viewModel.input.loadBooks()
+        registerCell()
+        setDelegate()
     }
     
     // MARK: - Actions
@@ -90,11 +92,6 @@ final class HomeViewController: BaseViewController {
         }
     }
     
-    private func setDelegate() {
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
     private func registerCell() {
         tableView.do {
             $0.register(
@@ -112,6 +109,11 @@ final class HomeViewController: BaseViewController {
                 forCellReuseIdentifier: recommendationID
             )
         }
+    }
+    
+    private func setDelegate() {
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 }
 

@@ -37,13 +37,24 @@ final class RecommendationBookCell: BaseTableViewCell {
         collectionView.contentInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        registerCell()
+        setDelegate()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(_ detailBookInfo: [DetailBookInfo]) {
+        self.detailBookInfo = detailBookInfo
+        self.basicBookInfo = detailBookInfo.map { $0.basicBookInfo }
+        collectionView.reloadData()
+    }
+    
+    // MARK: - Set UI
     
     override func setConstraints() {
         contentView.addSubview(collectionView)
@@ -53,24 +64,16 @@ final class RecommendationBookCell: BaseTableViewCell {
         }
     }
     
-    override func setDelegate() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    }
-    
-    override func registerCell() {
+    private func registerCell() {
         collectionView.register(
             RecommendationBookCollectionCell.self,
             forCellWithReuseIdentifier: identifier
         )
     }
     
-    // MARK: - Helpers
-    
-    func bind(_ detailBookInfo: [DetailBookInfo]) {
-        self.detailBookInfo = detailBookInfo
-        self.basicBookInfo = detailBookInfo.map { $0.basicBookInfo }
-        collectionView.reloadData()
+    private func setDelegate() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
 }
 

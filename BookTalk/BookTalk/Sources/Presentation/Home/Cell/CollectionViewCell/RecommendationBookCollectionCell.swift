@@ -14,7 +14,14 @@ final class RecommendationBookCollectionCell: BaseCollectionViewCell {
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(_ basicBookInfo: BasicBookInfo) {
+        imageView.image = UIImage(named: "\(basicBookInfo.coverImageURL)")
+        titleLabel.text = basicBookInfo.title
+    }
+    
+    // MARK: - Set UI
     
     override func setViews() {
         imageView.do {
@@ -30,12 +37,5 @@ final class RecommendationBookCollectionCell: BaseCollectionViewCell {
             $0.centerX.top.left.equalToSuperview()
             $0.bottom.equalToSuperview().inset(15)
         }
-    }
-    
-    // MARK: - Helpers
-    
-    func bind(_ basicBookInfo: BasicBookInfo) {
-        imageView.image = UIImage(named: "\(basicBookInfo.coverImageURL)")
-        titleLabel.text = basicBookInfo.title
     }
 }

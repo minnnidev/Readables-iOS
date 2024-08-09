@@ -14,7 +14,13 @@ final class SuggestionCell: BaseTableViewCell {
     let backgroundImageView = UIImageView()
     let suggestionLabel = UILabel()
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(_ text: String) {
+        suggestionLabel.text = text
+    }
+    
+    // MARK: - Set UI
     
     override func setViews() {
         backgroundImageView.do {
@@ -43,11 +49,5 @@ final class SuggestionCell: BaseTableViewCell {
             $0.left.equalTo(20)
             $0.bottom.equalToSuperview().inset(20)
         }
-    }
-    
-    // MARK: - Helpers
-    
-    func bind(_ text: String) {
-        suggestionLabel.text = text
     }
 }

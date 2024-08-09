@@ -36,7 +36,22 @@ final class SearchResultCell: BaseTableViewCell {
         updateFavoriteButton()
     }
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(_ detailBookInfo: DetailBookInfo) {
+        self.detailBookInfo = detailBookInfo
+        coverImageView.image = UIImage(named: detailBookInfo.basicBookInfo.coverImageURL)
+        titleLabel.text = detailBookInfo.basicBookInfo.title
+        authorLabel.text = detailBookInfo.basicBookInfo.author
+        publisherLabel.text = detailBookInfo.publisher
+        publicationDateLabel.text = detailBookInfo.publicationDate
+        availabilityLabel.text = detailBookInfo.isAvailable ? "대출 가능" : "대출 불가능"
+        availabilityLabel.textColor = detailBookInfo.isAvailable ? .systemGreen : .systemRed
+        isFavorite = detailBookInfo.isFavorite
+        updateFavoriteButton()
+    }
+    
+    // MARK: - Set UI
     
     override func setViews() {
         coverImageView.do {
@@ -117,19 +132,6 @@ final class SearchResultCell: BaseTableViewCell {
     }
     
     // MARK: - Helpers
-    
-    func bind(_ detailBookInfo: DetailBookInfo) {
-        self.detailBookInfo = detailBookInfo
-        coverImageView.image = UIImage(named: detailBookInfo.basicBookInfo.coverImageURL)
-        titleLabel.text = detailBookInfo.basicBookInfo.title
-        authorLabel.text = detailBookInfo.basicBookInfo.author
-        publisherLabel.text = detailBookInfo.publisher
-        publicationDateLabel.text = detailBookInfo.publicationDate
-        availabilityLabel.text = detailBookInfo.isAvailable ? "대출 가능" : "대출 불가능"
-        availabilityLabel.textColor = detailBookInfo.isAvailable ? .systemGreen : .systemRed
-        isFavorite = detailBookInfo.isFavorite
-        updateFavoriteButton()
-    }
     
     private func updateFavoriteButton() {
         let imageName = isFavorite ? "heart.fill" : "heart"

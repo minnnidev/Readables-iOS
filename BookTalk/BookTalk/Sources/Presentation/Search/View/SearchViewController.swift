@@ -26,6 +26,8 @@ final class SearchViewController: BaseViewController {
         
         setKeyboardNotifications()
         viewModel.input.loadBooks()
+        registerCell()
+        setDelegate()
     }
     
     deinit {
@@ -73,18 +75,18 @@ final class SearchViewController: BaseViewController {
         }
     }
     
-    private func setDelegate() {
-        searchBar.delegate = self
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
     private func registerCell() {
         tableView.do {
             $0.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
             $0.register(SearchResultCell.self, forCellReuseIdentifier: resultID)
         }
+    }
+    
+    private func setDelegate() {
+        searchBar.delegate = self
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     // MARK: - Helpers
