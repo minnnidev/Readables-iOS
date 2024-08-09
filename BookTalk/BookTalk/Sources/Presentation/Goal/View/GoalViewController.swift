@@ -49,6 +49,15 @@ final class GoalViewController: BaseViewController {
 
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "목표"
+
+        let plusButton = UIBarButtonItem(
+            image: UIImage(systemName: "plus"),
+            style: .plain,
+            target: self,
+            action: #selector(addButtonDidTapped)
+        )
+
+        navigationItem.rightBarButtonItem = plusButton
     }
 
     override func setViews() {
@@ -92,13 +101,17 @@ final class GoalViewController: BaseViewController {
             $0.height.equalTo(200)
         }
     }
+
+    @objc private func addButtonDidTapped() {
+        // TODO: 목표 추가로 이동
+    }
 }
 
 extension GoalViewController {
 
     private func updateChartData() {
         let barChartdataSet = BarChartDataSet(entries: viewModel.goalChartData.value)
-        barChartdataSet.setColor(UIColor(hex: 0xABE701))
+        barChartdataSet.setColor(.accentOrange)
         barChartdataSet.drawValuesEnabled = false
 
         let barChartData = BarChartData(dataSet: barChartdataSet)
