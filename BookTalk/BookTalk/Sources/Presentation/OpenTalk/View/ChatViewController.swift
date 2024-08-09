@@ -7,10 +7,9 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class ChatViewController: BaseViewController {
+
+    // MARK: - Properties
 
     private let chatTableView = UITableView(frame: .zero)
     private let textInputView = UIView()
@@ -18,6 +17,14 @@ final class ChatViewController: BaseViewController {
     private let sendButton = UIButton()
     
     private let viewModel = ChatViewModel()
+
+    // MARK: - Initializer
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +35,7 @@ final class ChatViewController: BaseViewController {
         addTapGesture()
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    // MARK: - UI Setup
 
     override func setNavigationBar() {
         navigationItem.title = "책 제목"
@@ -104,6 +109,8 @@ final class ChatViewController: BaseViewController {
         }
     }
 
+    // MARK: - Helpers
+
     private func setDelegate() {
         chatTableView.dataSource = self
     }
@@ -131,6 +138,8 @@ final class ChatViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
+
+    // MARK: - Actions
 
     @objc func hideKeyboard() {
         view.endEditing(true)
@@ -162,6 +171,8 @@ final class ChatViewController: BaseViewController {
     }
     
 }
+
+// MARK: - UITableViewDataSource
 
 extension ChatViewController: UITableViewDataSource {
 

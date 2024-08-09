@@ -7,12 +7,13 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class FirstCategoryViewController: BaseViewController {
 
+    // MARK: - Properties
+
     private let firstCategoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,8 @@ final class FirstCategoryViewController: BaseViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "카테고리"
     }
+
+    // MARK: - UI Setup
 
     override func setViews() {
         firstCategoryCollectionView.do {
@@ -50,6 +53,8 @@ final class FirstCategoryViewController: BaseViewController {
         }
     }
 
+    // MARK: - Helpers
+
     private func registerCell() {
         firstCategoryCollectionView.register(
             FirstCategoryCell.self,
@@ -70,6 +75,8 @@ final class FirstCategoryViewController: BaseViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+
 extension FirstCategoryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,6 +95,8 @@ extension FirstCategoryViewController: UICollectionViewDataSource {
         pushTosubcategoryViewController(CategoryType.allCases[indexPath.row])
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension FirstCategoryViewController: UICollectionViewDelegateFlowLayout {
 

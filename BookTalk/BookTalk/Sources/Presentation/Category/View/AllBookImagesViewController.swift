@@ -7,10 +7,9 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class AllBookImagesViewController: BaseViewController {
+
+    // MARK: - Properties
 
     private let sortView = UIView()
     private let sortButton = UIButton()
@@ -18,12 +17,16 @@ final class AllBookImagesViewController: BaseViewController {
 
     private let viewModel = ThirdCategoryViewModel()
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerCell()
         setCollectionView()
     }
+
+    // MARK: - UI Setup
 
     override func setNavigationBar() {
         navigationItem.title = "전체 보기"
@@ -84,6 +87,8 @@ final class AllBookImagesViewController: BaseViewController {
         }
     }
 
+    // MARK: - Helpers
+
     private func registerCell() {
         booksCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
     }
@@ -112,6 +117,8 @@ final class AllBookImagesViewController: BaseViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+
 extension AllBookImagesViewController: UICollectionViewDataSource {
 
     func collectionView(
@@ -133,6 +140,8 @@ extension AllBookImagesViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension AllBookImagesViewController: UICollectionViewDelegateFlowLayout {
 
