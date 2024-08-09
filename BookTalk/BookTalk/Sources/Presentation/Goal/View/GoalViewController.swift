@@ -184,7 +184,8 @@ extension GoalViewController: BookWithHeaderCellDelegate {
     func bookImageTapped() {
         // TODO: book id 등 구별할 수 있는 요소로 수정
 
-        let detailVC = DetailGoalViewController()
+        let viewModel = DetailGoalViewModel()
+        let detailVC = DetailGoalViewController(viewModel: viewModel)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

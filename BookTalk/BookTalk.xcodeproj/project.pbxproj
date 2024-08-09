@@ -80,6 +80,7 @@
 		ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44182C666F6E0073398A /* GoalChartCell.swift */; };
 		ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441B2C6670940073398A /* GoalSectionType.swift */; };
 		ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441D2C66793C0073398A /* DetailGoalViewController.swift */; };
+		ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +156,7 @@
 		ABED44182C666F6E0073398A /* GoalChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalChartCell.swift; sourceTree = "<group>"; };
 		ABED441B2C6670940073398A /* GoalSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionType.swift; sourceTree = "<group>"; };
 		ABED441D2C66793C0073398A /* DetailGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewController.swift; sourceTree = "<group>"; };
+		ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -637,6 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				ABED440F2C665CDB0073398A /* GoalViewModel.swift */,
+				ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				AB0C0F7E2C5F6D83007812C5 /* CompletedReadingCell.swift in Sources */,
+				ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
 				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				051155F12C64B08F00230CFE /* ReusableIdentifier.swift in Sources */,
