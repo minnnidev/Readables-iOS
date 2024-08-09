@@ -20,7 +20,39 @@ final class BookInfoCell: BaseTableViewCell {
     private let bookInfoStackView = UIStackView()
     private let joinOpenTalkButton = UIButton(type: .system)
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(_ viewModel: BookDetailViewModel) {
+        viewModel.output.coverImageURL.subscribe { [weak self] urlString in
+            self?.bookImageView.image = UIImage(named: urlString)
+        }
+        
+        viewModel.output.title.subscribe { [weak self] title in
+            self?.titleLabel.text = title
+        }
+        
+        viewModel.output.author.subscribe { [weak self] author in
+            self?.authorLabel.text = author
+        }
+        
+        viewModel.output.publisher.subscribe { [weak self] publisher in
+            self?.publisherLabel.text = publisher
+        }
+        
+        viewModel.output.publicationDate.subscribe { [weak self] publicationDate in
+            self?.publicationDateLabel.text = publicationDate
+        }
+        
+        viewModel.output.availabilityText.subscribe { [weak self] availabilityText in
+            self?.availabilityLabel.text = availabilityText
+        }
+        
+        viewModel.output.availabilityTextColor.subscribe { [weak self] textColor in
+            self?.availabilityLabel.textColor = textColor
+        }
+    }
+    
+    // MARK: - Set UI
     
     override func setViews() {
         bookImageView.do {
@@ -108,38 +140,6 @@ final class BookInfoCell: BaseTableViewCell {
             $0.left.equalTo(bookInfoStackView)
             $0.bottom.equalToSuperview().offset(-15)
             $0.height.equalTo(50)
-        }
-    }
-    
-    // MARK: - Helpers
-    
-    func bind(_ viewModel: BookDetailViewModel) {
-        viewModel.output.coverImageURL.subscribe { [weak self] urlString in
-            self?.bookImageView.image = UIImage(named: urlString)
-        }
-        
-        viewModel.output.title.subscribe { [weak self] title in
-            self?.titleLabel.text = title
-        }
-        
-        viewModel.output.author.subscribe { [weak self] author in
-            self?.authorLabel.text = author
-        }
-        
-        viewModel.output.publisher.subscribe { [weak self] publisher in
-            self?.publisherLabel.text = publisher
-        }
-        
-        viewModel.output.publicationDate.subscribe { [weak self] publicationDate in
-            self?.publicationDateLabel.text = publicationDate
-        }
-        
-        viewModel.output.availabilityText.subscribe { [weak self] availabilityText in
-            self?.availabilityLabel.text = availabilityText
-        }
-        
-        viewModel.output.availabilityTextColor.subscribe { [weak self] textColor in
-            self?.availabilityLabel.textColor = textColor
         }
     }
 }

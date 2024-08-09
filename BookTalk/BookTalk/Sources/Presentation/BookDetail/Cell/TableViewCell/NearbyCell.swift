@@ -16,7 +16,7 @@ final class NearbyCell: BaseTableViewCell {
     private let distanceLabel = UILabel()
     private let nearbyInfoStackView = UIStackView()
     
-    // MARK: - Base
+    // MARK: - Set UI
     
     override func setViews() {
         titleLabel.do {
