@@ -77,6 +77,8 @@
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
 		ABED44132C665DD90073398A /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44122C665DD90073398A /* GoalModel.swift */; };
+		ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44182C666F6E0073398A /* GoalChartCell.swift */; };
+		ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441B2C6670940073398A /* GoalSectionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +151,8 @@
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
+		ABED44182C666F6E0073398A /* GoalChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalChartCell.swift; sourceTree = "<group>"; };
+		ABED441B2C6670940073398A /* GoalSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -610,6 +614,8 @@
 		ABED44072C6650910073398A /* Goal */ = {
 			isa = PBXGroup;
 			children = (
+				ABED441A2C6670880073398A /* Enum */,
+				ABED44172C666F560073398A /* Cell */,
 				ABED44082C6650970073398A /* View */,
 				ABED440E2C665CD20073398A /* ViewModel */,
 			);
@@ -646,6 +652,22 @@
 				AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		ABED44172C666F560073398A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ABED44182C666F6E0073398A /* GoalChartCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		ABED441A2C6670880073398A /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				ABED441B2C6670940073398A /* GoalSectionType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -730,6 +752,7 @@
 			files = (
 				AB3F15462C611DC100C77E13 /* Observable.swift in Sources */,
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
+				ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
 				056F30522C60D5A100931302 /* NearbyCell.swift in Sources */,
@@ -741,6 +764,7 @@
 				051156012C64C6F100230CFE /* BaseHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
 				AB2E7BF22C53EDD800CE43CB /* AllBookImagesViewController.swift in Sources */,
+				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* CategoryBooks.swift in Sources */,

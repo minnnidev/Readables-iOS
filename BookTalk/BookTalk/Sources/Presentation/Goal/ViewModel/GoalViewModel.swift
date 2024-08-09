@@ -17,6 +17,8 @@ final class GoalViewModel {
     var goalChartData = Observable<[BarChartDataEntry]>([])
     var goalLabelData = Observable<[String]>([])
 
+    let goalSections = GoalSectionType.allCases
+
     func send(action: Action) {
 
         switch action {
