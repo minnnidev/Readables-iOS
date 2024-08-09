@@ -28,6 +28,10 @@ final class ChatViewController: BaseViewController {
         addTapGesture()
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func setNavigationBar() {
         navigationItem.title = "책 제목"
 
