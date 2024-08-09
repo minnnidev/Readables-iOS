@@ -18,6 +18,7 @@ struct HomeMockData {
                         title: "Book 1",
                         author: "Author 1"
                     ),
+                    keywords: [],
                     publisher: "Publisher 1",
                     publicationDate: "2024-01-01",
                     isAvailable: true,
@@ -30,6 +31,7 @@ struct HomeMockData {
                         title: "Book 2",
                         author: "Author 2"
                     ),
+                    keywords: ["# Keyword 1"],
                     publisher: "Publisher 2",
                     publicationDate: "2024-01-02",
                     isAvailable: false,
@@ -42,6 +44,7 @@ struct HomeMockData {
                         title: "Book 3",
                         author: "Author 3"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 3",
                     publicationDate: "2024-01-03",
                     isAvailable: true,
@@ -54,6 +57,7 @@ struct HomeMockData {
                         title: "Book 4",
                         author: "Author 4"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3"],
                     publisher: "Publisher 4",
                     publicationDate: "2024-01-04",
                     isAvailable: true,
@@ -66,6 +70,7 @@ struct HomeMockData {
                         title: "Book 5",
                         author: "Author 5"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3", "# Keyword 4"],
                     publisher: "Publisher 5",
                     publicationDate: "2024-01-05",
                     isAvailable: false,
@@ -83,6 +88,9 @@ struct HomeMockData {
                         title: "Book 1-1",
                         author: "Author 1-1"
                     ),
+                    keywords: [
+                        "# Keyword 1", "# Keyword 2", "# Keyword 3", "# Keyword 4", "# Keyword 5"
+                    ],
                     publisher: "Publisher 1-1",
                     publicationDate: "2024-01-01",
                     isAvailable: true,
@@ -95,6 +103,7 @@ struct HomeMockData {
                         title: "Book 2-1",
                         author: "Author 2-1"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 2-1",
                     publicationDate: "2024-01-02",
                     isAvailable: false,
@@ -107,6 +116,7 @@ struct HomeMockData {
                         title: "Book 3-1",
                         author: "Author 3-1"
                     ),
+                    keywords: ["# Keyword 1"],
                     publisher: "Publisher 3-1",
                     publicationDate: "2024-01-03",
                     isAvailable: true,
@@ -119,6 +129,7 @@ struct HomeMockData {
                         title: "Book 4-1",
                         author: "Author 4-1"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2" ,"# Keyword 3"],
                     publisher: "Publisher 4-1",
                     publicationDate: "2024-01-04",
                     isAvailable: true,
@@ -131,6 +142,7 @@ struct HomeMockData {
                         title: "Book 5-1",
                         author: "Author 5-1"
                     ),
+                    keywords: ["# Keyword 1"],
                     publisher: "Publisher 5-1",
                     publicationDate: "2024-01-05",
                     isAvailable: false,
@@ -148,6 +160,7 @@ struct HomeMockData {
                         title: "Book 1-2",
                         author: "Author 1-2"
                     ),
+                    keywords: [],
                     publisher: "Publisher 1-2",
                     publicationDate: "2024-01-01",
                     isAvailable: true,
@@ -160,6 +173,7 @@ struct HomeMockData {
                         title: "Book 2-2",
                         author: "Author 2-2"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3"],
                     publisher: "Publisher 2-2",
                     publicationDate: "2024-01-02",
                     isAvailable: false,
@@ -172,6 +186,7 @@ struct HomeMockData {
                         title: "Book 3-2",
                         author: "Author 3-2"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 3-2",
                     publicationDate: "2024-01-03",
                     isAvailable: true,
@@ -184,6 +199,7 @@ struct HomeMockData {
                         title: "Book 4-2",
                         author: "Author 4-2"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3", "# Keyword 4"],
                     publisher: "Publisher 4-2",
                     publicationDate: "2024-01-04",
                     isAvailable: true,
@@ -196,6 +212,7 @@ struct HomeMockData {
                         title: "Book 5-2",
                         author: "Author 5-2"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 5-2",
                     publicationDate: "2024-01-05",
                     isAvailable: false,
@@ -213,6 +230,7 @@ struct HomeMockData {
                         title: "Book 1-3",
                         author: "Author 1-3"
                     ),
+                    keywords: ["# Keyword 1"],
                     publisher: "Publisher 1-3",
                     publicationDate: "2024-01-01",
                     isAvailable: true,
@@ -225,6 +243,7 @@ struct HomeMockData {
                         title: "Book 2-3",
                         author: "Author 2-3"
                     ),
+                    keywords: ["# Keyword 1"],
                     publisher: "Publisher 2-3",
                     publicationDate: "2024-01-02",
                     isAvailable: false,
@@ -237,6 +256,7 @@ struct HomeMockData {
                         title: "Book 3-3",
                         author: "Author 3-3"
                     ),
+                    keywords: ["# Keyword 1"],
                     publisher: "Publisher 3-3",
                     publicationDate: "2024-01-03",
                     isAvailable: true,
@@ -249,6 +269,7 @@ struct HomeMockData {
                         title: "Book 4-3",
                         author: "Author 4-3"
                     ),
+                    keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3"],
                     publisher: "Publisher 4-3",
                     publicationDate: "2024-01-04",
                     isAvailable: true,
@@ -261,6 +282,7 @@ struct HomeMockData {
                         title: "Book 5-3",
                         author: "Author 5-3"
                     ),
+                    keywords: [],
                     publisher: "Publisher 5-3",
                     publicationDate: "2024-01-05",
                     isAvailable: false,
