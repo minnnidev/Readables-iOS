@@ -35,8 +35,8 @@ final class BookDetailViewModel {
     // MARK: - Properties
     
     private let bookInfo: DetailBookInfo
-    lazy var input: Input = { return createInput() }()
-    lazy var output: Output = { return createOutput() }()
+    lazy var input: Input = { return bindInput() }()
+    lazy var output: Output = { return transform() }()
     
     // MARK: - Initializer
     
@@ -65,7 +65,7 @@ final class BookDetailViewModel {
         if let opposite = opposite, property.value { opposite.value = false }
     }
     
-    private func createInput() -> Input {
+    private func bindInput() -> Input {
         return Input(
             favoriteButtonTap: { [weak self] in
                 guard let self = self else { return }
@@ -82,7 +82,7 @@ final class BookDetailViewModel {
         )
     }
     
-    private func createOutput() -> Output {
+    private func transform() -> Output {
         return Output(
             coverImageURL: Observable(bookInfo.basicBookInfo.coverImageURL),
             title: Observable(bookInfo.basicBookInfo.title),
