@@ -40,11 +40,12 @@ final class MainTabBarController: UITabBarController {
             rootViewController: OpenTalkViewController()
         )
         
+        let goalViewModel = GoalViewModel()
         let goal = createNavigationController(
             title: "목표",
             unselectedImage: "chart.xyaxis.line",
             selectedImage: "chart.xyaxis.line",
-            rootViewController: GoalViewController()
+            rootViewController: GoalViewController(viewModel: goalViewModel)
         )
         
         let my = createNavigationController(

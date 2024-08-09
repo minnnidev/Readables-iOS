@@ -74,6 +74,9 @@
 		AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7C032C565B3A00CE43CB /* FirstCategoryViewController.swift */; };
 		AB3F15462C611DC100C77E13 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F15452C611DC100C77E13 /* Observable.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
+		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
+		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
+		ABED44132C665DD90073398A /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44122C665DD90073398A /* GoalModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +147,8 @@
 		AB2E7C032C565B3A00CE43CB /* FirstCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCategoryViewController.swift; sourceTree = "<group>"; };
 		AB3F15452C611DC100C77E13 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
+		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
+		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */,
+				ABED440D2C66549E0073398A /* DGCharts in Frameworks */,
 				AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +542,7 @@
 				054543EE2C5A22F100E64948 /* Search */,
 				AB2E7BEE2C53DB6100CE43CB /* Category */,
 				AB0C0F682C5BFDB0007812C5 /* OpenTalk */,
+				ABED44112C665DC20073398A /* Goal */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -604,6 +611,7 @@
 			isa = PBXGroup;
 			children = (
 				ABED44082C6650970073398A /* View */,
+				ABED440E2C665CD20073398A /* ViewModel */,
 			);
 			path = Goal;
 			sourceTree = "<group>";
@@ -614,6 +622,22 @@
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		ABED440E2C665CD20073398A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ABED440F2C665CDB0073398A /* GoalViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ABED44112C665DC20073398A /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				ABED44122C665DD90073398A /* GoalModel.swift */,
+			);
+			path = Goal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -635,6 +659,7 @@
 			packageProductDependencies = (
 				AB22AD502C4E92C100C9A0F3 /* SnapKit */,
 				AB22AD532C4E92C700C9A0F3 /* Then */,
+				ABED440C2C66549E0073398A /* DGCharts */,
 			);
 			productName = BookTalk;
 			productReference = AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */;
@@ -667,6 +692,7 @@
 			packageReferences = (
 				AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AB22AD522C4E92C700C9A0F3 /* XCRemoteSwiftPackageReference "Then" */,
+				ABED440B2C66549E0073398A /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = AB22AD392C4E8D9D00C9A0F3 /* Products */;
 			projectDirPath = "";
@@ -728,6 +754,7 @@
 				054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SubcategoryViewController.swift in Sources */,
 				051156052C64C73F00230CFE /* BaseCollectionViewCell.swift in Sources */,
+				ABED44132C665DD90073398A /* GoalModel.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */,
 				056F30502C60D57100931302 /* BookInfoCell.swift in Sources */,
@@ -755,6 +782,7 @@
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
 				AB2E7BDF2C53B70700CE43CB /* SubcategoryViewModel.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
+				ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
 			);
@@ -1005,6 +1033,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		ABED440B2C66549E0073398A /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1017,6 +1053,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AB22AD522C4E92C700C9A0F3 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		ABED440C2C66549E0073398A /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABED440B2C66549E0073398A /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
