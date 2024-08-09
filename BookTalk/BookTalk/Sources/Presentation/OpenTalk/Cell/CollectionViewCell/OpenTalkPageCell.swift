@@ -7,26 +7,14 @@
 
 import UIKit
 
-import SnapKit
-import Then
+final class OpenTalkPageCell: BaseCollectionViewCell {
 
-final class OpenTalkPageCell: UICollectionViewCell {
-
-    static let identifier = "OpenTalkPageCell"
+    // MARK: - Properties
 
     private let pageTitleLabel = UILabel()
     private let lineView = UIView()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    // MARK: - UI Setup
 
     override var isSelected: Bool {
         didSet {
@@ -34,7 +22,7 @@ final class OpenTalkPageCell: UICollectionViewCell {
         }
     }
 
-    private func setViews() {
+    override func setViews() {
         contentView.backgroundColor = .white
 
         pageTitleLabel.do {
@@ -49,7 +37,7 @@ final class OpenTalkPageCell: UICollectionViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [pageTitleLabel, lineView].forEach {
             contentView.addSubview($0)
         }
@@ -64,6 +52,8 @@ final class OpenTalkPageCell: UICollectionViewCell {
             $0.height.equalTo(1)
         }
     }
+
+    // MARK: - Helpers
 
     func bind(_ talkPage: String) {
         pageTitleLabel.text = talkPage

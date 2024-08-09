@@ -7,14 +7,13 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 protocol CategorySelectModalViewControllerDelegate: AnyObject {
     func subcategorySelected(subcategory: String)
 }
 
 final class CategorySelectModalViewController: BaseViewController {
+
+    // MARK: - Properties
 
     private let titleLabel = UILabel()
     private let dismissButton = UIButton()
@@ -26,6 +25,9 @@ final class CategorySelectModalViewController: BaseViewController {
 
     weak var delegate: CategorySelectModalViewControllerDelegate?
 
+
+    // MARK: - Initializer
+
     init(viewModel: CategorySelectModalViewModel) {
         self.viewModel = viewModel
 
@@ -35,14 +37,18 @@ final class CategorySelectModalViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setPickerView()
+        setDelegate()
         addTarget()
         bind()
     }
+
+    // MARK: - UI Setup
 
     override func setViews() {
         view.backgroundColor = .white
@@ -103,7 +109,9 @@ final class CategorySelectModalViewController: BaseViewController {
         }
     }
 
-    private func setPickerView() {
+    // MARK: - Helpers
+
+    private func setDelegate() {
         pickerView.dataSource = self
         pickerView.delegate = self
     }
@@ -143,6 +151,8 @@ final class CategorySelectModalViewController: BaseViewController {
     }
 }
 
+// MARK: - UIPickerViewDataSource
+
 extension CategorySelectModalViewController: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -156,6 +166,8 @@ extension CategorySelectModalViewController: UIPickerViewDataSource {
         return viewModel.firstCategory.subcategories.count
     }
 }
+
+// MARK: - UIPickerViewDelegate
 
 extension CategorySelectModalViewController: UIPickerViewDelegate {
 

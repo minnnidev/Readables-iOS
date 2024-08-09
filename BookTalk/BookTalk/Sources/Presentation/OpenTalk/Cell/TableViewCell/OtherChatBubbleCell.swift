@@ -7,34 +7,22 @@
 
 import UIKit
 
-import SnapKit
-import Then
+final class OtherChatBubbleCell: BaseTableViewCell {
 
-final class OtherChatBubbleCell: UITableViewCell {
-
-    static let identifier = "ChatViewCell"
+    // MARK: - Properties
 
     private let profileImageView = UIImageView()
     private let nicknameLabel = UILabel()
     private let chatMessageLabel = UILabel()
     private let bubbleView = UIView()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    // MARK: - UI Setup
 
     override func layoutSubviews() {
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
     }
 
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
         
         backgroundColor = .clear
@@ -62,7 +50,7 @@ final class OtherChatBubbleCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [profileImageView, nicknameLabel, bubbleView].forEach {
             contentView.addSubview($0)
         }
@@ -92,6 +80,8 @@ final class OtherChatBubbleCell: UITableViewCell {
             $0.trailing.bottom.equalToSuperview().offset(-12)
         }
     }
+
+    // MARK: - Helpers
 
     func bind(with chatModel: ChatModel) {
         nicknameLabel.text = chatModel.nickname

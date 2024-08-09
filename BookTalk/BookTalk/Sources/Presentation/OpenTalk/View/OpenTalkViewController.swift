@@ -7,14 +7,15 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class OpenTalkViewController: BaseViewController {
+
+    // MARK: - Properties
 
     private let bookBanner = UIImageView()
     private let pageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,8 @@ final class OpenTalkViewController: BaseViewController {
         setDelegate()
         registerCell()
     }
+
+    // MARK: - UI Setup
 
     override func setNavigationBar() {
         let appearance = UINavigationBarAppearance()
@@ -86,6 +89,8 @@ final class OpenTalkViewController: BaseViewController {
         }
     }
 
+    // MARK: - Helpers
+
     private func setDelegate() {
         pageCollectionView.dataSource = self
         pageCollectionView.delegate = self
@@ -99,6 +104,8 @@ final class OpenTalkViewController: BaseViewController {
         bookCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
     }
 
+    // MARK: - Actions
+
     @objc private func searchIconDidTapped() {
         let searchVC = SearchViewController()
 
@@ -106,6 +113,8 @@ final class OpenTalkViewController: BaseViewController {
         navigationController?.pushViewController(searchVC, animated: true)
     }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension OpenTalkViewController: UICollectionViewDataSource {
 
@@ -148,6 +157,8 @@ extension OpenTalkViewController: UICollectionViewDataSource {
         }
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
 

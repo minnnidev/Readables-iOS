@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class ChatMenuViewController: BaseViewController {
 
     // MARK: - Properties
@@ -131,6 +128,8 @@ extension ChatMenuViewController: UITableViewDataSource {
         }
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension ChatMenuViewController: UITableViewDelegate {
 

@@ -7,18 +7,18 @@
 
 import UIKit
 
-final class CategoryBookCell: UITableViewCell {
-    
-    static let identifier = "CategoryBookCell"
+final class CategoryBookCell: BaseTableViewCell {
+
+    // MARK: - Properties
 
     private let headerLabel = UILabel()
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
 
+    // MARK: - Initializer
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        setViews()
-        setConstraints()
         registerCell()
         setCollectionView()
     }
@@ -27,7 +27,9 @@ final class CategoryBookCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setViews() {
+    // MARK: - UI Setup
+
+    override func setViews() {
         selectionStyle = .none
         
         contentView.backgroundColor = .clear
@@ -47,7 +49,7 @@ final class CategoryBookCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
 
         [headerLabel, bookCollectionView].forEach {
             contentView.addSubview($0)
@@ -65,6 +67,8 @@ final class CategoryBookCell: UITableViewCell {
             $0.bottom.equalToSuperview().offset(-16)
         }
     }
+
+    // MARK: - Helpers
 
     private func registerCell() {
         bookCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)

@@ -7,24 +7,15 @@
 
 import UIKit
 
-final class FirstCategoryCell: UICollectionViewCell {
+final class FirstCategoryCell: BaseCollectionViewCell {
 
-    static let identifier = "FirstCategoryCell"
+    // MARK: - Properties
 
     private let categoryNameLabel = UILabel()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    // MARK: - UI Setup
 
-        setViews()
-        setConstraints()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setViews() {
+    override func setViews() {
         contentView.backgroundColor = .white
 
         contentView.do {
@@ -39,7 +30,7 @@ final class FirstCategoryCell: UICollectionViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [categoryNameLabel].forEach {
             contentView.addSubview($0)
         }
@@ -49,6 +40,8 @@ final class FirstCategoryCell: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(24)
         }
     }
+
+    // MARK: - Helpers
 
     func bind(_ title: String) {
         categoryNameLabel.text = title

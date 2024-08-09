@@ -7,26 +7,17 @@
 
 import UIKit
 
-final class CategoryTitleCell: UITableViewCell {
+final class CategoryTitleCell: BaseTableViewCell {
 
-    static let identifier = "CategoryTitleCell"
+    // MARK: - Properties
 
     private let firstCategoryTitleLabel = UILabel()
     private let chevronImageView = UIImageView()
     private let subcategoryTitleLabel = UILabel()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    // MARK: - UI Setup
 
-        setViews()
-        setConstraints()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setViews() {
+    override func setViews() {
         selectionStyle = .none
 
         contentView.backgroundColor = .clear
@@ -48,7 +39,7 @@ final class CategoryTitleCell: UITableViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [firstCategoryTitleLabel, chevronImageView, subcategoryTitleLabel].forEach {
             contentView.addSubview($0)
         }
@@ -70,6 +61,8 @@ final class CategoryTitleCell: UITableViewCell {
             $0.leading.equalTo(chevronImageView.snp.trailing).offset(4)
         }
     }
+
+    // MARK: - Helpers
 
     func bind(_ category: Category) {
         firstCategoryTitleLabel.text = category.firstCategory

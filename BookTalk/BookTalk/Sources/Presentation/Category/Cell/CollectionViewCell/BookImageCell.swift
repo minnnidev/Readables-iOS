@@ -7,24 +7,15 @@
 
 import UIKit
 
-final class BookImageCell: UICollectionViewCell {
+final class BookImageCell: BaseCollectionViewCell {
 
-    static let identifier = "BookImageCell"
+    // MARK: - Properties
 
     private let bookImageView = UIImageView()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    // MARK: - UI Setup
 
-        setViews()
-        setConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setViews() {
+    override func setViews() {
         contentView.backgroundColor = .clear
 
         bookImageView.do {
@@ -32,7 +23,7 @@ final class BookImageCell: UICollectionViewCell {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         [bookImageView].forEach {
             contentView.addSubview($0)
         }
