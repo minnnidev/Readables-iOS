@@ -15,7 +15,14 @@ final class HomeHeaderView: BaseHeaderFooterView {
     private let titleLabel = UILabel()
     private let rightArrowIcon = UIImageView()
     
-    // MARK: - Base
+    // MARK: - Bind
+    
+    func bind(with title: String, section: Int) {
+        titleLabel.text = title
+        self.section = section
+    }
+    
+    // MARK: - Set UI
     
     override func setViews() {
         contentView.backgroundColor = .white
@@ -45,12 +52,5 @@ final class HomeHeaderView: BaseHeaderFooterView {
             $0.right.equalTo(-15)
             $0.size.equalTo(20)
         }
-    }
-    
-    // MARK: - Helpers
-    
-    func bind(with title: String, section: Int) {
-        titleLabel.text = title
-        self.section = section
     }
 }
