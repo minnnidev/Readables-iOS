@@ -96,7 +96,7 @@ final class BookDetailViewController: BaseViewController {
             var config = UIButton.Configuration.filled()
             config.baseBackgroundColor = .accentOrange
             config.cornerStyle = .capsule
-            config.image = UIImage(systemName: "plus")?
+            config.image = UIImage(systemName: "ellipsis")?
                 .withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))
             $0.configuration = config
             $0.layer.shadowRadius = 10

@@ -19,6 +19,7 @@ final class BookInfoCell: BaseTableViewCell {
     private let availabilityLabel = UILabel()
     private let bookInfoStackView = UIStackView()
     private let joinOpenTalkButton = UIButton(type: .system)
+    private let markAsReadButton = UIButton(type: .system)
     
     // MARK: - Bind
     
@@ -109,12 +110,30 @@ final class BookInfoCell: BaseTableViewCell {
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         }
+        
+        markAsReadButton.do {
+            var config = UIButton.Configuration.plain()
+            config.attributedTitle = AttributedString(
+                NSAttributedString(
+                    string: "읽은 책으로 추가하기",
+                    attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)]
+                )
+            )
+            config.image = UIImage(systemName: "plus")?
+                .withConfiguration(UIImage.SymbolConfiguration(pointSize: 12, weight: .bold))
+            config.imagePlacement = .trailing
+            config.imagePadding = 5
+            
+            $0.configuration = config
+        }
     }
     
     override func setConstraints() {
-        [bookImageView, titleLabel, bookInfoStackView, joinOpenTalkButton].forEach {
-            contentView.addSubview($0)
-        }
+        [bookImageView,
+         titleLabel,
+         bookInfoStackView,
+         joinOpenTalkButton,
+         markAsReadButton].forEach { contentView.addSubview($0) }
         
         bookImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -138,8 +157,14 @@ final class BookInfoCell: BaseTableViewCell {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(bookInfoStackView.snp.bottom).offset(15)
             $0.left.equalTo(bookInfoStackView)
-            $0.bottom.equalToSuperview().offset(-15)
             $0.height.equalTo(50)
+        }
+        
+        markAsReadButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(joinOpenTalkButton.snp.bottom).offset(15)
+            $0.left.equalTo(joinOpenTalkButton)
+            $0.bottom.equalToSuperview().offset(-15)
         }
     }
 }
