@@ -7,12 +7,18 @@
 
 import UIKit
 
-final class CategoryBookCell: BaseTableViewCell {
+protocol BookWithHeaderCellDelegate: AnyObject {
+    func bookImageTapped()
+}
+
+final class BookWithHeaderCell: BaseTableViewCell {
 
     // MARK: - Properties
 
     private let headerLabel = UILabel()
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+
+    weak var delegate: BookWithHeaderCellDelegate?
 
     // MARK: - Initializer
 
@@ -79,14 +85,14 @@ final class CategoryBookCell: BaseTableViewCell {
         bookCollectionView.delegate = self
     }
 
-    func bind(_ model: CategoryBooks) {
+    func bind(_ model: BooksWithHeader) {
         headerLabel.text = "\(model.headerTitle)"
 
         // TODO: image bind
     }
 }
 
-extension CategoryBookCell: UICollectionViewDataSource {
+extension BookWithHeaderCell: UICollectionViewDataSource {
 
     func collectionView(
         _ collectionView: UICollectionView,
@@ -106,9 +112,13 @@ extension CategoryBookCell: UICollectionViewDataSource {
 
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.bookImageTapped()
+    }
 }
 
-extension CategoryBookCell: UICollectionViewDelegateFlowLayout {
+extension BookWithHeaderCell: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,

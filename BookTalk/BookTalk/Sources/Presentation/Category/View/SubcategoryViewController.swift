@@ -74,7 +74,7 @@ final class SubcategoryViewController: BaseViewController {
         subcategoryTableView.register(BannerCell.self, forCellReuseIdentifier: BannerCell.identifier)
         subcategoryTableView.register(CategoryTitleCell.self, forCellReuseIdentifier: CategoryTitleCell.identifier)
         subcategoryTableView.register(ShowAllBookCell.self, forCellReuseIdentifier: ShowAllBookCell.identifier)
-        subcategoryTableView.register(CategoryBookCell.self, forCellReuseIdentifier: CategoryBookCell.identifier)
+        subcategoryTableView.register(BookWithHeaderCell.self, forCellReuseIdentifier: BookWithHeaderCell.identifier)
     }
 
     private func bind() {
@@ -122,7 +122,7 @@ extension SubcategoryViewController: UITableViewDataSource {
             return cell
 
         case .newBooks, .popularBooks:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryBookCell.identifier, for: indexPath) as? CategoryBookCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
             cell.bind(section == .newBooks ? viewModel.newBooks : viewModel.popularBooks)
 
