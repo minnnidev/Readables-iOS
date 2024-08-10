@@ -65,6 +65,15 @@ final class DetailGoalViewController: BaseViewController {
     override func setNavigationBar() {
         navigationItem.title = "목표 상세"
         navigationItem.largeTitleDisplayMode = .never
+
+        let menuButton = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(menuButtonDidTapped)
+        )
+
+        navigationItem.rightBarButtonItem = menuButton
     }
 
     override func setViews() {
@@ -173,6 +182,45 @@ final class DetailGoalViewController: BaseViewController {
             $0.bottom.equalToSuperview().offset(-20)
         }
     }
+
+    // MARK: - Actions
+
+    @objc private func menuButtonDidTapped() {
+        let alertVC = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let completedAction = UIAlertAction(
+            title: "목표 완료",
+            style: .default) { [weak self] _ in
+                self?.goalDeleteButtonDidTapped()
+            }
+
+        let deleteAction = UIAlertAction(
+            title: "목표 삭제",
+            style: .default) { [weak self] _ in
+                self?.goalCompletedButtonDidTapped()
+            }
+
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+
+        [completedAction, deleteAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+
+        present(alertVC, animated: true)
+    }
+
+    private func goalDeleteButtonDidTapped() {
+        // TODO: 목표 삭제 action
+    }
+
+    private func goalCompletedButtonDidTapped() {
+        // TODO: 목표 완료 action
+    }
+
 }
 
 extension DetailGoalViewController {
