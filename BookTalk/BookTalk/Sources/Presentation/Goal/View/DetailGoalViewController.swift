@@ -13,6 +13,8 @@ final class DetailGoalViewController: BaseViewController {
     // MARK: - Properties
 
     private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    private let bookNameLabel = UILabel()
     private let bookImageView = UIImageView()
     private let bookTitlelabel = UILabel()
     private let bookAuthorLabel = UILabel()
@@ -20,8 +22,18 @@ final class DetailGoalViewController: BaseViewController {
     private let bookPublishedDate = UILabel()
     private let startReadingDate = UILabel()
     private let archiveView = UIView()
+    private let archiveLabel = UILabel()
     private let todayDateLabel = UILabel()
+    private let datePicker = UIDatePicker()
+    private let startPageTextField = UITextField()
+    private let startTitleLabel = UILabel()
+    private let endPageTextField = UITextField()
+    private let endTitleLabel = UILabel()
+    private let addReadPageButton = UIButton()
+    private let goalChartLabel = UILabel()
     private let goalChart = BarChartView()
+    private let firstSeparatorLine = UIView()
+    private let secondSeparatorLine = UIView()
 
     private let viewModel: DetailGoalViewModel
 
@@ -82,6 +94,22 @@ final class DetailGoalViewController: BaseViewController {
         scrollView.do {
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
+            $0.isScrollEnabled = true
+        }
+
+        bookNameLabel.do {
+            $0.text = "나미야 잡화점의 기적"
+            $0.font = .systemFont(ofSize: 20, weight: .semibold)
+        }
+
+        archiveLabel.do {
+            $0.text = "오늘 이만큼 읽었어요 📚"
+            $0.font = .systemFont(ofSize: 20, weight: .semibold)
+        }
+
+        goalChartLabel.do {
+            $0.text = "지난 일주일동안의 기록 📆"
+            $0.font = .systemFont(ofSize: 20, weight: .semibold)
         }
 
         bookImageView.do {
@@ -93,12 +121,8 @@ final class DetailGoalViewController: BaseViewController {
             bookPublishedDate, startReadingDate
         ].forEach {
             $0.textColor = .black
-            $0.font = .systemFont(ofSize: 15, weight: .medium)
+            $0.font = .systemFont(ofSize: 16, weight: .medium)
             $0.text = "책 정보"
-        }
-
-        archiveView.do {
-            $0.backgroundColor = UIColor(hex: 0xF6F7CD)
         }
 
         goalChart.do {
@@ -115,6 +139,49 @@ final class DetailGoalViewController: BaseViewController {
             $0.rightAxis.enabled = false
             $0.legend.enabled = false
             $0.highlightPerTapEnabled = false
+            $0.doubleTapToZoomEnabled = false
+        }
+
+        datePicker.do {
+            $0.preferredDatePickerStyle = .automatic
+            $0.datePickerMode = .date
+            $0.locale = Locale(identifier: "ko-KR")
+            $0.timeZone = .autoupdatingCurrent
+        }
+
+        [startPageTextField, endPageTextField].forEach{
+            $0.backgroundColor = .clear
+            $0.keyboardType = .numberPad
+            $0.layer.borderColor = UIColor.lightGray.cgColor
+            $0.layer.borderWidth = 1.0
+            $0.layer.cornerRadius = 5
+        }
+
+        startTitleLabel.do {
+            $0.text = "부터"
+            $0.font = .systemFont(ofSize: 15)
+        }
+
+        endPageTextField.do {
+            $0.backgroundColor = .clear
+            $0.keyboardType = .numberPad
+            $0.borderStyle = .roundedRect
+        }
+
+        endTitleLabel.do {
+            $0.text = "까지"
+            $0.font = .systemFont(ofSize: 15)
+        }
+
+        addReadPageButton.do { 
+            $0.backgroundColor = .black
+            $0.setTitle("기록 추가하기", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.layer.cornerRadius = 10
+        }
+
+        [firstSeparatorLine, secondSeparatorLine].forEach {
+            $0.backgroundColor = .gray100
         }
     }
 
@@ -125,26 +192,36 @@ final class DetailGoalViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
 
-        [
-            bookImageView, bookTitlelabel, bookAuthorLabel, bookPublisherLabel,
-            bookPublishedDate, startReadingDate, archiveView, goalChart
-        ].forEach {
-            scrollView.addSubview($0)
+        scrollView.addSubview(contentView)
+
+        contentView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide.snp.width)
         }
 
-        [].forEach {
-            archiveView.addSubview($0)
+        [
+            bookNameLabel, bookImageView, bookTitlelabel, bookAuthorLabel, bookPublisherLabel,
+            bookPublishedDate, startReadingDate, archiveView, goalChart, datePicker,
+            startPageTextField, startTitleLabel, endPageTextField, endTitleLabel, addReadPageButton,
+            goalChartLabel, archiveLabel, firstSeparatorLine, secondSeparatorLine
+        ].forEach {
+            contentView.addSubview($0)
+        }
+
+        bookNameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(20)
         }
 
         bookImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.top.equalTo(bookNameLabel.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(20)
             $0.width.equalTo(100)
             $0.height.equalTo(150)
         }
 
         bookTitlelabel.snp.makeConstraints {
-            $0.top.equalTo(bookImageView).offset(20)
+            $0.top.equalTo(bookImageView).offset(12)
             $0.leading.equalTo(bookImageView.snp.trailing).offset(12)
         }
 
@@ -168,16 +245,70 @@ final class DetailGoalViewController: BaseViewController {
             $0.leading.equalTo(bookTitlelabel)
         }
 
-        archiveView.snp.makeConstraints {
-            $0.top.equalTo(bookImageView.snp.bottom).offset(20)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(200)
+        firstSeparatorLine.snp.makeConstraints {
+            $0.top.equalTo(bookImageView.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(1)
+        }
+
+        archiveLabel.snp.makeConstraints {
+            $0.top.equalTo(firstSeparatorLine.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+        }
+
+        datePicker.snp.makeConstraints {
+            $0.top.equalTo(archiveLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+        }
+
+        startPageTextField.snp.makeConstraints {
+            $0.top.equalTo(datePicker.snp.bottom).offset(12)
+            $0.leading.equalTo(datePicker)
+            $0.height.equalTo(30)
+            $0.width.equalTo(50)
+        }
+
+        startTitleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(startPageTextField)
+            $0.leading.equalTo(startPageTextField.snp.trailing).offset(8)
+        }
+
+        endPageTextField.snp.makeConstraints {
+            $0.centerY.equalTo(startPageTextField)
+            $0.leading.equalTo(startTitleLabel.snp.trailing).offset(24)
+            $0.height.equalTo(30)
+            $0.width.equalTo(50)
+        }
+
+        endTitleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(startPageTextField)
+            $0.leading.equalTo(endPageTextField.snp.trailing).offset(8)
+        }
+
+        addReadPageButton.snp.makeConstraints {
+            $0.top.equalTo(startPageTextField.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(40)
+        }
+
+        secondSeparatorLine.snp.makeConstraints {
+            $0.top.equalTo(addReadPageButton.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(1)
+        }
+
+        goalChartLabel.snp.makeConstraints {
+            $0.top.equalTo(secondSeparatorLine.snp.bottom).offset(20)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
 
         goalChart.snp.makeConstraints {
-            $0.top.equalTo(archiveView.snp.bottom).offset(20)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(12)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-12)
+            $0.top.equalTo(goalChartLabel.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(200)
             $0.bottom.equalToSuperview().offset(-20)
         }
@@ -227,7 +358,7 @@ extension DetailGoalViewController {
 
     private func updateChartData() {
         let barChartdataSet = BarChartDataSet(entries: viewModel.goalChartData.value)
-        barChartdataSet.setColor(.init(hex: 0xE7D001))
+        barChartdataSet.setColor(.accentOrange)
         barChartdataSet.drawValuesEnabled = false
 
         let barChartData = BarChartData(dataSet: barChartdataSet)

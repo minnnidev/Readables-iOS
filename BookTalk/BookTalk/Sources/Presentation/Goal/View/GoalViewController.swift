@@ -186,6 +186,8 @@ extension GoalViewController: BookWithHeaderCellDelegate {
 
         let viewModel = DetailGoalViewModel()
         let detailVC = DetailGoalViewController(viewModel: viewModel)
+        detailVC.hidesBottomBarWhenPushed = true
+        
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
