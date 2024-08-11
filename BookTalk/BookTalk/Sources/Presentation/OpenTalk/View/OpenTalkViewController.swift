@@ -205,7 +205,8 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
     ) {
         if collectionView == bookCollectionView {
             // TODO: 디테일뷰로 이동이지만 임시로 채팅뷰로 바로 이동하도록 구현
-            let chattingVC = ChatViewController()
+            let viewModel = ChatViewModel()
+            let chattingVC = ChatViewController(viewModel: viewModel)
             chattingVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(chattingVC, animated: true)
         }

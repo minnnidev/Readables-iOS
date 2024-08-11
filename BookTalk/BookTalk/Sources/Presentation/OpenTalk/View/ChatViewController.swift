@@ -15,11 +15,22 @@ final class ChatViewController: BaseViewController {
     private let textInputView = UIView()
     private let messageTextField = UITextField()
     private let sendButton = UIButton()
-    
-    private let viewModel = ChatViewModel()
+    private var bookmarkBarButton = UIBarButtonItem()
+
+    private let viewModel: ChatViewModel
 
     // MARK: - Initializer
 
+    init(viewModel: ChatViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -33,6 +44,8 @@ final class ChatViewController: BaseViewController {
         registerCell()
         setKeyboardNotifications()
         addTapGesture()
+        addTarget()
+        bind()
     }
 
     // MARK: - UI Setup
@@ -47,7 +60,14 @@ final class ChatViewController: BaseViewController {
             action: #selector(menuButtonDidTapped)
         )
 
-        navigationItem.rightBarButtonItem = menuButton
+        bookmarkBarButton = UIBarButtonItem(
+            image: UIImage(systemName: "bookmark"),
+            style: .plain,
+            target: self,
+            action: #selector(bookmarkButtonDidTapped)
+        )
+
+        navigationItem.rightBarButtonItems = [menuButton, bookmarkBarButton]
     }
 
     override func setViews() {
@@ -55,7 +75,7 @@ final class ChatViewController: BaseViewController {
 
         chatTableView.do {
             $0.showsVerticalScrollIndicator = true
-            $0.backgroundColor = UIColor(hex: 0xFFDCDC) // TODO: 색상 변경
+            $0.backgroundColor = UIColor(hex: 0xFFC4A3)
             $0.separatorStyle = .none
             $0.keyboardDismissMode = .onDrag
         }
@@ -134,9 +154,34 @@ final class ChatViewController: BaseViewController {
         )
     }
 
-    func addTapGesture() {
+    private func addTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+    }
+
+    private func addTarget() {
+        messageTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChanged(_:)),
+            for: .editingChanged
+        )
+    }
+
+    private func bind() {
+        viewModel.send(action: .loadChats)
+        
+        viewModel.chats.subscribe { [weak self] chats in
+            self?.chatTableView.reloadData()
+        }
+
+        viewModel.isBookmarked.subscribe { [weak self] state in
+            self?.bookmarkBarButton.image = state ?
+                UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark")
+        }
+
+        viewModel.message.subscribe { [weak self] text in
+            self?.sendButton.isEnabled = !text.isEmpty
+        }
     }
 
     // MARK: - Actions
@@ -169,7 +214,14 @@ final class ChatViewController: BaseViewController {
         let chatMenuVC = ChatMenuViewController()
         navigationController?.pushViewController(chatMenuVC, animated: true)
     }
-    
+
+    @objc private func bookmarkButtonDidTapped() {
+        viewModel.send(action: .toggleBookmark)
+    }
+
+    @objc private func textFieldDidChanged(_ textField: UITextField) {
+        viewModel.send(action: .textFieldChanged(text: textField.text ?? ""))
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -177,11 +229,11 @@ final class ChatViewController: BaseViewController {
 extension ChatViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.chats.count
+        return viewModel.chats.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let chat = viewModel.chats[indexPath.row]
+        let chat = viewModel.chats.value[indexPath.row]
 
         if chat.isMine {
             guard let cell = tableView.dequeueReusableCell(
