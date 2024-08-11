@@ -44,6 +44,7 @@ final class ChatViewController: BaseViewController {
         registerCell()
         setKeyboardNotifications()
         addTapGesture()
+        addTarget()
         bind()
     }
 
@@ -158,15 +159,28 @@ final class ChatViewController: BaseViewController {
         view.addGestureRecognizer(tapGesture)
     }
 
+    private func addTarget() {
+        messageTextField.addTarget(
+            self,
+            action: #selector(textFieldDidChanged(_:)),
+            for: .editingChanged
+        )
+    }
+
     private func bind() {
         viewModel.send(action: .loadChats)
         
         viewModel.chats.subscribe { [weak self] chats in
             self?.chatTableView.reloadData()
         }
+
         viewModel.isBookmarked.subscribe { [weak self] state in
             self?.bookmarkBarButton.image = state ?
                 UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark")
+        }
+
+        viewModel.message.subscribe { [weak self] text in
+            self?.sendButton.isEnabled = !text.isEmpty
         }
     }
 
@@ -203,6 +217,10 @@ final class ChatViewController: BaseViewController {
 
     @objc private func bookmarkButtonDidTapped() {
         viewModel.send(action: .toggleBookmark)
+    }
+
+    @objc private func textFieldDidChanged(_ textField: UITextField) {
+        viewModel.send(action: .textFieldChanged(text: textField.text ?? ""))
     }
 }
 
