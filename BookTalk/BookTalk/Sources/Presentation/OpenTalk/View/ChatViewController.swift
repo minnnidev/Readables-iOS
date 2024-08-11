@@ -74,7 +74,7 @@ final class ChatViewController: BaseViewController {
 
         chatTableView.do {
             $0.showsVerticalScrollIndicator = true
-            $0.backgroundColor = UIColor(hex: 0xFFDCDC) // TODO: 색상 변경
+            $0.backgroundColor = UIColor(hex: 0xFFC4A3)
             $0.separatorStyle = .none
             $0.keyboardDismissMode = .onDrag
         }
