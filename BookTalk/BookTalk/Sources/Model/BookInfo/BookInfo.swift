@@ -20,5 +20,10 @@ struct DetailBookInfo {
     let publicationDate: String
     let isAvailable: Bool
     var isFavorite: Bool
-    var distance: Double?
+    let registeredLibraries: [Library]
+}
+
+struct Library {
+    let name: String
+    let isAvailable: Bool
 }
