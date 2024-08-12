@@ -18,7 +18,6 @@ final class SearchResultCell: BaseTableViewCell {
     
     weak var delegate: SearchResultCellDelegate?
     
-    private var detailBookInfo: DetailBookInfo?
     private let coverImageView = UIImageView()
     private let titleLabel = UILabel()
     private let authorLabel = UILabel()
@@ -38,16 +37,14 @@ final class SearchResultCell: BaseTableViewCell {
     
     // MARK: - Bind
     
-    func bind(_ detailBookInfo: DetailBookInfo) {
-        self.detailBookInfo = detailBookInfo
-        coverImageView.image = UIImage(named: detailBookInfo.basicBookInfo.coverImageURL)
-        titleLabel.text = detailBookInfo.basicBookInfo.title
-        authorLabel.text = detailBookInfo.basicBookInfo.author
-        publisherLabel.text = detailBookInfo.publisher
-        publicationDateLabel.text = detailBookInfo.publicationDate
-        availabilityLabel.text = detailBookInfo.isAvailable ? "대출 가능" : "대출 불가능"
-        availabilityLabel.textColor = detailBookInfo.isAvailable ? .systemGreen : .systemRed
-        isFavorite = detailBookInfo.isFavorite
+    func bind(book: DetailBookInfo, availabilityText: String, availabilityTextColor: UIColor) {
+        titleLabel.text = book.basicBookInfo.title
+        authorLabel.text = book.basicBookInfo.author
+        publisherLabel.text = book.publisher
+        publicationDateLabel.text = book.publicationDate
+        availabilityLabel.text = availabilityText
+        availabilityLabel.textColor = availabilityTextColor
+        isFavorite = book.isFavorite
         updateFavoriteButton()
     }
     
@@ -84,10 +81,9 @@ final class SearchResultCell: BaseTableViewCell {
         }
         
         availabilityLabel.do {
-            $0.font = . systemFont(ofSize: 14, weight: .medium)
-            $0.textColor = .systemGreen
+            $0.font = . systemFont(ofSize: 14, weight: .bold)
             $0.textAlignment = .left
-            $0.text = "대출 가능"
+            $0.numberOfLines = 0
         }
         
         bookInfoStackView.do {
