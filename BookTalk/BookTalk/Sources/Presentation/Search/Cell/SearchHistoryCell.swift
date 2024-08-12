@@ -32,14 +32,19 @@ final class SearchHistoryCell: BaseTableViewCell {
     func bind(_ text: String) {
         titleLabel.text = text
         deleteButton.isHidden = (text == "최근 검색어가 없습니다.")
+        
+        if text == "최근 검색어가 없습니다." {
+            titleLabel.textColor = .systemGray
+        } else {
+            titleLabel.textColor = .black
+        }
     }
     
     // MARK: - Set UI
     
     override func setViews() {
         titleLabel.do {
-            $0.text = "최근 검색어"
-            $0.textColor = .black
+            $0.textColor = .systemGray
             $0.textAlignment = .left
             $0.font = .systemFont(ofSize: 15, weight: .medium)
         }
@@ -56,12 +61,12 @@ final class SearchHistoryCell: BaseTableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(10)
+            $0.left.equalToSuperview().offset(15)
         }
         
         deleteButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.right.equalToSuperview().offset(-10)
+            $0.right.equalToSuperview().offset(-15)
             $0.left.equalTo(titleLabel.snp.right).offset(10)
         }
     }
