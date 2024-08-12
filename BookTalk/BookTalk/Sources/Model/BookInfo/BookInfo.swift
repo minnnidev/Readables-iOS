@@ -18,7 +18,6 @@ struct DetailBookInfo {
     let keywords: [String]
     let publisher: String
     let publicationDate: String
-    let isAvailable: Bool
     var isFavorite: Bool
     let registeredLibraries: [Library]
 }

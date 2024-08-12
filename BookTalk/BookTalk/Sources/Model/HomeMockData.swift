@@ -21,7 +21,6 @@ struct HomeMockData {
                     keywords: [],
                     publisher: "Publisher 1",
                     publicationDate: "2024-01-01",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -34,7 +33,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1"],
                     publisher: "Publisher 2",
                     publicationDate: "2024-01-02",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: [
                         Library(
@@ -60,7 +58,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 3",
                     publicationDate: "2024-01-03",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: [
                         Library(
@@ -86,7 +83,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3"],
                     publisher: "Publisher 4",
                     publicationDate: "2024-01-04",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -99,7 +95,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3", "# Keyword 4"],
                     publisher: "Publisher 5",
                     publicationDate: "2024-01-05",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 )
@@ -119,7 +114,6 @@ struct HomeMockData {
                     ],
                     publisher: "Publisher 1-1",
                     publicationDate: "2024-01-01",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -132,7 +126,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 2-1",
                     publicationDate: "2024-01-02",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -145,7 +138,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1"],
                     publisher: "Publisher 3-1",
                     publicationDate: "2024-01-03",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -158,7 +150,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2" ,"# Keyword 3"],
                     publisher: "Publisher 4-1",
                     publicationDate: "2024-01-04",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -171,7 +162,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1"],
                     publisher: "Publisher 5-1",
                     publicationDate: "2024-01-05",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 )
@@ -189,7 +179,6 @@ struct HomeMockData {
                     keywords: [],
                     publisher: "Publisher 1-2",
                     publicationDate: "2024-01-01",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -202,7 +191,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3"],
                     publisher: "Publisher 2-2",
                     publicationDate: "2024-01-02",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -215,7 +203,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 3-2",
                     publicationDate: "2024-01-03",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -228,7 +215,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3", "# Keyword 4"],
                     publisher: "Publisher 4-2",
                     publicationDate: "2024-01-04",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -241,7 +227,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2"],
                     publisher: "Publisher 5-2",
                     publicationDate: "2024-01-05",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 )
@@ -259,7 +244,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1"],
                     publisher: "Publisher 1-3",
                     publicationDate: "2024-01-01",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -272,7 +256,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1"],
                     publisher: "Publisher 2-3",
                     publicationDate: "2024-01-02",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -285,7 +268,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1"],
                     publisher: "Publisher 3-3",
                     publicationDate: "2024-01-03",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -298,7 +280,6 @@ struct HomeMockData {
                     keywords: ["# Keyword 1", "# Keyword 2", "# Keyword 3"],
                     publisher: "Publisher 4-3",
                     publicationDate: "2024-01-04",
-                    isAvailable: true,
                     isFavorite: false,
                     registeredLibraries: []
                 ),
@@ -311,7 +292,6 @@ struct HomeMockData {
                     keywords: [],
                     publisher: "Publisher 5-3",
                     publicationDate: "2024-01-05",
-                    isAvailable: false,
                     isFavorite: false,
                     registeredLibraries: []
                 )
