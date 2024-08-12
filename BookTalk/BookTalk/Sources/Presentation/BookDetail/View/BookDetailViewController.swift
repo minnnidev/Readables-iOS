@@ -17,8 +17,6 @@ final class BookDetailViewController: BaseViewController {
     private let likeButton = UIButton(type: .system)
     private let dislikeButton = UIButton(type: .system)
     private let tableView = UITableView(frame: .zero, style: .plain)
-    private let bookInfoID = BookInfoCell.identifier
-    private let nearbyID = NearbyCell.identifier
     
     // MARK: - Lifecycle
     
@@ -154,13 +152,17 @@ final class BookDetailViewController: BaseViewController {
     
     private func registerCell() {
         tableView.do {
-            $0.register(BookInfoCell.self, forCellReuseIdentifier: bookInfoID)
-            $0.register(NearbyCell.self, forCellReuseIdentifier: nearbyID)
+            $0.register(BookInfoCell.self, forCellReuseIdentifier: BookInfoCell.identifier)
+            $0.register(
+                BorrowableLibraryCell.self,
+                forCellReuseIdentifier: BorrowableLibraryCell.identifier
+            )
         }
     }
     
     private func setDelegate() {
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     // MARK: - Helpers
@@ -190,14 +192,14 @@ final class BookDetailViewController: BaseViewController {
         let transform: CATransform3D =
             isVisible ? CATransform3DIdentity : CATransform3DMakeScale(0.4, 0.4, 1)
         let alpha: CGFloat = isVisible ? 1.0 : 0.0
-        let duration: TimeInterval = isVisible ? 0.3 : 0.15
+        let duration: TimeInterval = 0.3
         
         buttons.forEach { button in
             UIView.animate(
                 withDuration: duration,
                 delay: 0.2,
-                usingSpringWithDamping: 0.55,
-                initialSpringVelocity: 0.3,
+                usingSpringWithDamping: isVisible ? 0.55 : 1.0,
+                initialSpringVelocity: isVisible ? 0.3 : 0.0,
                 options: [.curveEaseInOut],
                 animations: {
                     button.layer.transform = transform
@@ -237,7 +239,7 @@ extension BookDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: bookInfoID,
+                withIdentifier: BookInfoCell.identifier,
                 for: indexPath
             ) as? BookInfoCell else {
                 return UITableViewCell()
@@ -247,13 +249,31 @@ extension BookDetailViewController: UITableViewDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: nearbyID,
+                withIdentifier: BorrowableLibraryCell.identifier,
                 for: indexPath
-            ) as? NearbyCell else {
+            ) as? BorrowableLibraryCell else {
                 return UITableViewCell()
             }
             cell.selectionStyle = .none
+            cell.bind(viewModel)
             return cell
+        }
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension BookDetailViewController: UITableViewDelegate {
+    
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        if indexPath.section == tableView.numberOfSections - 1 {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.width)
+        } else {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         }
     }
 }

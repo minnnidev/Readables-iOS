@@ -26,7 +26,7 @@
 		054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
-		056F30522C60D5A100931302 /* NearbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* NearbyCell.swift */; };
+		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
 		056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30532C60D5D400931302 /* BookDetailViewController.swift */; };
 		057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925382C4FF34A00834EC6 /* MainTabBarController.swift */; };
 		0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */; };
@@ -103,7 +103,7 @@
 		054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
-		056F30512C60D5A100931302 /* NearbyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyCell.swift; sourceTree = "<group>"; };
+		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
 		056F30532C60D5D400931302 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		057925382C4FF34A00834EC6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		0579253A2C4FF4CA00834EC6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				056F304F2C60D57100931302 /* BookInfoCell.swift */,
-				056F30512C60D5A100931302 /* NearbyCell.swift */,
+				056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -762,7 +762,7 @@
 				ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
-				056F30522C60D5A100931302 /* NearbyCell.swift in Sources */,
+				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* BookWithHeaderCell.swift in Sources */,

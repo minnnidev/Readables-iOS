@@ -23,7 +23,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-01",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -36,7 +36,20 @@ struct HomeMockData {
                     publicationDate: "2024-01-02",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: [
+                        Library(
+                        name: "가 도서관",
+                        isAvailable: true
+                        ),
+                        Library(
+                        name: "나 도서관",
+                        isAvailable: false
+                        ),
+                        Library(
+                        name: "다 도서관",
+                        isAvailable: true
+                        )
+                    ]
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -49,7 +62,20 @@ struct HomeMockData {
                     publicationDate: "2024-01-03",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: [
+                        Library(
+                        name: "가 도서관",
+                        isAvailable: false
+                        ),
+                        Library(
+                        name: "나 도서관",
+                        isAvailable: false
+                        ),
+                        Library(
+                        name: "다 도서관",
+                        isAvailable: false
+                        )
+                    ]
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -62,7 +88,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-04",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -75,7 +101,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-05",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 )
             ]
         ),
@@ -95,7 +121,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-01",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -108,7 +134,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-02",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -121,7 +147,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-03",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -134,7 +160,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-04",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -147,7 +173,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-05",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 )
             ]
         ),
@@ -165,7 +191,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-01",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -178,7 +204,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-02",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -191,7 +217,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-03",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -204,7 +230,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-04",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -217,7 +243,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-05",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 )
             ]
         ),
@@ -235,7 +261,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-01",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -248,7 +274,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-02",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -261,7 +287,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-03",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -274,7 +300,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-04",
                     isAvailable: true,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -287,7 +313,7 @@ struct HomeMockData {
                     publicationDate: "2024-01-05",
                     isAvailable: false,
                     isFavorite: false,
-                    distance: nil
+                    registeredLibraries: []
                 )
             ]
         )

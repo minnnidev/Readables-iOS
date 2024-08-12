@@ -25,11 +25,12 @@ final class BookDetailViewModel {
         let publicationDate: Observable<String>
         let availabilityText: Observable<String>
         let availabilityTextColor: Observable<UIColor>
-        let distanceText: Observable<String>
         let areChildButtonsVisible: Observable<Bool>
         let isFavorite: Observable<Bool>
         let isLiked: Observable<Bool>
         let isDisliked: Observable<Bool>
+        let showLibraryRegistrationButton: Observable<Bool>
+        let borrowableLibraries: Observable<[Library]>
     }
     
     // MARK: - Properties
@@ -44,58 +45,64 @@ final class BookDetailViewModel {
         self.bookInfo = bookInfo
     }
     
-    // MARK: - Actions
-    
-    private func toggleFavorite() {
-        toggle(output.isFavorite)
-    }
-    
-    private func toggleLike() {
-        toggle(output.isLiked, opposite: output.isDisliked)
-    }
-    
-    private func toggleDislike() {
-        toggle(output.isDisliked, opposite: output.isLiked)
-    }
-    
     // MARK: - Helpers
     
-    private func toggle(_ property: Observable<Bool>, opposite: Observable<Bool>? = nil) {
+    private func toggle(_ property: Observable<Bool>?, opposite: Observable<Bool>? = nil) {
+        guard let property = property else { return }
         property.value.toggle()
         if let opposite = opposite, property.value { opposite.value = false }
+    }
+    
+    private func getAvailability(
+        _ libraries: [Library],
+        isRegistered: Bool
+    ) -> (text: String, color: UIColor) {
+        guard isRegistered else {
+            return ("대출 여부를 확인하려면 도서관을 등록해주세요.", .systemGray)
+        }
+        
+        let isAvailable = libraries.contains { $0.isAvailable }
+        let text = isAvailable ? "대출 가능" : "대출 불가능"
+        let color = isAvailable ? UIColor.systemGreen : .systemRed
+        
+        return (text, color)
     }
     
     private func bindInput() -> Input {
         return Input(
             favoriteButtonTap: { [weak self] in
-                guard let self = self else { return }
-                self.toggleFavorite()
+                self?.toggle(self?.output.isFavorite)
             },
             likeButtonTap: { [weak self] in
-                guard let self = self else { return }
-                self.toggleLike()
+                self?.toggle(self?.output.isLiked, opposite: self?.output.isDisliked)
             },
             dislikeButtonTap: { [weak self] in
-                guard let self = self else { return }
-                self.toggleDislike()
+                self?.toggle(self?.output.isDisliked, opposite: self?.output.isLiked)
             }
         )
     }
     
     private func transform() -> Output {
+        let isLibraryRegistered = !bookInfo.registeredLibraries.isEmpty
+        let availability = getAvailability(
+            bookInfo.registeredLibraries,
+            isRegistered: isLibraryRegistered
+        )
+        
         return Output(
             coverImageURL: Observable(bookInfo.basicBookInfo.coverImageURL),
             title: Observable(bookInfo.basicBookInfo.title),
             author: Observable(bookInfo.basicBookInfo.author),
             publisher: Observable(bookInfo.publisher),
             publicationDate: Observable(bookInfo.publicationDate),
-            availabilityText: Observable(bookInfo.isAvailable ? "대출 가능" : "대출 불가능"),
-            availabilityTextColor: Observable(bookInfo.isAvailable ? .systemGreen : .systemRed),
-            distanceText: Observable("\(bookInfo.distance ?? 0.0)m"),
+            availabilityText: Observable(availability.text),
+            availabilityTextColor: Observable(availability.color),
             areChildButtonsVisible: Observable(false),
             isFavorite: Observable(false),
             isLiked: Observable(false),
-            isDisliked: Observable(false)
+            isDisliked: Observable(false),
+            showLibraryRegistrationButton: Observable(!isLibraryRegistered),
+            borrowableLibraries: Observable(bookInfo.registeredLibraries)
         )
     }
 }
