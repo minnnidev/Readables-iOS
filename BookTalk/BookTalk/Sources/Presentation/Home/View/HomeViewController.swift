@@ -14,8 +14,6 @@ final class HomeViewController: BaseViewController {
     private let viewModel = HomeViewModel()
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let suggestionID = SuggestionCell.identifier
-    private let headerID = HomeHeaderView.identifier
-    private let recommendationID = RecommendationBookCell.identifier
     
     // MARK: - Lifecycle
     
@@ -101,12 +99,12 @@ final class HomeViewController: BaseViewController {
             
             $0.register(
                 HomeHeaderView.self,
-                forHeaderFooterViewReuseIdentifier: headerID
+                forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier
             )
             
             $0.register(
                 RecommendationBookCell.self,
-                forCellReuseIdentifier: recommendationID
+                forCellReuseIdentifier: RecommendationBookCell.identifier
             )
         }
     }
@@ -144,7 +142,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: recommendationID,
+            withIdentifier: RecommendationBookCell.identifier,
             for: indexPath
         ) as? RecommendationBookCell else {
             return UITableViewCell()
@@ -179,7 +177,7 @@ extension HomeViewController: UITableViewDelegate {
         if section == 0 { return nil }
         
         guard let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: headerID
+            withIdentifier: HomeHeaderView.identifier
         ) as? HomeHeaderView else {
             return nil
         }

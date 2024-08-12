@@ -13,19 +13,20 @@ final class SearchViewController: BaseViewController {
     
     private let viewModel = SearchViewModel()
     private let searchBar = UISearchBar()
+    private let switchSearchModeButton = UISwitch()
+    private let switchSearchModeTitle = UILabel()
+    private let switchSearchModeStackView = UIStackView()
     private let tableView = UITableView(frame: .zero, style: .plain)
-    private var isSearching: Bool = false
     private var searchHistory: [String] = []
-    private let historyID = SearchHistoryCell.identifier
-    private let resultID = SearchResultCell.identifier
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         setKeyboardNotifications()
-        viewModel.input.loadBooks()
+        setSearchModeToggle()
         registerCell()
         setDelegate()
     }
@@ -42,8 +43,8 @@ final class SearchViewController: BaseViewController {
         }
         
         viewModel.output.isKeywordSearch.subscribe { [weak self] isKeywordSearch in
-            self?.searchBar.placeholder =
-                isKeywordSearch ? "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+            self?.searchBar.placeholder = isKeywordSearch ?
+                "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
         }
     }
     
@@ -53,32 +54,69 @@ final class SearchViewController: BaseViewController {
         searchBar.autocapitalizationType = .none
         searchBar.autocorrectionType = .no
         searchBar.spellCheckingType = .no
-        searchBar.placeholder = "책 이름 / 작가 이름"
+        searchBar.placeholder = "책 이름 또는 작가 이름을 입력해주세요."
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
     }
     
     override func setViews() {
         view.backgroundColor = .white
-        tableView.separatorStyle = .none
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 160
-        tableView.keyboardDismissMode = .interactive
-        tableView.automaticallyAdjustsScrollIndicatorInsets = false
+        
+        switchSearchModeButton.do {
+            $0.isOn = false
+            $0.onTintColor = .systemGreen
+        }
+        
+        switchSearchModeTitle.do {
+            $0.text = "키워드로 검색하기"
+            $0.textAlignment = .right
+            $0.textColor = .accentOrange
+            $0.numberOfLines = 0
+            $0.font = .systemFont(ofSize: 15, weight: .medium)
+        }
+        
+        switchSearchModeStackView.do {
+            $0.addArrangedSubview(switchSearchModeTitle)
+            $0.addArrangedSubview(switchSearchModeButton)
+            
+            $0.axis = .horizontal
+            $0.alignment = .fill
+            $0.distribution = .fill
+            $0.spacing = 10
+        }
+        
+        tableView.do {
+            $0.separatorStyle = .none
+            $0.rowHeight = UITableView.automaticDimension
+            $0.estimatedRowHeight = 160
+            $0.keyboardDismissMode = .interactive
+            $0.automaticallyAdjustsScrollIndicatorInsets = false
+        }
     }
     
     override func setConstraints() {
-        view.addSubview(tableView)
+        [switchSearchModeStackView, tableView].forEach { view.addSubview($0) }
+        
+        switchSearchModeStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            $0.right.equalTo(-15)
+        }
         
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(switchSearchModeButton.snp.bottom)
+            $0.centerX.left.bottom.equalToSuperview()
         }
     }
     
     private func registerCell() {
         tableView.do {
-            $0.register(SearchHistoryCell.self, forCellReuseIdentifier: historyID)
-            $0.register(SearchResultCell.self, forCellReuseIdentifier: resultID)
+            $0.register(
+                SearchHistoryCell.self,
+                forCellReuseIdentifier: SearchHistoryCell.identifier
+            )
+            
+            $0.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.identifier)
         }
     }
     
@@ -90,6 +128,10 @@ final class SearchViewController: BaseViewController {
     }
     
     // MARK: - Helpers
+    
+    private func fetchData() {
+        viewModel.input.loadBooks()
+    }
     
     private func navigateToBookDetail(with book: DetailBookInfo) {
         let detailViewModel = BookDetailViewModel(bookInfo: book)
@@ -115,6 +157,14 @@ final class SearchViewController: BaseViewController {
         )
     }
     
+    private func setSearchModeToggle() {
+        switchSearchModeButton.addTarget(
+            self,
+            action: #selector(toggleSearchMode),
+            for: .valueChanged
+        )
+    }
+    
     @objc private func handleKeyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
@@ -131,6 +181,10 @@ final class SearchViewController: BaseViewController {
     @objc private func handleKeyboardWillHide(notification: NSNotification) {
         tableView.contentInset.bottom = 0
         tableView.verticalScrollIndicatorInsets.bottom = 0
+    }
+    
+    @objc private func toggleSearchMode() {
+        viewModel.input.updateSearchMode(switchSearchModeButton.isOn)
     }
 }
 
@@ -158,7 +212,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if viewModel.output.filteredBooks.value.isEmpty {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: historyID,
+                withIdentifier: SearchHistoryCell.identifier,
                 for: indexPath
             ) as? SearchHistoryCell else {
                 return UITableViewCell()
@@ -173,15 +227,22 @@ extension SearchViewController: UITableViewDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: resultID,
+                withIdentifier: SearchResultCell.identifier,
                 for: indexPath
             ) as? SearchResultCell else {
                 return UITableViewCell()
             }
             let book = viewModel.output.filteredBooks.value[indexPath.row]
+            let availabilityText = viewModel.output.availabilityText.value[indexPath.row]
+            let availabilityTextColor = viewModel.output.availabilityTextColor.value[indexPath.row]
             cell.delegate = self
             cell.selectionStyle = .none
-            cell.bind(book)
+            cell.separatorInset = .zero
+            cell.bind(
+                book: book,
+                availabilityText: availabilityText,
+                availabilityTextColor: availabilityTextColor
+            )
             return cell
         }
     }
@@ -199,18 +260,8 @@ extension SearchViewController: UITableViewDelegate {
             let selectedHistory = searchHistory[indexPath.row]
             searchBar.text = selectedHistory
             viewModel.input.searchTextChanged(selectedHistory.lowercased())
+            tableView.reloadData()
         }
-    }
-    
-    func tableView(
-        _ tableView: UITableView,
-        willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
-        cell.separatorInset = .zero
-        tableView.separatorStyle =
-            viewModel.output.filteredBooks.value.isEmpty && searchHistory.isEmpty ? 
-                .none : .singleLine
     }
 }
 
@@ -219,18 +270,21 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            viewModel.input.searchTextChanged(searchText)
-        }
+        if searchText.isEmpty { viewModel.input.searchTextChanged(searchText) }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        if let searchText = searchBar.text, !searchText.isEmpty {
-            viewModel.input.searchTextChanged(searchText.lowercased())
-            if !searchHistory.contains(searchText) {
-                searchHistory.append(searchText)
+        if let searchText = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !searchText.isEmpty {
+            let sanitizedSearchText = searchText
+                .replacingOccurrences(of: " ", with: "").lowercased()
+            viewModel.input.searchTextChanged(sanitizedSearchText)
+            
+            if !searchHistory.contains(sanitizedSearchText) {
+                searchHistory.append(sanitizedSearchText)
             }
+            tableView.reloadData()
         }
     }
 }

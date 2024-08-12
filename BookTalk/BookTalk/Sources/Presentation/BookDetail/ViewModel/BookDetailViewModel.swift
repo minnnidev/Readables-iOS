@@ -53,7 +53,7 @@ final class BookDetailViewModel {
         if let opposite = opposite, property.value { opposite.value = false }
     }
     
-    private func getAvailability(
+    private func updateAvailability(
         _ libraries: [Library],
         isRegistered: Bool
     ) -> (text: String, color: UIColor) {
@@ -84,7 +84,7 @@ final class BookDetailViewModel {
     
     private func transform() -> Output {
         let isLibraryRegistered = !bookInfo.registeredLibraries.isEmpty
-        let availability = getAvailability(
+        let availability = updateAvailability(
             bookInfo.registeredLibraries,
             isRegistered: isLibraryRegistered
         )
