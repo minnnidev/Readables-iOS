@@ -33,7 +33,6 @@ final class MyReadingProgressCell: BaseTableViewCell {
         }
 
         percentLabel.do {
-            $0.text = "80%"
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
         }
 
@@ -50,7 +49,6 @@ final class MyReadingProgressCell: BaseTableViewCell {
 
         progressView.do {
             $0.tintColor = .accentOrange
-            $0.setProgress(0.7, animated: true)
         }
     }
 
@@ -87,5 +85,10 @@ final class MyReadingProgressCell: BaseTableViewCell {
             $0.height.equalTo(50)
             $0.bottom.equalToSuperview().offset(-20)
         }
+    }
+
+    func bind(percent: Int) {
+        percentLabel.text = "\(percent)%"
+        progressView.setProgress(Float(percent)/100, animated: false)
     }
 }

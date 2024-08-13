@@ -116,6 +116,8 @@ extension ChatMenuViewController: UITableViewDataSource {
                 for: indexPath
             ) as? MyReadingProgressCell else { return UITableViewCell() }
 
+            cell.bind(percent: 50)
+
             return cell
 
         case .completedReading:
