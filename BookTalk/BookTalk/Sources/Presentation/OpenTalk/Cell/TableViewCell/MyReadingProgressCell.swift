@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class MyReadingProgressCell: BaseTableViewCell {
 
     // MARK: - Properties
@@ -20,6 +17,20 @@ final class MyReadingProgressCell: BaseTableViewCell {
     private let progressView = UIProgressView()
     private let updateButton = UIButton()
 
+    var updateButtonDidTappedObservable = Observable(false)
+
+    // MARK: - Initializer
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        addTarget()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - UI Setup
 
     override func setViews() {
@@ -85,6 +96,22 @@ final class MyReadingProgressCell: BaseTableViewCell {
             $0.height.equalTo(50)
             $0.bottom.equalToSuperview().offset(-20)
         }
+    }
+
+    // MARK: - Actions
+
+    @objc private func updateButtonDidTapped() {
+        updateButtonDidTappedObservable.value = true
+    }
+
+    // MARK: - Helpers
+
+    private func addTarget() {
+        updateButton.addTarget(
+            self,
+            action: #selector(updateButtonDidTapped),
+            for: .touchUpInside
+        )
     }
 
     func bind(percent: Int) {

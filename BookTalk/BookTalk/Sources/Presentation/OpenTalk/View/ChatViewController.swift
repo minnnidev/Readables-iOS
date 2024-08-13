@@ -52,6 +52,7 @@ final class ChatViewController: BaseViewController {
 
     override func setNavigationBar() {
         navigationItem.title = "책 제목"
+        navigationItem.backButtonTitle = ""
 
         let menuButton = UIBarButtonItem(
             image: UIImage(systemName: "line.3.horizontal"),

@@ -27,6 +27,11 @@ final class ChatMenuViewController: BaseViewController {
 
     // MARK: - UI Setup
 
+    override func setNavigationBar() {
+        navigationItem.title = "책 제목"
+        navigationItem.backButtonTitle = ""
+    }
+
     override func setViews() {
         view.backgroundColor = .white
 
@@ -82,6 +87,14 @@ final class ChatMenuViewController: BaseViewController {
             forCellReuseIdentifier: CompletedReadingCell.identifier
         )
     }
+
+    private func pushToDetailGoalViewController() {
+        // TODO: book number와 같은 id값 뷰모델로 넘겨주기
+        let viewModel = DetailGoalViewModel()
+        let detailGoalVC = DetailGoalViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(detailGoalVC, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -101,32 +114,37 @@ extension ChatMenuViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        switch sectionType {
-        case .nowReading:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: NowReadingCell.identifier,
-                for: indexPath
-            ) as? NowReadingCell else { return UITableViewCell() }
-
-            return cell
-
-        case .myProgress:
-            guard let cell = tableView.dequeueReusableCell(
+        guard let nowReadingCell = tableView.dequeueReusableCell(
+            withIdentifier: NowReadingCell.identifier,
+            for: indexPath
+        ) as? NowReadingCell,
+              let readingProgressCell = tableView.dequeueReusableCell(
                 withIdentifier: MyReadingProgressCell.identifier,
                 for: indexPath
-            ) as? MyReadingProgressCell else { return UITableViewCell() }
-
-            cell.bind(percent: 50)
-
-            return cell
-
-        case .completedReading:
-            guard let cell = tableView.dequeueReusableCell(
+              ) as? MyReadingProgressCell,
+              let completedReadingCell = tableView.dequeueReusableCell(
                 withIdentifier: CompletedReadingCell.identifier,
                 for: indexPath
-            ) as? CompletedReadingCell else { return UITableViewCell() }
+              ) as? CompletedReadingCell else { return UITableViewCell() }
 
-            return cell
+
+        switch sectionType {
+        case .nowReading:
+            return nowReadingCell
+
+        case .myProgress:
+            readingProgressCell.bind(percent: 50)
+
+            readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
+                guard isTapped else { return }
+
+                self?.pushToDetailGoalViewController()
+            }
+
+            return readingProgressCell
+
+        case .completedReading:
+            return completedReadingCell
         }
     }
 }
