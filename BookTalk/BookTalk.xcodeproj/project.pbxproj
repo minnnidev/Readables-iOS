@@ -75,6 +75,7 @@
 		AB3F15462C611DC100C77E13 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F15452C611DC100C77E13 /* Observable.swift */; };
 		AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */; };
 		AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA4E2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift */; };
+		AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA512C6B31BC009A2AB6 /* AddBookViewController.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -154,6 +155,7 @@
 		AB3F15452C611DC100C77E13 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewModel.swift; sourceTree = "<group>"; };
 		AB4CBA4E2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotStartedReadingCell.swift; sourceTree = "<group>"; };
+		AB4CBA512C6B31BC009A2AB6 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 			children = (
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				ABED441D2C66793C0073398A /* DetailGoalViewController.swift */,
+				AB4CBA512C6B31BC009A2AB6 /* AddBookViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */,
+				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
