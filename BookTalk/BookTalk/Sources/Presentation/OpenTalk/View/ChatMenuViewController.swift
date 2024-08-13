@@ -15,7 +15,20 @@ final class ChatMenuViewController: BaseViewController {
     private let bottomLineView = UIView()
     private let bottomView = UIView()
     private let shareGoalButton = UIButton()
+    private let viewModel: ChatMenuViewModel
 
+    // MARK: - Initializer
+
+    init(viewModel: ChatMenuViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -27,13 +40,18 @@ final class ChatMenuViewController: BaseViewController {
 
     // MARK: - UI Setup
 
+    override func setNavigationBar() {
+        navigationItem.title = "책 제목"
+        navigationItem.backButtonTitle = ""
+    }
+
     override func setViews() {
         view.backgroundColor = .white
 
         chatMenuTableView.do {
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
-            $0.separatorStyle = .none
+            $0.separatorInset = .zero
             $0.estimatedRowHeight = 300
         }
 
@@ -78,9 +96,27 @@ final class ChatMenuViewController: BaseViewController {
             forCellReuseIdentifier: MyReadingProgressCell.identifier
         )
         chatMenuTableView.register(
+            NotStartedReadingCell.self,
+            forCellReuseIdentifier: NotStartedReadingCell.identifier
+        )
+        chatMenuTableView.register(
             CompletedReadingCell.self,
             forCellReuseIdentifier: CompletedReadingCell.identifier
         )
+    }
+
+    private func pushToDetailGoalViewController() {
+        // TODO: book number와 같은 id값 뷰모델로 넘겨주기
+        let viewModel = DetailGoalViewModel()
+        let detailGoalVC = DetailGoalViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(detailGoalVC, animated: true)
+    }
+
+    private func pushToAddBookViewController() {
+        let addBookVC = AddBookViewController()
+
+        navigationController?.pushViewController(addBookVC, animated: true)
     }
 }
 
@@ -101,30 +137,51 @@ extension ChatMenuViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        switch sectionType {
-        case .nowReading:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: NowReadingCell.identifier,
-                for: indexPath
-            ) as? NowReadingCell else { return UITableViewCell() }
-
-            return cell
-
-        case .myProgress:
-            guard let cell = tableView.dequeueReusableCell(
+        guard let nowReadingCell = tableView.dequeueReusableCell(
+            withIdentifier: NowReadingCell.identifier,
+            for: indexPath
+        ) as? NowReadingCell,
+              let readingProgressCell = tableView.dequeueReusableCell(
                 withIdentifier: MyReadingProgressCell.identifier,
                 for: indexPath
-            ) as? MyReadingProgressCell else { return UITableViewCell() }
-
-            return cell
-
-        case .completedReading:
-            guard let cell = tableView.dequeueReusableCell(
+              ) as? MyReadingProgressCell,
+              let completedReadingCell = tableView.dequeueReusableCell(
                 withIdentifier: CompletedReadingCell.identifier,
                 for: indexPath
-            ) as? CompletedReadingCell else { return UITableViewCell() }
+              ) as? CompletedReadingCell,
+              let notStartedReadingCell = tableView.dequeueReusableCell(
+                withIdentifier: NotStartedReadingCell.identifier,
+                for: indexPath
+              ) as? NotStartedReadingCell
+        else { return UITableViewCell() }
 
-            return cell
+
+        switch sectionType {
+        case .nowReading:
+            return nowReadingCell
+
+        case .myProgress:
+            if viewModel.myPercent != nil {
+                readingProgressCell.bind(percent: 50)
+
+                readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
+                    guard isTapped else { return }
+
+                    self?.pushToDetailGoalViewController()
+                }
+
+                return readingProgressCell
+            } else {
+                notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
+                    guard isTapped else { return }
+
+                    self?.pushToAddBookViewController()
+                }
+                return notStartedReadingCell
+            }
+
+        case .completedReading:
+            return completedReadingCell
         }
     }
 }
