@@ -99,6 +99,10 @@ final class AddBookViewController: BaseViewController {
         viewModel.books.subscribe { [weak self] _ in
             self?.resultCollectionView.reloadData()
         }
+
+        viewModel.searchText.subscribe { [weak self] text in
+            self?.searchBar.text = text
+        }
     }
 }
 
@@ -181,10 +185,6 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UISearchBarDelegate
 
 extension AddBookViewController: UISearchBarDelegate {
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchText.value = searchText
-    }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.send(action: .loadResult(query: searchBar.text ?? ""))
