@@ -112,6 +112,12 @@ final class ChatMenuViewController: BaseViewController {
 
         navigationController?.pushViewController(detailGoalVC, animated: true)
     }
+
+    private func pushToAddBookViewController() {
+        let addBookVC = AddBookViewController()
+
+        navigationController?.pushViewController(addBookVC, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -166,6 +172,11 @@ extension ChatMenuViewController: UITableViewDataSource {
 
                 return readingProgressCell
             } else {
+                notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
+                    guard isTapped else { return }
+
+                    self?.pushToAddBookViewController()
+                }
                 return notStartedReadingCell
             }
 

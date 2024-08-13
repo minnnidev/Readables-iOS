@@ -14,6 +14,20 @@ final class NotStartedReadingCell: BaseTableViewCell {
     private let titleLabel = UILabel()
     private let addButton = UIButton()
 
+    var addButtonDidTappedObservable = Observable(false)
+
+    // MARK: - Initializer
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        addTarget()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - UI Setup
 
     override func setViews() {
@@ -50,5 +64,21 @@ final class NotStartedReadingCell: BaseTableViewCell {
             $0.leading.equalToSuperview().offset(20)
             $0.bottom.trailing.equalToSuperview().offset(-20)
         }
+    }
+
+    // MARK: - Helpers
+
+    private func addTarget() {
+        addButton.addTarget(
+            self,
+            action: #selector(addButtonDidTapped),
+            for: .touchUpInside
+        )
+    }
+
+    // MARK: - Actions
+
+    @objc private func addButtonDidTapped() {
+        addButtonDidTappedObservable.value = true
     }
 }
