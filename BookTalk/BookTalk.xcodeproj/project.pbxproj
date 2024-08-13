@@ -78,6 +78,7 @@
 		AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA512C6B31BC009A2AB6 /* AddBookViewController.swift */; };
 		AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA532C6B3FCE009A2AB6 /* AddBookViewModel.swift */; };
 		AB4CBA562C6B44D7009A2AB6 /* LikedTitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA552C6B44D6009A2AB6 /* LikedTitleHeaderView.swift */; };
+		AB4CBA592C6BADD3009A2AB6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AB4CBA582C6BADD3009A2AB6 /* Alamofire */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -175,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */,
+				AB4CBA592C6BADD3009A2AB6 /* Alamofire in Frameworks */,
 				ABED440D2C66549E0073398A /* DGCharts in Frameworks */,
 				AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */,
 			);
@@ -711,6 +713,7 @@
 				AB22AD502C4E92C100C9A0F3 /* SnapKit */,
 				AB22AD532C4E92C700C9A0F3 /* Then */,
 				ABED440C2C66549E0073398A /* DGCharts */,
+				AB4CBA582C6BADD3009A2AB6 /* Alamofire */,
 			);
 			productName = BookTalk;
 			productReference = AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */;
@@ -744,6 +747,7 @@
 				AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				AB22AD522C4E92C700C9A0F3 /* XCRemoteSwiftPackageReference "Then" */,
 				ABED440B2C66549E0073398A /* XCRemoteSwiftPackageReference "Charts" */,
+				AB4CBA572C6BADD3009A2AB6 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = AB22AD392C4E8D9D00C9A0F3 /* Products */;
 			projectDirPath = "";
@@ -1093,6 +1097,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		AB4CBA572C6BADD3009A2AB6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 		ABED440B2C66549E0073398A /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ChartsOrg/Charts.git";
@@ -1113,6 +1125,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AB22AD522C4E92C700C9A0F3 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		AB4CBA582C6BADD3009A2AB6 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB4CBA572C6BADD3009A2AB6 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		ABED440C2C66549E0073398A /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
