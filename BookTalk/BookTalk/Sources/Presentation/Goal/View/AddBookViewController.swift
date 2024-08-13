@@ -14,13 +14,28 @@ final class AddBookViewController: BaseViewController {
     private let searchBar = UISearchBar()
     private let resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
 
-    // MARK: Initializer
+    private let viewModel: AddBookViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: AddBookViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setDelegate()
         registerCell()
+        bind()
     }
 
     // MARK: - UI Setup
@@ -63,6 +78,8 @@ final class AddBookViewController: BaseViewController {
     private func setDelegate() {
         resultCollectionView.dataSource = self
         resultCollectionView.delegate = self
+
+        searchBar.delegate = self
     }
 
     private func registerCell() {
@@ -70,6 +87,12 @@ final class AddBookViewController: BaseViewController {
             BookImageCell.self,
             forCellWithReuseIdentifier: BookImageCell.identifier
         )
+    }
+
+    private func bind() {
+        viewModel.books.subscribe { [weak self] _ in
+            self?.resultCollectionView.reloadData()
+        }
     }
 }
 
@@ -124,5 +147,12 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         return 8
+    }
+}
+
+extension AddBookViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.send(action: .loadResult(query: searchBar.text ?? ""))
     }
 }
