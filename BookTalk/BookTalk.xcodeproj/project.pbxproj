@@ -79,6 +79,7 @@
 		AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA532C6B3FCE009A2AB6 /* AddBookViewModel.swift */; };
 		AB4CBA562C6B44D7009A2AB6 /* LikedTitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA552C6B44D6009A2AB6 /* LikedTitleHeaderView.swift */; };
 		AB4CBA592C6BADD3009A2AB6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AB4CBA582C6BADD3009A2AB6 /* Alamofire */; };
+		AB4CBA5D2C6BAFA5009A2AB6 /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -161,6 +162,7 @@
 		AB4CBA512C6B31BC009A2AB6 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		AB4CBA532C6B3FCE009A2AB6 /* AddBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewModel.swift; sourceTree = "<group>"; };
 		AB4CBA552C6B44D6009A2AB6 /* LikedTitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedTitleHeaderView.swift; sourceTree = "<group>"; };
+		AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				057925372C4FF31D00834EC6 /* Application */,
 				AB2E7BEB2C53DAFE00CE43CB /* Model */,
 				057925442C4FF51400834EC6 /* Presentation */,
+				AB4CBA5B2C6BAF92009A2AB6 /* Network */,
 				AB2E7BC22C5260A100CE43CB /* Util */,
 			);
 			path = Sources;
@@ -598,6 +601,14 @@
 			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
+		AB4CBA5B2C6BAF92009A2AB6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		ABD10DE62C516D26005F290E /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -803,6 +814,7 @@
 				056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
+				AB4CBA5D2C6BAFA5009A2AB6 /* NetworkEnvironment.swift in Sources */,
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
@@ -990,6 +1002,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "http://52.79.187.133:8080";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BTX96P3YD4;
@@ -1026,6 +1039,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "http://52.79.187.133:8080";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BTX96P3YD4;
