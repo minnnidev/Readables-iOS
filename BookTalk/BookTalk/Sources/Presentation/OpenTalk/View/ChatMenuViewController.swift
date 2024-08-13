@@ -15,7 +15,20 @@ final class ChatMenuViewController: BaseViewController {
     private let bottomLineView = UIView()
     private let bottomView = UIView()
     private let shareGoalButton = UIButton()
+    private let viewModel: ChatMenuViewModel
 
+    // MARK: - Initializer
+
+    init(viewModel: ChatMenuViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -38,7 +51,7 @@ final class ChatMenuViewController: BaseViewController {
         chatMenuTableView.do {
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .clear
-            $0.separatorStyle = .none
+            $0.separatorInset = .zero
             $0.estimatedRowHeight = 300
         }
 
@@ -83,6 +96,10 @@ final class ChatMenuViewController: BaseViewController {
             forCellReuseIdentifier: MyReadingProgressCell.identifier
         )
         chatMenuTableView.register(
+            NotStartedReadingCell.self,
+            forCellReuseIdentifier: NotStartedReadingCell.identifier
+        )
+        chatMenuTableView.register(
             CompletedReadingCell.self,
             forCellReuseIdentifier: CompletedReadingCell.identifier
         )
@@ -125,7 +142,12 @@ extension ChatMenuViewController: UITableViewDataSource {
               let completedReadingCell = tableView.dequeueReusableCell(
                 withIdentifier: CompletedReadingCell.identifier,
                 for: indexPath
-              ) as? CompletedReadingCell else { return UITableViewCell() }
+              ) as? CompletedReadingCell,
+              let notStartedReadingCell = tableView.dequeueReusableCell(
+                withIdentifier: NotStartedReadingCell.identifier,
+                for: indexPath
+              ) as? NotStartedReadingCell
+        else { return UITableViewCell() }
 
 
         switch sectionType {
@@ -133,15 +155,19 @@ extension ChatMenuViewController: UITableViewDataSource {
             return nowReadingCell
 
         case .myProgress:
-            readingProgressCell.bind(percent: 50)
+            if viewModel.myPercent != nil {
+                readingProgressCell.bind(percent: 50)
 
-            readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
-                guard isTapped else { return }
+                readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
+                    guard isTapped else { return }
 
-                self?.pushToDetailGoalViewController()
+                    self?.pushToDetailGoalViewController()
+                }
+
+                return readingProgressCell
+            } else {
+                return notStartedReadingCell
             }
-
-            return readingProgressCell
 
         case .completedReading:
             return completedReadingCell

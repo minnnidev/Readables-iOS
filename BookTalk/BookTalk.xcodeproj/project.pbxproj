@@ -73,6 +73,8 @@
 		AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7BFD2C5602A500CE43CB /* Category.swift */; };
 		AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E7C032C565B3A00CE43CB /* FirstCategoryViewController.swift */; };
 		AB3F15462C611DC100C77E13 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3F15452C611DC100C77E13 /* Observable.swift */; };
+		AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */; };
+		AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA4E2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -150,6 +152,8 @@
 		AB2E7BFD2C5602A500CE43CB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		AB2E7C032C565B3A00CE43CB /* FirstCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCategoryViewController.swift; sourceTree = "<group>"; };
 		AB3F15452C611DC100C77E13 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMenuViewModel.swift; sourceTree = "<group>"; };
+		AB4CBA4E2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotStartedReadingCell.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -446,6 +450,7 @@
 				AB0C0F7B2C5F6D45007812C5 /* MyReadingProgressCell.swift */,
 				AB0C0F7D2C5F6D83007812C5 /* CompletedReadingCell.swift */,
 				AB23BF0F2C64A02900E12702 /* ReadingPeopleCell.swift */,
+				AB4CBA4E2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */,
+				AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				051155F12C64B08F00230CFE /* ReusableIdentifier.swift in Sources */,
 				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
+				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
@@ -823,6 +830,7 @@
 				AB2E7BDF2C53B70700CE43CB /* SubcategoryViewModel.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
 				ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */,
+				AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
 			);

@@ -52,7 +52,7 @@ final class MyReadingProgressCell: BaseTableViewCell {
         }
 
         updateButton.do {
-            $0.setTitle("갱신하기", for: .normal)
+            $0.setTitle("기록 갱신하기", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = UIColor.accentOrange
             $0.layer.cornerRadius = 10
