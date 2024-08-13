@@ -69,7 +69,7 @@ final class BookWithHeaderCell: BaseTableViewCell {
         bookCollectionView.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.height.equalTo(208)
             $0.bottom.equalToSuperview().offset(-16)
         }
     }
@@ -126,7 +126,7 @@ extension BookWithHeaderCell: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         // TODO: 책 사이즈 정의
-        return CGSize(width: 100, height: collectionView.frame.height)
+        return CGSize(width: (ScreenSize.width-36) / 3, height: collectionView.frame.height)
     }
 
     func collectionView(

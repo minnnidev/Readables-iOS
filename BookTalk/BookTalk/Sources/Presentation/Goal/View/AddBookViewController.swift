@@ -136,7 +136,7 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let width = (ScreenSize.width-36) / 3
-        return CGSize(width: width, height: 160)
+        return CGSize(width: width, height: 208)
     }
 
     func collectionView(
@@ -144,7 +144,7 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 8
+        return 24
     }
 
     func collectionView(
