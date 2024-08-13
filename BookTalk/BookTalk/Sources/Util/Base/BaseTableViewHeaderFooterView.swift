@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class BaseHeaderFooterView: UITableViewHeaderFooterView {
+class BaseTableViewHeaderFooterView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -25,5 +25,23 @@ class BaseHeaderFooterView: UITableViewHeaderFooterView {
     
     func setViews() { }
     
+    func setConstraints() { }
+}
+
+class BaseCollectionViewHeaderFooterView: UICollectionReusableView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        setViews()
+        setConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setViews() { }
+
     func setConstraints() { }
 }

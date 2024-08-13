@@ -23,11 +23,11 @@ final class AddBookViewController: BaseViewController {
 
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -87,6 +87,12 @@ final class AddBookViewController: BaseViewController {
             BookImageCell.self,
             forCellWithReuseIdentifier: BookImageCell.identifier
         )
+
+        resultCollectionView.register(
+            LikedTitleHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: LikedTitleHeaderView.identifier
+        )
     }
 
     private func bind() {
@@ -104,7 +110,7 @@ extension AddBookViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 50
+        return 5
     }
 
     func collectionView(
@@ -148,9 +154,37 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         return 8
     }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: LikedTitleHeaderView.identifier,
+            for: indexPath
+        ) as? LikedTitleHeaderView else { return UICollectionReusableView() }
+
+        return headerView
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
 }
 
+// MARK: - UISearchBarDelegate
+
 extension AddBookViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchText.value = searchText
+    }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.send(action: .loadResult(query: searchBar.text ?? ""))

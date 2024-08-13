@@ -14,6 +14,7 @@ final class AddBookViewModel {
     }
 
     var books = Observable<[String]>([]) // TODO: 수정
+    var searchText = Observable("")
 
     func send(action: Action) {
         switch action {
