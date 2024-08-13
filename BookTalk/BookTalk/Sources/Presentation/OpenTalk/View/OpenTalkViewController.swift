@@ -171,7 +171,7 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: ScreenSize.width/2, height: collectionView.frame.height)
         } else {
             let width = (ScreenSize.width-36) / 3
-            return CGSize(width: width, height: 160)
+            return CGSize(width: width, height: 208)
         }
     }
 
@@ -195,7 +195,7 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == pageCollectionView {
             return CGFloat()
         } else {
-            return 8
+            return 24
         }
     }
 

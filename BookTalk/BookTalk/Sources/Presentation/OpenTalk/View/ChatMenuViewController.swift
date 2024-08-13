@@ -113,8 +113,9 @@ final class ChatMenuViewController: BaseViewController {
         navigationController?.pushViewController(detailGoalVC, animated: true)
     }
 
-    private func pushToAddBookViewController() {
-        let addBookVC = AddBookViewController()
+    private func pushToAddBookViewController(of bookName: String) {
+        let viewModel = AddBookViewModel(bookName: bookName)
+        let addBookVC = AddBookViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(addBookVC, animated: true)
     }
@@ -175,7 +176,8 @@ extension ChatMenuViewController: UITableViewDataSource {
                 notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }
 
-                    self?.pushToAddBookViewController()
+                    // TODO: 책 제목 수정
+                    self?.pushToAddBookViewController(of: "나미야 잡화점의 기적")
                 }
                 return notStartedReadingCell
             }
