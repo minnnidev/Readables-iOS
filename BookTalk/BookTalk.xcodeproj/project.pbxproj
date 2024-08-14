@@ -35,6 +35,8 @@
 		057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925422C4FF4E100834EC6 /* MyViewController.swift */; };
 		0579D1092C6C9D5C0032AC1C /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */; };
 		0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D10C2C6C9E230032AC1C /* Keyword.swift */; };
+		0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D10F2C6C9E410032AC1C /* HomeSectionType.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -119,6 +121,8 @@
 		057925422C4FF4E100834EC6 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		0579D10C2C6C9E230032AC1C /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
+		0579D10F2C6C9E410032AC1C /* HomeSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionType.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 		0545432E2C53725200E64948 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0579D10E2C6C9E380032AC1C /* Enum */,
 				054543A72C57530A00E64948 /* Header */,
 				054543952C57493400E64948 /* Cell */,
 				054543932C5748E200E64948 /* View */,
@@ -201,6 +206,7 @@
 		0545438C2C5747E300E64948 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0579D10C2C6C9E230032AC1C /* Keyword.swift */,
 				0545439A2C574B9000E64948 /* HomeSection.swift */,
 				0545439F2C5750B200E64948 /* HomeMockData.swift */,
 			);
@@ -402,6 +408,14 @@
 				ABED44142C6668FE0073398A /* Component */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0579D10E2C6C9E380032AC1C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				0579D10F2C6C9E410032AC1C /* HomeSectionType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		AB0C0F552C5BD557007812C5 /* OpenTalk */ = {
@@ -805,6 +819,7 @@
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
+				0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
@@ -826,6 +841,7 @@
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
 				AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
+				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
