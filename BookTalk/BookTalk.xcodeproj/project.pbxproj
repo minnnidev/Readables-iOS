@@ -37,6 +37,10 @@
 		0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D10C2C6C9E230032AC1C /* Keyword.swift */; };
 		0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D10F2C6C9E410032AC1C /* HomeSectionType.swift */; };
+		0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1112C6C9F6B0032AC1C /* KeywordHeaderView.swift */; };
+		0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */; };
+		0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */; };
+		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -123,6 +127,10 @@
 		0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		0579D10C2C6C9E230032AC1C /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		0579D10F2C6C9E410032AC1C /* HomeSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionType.swift; sourceTree = "<group>"; };
+		0579D1112C6C9F6B0032AC1C /* KeywordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordHeaderView.swift; sourceTree = "<group>"; };
+		0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
+		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
+		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +232,7 @@
 		054543942C57491800E64948 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */,
 				054543982C5749F300E64948 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
@@ -242,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				054543A12C5751DD00E64948 /* SuggestionCell.swift */,
+				0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */,
 				054543A32C57520C00E64948 /* RecommendationBookCell.swift */,
 			);
 			path = TableViewCell;
@@ -250,6 +260,7 @@
 		054543972C57494E00E64948 /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */,
 				054543A52C57523B00E64948 /* RecommendationBookCollectionCell.swift */,
 			);
 			path = CollectionViewCell;
@@ -258,6 +269,7 @@
 		054543A72C57530A00E64948 /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				0579D1112C6C9F6B0032AC1C /* KeywordHeaderView.swift */,
 				054543A82C57531C00E64948 /* HomeHeaderView.swift */,
 			);
 			path = Header;
@@ -795,10 +807,12 @@
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */,
 				ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */,
+				0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */,
 				0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
+				0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */,
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,
@@ -823,6 +837,7 @@
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
+				0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				AB0C0F822C5F6E2D007812C5 /* ChatMenuSectionType.swift in Sources */,
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
@@ -846,6 +861,7 @@
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				AB0C0F7E2C5F6D83007812C5 /* CompletedReadingCell.swift in Sources */,
+				0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */,
 				ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
 				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
