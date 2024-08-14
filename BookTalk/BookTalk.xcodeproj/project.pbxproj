@@ -33,6 +33,7 @@
 		0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */; };
 		057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925402C4FF4DC00834EC6 /* GoalViewController.swift */; };
 		057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057925422C4FF4E100834EC6 /* MyViewController.swift */; };
+		0579D1092C6C9D5C0032AC1C /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -115,6 +116,7 @@
 		0579253E2C4FF4D700834EC6 /* OpenTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewController.swift; sourceTree = "<group>"; };
 		057925402C4FF4DC00834EC6 /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		057925422C4FF4E100834EC6 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				AB2E7BC32C5260AB00CE43CB /* Extension */,
 				AB2E7BD72C53B37500CE43CB /* Constant.swift */,
 				AB3F15452C611DC100C77E13 /* Observable.swift */,
+				0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */,
 				051155F02C64B08F00230CFE /* ReusableIdentifier.swift */,
 			);
 			path = Util;
@@ -834,6 +837,7 @@
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,
+				0579D1092C6C9D5C0032AC1C /* PaddedLabel.swift in Sources */,
 				AB2E7BC12C525CC700CE43CB /* CategoryType.swift in Sources */,
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
