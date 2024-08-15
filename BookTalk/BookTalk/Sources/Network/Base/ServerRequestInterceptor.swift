@@ -11,12 +11,25 @@ import Alamofire
 final class ServerRequestInterceptor: RequestInterceptor {
 
     /// request 전 추가 기능
+    ///
+    /// - Note:
+    ///     - access token, refresh token 존재 여부 체크
+    ///     - 체크 후에 request header에 추가
     func adapt(
         _ urlRequest: URLRequest,
         for session: Session,
         completion: @escaping (Result<URLRequest, any Error>
         ) -> Void) {
-        // TODO: request 요청 전
+        guard let accessToken = KeychainManager.shared.read(key: TokenKey.accessToken),
+              let refreshToken = KeychainManager.shared.read(key: TokenKey.refreshToken) else {
+            // TODO: 키체인에 토큰 존재하지 않을 시 에러 - ex. 로그아웃
+            return
+        }
+
+        var adaptedRequest = urlRequest
+        adaptedRequest.headers.add(.authorization(bearerToken: accessToken))
+
+        completion(.success(adaptedRequest))
     }
 
     /// request 실패 후 재시도
