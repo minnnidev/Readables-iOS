@@ -86,6 +86,7 @@
 		AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */; };
 		AB4CBA6C2C6DD8E7009A2AB6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA6B2C6DD8E7009A2AB6 /* NetworkManager.swift */; };
 		AB4CBA6E2C6DE391009A2AB6 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */; };
+		AB4CBA702C6DEFB8009A2AB6 /* Keychain+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA6F2C6DEFB8009A2AB6 /* Keychain+.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -175,6 +176,7 @@
 		AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRequestInterceptor.swift; sourceTree = "<group>"; };
 		AB4CBA6B2C6DD8E7009A2AB6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		AB4CBA6F2C6DEFB8009A2AB6 /* Keychain+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+.swift"; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				AB2E7BC62C5260E000CE43CB /* UIColor+.swift */,
+				AB4CBA6F2C6DEFB8009A2AB6 /* Keychain+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -879,6 +882,7 @@
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
+				AB4CBA702C6DEFB8009A2AB6 /* Keychain+.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* ThirdCategoryViewModel.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,

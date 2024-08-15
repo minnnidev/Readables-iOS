@@ -34,23 +34,30 @@ final class NetworkManager: Networkable {
         let interceptor = withInterceptor ? requestInterceptor : nil
         let dataRequest = createDataRequest(for: endpoint, interceptor: interceptor)
 
-        do {
-            let response = try await dataRequest.validate().serializingDecodable(T.self).value
-            return response
-        } catch let afError as AFError {
-            print(afError.localizedDescription)
-            throw NetworkError.afError
-        } catch let decodingError as DecodingError {
-            print(decodingError.localizedDescription)
-            throw NetworkError.decodingError
-        } catch {
-            print(error.localizedDescription)
-            throw NetworkError.error
+        let response = await dataRequest.validate().serializingDecodable(T.self).response
+
+        switch response.result {
+        case let .success(value):
+            // 응답 헤더로부터 갱신된 accessToken 받아오기
+            if let headers = response.response?.headers,
+               let accessToken = headers["Authorization"] {
+                saveAccessToken(accessToken)
+            }
+
+            return value
+
+        // TODO: 에러 처리
+        case let .failure(error):
+            throw error
         }
     }
 }
 
 extension NetworkManager {
+
+    private func saveAccessToken(_ accessToken: String) {
+        KeychainManager.shared.save(key: TokenKey.accessToken, token: accessToken)
+    }
 
     private func createDataRequest(
         for endpoint: TargetType,
