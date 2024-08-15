@@ -32,7 +32,8 @@ final class MyViewController: BaseViewController {
     // MARK: - Actions
 
     @objc private func settingButtonDidTapped() {
-        let settigVC = SettingViewController()
+        let viewModel = SettingViewModel()
+        let settigVC = SettingViewController(viewModel: viewModel)
         settigVC.hidesBottomBarWhenPushed = true
         
         navigationController?.pushViewController(settigVC, animated: true)

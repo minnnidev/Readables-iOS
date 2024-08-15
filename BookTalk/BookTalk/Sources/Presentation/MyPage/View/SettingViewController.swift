@@ -13,6 +13,20 @@ final class SettingViewController: BaseViewController {
 
     private let settingTableView = UITableView()
 
+    private let viewModel: SettingViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: SettingViewModel) {
+        self.viewModel = settingViewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
