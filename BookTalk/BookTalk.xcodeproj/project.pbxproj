@@ -83,6 +83,7 @@
 		AB4CBA602C6BB0E9009A2AB6 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA5F2C6BB0E9009A2AB6 /* APIEndpoint.swift */; };
 		AB4CBA622C6BB191009A2AB6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA612C6BB191009A2AB6 /* Task.swift */; };
 		AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA652C6BB398009A2AB6 /* KeychainManager.swift */; };
+		AB4CBA6A2C6DD6E3009A2AB6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA692C6DD6E3009A2AB6 /* AuthInterceptor.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -169,6 +170,7 @@
 		AB4CBA5F2C6BB0E9009A2AB6 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		AB4CBA612C6BB191009A2AB6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		AB4CBA652C6BB398009A2AB6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		AB4CBA692C6DD6E3009A2AB6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
 				AB4CBA5F2C6BB0E9009A2AB6 /* APIEndpoint.swift */,
 				AB4CBA612C6BB191009A2AB6 /* Task.swift */,
+				AB4CBA692C6DD6E3009A2AB6 /* AuthInterceptor.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				AB2E7BF22C53EDD800CE43CB /* AllBookImagesViewController.swift in Sources */,
 				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
+				AB4CBA6A2C6DD6E3009A2AB6 /* AuthInterceptor.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* BooksWithHeader.swift in Sources */,
 				AB2E7BFA2C54A53900CE43CB /* CategorySelectModalViewController.swift in Sources */,
