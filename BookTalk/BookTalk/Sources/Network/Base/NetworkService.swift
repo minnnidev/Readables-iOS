@@ -50,7 +50,6 @@ final class NetworkService: NetworkServiceType {
     }
 }
 
-
 extension NetworkService {
 
     private func handleNetworkError(_ error: Error) -> NetworkError {
