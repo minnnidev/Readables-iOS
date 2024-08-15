@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol Networkable {
-    func request<T: Decodable>(endpoint: APIEndpoint) async throws -> T?
+    func request<T: Decodable>(endpoint: TargetType) async throws -> T?
 }
 
 final class NetworkManager: Networkable {
@@ -19,7 +19,7 @@ final class NetworkManager: Networkable {
 
     private init() { }
 
-    func request<T: Decodable>(endpoint: APIEndpoint) async throws -> T? {
+    func request<T: Decodable>(endpoint: TargetType) async throws -> T? {
         let dataRequest = createDataRequest(for: endpoint)
 
         do {
@@ -36,7 +36,7 @@ final class NetworkManager: Networkable {
             throw NetworkError.error
         }
     }
-    private func createDataRequest(for endpoint: APIEndpoint) -> DataRequest {
+    private func createDataRequest(for endpoint: TargetType) -> DataRequest {
         let url = endpoint.baseURL.appendingPathComponent(endpoint.path)
 
         switch endpoint.task {
@@ -45,7 +45,7 @@ final class NetworkManager: Networkable {
                 url,
                 method: endpoint.method,
                 headers: endpoint.header,
-                interceptor: AuthInterceptor()
+                interceptor: RequestInterceptor()
             )
 
         case let .requestJSONEncodable(body):

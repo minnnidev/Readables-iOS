@@ -1,5 +1,5 @@
 //
-//  Interceptor.swift
+//  RequestInterceptor.swift
 //  BookTalk
 //
 //  Created by 김민 on 8/15/24.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-final class AuthInterceptor: RequestInterceptor {
+final class RequestInterceptor: RequestInterceptor {
 
     /// request 전 추가 기능
     func adapt(
