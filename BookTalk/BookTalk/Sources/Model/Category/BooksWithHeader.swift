@@ -13,5 +13,7 @@ struct BooksWithHeader {
 }
 
 struct Book {
+    var isbn: String
     var imageURL: String
+    var title: String
 }
