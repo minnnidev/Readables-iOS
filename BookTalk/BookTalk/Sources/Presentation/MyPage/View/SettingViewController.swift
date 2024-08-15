@@ -76,6 +76,32 @@ final class SettingViewController: BaseViewController {
             forCellReuseIdentifier: SettingCell.identifier
         )
     }
+
+    private func presentLogoutActionSheet() {
+        let alertVC = UIAlertController(
+            title: "로그아웃하시겠습니까?",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let logoutAction = UIAlertAction(
+            title: "로그아웃",
+            style: .destructive) { [weak self] _ in
+                self?.viewModel.send(action: .logout)
+            }
+
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+
+        [logoutAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+
+        present(alertVC, animated: true)
+    }
+
+    private func presentWithdrawActionSheet() {
+        // TODO: 탈퇴 UI - 사유 선택?
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -102,6 +128,28 @@ extension SettingViewController: UITableViewDataSource {
         cell.bind(title: setting.title, content: setting.content)
 
         return cell
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        switch SettingType.allCases[indexPath.row] {
+        case .terms:
+            // TODO: 이용약관 뷰로 이동 (ex. 노션, 앱 뷰)
+            return
+
+        case .logout:
+            presentLogoutActionSheet()
+            return
+
+        case .withdraw:
+            presentWithdrawActionSheet()
+            return
+
+        case .version:
+            return
+        }
     }
 }
 
