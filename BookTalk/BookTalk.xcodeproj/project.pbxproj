@@ -623,8 +623,6 @@
 			isa = PBXGroup;
 			children = (
 				AB4CBA5E2C6BB059009A2AB6 /* Base */,
-				AB4CBA852C6E3324009A2AB6 /* Environment */,
-				AB4CBA862C6E3336009A2AB6 /* Error */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -632,6 +630,8 @@
 		AB4CBA5E2C6BB059009A2AB6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */,
+				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
 				AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */,
 				AB4CBA5F2C6BB0E9009A2AB6 /* TargetType.swift */,
 				AB4CBA612C6BB191009A2AB6 /* Task.swift */,
@@ -639,22 +639,6 @@
 				AB4CBA6B2C6DD8E7009A2AB6 /* NetworkService.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		AB4CBA852C6E3324009A2AB6 /* Environment */ = {
-			isa = PBXGroup;
-			children = (
-				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
-			);
-			path = Environment;
-			sourceTree = "<group>";
-		};
-		AB4CBA862C6E3336009A2AB6 /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */,
-			);
-			path = Error;
 			sourceTree = "<group>";
 		};
 		ABD10DE62C516D26005F290E /* Category */ = {
