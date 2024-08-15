@@ -13,7 +13,7 @@ protocol APIEndpoint {
     var path: String { get }
     var method: HTTPMethod { get }
     var task: Task { get }
-    var header: HTTPHeader { get }
+    var header: HTTPHeaders? { get }
 }
 
 extension APIEndpoint {
