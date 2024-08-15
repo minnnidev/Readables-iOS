@@ -13,6 +13,6 @@ enum Task {
     case requestPlain
     /// Encodable을 채택하는 body를 포함하는 request
     case requestJSONEncodable(body: Encodable)
-    ///  Parameter을 포함하는 request
+    /// Parameter을 포함하는 request
     case requestParameters(parameters: Parameters)
 }

@@ -10,5 +10,5 @@ import Foundation
 enum NetworkError: Error {
     case afError
     case decodingError
-    case error(statusCode: Int)
+    case error
 }

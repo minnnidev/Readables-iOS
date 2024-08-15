@@ -83,7 +83,7 @@
 		AB4CBA602C6BB0E9009A2AB6 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA5F2C6BB0E9009A2AB6 /* TargetType.swift */; };
 		AB4CBA622C6BB191009A2AB6 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA612C6BB191009A2AB6 /* Task.swift */; };
 		AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA652C6BB398009A2AB6 /* KeychainManager.swift */; };
-		AB4CBA6A2C6DD6E3009A2AB6 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA692C6DD6E3009A2AB6 /* RequestInterceptor.swift */; };
+		AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */; };
 		AB4CBA6C2C6DD8E7009A2AB6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA6B2C6DD8E7009A2AB6 /* NetworkManager.swift */; };
 		AB4CBA6E2C6DE391009A2AB6 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
@@ -172,7 +172,7 @@
 		AB4CBA5F2C6BB0E9009A2AB6 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		AB4CBA612C6BB191009A2AB6 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		AB4CBA652C6BB398009A2AB6 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		AB4CBA692C6DD6E3009A2AB6 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
+		AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRequestInterceptor.swift; sourceTree = "<group>"; };
 		AB4CBA6B2C6DD8E7009A2AB6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
@@ -628,7 +628,7 @@
 				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
 				AB4CBA5F2C6BB0E9009A2AB6 /* TargetType.swift */,
 				AB4CBA612C6BB191009A2AB6 /* Task.swift */,
-				AB4CBA692C6DD6E3009A2AB6 /* RequestInterceptor.swift */,
+				AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */,
 				AB4CBA6B2C6DD8E7009A2AB6 /* NetworkManager.swift */,
 				AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */,
 			);
@@ -831,7 +831,7 @@
 				AB2E7BF22C53EDD800CE43CB /* AllBookImagesViewController.swift in Sources */,
 				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
-				AB4CBA6A2C6DD6E3009A2AB6 /* RequestInterceptor.swift in Sources */,
+				AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* BooksWithHeader.swift in Sources */,
 				AB2E7BFA2C54A53900CE43CB /* CategorySelectModalViewController.swift in Sources */,

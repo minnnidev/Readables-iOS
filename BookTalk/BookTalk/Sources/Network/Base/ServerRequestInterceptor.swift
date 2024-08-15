@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-final class RequestInterceptor: RequestInterceptor {
+final class ServerRequestInterceptor: RequestInterceptor {
 
     /// request 전 추가 기능
     func adapt(
