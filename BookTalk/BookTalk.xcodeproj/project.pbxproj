@@ -540,9 +540,7 @@
 				AB2E7BCC2C53ADE300CE43CB /* Base */,
 				AB2E7BC32C5260AB00CE43CB /* Extension */,
 				AB2E7BD72C53B37500CE43CB /* Constant.swift */,
-				0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */,
 				AB3F15452C611DC100C77E13 /* Observable.swift */,
-				0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */,
 				051155F02C64B08F00230CFE /* ReusableIdentifier.swift */,
 			);
 			path = Util;
@@ -703,6 +701,8 @@
 			isa = PBXGroup;
 			children = (
 				AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */,
+				0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */,
+				0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
