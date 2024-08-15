@@ -9,16 +9,16 @@ import Foundation
 
 import Alamofire
 
-protocol Networkable {
+protocol NetworkServiceType {
     func request<T: Decodable>(
-        endpoint: TargetType,
+        target: TargetType,
         withInterceptor: Bool
-    ) async throws -> T?
+    ) async throws -> BaseResponse<T>
 }
 
-final class NetworkManager: Networkable {
+final class NetworkService: NetworkServiceType {
 
-    static let shared = NetworkManager()
+    static let shared = NetworkService()
     private let requestInterceptor: RequestInterceptor
 
     private init(
@@ -27,36 +27,45 @@ final class NetworkManager: Networkable {
         self.requestInterceptor = requestInterceptor
     }
 
-    func request<T: Decodable>(
-        endpoint: TargetType,
+    func request<T>(
+        target: TargetType,
         withInterceptor: Bool = true
-    ) async throws -> T? {
+    ) async throws -> BaseResponse<T> {
         let interceptor = withInterceptor ? requestInterceptor : nil
-        let dataRequest = createDataRequest(for: endpoint, interceptor: interceptor)
+        let dataRequest = createDataRequest(for: target, interceptor: interceptor)
+        let data: Data
 
-        let response = await dataRequest.validate().serializingDecodable(T.self).response
+        do {
+            data = try await dataRequest.validate().serializingData().value
+        } catch {
+            throw handleNetworkError(error)
+        }
 
-        switch response.result {
-        case let .success(value):
-            // 응답 헤더로부터 갱신된 accessToken 받아오기
-            if let headers = response.response?.headers,
-               let accessToken = headers["Authorization"] {
-                saveAccessToken(accessToken)
-            }
-
-            return value
-
-        // TODO: 에러 처리
-        case let .failure(error):
-            throw error
+        do {
+            let decodedData = try JSONDecoder().decode(BaseResponse<T>.self, from: data)
+            return decodedData
+        } catch {
+            throw NetworkError.decodeError
         }
     }
 }
 
-extension NetworkManager {
 
-    private func saveAccessToken(_ accessToken: String) {
-        KeychainManager.shared.save(key: TokenKey.accessToken, token: accessToken)
+extension NetworkService {
+
+    private func handleNetworkError(_ error: Error) -> NetworkError {
+        guard let afError = error.asAFError else { return .unknownError }
+
+        switch afError {
+        case .invalidURL:
+            return .invalidURL
+        case .responseValidationFailed(reason: .unacceptableStatusCode(let code)):
+            return .invalidStatusCode(statusCode: code)
+        case .sessionTaskFailed:
+            return .serverUnavailable
+        default:
+            return .unknownError
+        }
     }
 
     private func createDataRequest(
