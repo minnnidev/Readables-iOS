@@ -24,8 +24,7 @@ final class GenreService: GenreServiceType {
     func getThisWeekTrend(with request: GenreTrendRequestDTO) async throws -> [Book] {
         do {
             let result: BaseResponse<[LoanItemResponseDTO]> = try await networkService.request(
-                target: GenreTarget.getThisWeekTrend(params: request), 
-                withInterceptor: true
+                target: GenreTarget.getThisWeekTrend(params: request)
             )
 
             return result.data.map { $0.toBookModel() }

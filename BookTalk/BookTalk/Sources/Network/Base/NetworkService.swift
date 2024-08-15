@@ -11,8 +11,11 @@ import Alamofire
 
 protocol NetworkServiceType {
     func request<T: Decodable>(
-        target: TargetType,
-        withInterceptor: Bool
+        target: TargetType
+    ) async throws -> BaseResponse<T>
+
+    func requestWithoutInterceptor<T: Decodable>(
+        target: TargetType
     ) async throws -> BaseResponse<T>
 }
 
@@ -28,8 +31,20 @@ final class NetworkService: NetworkServiceType {
     }
 
     func request<T>(
+        target: TargetType
+    ) async throws -> BaseResponse<T> {
+        return try await request(target: target, withInterceptor: true)
+    }
+
+    func requestWithoutInterceptor<T>(
+        target: TargetType
+    ) async throws -> BaseResponse<T> {
+        return try await request(target: target, withInterceptor: false)
+    }
+
+    private func request<T>(
         target: TargetType,
-        withInterceptor: Bool = true
+        withInterceptor: Bool
     ) async throws -> BaseResponse<T> {
         let interceptor = withInterceptor ? requestInterceptor : nil
         let dataRequest = createDataRequest(for: target, interceptor: interceptor)
