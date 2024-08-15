@@ -12,7 +12,7 @@ protocol TargetType {
     var baseURL: URL { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var task: Task { get }
+    var task: APITask { get }
     var header: HTTPHeaders? { get }
 }
 
