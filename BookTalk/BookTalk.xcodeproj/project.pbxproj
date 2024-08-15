@@ -89,6 +89,7 @@
 		AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA742C6E00FC009A2AB6 /* SettingViewController.swift */; };
 		AB4CBA782C6E037B009A2AB6 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA772C6E037B009A2AB6 /* SettingCell.swift */; };
 		AB4CBA7B2C6E0755009A2AB6 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA7A2C6E0755009A2AB6 /* SettingViewModel.swift */; };
+		AB4CBA812C6E09CD009A2AB6 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
@@ -182,6 +183,7 @@
 		AB4CBA742C6E00FC009A2AB6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AB4CBA772C6E037B009A2AB6 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		AB4CBA7A2C6E0755009A2AB6 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 		AB4CBA722C6DFF6B009A2AB6 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				AB4CBA7F2C6E09AF009A2AB6 /* Enum */,
 				AB4CBA762C6E036C009A2AB6 /* Cell */,
 				AB4CBA732C6DFF75009A2AB6 /* View */,
 				AB4CBA792C6E06DF009A2AB6 /* ViewModel */,
@@ -665,6 +668,14 @@
 				AB4CBA7A2C6E0755009A2AB6 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AB4CBA7F2C6E09AF009A2AB6 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		ABD10DE62C516D26005F290E /* Category */ = {
@@ -854,6 +865,7 @@
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
 				0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */,
+				AB4CBA812C6E09CD009A2AB6 /* SettingType.swift in Sources */,
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,

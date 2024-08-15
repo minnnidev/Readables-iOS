@@ -18,7 +18,7 @@ final class SettingViewController: BaseViewController {
     // MARK: - Initializer
 
     init(viewModel: SettingViewModel) {
-        self.viewModel = settingViewModel
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +46,9 @@ final class SettingViewController: BaseViewController {
         view.backgroundColor = .white
 
         settingTableView.do {
-            $0.backgroundColor = .yellow
+            $0.backgroundColor = .clear
+            $0.isScrollEnabled = false
+            $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         }
     }
@@ -84,7 +86,7 @@ extension SettingViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 4
+        return SettingType.allCases.count
     }
 
     func tableView(
@@ -95,6 +97,9 @@ extension SettingViewController: UITableViewDataSource {
             withIdentifier: SettingCell.identifier,
             for: indexPath
         ) as? SettingCell else { return UITableViewCell() }
+
+        let setting = SettingType.allCases[indexPath.row]
+        cell.bind(title: setting.title, content: setting.content)
 
         return cell
     }
