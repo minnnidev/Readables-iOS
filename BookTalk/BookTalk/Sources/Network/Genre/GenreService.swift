@@ -15,12 +15,13 @@ struct GenreService {
                 target: GenreTarget.getThisWeekTrend(params: request)
             )
 
-            print(result)
-
-            return result.data!.map { $0.toBookModel() }
+            return result
+                .data?
+                .compactMap { $0.toBookModel() } ?? []
 
         } catch {
             throw error
         }
     }
 }
+
