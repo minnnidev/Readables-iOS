@@ -631,27 +631,59 @@
 			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
+		AB44E6182C6FC3D100C95139 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		AB44E6192C6FC3D900C95139 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		AB44E61A2C6FC3E600C95139 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CBA612C6BB191009A2AB6 /* APITask.swift */,
+				AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */,
+				AB4CBA5F2C6BB0E9009A2AB6 /* TargetType.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		AB44E61C2C6FC4C000C95139 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CBA6B2C6DD8E7009A2AB6 /* NetworkService.swift */,
+				AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		AB4CBA5B2C6BAF92009A2AB6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				AB4CBA5E2C6BB059009A2AB6 /* Base */,
+				AB4CBA5E2C6BB059009A2AB6 /* Foundation */,
 				AB8205532C6E66060014C5A5 /* Genre */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		AB4CBA5E2C6BB059009A2AB6 /* Base */ = {
+		AB4CBA5E2C6BB059009A2AB6 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				AB4CBA6D2C6DE391009A2AB6 /* NetworkError.swift */,
-				AB4CBA5C2C6BAFA5009A2AB6 /* NetworkEnvironment.swift */,
-				AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */,
-				AB4CBA5F2C6BB0E9009A2AB6 /* TargetType.swift */,
-				AB4CBA612C6BB191009A2AB6 /* APITask.swift */,
-				AB4CBA692C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift */,
-				AB4CBA6B2C6DD8E7009A2AB6 /* NetworkService.swift */,
+				AB44E6182C6FC3D100C95139 /* Environment */,
+				AB44E6192C6FC3D900C95139 /* Error */,
+				AB44E61A2C6FC3E600C95139 /* Helper */,
+				AB44E61C2C6FC4C000C95139 /* Core */,
 			);
-			path = Base;
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		AB8205532C6E66060014C5A5 /* Genre */ = {
