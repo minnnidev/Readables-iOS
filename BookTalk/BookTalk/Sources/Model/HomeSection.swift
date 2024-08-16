@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct HomeSection {
-    let header: String
-    let bookInfo: [DetailBookInfo]
+struct HomeSection: Equatable {
+    let type: HomeSectionType
+    let headerTitle: String
+    var isExpanded: Bool
 }
+

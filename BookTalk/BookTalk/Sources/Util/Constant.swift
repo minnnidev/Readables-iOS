@@ -19,3 +19,13 @@ extension Constant {
         static let height = windowScene?.screen.bounds.height ?? 0
     }
 }
+
+extension Constant {
+
+    static var appVersion: String {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            return "v.\(version)"
+        }
+        return "v.0.0"
+    }
+}

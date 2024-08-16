@@ -8,10 +8,9 @@
 import UIKit
 
 final class HomeHeaderView: BaseTableViewHeaderFooterView {
-
+    
     // MARK: - Properties
     
-    var section: Int?
     private let titleLabel = UILabel()
     private let rightArrowIcon = UIImageView()
     
