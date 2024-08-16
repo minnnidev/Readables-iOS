@@ -7,23 +7,11 @@
 
 import Foundation
 
-protocol GenreServiceType {
-    func getThisWeekTrend(with request: GenreTrendRequestDTO) async throws -> [Book]
-}
+struct GenreService {
 
-final class GenreService: GenreServiceType {
-
-    private let networkService: NetworkServiceType
-
-    init(
-        networkService: NetworkServiceType = NetworkService.shared
-    ) {
-        self.networkService = networkService
-    }
-
-    func getThisWeekTrend(with request: GenreTrendRequestDTO) async throws -> [Book] {
+    static func getThisWeekTrend(with request: GenreTrendRequestDTO) async throws -> [Book] {
         do {
-            let result: BaseResponse<[LoanItemResponseDTO]> = try await networkService.request(
+            let result: BaseResponse<[LoanItemResponseDTO]> = try await NetworkService.shared.request(
                 target: GenreTarget.getThisWeekTrend(params: request)
             )
 

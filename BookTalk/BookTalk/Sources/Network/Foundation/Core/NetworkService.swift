@@ -24,15 +24,10 @@ final class NetworkService: NetworkServiceType {
     // MARK: - Properties
 
     static let shared = NetworkService()
-    private let requestInterceptor: RequestInterceptor
 
     // MARK: - Initializer
 
-    private init(
-        requestInterceptor: ServerRequestInterceptor = .init()
-    ) {
-        self.requestInterceptor = requestInterceptor
-    }
+    private init() { }
 
     // MARK: - Helpers
 
@@ -52,8 +47,7 @@ final class NetworkService: NetworkServiceType {
         target: TargetType,
         withInterceptor: Bool
     ) async throws -> BaseResponse<T> {
-        let interceptor = withInterceptor ? requestInterceptor : nil
-        let dataRequest = createDataRequest(for: target, interceptor: interceptor)
+        let dataRequest = createDataRequest(for: target, withInterceptor: withInterceptor)
         let response = await dataRequest.validate().serializingData().response
 
         switch response.result {
@@ -105,9 +99,10 @@ extension NetworkService {
 
     private func createDataRequest(
         for endpoint: TargetType,
-        interceptor: RequestInterceptor?
+        withInterceptor: Bool
     ) -> DataRequest {
         let url = endpoint.baseURL.appendingPathComponent(endpoint.path)
+        let interceptor = withInterceptor ? ServerRequestInterceptor() : nil
 
         switch endpoint.task {
         case .requestPlain:

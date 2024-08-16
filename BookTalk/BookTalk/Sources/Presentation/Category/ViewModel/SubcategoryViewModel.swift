@@ -25,14 +25,11 @@ final class SubcategoryViewModel {
     // MARK: - Initializer
 
     let firstCategoryType: CategoryType
-    let genreService: GenreServiceType
 
     init(
-        firstCategoryType: CategoryType,
-        genreService: GenreServiceType = GenreService()
+        firstCategoryType: CategoryType
     ) {
         self.firstCategoryType = firstCategoryType
-        self.genreService = genreService
 
         loadPopularBooks()
     }
@@ -50,8 +47,8 @@ final class SubcategoryViewModel {
     func loadPopularBooks() {
         Task {
             do {
-                let books = try await genreService.getThisWeekTrend(with:
-                        .init(genreCode: "13", pageNo: "1", pageSize: "10")
+                let books = try await GenreService.getThisWeekTrend(
+                    with: .init(genreCode: "13", pageNo: "1", pageSize: "10")
                 )
                 print(books)
             } catch {

@@ -23,7 +23,7 @@ final class ServerRequestInterceptor: RequestInterceptor {
         guard let accessToken = KeychainManager.shared.read(key: TokenKey.accessToken),
               let _ = KeychainManager.shared.read(key: TokenKey.refreshToken) else {
             // TODO: 키체인에 토큰 존재하지 않을 시 에러 - ex. 로그아웃
-            print("토큰 없음!")
+            debugPrint("토큰 없음 - 요청 불가")
             return
         }
 
