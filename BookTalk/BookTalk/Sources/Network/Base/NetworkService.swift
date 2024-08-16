@@ -21,14 +21,20 @@ protocol NetworkServiceType {
 
 final class NetworkService: NetworkServiceType {
 
+    // MARK: - Properties
+
     static let shared = NetworkService()
     private let requestInterceptor: RequestInterceptor
+
+    // MARK: - Initializer
 
     private init(
         requestInterceptor: ServerRequestInterceptor = .init()
     ) {
         self.requestInterceptor = requestInterceptor
     }
+
+    // MARK: - Helpers
 
     func request<T>(
         target: TargetType
@@ -48,25 +54,39 @@ final class NetworkService: NetworkServiceType {
     ) async throws -> BaseResponse<T> {
         let interceptor = withInterceptor ? requestInterceptor : nil
         let dataRequest = createDataRequest(for: target, interceptor: interceptor)
-        let data: Data
+        let response = await dataRequest.validate().serializingData().response
 
-        do {
-            data = try await dataRequest.validate().serializingData().value
-        } catch {
+        switch response.result {
+        case let .success(data):
+            do {
+                updateAccessToken(response.response?.headers)
+
+                let decodedData = try JSONDecoder().decode(BaseResponse<T>.self, from: data)
+                return decodedData
+            } catch {
+                throw NetworkError.decodeError
+            }
+
+        case let .failure(error):
             throw handleNetworkError(error)
         }
-
-        do {
-            let decodedData = try JSONDecoder().decode(BaseResponse<T>.self, from: data)
-            return decodedData
-        } catch {
-            throw NetworkError.decodeError
-        }
-        
     }
 }
 
 extension NetworkService {
+
+    // 요청 성공 시 response의 header로 받은 access token으로 갱신
+    private func updateAccessToken(_ headers: HTTPHeaders?) {
+        guard let headers = headers,
+              let authorizationHeader = headers["Authorization"],
+              authorizationHeader.starts(with: "Bearer ") else {
+            return
+        }
+
+        let newAccessToken = String(authorizationHeader.dropFirst("Bearer ".count))
+        KeychainManager.shared.save(key: TokenKey.accessToken, token: newAccessToken)
+        debugPrint("요청 성공: access token 갱신 완료")
+    }
 
     private func handleNetworkError(_ error: Error) -> NetworkError {
         guard let afError = error.asAFError else { return .unknownError }

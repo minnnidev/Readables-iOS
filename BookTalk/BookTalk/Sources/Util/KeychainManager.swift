@@ -22,7 +22,7 @@ final class KeychainManager {
 
         SecItemDelete(query)
 
-        print("save result of \(key): \(SecItemAdd(query as CFDictionary, nil) == errSecSuccess)")
+        print("키체인 저장 완료: \(key): \(SecItemAdd(query as CFDictionary, nil) == errSecSuccess)")
     }
 
     func read(key: String) -> String? {
