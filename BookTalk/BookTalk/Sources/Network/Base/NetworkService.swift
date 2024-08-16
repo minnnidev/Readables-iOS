@@ -62,6 +62,7 @@ final class NetworkService: NetworkServiceType {
         } catch {
             throw NetworkError.decodeError
         }
+        
     }
 }
 

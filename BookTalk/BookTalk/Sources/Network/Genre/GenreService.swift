@@ -27,7 +27,10 @@ final class GenreService: GenreServiceType {
                 target: GenreTarget.getThisWeekTrend(params: request)
             )
 
-            return result.data.map { $0.toBookModel() }
+            print(result)
+
+            return result.data!.map { $0.toBookModel() }
+
         } catch {
             throw error
         }

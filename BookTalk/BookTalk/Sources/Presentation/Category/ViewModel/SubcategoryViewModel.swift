@@ -33,6 +33,8 @@ final class SubcategoryViewModel {
     ) {
         self.firstCategoryType = firstCategoryType
         self.genreService = genreService
+
+        loadPopularBooks()
     }
 
     // MARK: - Helpers

@@ -35,7 +35,7 @@ struct LoanItemResponseDTO: Decodable {
         case classNm = "class_nm"
         case loanCount = "loan_count"
         case bookImageURL = "bookImageURL"
-        case bookDtlUrl = "bookDtlUrl"
+        case bookDtlUrl
     }
 }
 

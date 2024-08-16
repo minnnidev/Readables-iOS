@@ -19,10 +19,10 @@ protocol TargetType {
 extension TargetType {
 
     var baseURL: URL {
-        return  URL(string: NetworkEnvironment.baseURL)!
+        return URL(string: NetworkEnvironment.baseURL)!
     }
 
     var header: HTTPHeaders? {
-        return ["Content-Type": "application/json"]
+        return nil
     }
 }
