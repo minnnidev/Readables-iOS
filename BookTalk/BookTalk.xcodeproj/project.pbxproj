@@ -42,6 +42,11 @@
 		0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */; };
 		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
 		0579D1BD2C70E5140032AC1C /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1BC2C70E5140032AC1C /* SegmentedProgressBar.swift */; };
+		0579D1BF2C70E5490032AC1C /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1BE2C70E5490032AC1C /* SocialLoginButton.swift */; };
+		0579D1C62C70E5780032AC1C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1C52C70E5780032AC1C /* LoginViewModel.swift */; };
+		0579D1C82C70E57F0032AC1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1C72C70E57F0032AC1C /* LoginViewController.swift */; };
+		0579D1CA2C70E5850032AC1C /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1C92C70E5850032AC1C /* LoginType.swift */; };
+		0579D1CC2C70E58B0032AC1C /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1CB2C70E58B0032AC1C /* OnboardingManager.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -154,6 +159,11 @@
 		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
 		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
 		0579D1BC2C70E5140032AC1C /* SegmentedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressBar.swift; sourceTree = "<group>"; };
+		0579D1BE2C70E5490032AC1C /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
+		0579D1C52C70E5780032AC1C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0579D1C72C70E57F0032AC1C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0579D1C92C70E5850032AC1C /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
+		0579D1CB2C70E58B0032AC1C /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -455,6 +465,7 @@
 		057925442C4FF51400834EC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				0579D1C02C70E55F0032AC1C /* Login */,
 				056F2FEE2C5B4E3600931302 /* MainTab */,
 				056F30472C60D4E400931302 /* BookDetail */,
 				0545432E2C53725200E64948 /* Home */,
@@ -474,6 +485,49 @@
 				0579D10F2C6C9E410032AC1C /* HomeSectionType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		0579D1C02C70E55F0032AC1C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0579D1C42C70E56C0032AC1C /* Manager */,
+				0579D1C32C70E5690032AC1C /* Enum */,
+				0579D1C22C70E5660032AC1C /* View */,
+				0579D1C12C70E5630032AC1C /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0579D1C12C70E5630032AC1C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0579D1C52C70E5780032AC1C /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0579D1C22C70E5660032AC1C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0579D1C72C70E57F0032AC1C /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0579D1C32C70E5690032AC1C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				0579D1C92C70E5850032AC1C /* LoginType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		0579D1C42C70E56C0032AC1C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				0579D1CB2C70E58B0032AC1C /* OnboardingManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		AB0C0F552C5BD557007812C5 /* OpenTalk */ = {
@@ -895,6 +949,7 @@
 				0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */,
 				0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */,
 				0579D1BC2C70E5140032AC1C /* SegmentedProgressBar.swift */,
+				0579D1BE2C70E5490032AC1C /* SocialLoginButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1044,12 +1099,14 @@
 				0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB4CBA5D2C6BAFA5009A2AB6 /* NetworkEnvironment.swift in Sources */,
+				0579D1CA2C70E5850032AC1C /* LoginType.swift in Sources */,
 				AB4CBA6E2C6DE391009A2AB6 /* NetworkError.swift in Sources */,
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				AB0C0F822C5F6E2D007812C5 /* ChatMenuSectionType.swift in Sources */,
+				0579D1CC2C70E58B0032AC1C /* OnboardingManager.swift in Sources */,
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				AB4CBA7B2C6E0755009A2AB6 /* SettingViewModel.swift in Sources */,
@@ -1059,8 +1116,10 @@
 				AB2E7BDA2C53B3F300CE43CB /* SubcategoryViewController.swift in Sources */,
 				AB4CBA562C6B44D7009A2AB6 /* LikedTitleHeaderView.swift in Sources */,
 				AB8205602C6E67850014C5A5 /* LoanItemResponseDTO.swift in Sources */,
+				0579D1C62C70E5780032AC1C /* LoginViewModel.swift in Sources */,
 				051156052C64C73F00230CFE /* BaseCollectionViewCell.swift in Sources */,
 				ABED44132C665DD90073398A /* GoalModel.swift in Sources */,
+				0579D1C82C70E57F0032AC1C /* LoginViewController.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */,
 				056F30502C60D57100931302 /* BookInfoCell.swift in Sources */,
@@ -1069,6 +1128,7 @@
 				AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */,
 				AB4CBA6C2C6DD8E7009A2AB6 /* NetworkService.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
+				0579D1BF2C70E5490032AC1C /* SocialLoginButton.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
 				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
