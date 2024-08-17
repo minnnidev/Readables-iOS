@@ -7,11 +7,11 @@
 
 import Foundation
 
-/// 두 번째 주제 카테고리 섹션 정의
-enum CategorySectionKind {
+/// 두 번째 주제 카테고리뷰 섹션 정의
+enum CategorySectionKind: CaseIterable {
     case banner
     case category
     case allBookButton
-    case newBooks
     case popularBooks
+    case newBooks
 }

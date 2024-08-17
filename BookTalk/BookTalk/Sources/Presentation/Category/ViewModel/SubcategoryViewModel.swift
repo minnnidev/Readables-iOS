@@ -18,10 +18,8 @@ final class SubcategoryViewModel {
 
     // MARK: - Properties
 
-    let sections: [CategorySectionKind] = [.banner, .category, .allBookButton, .popularBooks, .newBooks]
     let newBooks: BooksWithHeader = .init(headerTitle: "신작 도서", books: [])
     var subcategory: Observable<String> = Observable("전체")
-
     var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
 
     private var subcategoryIdx: Int = 0 {

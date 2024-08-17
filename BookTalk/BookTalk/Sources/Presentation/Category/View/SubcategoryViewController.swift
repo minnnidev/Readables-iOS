@@ -95,7 +95,7 @@ final class SubcategoryViewController: BaseViewController {
 extension SubcategoryViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sections.count
+        return CategorySectionKind.allCases.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +103,7 @@ extension SubcategoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = viewModel.sections[indexPath.section]
+        let section = CategorySectionKind.allCases[indexPath.section]
 
         switch section {
         case .banner:
@@ -147,7 +147,9 @@ extension SubcategoryViewController: UITableViewDataSource {
 extension SubcategoryViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch viewModel.sections[indexPath.section] {
+        let section = CategorySectionKind.allCases[indexPath.section]
+
+        switch section {
 
         case .banner:
             return 160
@@ -158,7 +160,9 @@ extension SubcategoryViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch viewModel.sections[indexPath.section] {
+        let section = CategorySectionKind.allCases[indexPath.section]
+
+        switch section {
 
         case .category:
             let viewModel = CategorySelectModalViewModel(
