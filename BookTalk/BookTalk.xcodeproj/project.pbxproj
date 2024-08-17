@@ -47,6 +47,7 @@
 		0579D1C82C70E57F0032AC1C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1C72C70E57F0032AC1C /* LoginViewController.swift */; };
 		0579D1CA2C70E5850032AC1C /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1C92C70E5850032AC1C /* LoginType.swift */; };
 		0579D1CC2C70E58B0032AC1C /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1CB2C70E58B0032AC1C /* OnboardingManager.swift */; };
+		0579D1CF2C70E5F70032AC1C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0579D1CE2C70E5F70032AC1C /* Lottie */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -247,6 +248,7 @@
 				ABED440D2C66549E0073398A /* DGCharts in Frameworks */,
 				AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */,
 				AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */,
+				0579D1CF2C70E5F70032AC1C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -992,6 +994,7 @@
 				ABED440C2C66549E0073398A /* DGCharts */,
 				AB4CBA582C6BADD3009A2AB6 /* Alamofire */,
 				AB4ECF452C70848C00DC24A0 /* Kingfisher */,
+				0579D1CE2C70E5F70032AC1C /* Lottie */,
 			);
 			productName = BookTalk;
 			productReference = AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */;
@@ -1027,6 +1030,7 @@
 				ABED440B2C66549E0073398A /* XCRemoteSwiftPackageReference "Charts" */,
 				AB4CBA572C6BADD3009A2AB6 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AB4ECF442C70848C00DC24A0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0579D1CD2C70E5F70032AC1C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = AB22AD392C4E8D9D00C9A0F3 /* Products */;
 			projectDirPath = "";
@@ -1395,6 +1399,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0579D1CD2C70E5F70032AC1C /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1438,6 +1450,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0579D1CE2C70E5F70032AC1C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0579D1CD2C70E5F70032AC1C /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		AB22AD502C4E92C100C9A0F3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */;
