@@ -9,6 +9,6 @@ import Foundation
 
 struct GenreTrendRequestDTO: Encodable {
     let genreCode: String
-    let pageNo: String
-    let pageSize: String
+    let pageNo: String = "1"
+    let pageSize: String = "10"
 }

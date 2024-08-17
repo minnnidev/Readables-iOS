@@ -56,7 +56,7 @@ final class SubcategoryViewModel {
             Task {
                 do {
                     let popularBooks = try await GenreService.getThisWeekTrend(
-                        with: .init(genreCode: genreCode, pageNo: "1", pageSize: "10")
+                        with: .init(genreCode: genreCode)
                     )
 
                     await MainActor.run {
