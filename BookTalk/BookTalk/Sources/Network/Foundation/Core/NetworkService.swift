@@ -75,7 +75,6 @@ extension NetworkService {
 
         let newAccessToken = String(authorizationHeader.dropFirst("Bearer ".count))
         KeychainManager.shared.save(key: TokenKey.accessToken, token: newAccessToken)
-        debugPrint("요청 성공: access token 갱신 완료")
     }
 
     private func createDataRequest(for endpoint: TargetType) -> DataRequest {
