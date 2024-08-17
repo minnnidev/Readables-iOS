@@ -26,8 +26,12 @@ final class SubcategoryViewModel {
 
     let firstCategoryType: CategoryType
 
-    init(firstCategoryType: CategoryType) {
+    init(
+        firstCategoryType: CategoryType
+    ) {
         self.firstCategoryType = firstCategoryType
+
+        loadPopularBooks()
     }
 
     // MARK: - Helpers
@@ -36,6 +40,20 @@ final class SubcategoryViewModel {
         switch action {
         case let .setSubcategory(subcategoryName):
             subcategory.value = subcategoryName
+        }
+    }
+
+    // TODO: 수정
+    func loadPopularBooks() {
+        Task {
+            do {
+                let books = try await GenreService.getThisWeekTrend(
+                    with: .init(genreCode: "13", pageNo: "1", pageSize: "10")
+                )
+                print(books)
+            } catch let error as NetworkError {
+                print("Error: \(error.localizedDescription)")
+            }
         }
     }
 }
