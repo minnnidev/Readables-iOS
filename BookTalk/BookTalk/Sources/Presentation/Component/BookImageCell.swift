@@ -20,7 +20,7 @@ final class BookImageCell: BaseCollectionViewCell {
         contentView.backgroundColor = .clear
 
         bookImageView.do {
-            $0.backgroundColor = .gray100
+            $0.backgroundColor = .clear
         }
 
         bookNameLabel.do {
