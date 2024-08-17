@@ -12,7 +12,7 @@ final class SubcategoryViewModel {
     // MARK: - Actions
 
     enum Action {
-        case setSubcategory(subcategoryName: String)
+        case setSubcategory(subcategoryIndex: Int)
     }
 
     // MARK: - Properties
@@ -38,8 +38,8 @@ final class SubcategoryViewModel {
 
     func send(action: Action) {
         switch action {
-        case let .setSubcategory(subcategoryName):
-            subcategory.value = subcategoryName
+        case let .setSubcategory(subcategoryIndex):
+            subcategory.value = firstCategoryType.subcategories[subcategoryIndex]
         }
     }
 
@@ -50,10 +50,14 @@ final class SubcategoryViewModel {
                 let books = try await GenreService.getThisWeekTrend(
                     with: .init(genreCode: "13", pageNo: "1", pageSize: "10")
                 )
-                print(books)
+
             } catch let error as NetworkError {
                 print("Error: \(error.localizedDescription)")
             }
         }
+    }
+
+    private func getGenreCode(_ firstCategoryCode: Int, _ subcategoryIndex: Int) -> String {
+        return "\(firstCategoryCode)\(subcategoryIndex)"
     }
 }

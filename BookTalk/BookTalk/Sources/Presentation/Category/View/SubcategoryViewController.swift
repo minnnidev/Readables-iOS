@@ -177,7 +177,7 @@ extension SubcategoryViewController: UITableViewDelegate {
 
 extension SubcategoryViewController: CategorySelectModalViewControllerDelegate {
 
-    func subcategorySelected(subcategory: String) {
-        viewModel.send(action: .setSubcategory(subcategoryName: subcategory))
+    func subcategorySelected(subcategoryIndex: Int) {
+        viewModel.send(action: .setSubcategory(subcategoryIndex: subcategoryIndex))
     }
 }
