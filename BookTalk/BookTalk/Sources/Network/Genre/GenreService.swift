@@ -9,12 +9,20 @@ import Foundation
 
 struct GenreService {
 
-    static func getThisWeekTrend(with request: GenreTrendRequestDTO) async throws -> [Book] {
+    static func getThisWeekTrend(with requestDTO: GenreTrendRequestDTO) async throws -> [Book] {
         let result: [LoanItemResponseDTO] = try await NetworkService.shared.request(
-            target: GenreTarget.getThisWeekTrend(params: request)
-        ) 
+            target: GenreTarget.getThisWeekTrend(params: requestDTO)
+        )
 
         return result.map { $0.toBookModel() } 
+    }
+
+    static func getNewTrend(with requestDTO: GenreTrendRequestDTO) async throws -> [Book] {
+        let result: [LoanItemResponseDTO] = try await NetworkService.shared.request(
+            target: GenreTarget.getNewTrend(params: requestDTO)
+        )
+
+        return result.map { $0.toBookModel() }
     }
 }
 

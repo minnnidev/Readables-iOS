@@ -73,7 +73,25 @@ final class SubcategoryViewModel {
 
         case let .loadSubcategoryNewBooks(subcategoryIdx):
             newBooks.value.headerTitle = "새로 나온 책들을 확인해 보세요!"
-            return
+
+            let genreCode = getGenreCode(
+                firstCategoryType.rawValue, subcategoryIdx
+            )
+
+            Task {
+                do {
+                    let newBooks = try await GenreService.getNewTrend(
+                        with: .init(genreCode: genreCode)
+                    )
+
+                    await MainActor.run {
+                        self.newBooks.value.books = newBooks
+                    }
+
+                } catch let error as NetworkError {
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
         }
     }
 
