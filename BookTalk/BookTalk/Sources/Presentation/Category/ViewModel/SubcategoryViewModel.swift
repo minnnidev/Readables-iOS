@@ -12,7 +12,7 @@ final class SubcategoryViewModel {
     // MARK: - Actions
 
     enum Action {
-        case setSubcategory(subcategoryIndex: Int)
+        case setSubcategory(subcategoryIdx: Int)
         case loadSubcategoryBooks(subcategoryIdx: Int)
     }
 

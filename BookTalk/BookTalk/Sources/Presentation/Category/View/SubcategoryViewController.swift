@@ -36,7 +36,7 @@ final class SubcategoryViewController: BaseViewController {
         registerCell()
         bind()
 
-        viewModel.send(action: .setSubcategory(subcategoryIndex: 0))
+        viewModel.send(action: .setSubcategory(subcategoryIdx: 0))
     }
 
     // MARK: - Helpers
@@ -180,6 +180,6 @@ extension SubcategoryViewController: UITableViewDelegate {
 extension SubcategoryViewController: CategorySelectModalViewControllerDelegate {
 
     func subcategorySelected(subcategoryIndex: Int) {
-        viewModel.send(action: .setSubcategory(subcategoryIndex: subcategoryIndex))
+        viewModel.send(action: .setSubcategory(subcategoryIdx: subcategoryIndex))
     }
 }
