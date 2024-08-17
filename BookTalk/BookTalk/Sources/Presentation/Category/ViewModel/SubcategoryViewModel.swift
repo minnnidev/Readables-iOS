@@ -19,9 +19,10 @@ final class SubcategoryViewModel {
     // MARK: - Properties
 
     let sections: [CategorySectionKind] = [.banner, .category, .allBookButton, .popularBooks, .newBooks]
-    let popularBooks: BooksWithHeader = .init(headerTitle: "7월 4주차 TOP 10", books: [])
     let newBooks: BooksWithHeader = .init(headerTitle: "신작 도서", books: [])
     var subcategory: Observable<String> = Observable("전체")
+
+    var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "인기 도서", books: []))
 
     private var subcategoryIdx: Int = 0 {
         didSet {
@@ -54,11 +55,13 @@ final class SubcategoryViewModel {
 
             Task {
                 do {
-                    let books = try await GenreService.getThisWeekTrend(
+                    let popularBooks = try await GenreService.getThisWeekTrend(
                         with: .init(genreCode: genreCode, pageNo: "1", pageSize: "10")
                     )
 
-                    print(books)
+                    await MainActor.run {
+                        self.popularBooks.value.books = popularBooks
+                    }
 
                 } catch let error as NetworkError {
                     print("Error: \(error.localizedDescription)")

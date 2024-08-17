@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 protocol BookWithHeaderCellDelegate: AnyObject {
     func bookImageTapped()
 }
@@ -17,6 +19,7 @@ final class BookWithHeaderCell: BaseTableViewCell {
 
     private let headerLabel = UILabel()
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private var books = [Book]()
 
     weak var delegate: BookWithHeaderCellDelegate?
 
@@ -41,13 +44,14 @@ final class BookWithHeaderCell: BaseTableViewCell {
         contentView.backgroundColor = .clear
 
         headerLabel.do {
+            $0.text = "7월 4주차 인기도서"
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
         }
 
         bookCollectionView.do {
             let flowLayout: UICollectionViewFlowLayout = .init()
             flowLayout.scrollDirection = .horizontal
-
+            
             $0.collectionViewLayout = flowLayout
             $0.backgroundColor = .clear
             $0.showsHorizontalScrollIndicator = false
@@ -69,7 +73,7 @@ final class BookWithHeaderCell: BaseTableViewCell {
         bookCollectionView.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(208)
+            $0.height.equalTo(220)
             $0.bottom.equalToSuperview().offset(-16)
         }
     }
@@ -87,8 +91,9 @@ final class BookWithHeaderCell: BaseTableViewCell {
 
     func bind(_ model: BooksWithHeader) {
         headerLabel.text = "\(model.headerTitle)"
+        books = model.books
 
-        // TODO: image bind
+        bookCollectionView.reloadData()
     }
 }
 
@@ -98,7 +103,7 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 10
+        return books.count
     }
 
     func collectionView(
@@ -109,6 +114,8 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
             withReuseIdentifier: BookImageCell.identifier,
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
+
+        cell.bind(with: books[indexPath.row])
 
         return cell
     }

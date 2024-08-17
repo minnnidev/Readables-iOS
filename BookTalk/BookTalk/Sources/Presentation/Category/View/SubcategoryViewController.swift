@@ -83,6 +83,10 @@ final class SubcategoryViewController: BaseViewController {
         viewModel.subcategory.subscribe { [weak self] _ in
             self?.subcategoryTableView.reloadData()
         }
+
+        viewModel.popularBooks.subscribe { [weak self] _ in
+            self?.subcategoryTableView.reloadData()
+        }
     }
 }
 
@@ -123,10 +127,14 @@ extension SubcategoryViewController: UITableViewDataSource {
 
             return cell
 
-        case .newBooks, .popularBooks:
+        case .popularBooks:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
-            cell.bind(section == .newBooks ? viewModel.newBooks : viewModel.popularBooks)
+            cell.bind(viewModel.popularBooks.value)
+            return cell
+
+        case .newBooks:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
             return cell
         }

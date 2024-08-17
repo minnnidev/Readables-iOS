@@ -38,6 +38,7 @@ final class BookImageCell: BaseCollectionViewCell {
 
         bookImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(150)
         }
 
         bookNameLabel.snp.makeConstraints {
@@ -45,5 +46,12 @@ final class BookImageCell: BaseCollectionViewCell {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+    }
+
+    func bind(with book: Book) {
+        guard let url = URL(string: book.imageURL) else { return }
+
+        bookImageView.kf.setImage(with: url)
+        bookNameLabel.text = book.title
     }
 }
