@@ -49,6 +49,7 @@
 		0579D1CC2C70E58B0032AC1C /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1CB2C70E58B0032AC1C /* OnboardingManager.swift */; };
 		0579D1CF2C70E5F70032AC1C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0579D1CE2C70E5F70032AC1C /* Lottie */; };
 		0579D1D12C70E6140032AC1C /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1D02C70E6140032AC1C /* WaveView.swift */; };
+		0579D1D32C70E7070032AC1C /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 0579D1D22C70E7070032AC1C /* login.json */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -167,6 +168,7 @@
 		0579D1C92C70E5850032AC1C /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		0579D1CB2C70E58B0032AC1C /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		0579D1D02C70E6140032AC1C /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
+		0579D1D22C70E7070032AC1C /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 		057925182C4F927C00834EC6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0579D1D22C70E7070032AC1C /* login.json */,
 				AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */,
 				AB22AD462C4E8D9F00C9A0F3 /* LaunchScreen.storyboard */,
 			);
@@ -1051,6 +1054,7 @@
 			files = (
 				AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */,
 				AB22AD482C4E8D9F00C9A0F3 /* Base in Resources */,
+				0579D1D32C70E7070032AC1C /* login.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
