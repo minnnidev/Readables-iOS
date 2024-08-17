@@ -24,7 +24,6 @@ final class BookImageCell: BaseCollectionViewCell {
         }
 
         bookNameLabel.do {
-            $0.text = "당신도논리적으로말할수있습니다줄바꿈테스트"
             $0.font = .systemFont(ofSize: 15, weight: .semibold)
             $0.lineBreakMode = .byTruncatingTail
             $0.numberOfLines = 2

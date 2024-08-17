@@ -22,7 +22,7 @@ final class SubcategoryViewModel {
     let newBooks: BooksWithHeader = .init(headerTitle: "신작 도서", books: [])
     var subcategory: Observable<String> = Observable("전체")
 
-    var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "인기 도서", books: []))
+    var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
 
     private var subcategoryIdx: Int = 0 {
         didSet {
@@ -49,6 +49,9 @@ final class SubcategoryViewModel {
             subcategory.value = firstCategoryType.subcategories[subcategoryIndex]
 
         case let .loadSubcategoryBooks(subcategoryIdx):
+            let (month, week) = Date().currentWeekOfMonth()
+            popularBooks.value.headerTitle = "\(month)월 \(week)주차 TOP 10"
+
             let genreCode = getGenreCode(
                 firstCategoryType.rawValue, subcategoryIdx
             )

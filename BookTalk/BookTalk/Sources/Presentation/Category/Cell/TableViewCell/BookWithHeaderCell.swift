@@ -44,7 +44,6 @@ final class BookWithHeaderCell: BaseTableViewCell {
         contentView.backgroundColor = .clear
 
         headerLabel.do {
-            $0.text = "7월 4주차 인기도서"
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
         }
 
