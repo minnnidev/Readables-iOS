@@ -41,6 +41,7 @@
 		0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */; };
 		0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */; };
 		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
+		0579D1BD2C70E5140032AC1C /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1BC2C70E5140032AC1C /* SegmentedProgressBar.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -152,6 +153,7 @@
 		0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
 		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
+		0579D1BC2C70E5140032AC1C /* SegmentedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressBar.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 				AB2E7BE92C53D69600CE43CB /* BookImageCell.swift */,
 				0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */,
 				0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */,
+				0579D1BC2C70E5140032AC1C /* SegmentedProgressBar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 				AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */,
 				ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */,
 				0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */,
+				0579D1BD2C70E5140032AC1C /* SegmentedProgressBar.swift in Sources */,
 				0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
