@@ -51,7 +51,7 @@ final class SubcategoryViewModel {
                     with: .init(genreCode: "13", pageNo: "1", pageSize: "10")
                 )
                 print(books)
-            } catch {
+            } catch let error as NetworkError {
                 print("Error: \(error.localizedDescription)")
             }
         }

@@ -10,18 +10,11 @@ import Foundation
 struct GenreService {
 
     static func getThisWeekTrend(with request: GenreTrendRequestDTO) async throws -> [Book] {
-        do {
-            let result: BaseResponse<[LoanItemResponseDTO]> = try await NetworkService.shared.request(
-                target: GenreTarget.getThisWeekTrend(params: request)
-            )
+        let result: [LoanItemResponseDTO] = try await NetworkService.shared.request(
+            target: GenreTarget.getThisWeekTrend(params: request)
+        ) 
 
-            return result
-                .data?
-                .compactMap { $0.toBookModel() } ?? []
-
-        } catch {
-            throw error
-        }
+        return result.map { $0.toBookModel() } 
     }
 }
 
