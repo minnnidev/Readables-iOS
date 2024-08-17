@@ -12,11 +12,7 @@ import Alamofire
 protocol NetworkServiceType {
     func request<T: Decodable>(
         target: TargetType
-    ) async throws -> BaseResponse<T>
-
-    func requestWithoutInterceptor<T: Decodable>(
-        target: TargetType
-    ) async throws -> BaseResponse<T>
+    ) async throws -> T
 }
 
 final class NetworkService: NetworkServiceType {
@@ -31,38 +27,38 @@ final class NetworkService: NetworkServiceType {
 
     // MARK: - Helpers
 
-    func request<T>(
-        target: TargetType
-    ) async throws -> BaseResponse<T> {
-        return try await request(target: target, withInterceptor: true)
-    }
+    func request<T: Decodable>(target: TargetType) async throws -> T {
+        let dataRequest = createDataRequest(for: target)
+        let response = await dataRequest.serializingData().response
+        
+        guard response.response != nil,
+              let data = response.data else {
+            throw NetworkError.invalidResponse
+        }
 
-    func requestWithoutInterceptor<T>(
-        target: TargetType
-    ) async throws -> BaseResponse<T> {
-        return try await request(target: target, withInterceptor: false)
-    }
+        do {
+            let decodedData = try JSONDecoder().decode(BaseResponse<T>.self, from: data)
 
-    private func request<T>(
-        target: TargetType,
-        withInterceptor: Bool
-    ) async throws -> BaseResponse<T> {
-        let dataRequest = createDataRequest(for: target, withInterceptor: withInterceptor)
-        let response = await dataRequest.validate().serializingData().response
-
-        switch response.result {
-        case let .success(data):
-            do {
+            switch decodedData.statusCode {
+            case 200:
                 updateAccessToken(response.response?.headers)
 
-                let decodedData = try JSONDecoder().decode(BaseResponse<T>.self, from: data)
-                return decodedData
-            } catch {
-                throw NetworkError.decodeError
-            }
+                guard let result = decodedData.data else {
+                    throw NetworkError.invalidResponse
+                }
 
-        case let .failure(error):
-            throw handleNetworkError(error)
+                return result
+
+            default:
+                throw NetworkError.invalidStatusCode(
+                    statusCode: decodedData.statusCode,
+                    message: decodedData.message
+                )
+            }
+        } catch is DecodingError {
+            throw NetworkError.decodeError
+        } catch {
+            throw error
         }
     }
 }
@@ -82,27 +78,9 @@ extension NetworkService {
         debugPrint("요청 성공: access token 갱신 완료")
     }
 
-    private func handleNetworkError(_ error: Error) -> NetworkError {
-        guard let afError = error.asAFError else { return .unknownError }
-
-        switch afError {
-        case .invalidURL:
-            return .invalidURL
-        case .responseValidationFailed(reason: .unacceptableStatusCode(let code)):
-            return .invalidStatusCode(statusCode: code)
-        case .sessionTaskFailed:
-            return .serverUnavailable
-        default:
-            return .unknownError
-        }
-    }
-
-    private func createDataRequest(
-        for endpoint: TargetType,
-        withInterceptor: Bool
-    ) -> DataRequest {
+    private func createDataRequest(for endpoint: TargetType) -> DataRequest {
         let url = endpoint.baseURL.appendingPathComponent(endpoint.path)
-        let interceptor = withInterceptor ? ServerRequestInterceptor() : nil
+        let interceptor = ServerRequestInterceptor()
 
         switch endpoint.task {
         case .requestPlain:
@@ -132,6 +110,10 @@ extension NetworkService {
                 headers: endpoint.header,
                 interceptor: interceptor
             )
+
+        case .requestWithoutInterceptor:
+            // TODO: - 인터셉터 없는 request 형식 추가
+            return AF.request(url)
         }
     }
 }

@@ -10,8 +10,8 @@ import Foundation
 enum NetworkError: Error {
     case invalidURL
     case decodeError
-    case invalidRequest
-    case invalidStatusCode(statusCode: Int)
+    case invalidResponse
+    case invalidStatusCode(statusCode: Int, message: String?)
     case serverUnavailable
     case unknownError
 }
@@ -20,9 +20,9 @@ extension NetworkError {
     
     var errorMessage: String {
         switch self {
-        case .invalidRequest:
+        case .invalidResponse:
             return "잘못된 요청입니다. 다시 시도해 주세요."
-        case let .invalidStatusCode(statusCode):
+        case let .invalidStatusCode(statusCode, _):
             return "서버에서 응답을 제대로 받지 못했어요. 잠시 후 다시 시도해 주세요. (오류 코드: \(statusCode))"
         case .serverUnavailable:
             return "서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요."
@@ -37,10 +37,10 @@ extension NetworkError {
             return "URL 오류"
         case .decodeError:
             return "디코딩 오류"
-        case .invalidRequest:
+        case .invalidResponse:
             return "요청 오류"
-        case let .invalidStatusCode(statusCode):
-            return "오류 코드: \(statusCode)"
+        case let .invalidStatusCode(statusCode, message):
+            return "\(statusCode), \(message ?? "")"
         case .serverUnavailable:
             return "서버에 연결 불가능"
         case .unknownError:
