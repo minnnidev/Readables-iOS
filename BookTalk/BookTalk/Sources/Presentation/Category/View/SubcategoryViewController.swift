@@ -35,6 +35,8 @@ final class SubcategoryViewController: BaseViewController {
         setCollectionView()
         registerCell()
         bind()
+
+        viewModel.send(action: .setSubcategory(subcategoryIdx: 0))
     }
 
     // MARK: - Helpers
@@ -81,6 +83,10 @@ final class SubcategoryViewController: BaseViewController {
         viewModel.subcategory.subscribe { [weak self] _ in
             self?.subcategoryTableView.reloadData()
         }
+
+        viewModel.popularBooks.subscribe { [weak self] _ in
+            self?.subcategoryTableView.reloadData()
+        }
     }
 }
 
@@ -89,7 +95,7 @@ final class SubcategoryViewController: BaseViewController {
 extension SubcategoryViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sections.count
+        return CategorySectionKind.allCases.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,7 +103,7 @@ extension SubcategoryViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = viewModel.sections[indexPath.section]
+        let section = CategorySectionKind.allCases[indexPath.section]
 
         switch section {
         case .banner:
@@ -121,10 +127,14 @@ extension SubcategoryViewController: UITableViewDataSource {
 
             return cell
 
-        case .newBooks, .popularBooks:
+        case .popularBooks:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
-            cell.bind(section == .newBooks ? viewModel.newBooks : viewModel.popularBooks)
+            cell.bind(viewModel.popularBooks.value)
+            return cell
+
+        case .newBooks:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
             return cell
         }
@@ -137,7 +147,9 @@ extension SubcategoryViewController: UITableViewDataSource {
 extension SubcategoryViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch viewModel.sections[indexPath.section] {
+        let section = CategorySectionKind.allCases[indexPath.section]
+
+        switch section {
 
         case .banner:
             return 160
@@ -148,7 +160,9 @@ extension SubcategoryViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch viewModel.sections[indexPath.section] {
+        let section = CategorySectionKind.allCases[indexPath.section]
+
+        switch section {
 
         case .category:
             let viewModel = CategorySelectModalViewModel(
@@ -177,7 +191,7 @@ extension SubcategoryViewController: UITableViewDelegate {
 
 extension SubcategoryViewController: CategorySelectModalViewControllerDelegate {
 
-    func subcategorySelected(subcategory: String) {
-        viewModel.send(action: .setSubcategory(subcategoryName: subcategory))
+    func subcategorySelected(subcategoryIndex: Int) {
+        viewModel.send(action: .setSubcategory(subcategoryIdx: subcategoryIndex))
     }
 }

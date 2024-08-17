@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CategorySelectModalViewControllerDelegate: AnyObject {
-    func subcategorySelected(subcategory: String)
+    func subcategorySelected(subcategoryIndex: Int)
 }
 
 final class CategorySelectModalViewController: BaseViewController {
@@ -146,7 +146,7 @@ final class CategorySelectModalViewController: BaseViewController {
     }
 
     @objc private func completeButtonDidTapped() {
-        delegate?.subcategorySelected(subcategory: viewModel.selectedSubcategory ?? "전체")
+        delegate?.subcategorySelected(subcategoryIndex: viewModel.subcategoryIndex ?? 0)
         dismiss(animated: true)
     }
 }

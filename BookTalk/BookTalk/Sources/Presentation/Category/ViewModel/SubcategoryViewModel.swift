@@ -12,15 +12,21 @@ final class SubcategoryViewModel {
     // MARK: - Actions
 
     enum Action {
-        case setSubcategory(subcategoryName: String)
+        case setSubcategory(subcategoryIdx: Int)
+        case loadSubcategoryBooks(subcategoryIdx: Int)
     }
 
     // MARK: - Properties
 
-    let sections: [CategorySectionKind] = [.banner, .category, .allBookButton, .popularBooks, .newBooks]
-    let popularBooks: BooksWithHeader = .init(headerTitle: "7월 4주차 TOP 10", books: [])
     let newBooks: BooksWithHeader = .init(headerTitle: "신작 도서", books: [])
-    var subcategory = Observable("전체")
+    var subcategory: Observable<String> = Observable("전체")
+    var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
+
+    private var subcategoryIdx: Int = 0 {
+        didSet {
+            send(action: .loadSubcategoryBooks(subcategoryIdx: subcategoryIdx))
+        }
+    }
 
     // MARK: - Initializer
 
@@ -30,30 +36,42 @@ final class SubcategoryViewModel {
         firstCategoryType: CategoryType
     ) {
         self.firstCategoryType = firstCategoryType
-
-        loadPopularBooks()
     }
 
     // MARK: - Helpers
 
     func send(action: Action) {
         switch action {
-        case let .setSubcategory(subcategoryName):
-            subcategory.value = subcategoryName
+        case let .setSubcategory(subcategoryIndex):
+            subcategoryIdx = subcategoryIndex
+            subcategory.value = firstCategoryType.subcategories[subcategoryIndex]
+
+        case let .loadSubcategoryBooks(subcategoryIdx):
+            let (month, week) = Date().currentWeekOfMonth()
+            popularBooks.value.headerTitle = "\(month)월 \(week)주차 TOP 10"
+
+            let genreCode = getGenreCode(
+                firstCategoryType.rawValue, subcategoryIdx
+            )
+
+            Task {
+                do {
+                    let popularBooks = try await GenreService.getThisWeekTrend(
+                        with: .init(genreCode: genreCode)
+                    )
+
+                    await MainActor.run {
+                        self.popularBooks.value.books = popularBooks
+                    }
+
+                } catch let error as NetworkError {
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
         }
     }
 
-    // TODO: 수정
-    func loadPopularBooks() {
-        Task {
-            do {
-                let books = try await GenreService.getThisWeekTrend(
-                    with: .init(genreCode: "13", pageNo: "1", pageSize: "10")
-                )
-                print(books)
-            } catch let error as NetworkError {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+    private func getGenreCode(_ firstCategoryCode: Int, _ subcategoryIndex: Int) -> String {
+        return "\(firstCategoryCode)\(subcategoryIndex)"
     }
 }

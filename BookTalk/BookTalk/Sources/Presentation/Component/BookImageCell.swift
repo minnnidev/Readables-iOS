@@ -20,11 +20,10 @@ final class BookImageCell: BaseCollectionViewCell {
         contentView.backgroundColor = .clear
 
         bookImageView.do {
-            $0.backgroundColor = .gray100
+            $0.backgroundColor = .clear
         }
 
         bookNameLabel.do {
-            $0.text = "당신도논리적으로말할수있습니다줄바꿈테스트"
             $0.font = .systemFont(ofSize: 15, weight: .semibold)
             $0.lineBreakMode = .byTruncatingTail
             $0.numberOfLines = 2
@@ -38,6 +37,7 @@ final class BookImageCell: BaseCollectionViewCell {
 
         bookImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(150)
         }
 
         bookNameLabel.snp.makeConstraints {
@@ -45,5 +45,12 @@ final class BookImageCell: BaseCollectionViewCell {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+    }
+
+    func bind(with book: Book) {
+        guard let url = URL(string: book.imageURL) else { return }
+
+        bookImageView.kf.setImage(with: url)
+        bookNameLabel.text = book.title
     }
 }

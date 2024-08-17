@@ -8,7 +8,7 @@
 import Foundation
 
 struct BooksWithHeader {
-    let headerTitle: String
+    var headerTitle: String
     var books: [Book]
 }
 
