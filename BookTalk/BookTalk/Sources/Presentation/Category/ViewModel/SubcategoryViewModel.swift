@@ -13,6 +13,7 @@ final class SubcategoryViewModel {
 
     enum Action {
         case setSubcategory(subcategoryIndex: Int)
+        case loadSubcategoryBooks(subcategoryIdx: Int)
     }
 
     // MARK: - Properties
@@ -20,7 +21,13 @@ final class SubcategoryViewModel {
     let sections: [CategorySectionKind] = [.banner, .category, .allBookButton, .popularBooks, .newBooks]
     let popularBooks: BooksWithHeader = .init(headerTitle: "7월 4주차 TOP 10", books: [])
     let newBooks: BooksWithHeader = .init(headerTitle: "신작 도서", books: [])
-    var subcategory = Observable("전체")
+    var subcategory: Observable<String> = Observable("전체")
+
+    private var subcategoryIdx: Int = 0 {
+        didSet {
+            send(action: .loadSubcategoryBooks(subcategoryIdx: subcategoryIdx))
+        }
+    }
 
     // MARK: - Initializer
 
@@ -30,8 +37,6 @@ final class SubcategoryViewModel {
         firstCategoryType: CategoryType
     ) {
         self.firstCategoryType = firstCategoryType
-
-        loadPopularBooks()
     }
 
     // MARK: - Helpers
@@ -39,20 +44,25 @@ final class SubcategoryViewModel {
     func send(action: Action) {
         switch action {
         case let .setSubcategory(subcategoryIndex):
+            subcategoryIdx = subcategoryIndex
             subcategory.value = firstCategoryType.subcategories[subcategoryIndex]
-        }
-    }
 
-    // TODO: 수정
-    func loadPopularBooks() {
-        Task {
-            do {
-                let books = try await GenreService.getThisWeekTrend(
-                    with: .init(genreCode: "13", pageNo: "1", pageSize: "10")
-                )
+        case let .loadSubcategoryBooks(subcategoryIdx):
+            let genreCode = getGenreCode(
+                firstCategoryType.rawValue, subcategoryIdx
+            )
 
-            } catch let error as NetworkError {
-                print("Error: \(error.localizedDescription)")
+            Task {
+                do {
+                    let books = try await GenreService.getThisWeekTrend(
+                        with: .init(genreCode: genreCode, pageNo: "1", pageSize: "10")
+                    )
+
+                    print(books)
+
+                } catch let error as NetworkError {
+                    print("Error: \(error.localizedDescription)")
+                }
             }
         }
     }

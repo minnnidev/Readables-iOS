@@ -35,6 +35,8 @@ final class SubcategoryViewController: BaseViewController {
         setCollectionView()
         registerCell()
         bind()
+
+        viewModel.send(action: .setSubcategory(subcategoryIndex: 0))
     }
 
     // MARK: - Helpers
