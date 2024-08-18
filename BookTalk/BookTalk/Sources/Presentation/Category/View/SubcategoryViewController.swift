@@ -192,7 +192,9 @@ extension SubcategoryViewController: UITableViewDelegate {
             present(modalViewController, animated: true)
 
         case .allBookButton:
-            let viewModel = AllBooksViewModel(genreCode: "")
+            let viewModel = AllBooksViewModel(
+                genreCode: "\(viewModel.firstCategoryType.rawValue)\(viewModel.subcategoryIdx)"
+            )
             let allBooksViewController = AllBooksViewController(viewModel: viewModel)
 
             allBooksViewController.hidesBottomBarWhenPushed = true
