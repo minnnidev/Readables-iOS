@@ -13,7 +13,7 @@ final class SubcategoryViewModel {
 
     enum Action {
         case setSubcategory(subcategoryIdx: Int)
-        case loadSubcategoryBooks(subcategoryIdx: Int)
+        case loadPopularBooks(subcategoryIdx: Int)
     }
 
     // MARK: - Properties
@@ -24,7 +24,7 @@ final class SubcategoryViewModel {
 
     private var subcategoryIdx: Int = 0 {
         didSet {
-            send(action: .loadSubcategoryBooks(subcategoryIdx: subcategoryIdx))
+            send(action: .loadPopularBooks(subcategoryIdx: subcategoryIdx))
         }
     }
 
@@ -46,7 +46,7 @@ final class SubcategoryViewModel {
             subcategoryIdx = subcategoryIndex
             subcategory.value = firstCategoryType.subcategories[subcategoryIndex]
 
-        case let .loadSubcategoryBooks(subcategoryIdx):
+        case let .loadPopularBooks(subcategoryIdx):
             let (month, week) = Date().currentWeekOfMonth()
             popularBooks.value.headerTitle = "\(month)월 \(week)주차 TOP 10"
 
