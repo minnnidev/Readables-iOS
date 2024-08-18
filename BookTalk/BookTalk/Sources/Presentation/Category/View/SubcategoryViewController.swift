@@ -84,12 +84,24 @@ final class SubcategoryViewController: BaseViewController {
             self?.subcategoryTableView.reloadData()
         }
 
-        viewModel.popularBooks.subscribe { [weak self] _ in
-            self?.subcategoryTableView.reloadData()
+        viewModel.popularBooks.subscribe { _ in
+            Task { [weak self] in
+                await MainActor.run {
+                    self?.subcategoryTableView.reloadSections(
+                        IndexSet(integer: CategorySectionKind.popularBooks.rawValue), with: .fade
+                    )
+                }
+            }
         }
 
-        viewModel.newBooks.subscribe { [weak self] _ in
-            self?.subcategoryTableView.reloadData()
+        viewModel.newBooks.subscribe { _ in
+            Task { [weak self] in
+                await MainActor.run {
+                    self?.subcategoryTableView.reloadSections(
+                        IndexSet(integer: CategorySectionKind.newBooks.rawValue), with: .automatic
+                    )
+                }
+            }
         }
     }
 }
