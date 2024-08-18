@@ -35,6 +35,9 @@ final class AllBooksViewController: BaseViewController {
 
         registerCell()
         setCollectionView()
+        bind()
+
+        viewModel.send(action: .sort(.popularityPerWeek))
     }
 
     // MARK: - UI Setup
@@ -65,6 +68,8 @@ final class AllBooksViewController: BaseViewController {
         booksCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .vertical
+            flowLayout.minimumLineSpacing = 24
+            flowLayout.minimumInteritemSpacing = 8
 
             $0.collectionViewLayout = flowLayout
             $0.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -126,6 +131,24 @@ final class AllBooksViewController: BaseViewController {
 
         return actions
     }
+
+    private func bind() {
+        viewModel.books.subscribe { books in
+            Task { [weak self] in
+                await MainActor.run {
+                    self?.booksCollectionView.reloadData()
+
+                    guard books.count > 0 else { return }
+
+                    self?.booksCollectionView.scrollToItem(
+                        at: IndexPath(item: 0, section: 0),
+                        at: .top,
+                        animated: false
+                    )
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -136,7 +159,7 @@ extension AllBooksViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 50
+        return viewModel.books.value.count
     }
 
     func collectionView(
@@ -148,6 +171,7 @@ extension AllBooksViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
+        cell.bind(with: viewModel.books.value[indexPath.row])
         return cell
     }
 }
@@ -163,21 +187,5 @@ extension AllBooksViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         let width = (ScreenSize.width-36) / 3
         return CGSize(width: width, height: 208)
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 24
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 8
     }
 }
