@@ -192,9 +192,11 @@ extension SubcategoryViewController: UITableViewDelegate {
             present(modalViewController, animated: true)
 
         case .allBookButton:
-            let thirdCategoryViewController = AllBooksViewController()
-            thirdCategoryViewController.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(thirdCategoryViewController, animated: true)
+            let viewModel = AllBooksViewModel(genreCode: "")
+            let allBooksViewController = AllBooksViewController(viewModel: viewModel)
+
+            allBooksViewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(allBooksViewController, animated: true)
 
         case .banner, .newBooks, .popularBooks:
             return

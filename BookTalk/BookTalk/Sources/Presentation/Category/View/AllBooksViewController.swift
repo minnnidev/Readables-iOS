@@ -14,9 +14,20 @@ final class AllBooksViewController: BaseViewController {
     private let sortView = UIView()
     private let sortButton = UIButton()
     private let booksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private let viewModel: AllBooksViewModel
 
-    private let viewModel = AllBooksViewModel()
+    // MARK: - Initializer
 
+    init(viewModel: AllBooksViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {

@@ -9,6 +9,18 @@ import Foundation
 
 final class AllBooksViewModel {
 
+    // MARK: - Properties
+
+    private let genreCode: String
+
+    // MARK: - Initializer
+
+    init(genreCode: String) {
+        self.genreCode = genreCode
+    }
+
+    // MARK: - Helpers
+
     enum Action {
         case sort(_ sortType: BookSortType)
     }
