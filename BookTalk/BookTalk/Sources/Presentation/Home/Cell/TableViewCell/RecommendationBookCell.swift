@@ -30,9 +30,10 @@ final class RecommendationBookCell: BaseTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.estimatedItemSize = CGSize(width: 110, height: 160)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.contentInset = .init(top: 0, left: 15, bottom: 15, right: 15)
+        collectionView.contentInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -64,8 +65,8 @@ final class RecommendationBookCell: BaseTableViewCell {
     
     private func registerCell() {
         collectionView.register(
-            BookImageCell.self,
-            forCellWithReuseIdentifier: BookImageCell.identifier
+            RecommendationBookCollectionCell.self,
+            forCellWithReuseIdentifier: RecommendationBookCollectionCell.identifier
         )
     }
     
@@ -91,11 +92,13 @@ extension RecommendationBookCell: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: BookImageCell.identifier,
+            withReuseIdentifier: RecommendationBookCollectionCell.identifier,
             for: indexPath
-        ) as? BookImageCell else {
+        ) as? RecommendationBookCollectionCell else {
             return UICollectionViewCell()
         }
+        let basicInfo = basicBookInfo[indexPath.item]
+        cell.bind(basicInfo)
         return cell
     }
 }
@@ -119,8 +122,7 @@ extension RecommendationBookCell: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let width = (ScreenSize.width - 36) / 3
-        return CGSize(width: width, height: 208)
+        return CGSize(width: 110, height: collectionView.frame.height)
     }
     
     func collectionView(
@@ -128,7 +130,7 @@ extension RecommendationBookCell: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 8
+        return 20
     }
     
     func collectionView(
@@ -136,6 +138,6 @@ extension RecommendationBookCell: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 8
+        return 20
     }
 }
