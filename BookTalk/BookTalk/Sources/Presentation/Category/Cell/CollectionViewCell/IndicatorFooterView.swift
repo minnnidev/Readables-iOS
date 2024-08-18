@@ -27,13 +27,6 @@ final class IndicatorFooterView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - UI Setup
 
-    override func setViews() {
-        indicatorView.do {
-            $0.color = .accentOrange
-            $0.hidesWhenStopped = true
-        }
-    }
-
     override func setConstraints() {
         addSubview(indicatorView)
 
