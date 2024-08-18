@@ -37,7 +37,7 @@ final class AllBooksViewController: BaseViewController {
         setCollectionView()
         bind()
 
-        viewModel.send(action: .sort(.popularityPerWeek))
+        viewModel.send(action: .loadBooks(.popularityPerWeek))
     }
 
     // MARK: - UI Setup
@@ -121,8 +121,9 @@ final class AllBooksViewController: BaseViewController {
             let action: UIAction = .init(
                 title: sortType.title,
                 handler: { [weak self] _ in
+                    self?.viewModel.selectedFilter = sortType
                     self?.sortButton.setTitle(sortType.title, for: .normal)
-                    self?.viewModel.send(action: .sort(sortType))
+                    self?.viewModel.send(action: .loadBooks(sortType))
                 }
             )
 
@@ -137,14 +138,6 @@ final class AllBooksViewController: BaseViewController {
             Task { [weak self] in
                 await MainActor.run {
                     self?.booksCollectionView.reloadData()
-
-                    guard books.count > 0 else { return }
-
-                    self?.booksCollectionView.scrollToItem(
-                        at: IndexPath(item: 0, section: 0),
-                        at: .top,
-                        animated: false
-                    )
                 }
             }
         }
@@ -187,5 +180,19 @@ extension AllBooksViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         let width = (ScreenSize.width-36) / 3
         return CGSize(width: width, height: 208)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension AllBooksViewController: UIScrollViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+
+        if offsetY > contentHeight - scrollView.frame.height * 1.5 {
+            viewModel.send(action: .loadMoreBooks(viewModel.selectedFilter))
+        }
     }
 }
