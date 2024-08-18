@@ -12,10 +12,11 @@ final class AllBooksViewModel {
     // MARK: - Properties
 
     private(set) var books = Observable<[Book]>([])
+    private(set) var hasMoreResult = Observable(true)
+
     private var currentPage = 1
     private var pageSize = 18
-    private var hasMoreResult = true
-    private var isLoading = false
+    private var maxListSize = 50
 
     var selectedFilter = BookSortType.popularityPerWeek
 
@@ -38,7 +39,7 @@ final class AllBooksViewModel {
         switch action {
         case let .loadBooks(sortType):
             currentPage = 1
-            hasMoreResult = true
+            hasMoreResult.value = true
             books.value.removeAll()
 
             loadBooks(of: sortType)
@@ -49,82 +50,54 @@ final class AllBooksViewModel {
     }
 
     private func loadBooks(of type: BookSortType) {
-        guard !isLoading && hasMoreResult else { return }
+        guard hasMoreResult.value else { return }
 
-        isLoading = true
-
-        switch type {
-        case .popularityPerWeek, .popularityPerMonth:
-            Task {
-                do {
-                    let result = try await GenreService.getBooksByFilter(
-                        of: type,
-                        with: .init(
-                            genreCode: genreCode,
-                            pageNo: "\(currentPage)",
-                            pageSize: "\(pageSize)")
-                    )
-
-                    await MainActor.run {
-                        if result.isEmpty {
-                            hasMoreResult = false
-                        } else {
-                            books.value.append(contentsOf: result)
-                            currentPage += 1
-                        }
-
-                        isLoading = false
-                    }
-                } catch let error as NetworkError {
-                    print("Error: \(error.localizedDescription)")
-                }
-            }
-
-        case .newest:
-            Task {
-                do {
-                    let result = try await GenreService.getNewTrend(
-                        with: .init(
-                            genreCode: genreCode,
-                            pageNo: "\(currentPage)",
-                            pageSize: "\(pageSize)"
-                        )
-                    )
-
-                    await MainActor.run {
-                        if result.isEmpty {
-                            hasMoreResult = false
-                        } else {
-                            books.value.append(contentsOf: result)
-                            currentPage += 1
-                        }
-                        isLoading = false
-                    }
-                } catch let error as NetworkError {
-                    print("Error: \(error.localizedDescription)")
-                }
-            }
-
-        case .random:
-            Task {
-                do {
-                    let result = try await GenreService.getRandomBooks(
-                        with: .init(genreCode: genreCode, maxSize: "\(pageSize)")
-                    )
-
-                    await MainActor.run {
-                        if result.isEmpty {
-                            hasMoreResult = false
-                        } else {
-                            books.value.append(contentsOf: result)
-                            currentPage += 1
-                        }
-                        isLoading = false
-                    }
-                } catch let error as NetworkError {
-                    print("Error: \(error.localizedDescription)")
-                }
+        Task {
+            do {
+                let result = try await fetchBooks(of: type)
+                await updateBooks(with: result, of: selectedFilter)
+            } catch let error as NetworkError {
+                print("Error: \(error.localizedDescription)")
             }
         }
+    }
+
+    private func fetchBooks(of type: BookSortType) async throws -> [Book] {
+        switch type {
+        case .popularityPerWeek, .popularityPerMonth:
+            return try await GenreService.getBooksByFilter(
+                of: type,
+                with: .init(
+                    genreCode: genreCode,
+                    pageNo: "\(currentPage)",
+                    pageSize: "\(pageSize)"
+                )
+            )
+        case .newest:
+            return try await GenreService.getNewTrend(
+                with: .init(
+                    genreCode: genreCode,
+                    pageNo: "\(currentPage)",
+                    pageSize: "\(pageSize)"
+                )
+            )
+        case .random:
+            return try await GenreService.getRandomBooks(
+                with: .init(
+                    genreCode: genreCode,
+                    maxSize: "\(maxListSize)"
+                )
+            )
+        }
+    }
+
+    @MainActor
+    private func updateBooks(with result: [Book], of selectedFilter: BookSortType) {
+        if result.isEmpty || result.count < pageSize || selectedFilter == .random {
+            hasMoreResult.value = false
+        }
+        
+        books.value.append(contentsOf: result)
+        currentPage += 1
     }
 }

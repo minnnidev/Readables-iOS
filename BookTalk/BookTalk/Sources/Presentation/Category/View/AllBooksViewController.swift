@@ -14,6 +14,7 @@ final class AllBooksViewController: BaseViewController {
     private let sortView = UIView()
     private let sortButton = UIButton()
     private let booksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    
     private let viewModel: AllBooksViewModel
 
     // MARK: - Initializer
@@ -106,7 +107,16 @@ final class AllBooksViewController: BaseViewController {
     // MARK: - Helpers
 
     private func registerCell() {
-        booksCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
+        booksCollectionView.register(
+            BookImageCell.self,
+            forCellWithReuseIdentifier: BookImageCell.identifier
+        )
+
+        booksCollectionView.register(
+            IndicatorFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: IndicatorFooterView.identifier
+        )
     }
 
     private func setCollectionView() {
@@ -141,6 +151,17 @@ final class AllBooksViewController: BaseViewController {
                 }
             }
         }
+
+        viewModel.hasMoreResult.subscribe { [weak self] hasMore in
+            guard let self = self else { return }
+            let indexPath = IndexPath(item: 0, section: 0)
+            let context = UICollectionViewFlowLayoutInvalidationContext()
+            context.invalidateSupplementaryElements(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                at: [indexPath]
+            )
+            booksCollectionView.collectionViewLayout.invalidateLayout(with: context)
+        }
     }
 }
 
@@ -167,6 +188,33 @@ extension AllBooksViewController: UICollectionViewDataSource {
         cell.bind(with: viewModel.books.value[indexPath.row])
         return cell
     }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let footerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: IndicatorFooterView.identifier,
+            for: indexPath
+        ) as? IndicatorFooterView else { return UICollectionReusableView() }
+
+        return footerView
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        guard viewModel.hasMoreResult.value else { return }
+
+        let isLoadPoint = indexPath.item == viewModel.books.value.count - 9
+        guard isLoadPoint else { return }
+
+        viewModel.send(action: .loadMoreBooks(viewModel.selectedFilter))
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -181,18 +229,17 @@ extension AllBooksViewController: UICollectionViewDelegateFlowLayout {
         let width = (ScreenSize.width-36) / 3
         return CGSize(width: width, height: 208)
     }
-}
 
-// MARK: - UIScrollViewDelegate
-
-extension AllBooksViewController: UIScrollViewDelegate {
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-
-        if offsetY > contentHeight - scrollView.frame.height * 1.5 {
-            viewModel.send(action: .loadMoreBooks(viewModel.selectedFilter))
-        }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForFooterInSection section: Int
+    ) -> CGSize {
+        guard viewModel.hasMoreResult.value else { return .zero }
+        
+        return CGSize(
+            width: collectionView.frame.width,
+            height: 50
+        )
     }
 }
