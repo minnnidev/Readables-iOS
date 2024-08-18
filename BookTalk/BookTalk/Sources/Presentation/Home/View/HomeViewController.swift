@@ -23,6 +23,8 @@ final class HomeViewController: BaseViewController {
         registerCell()
         setDelegate()
         bind()
+
+        viewModel.fetchSections()
     }
     
     // MARK: - Actions

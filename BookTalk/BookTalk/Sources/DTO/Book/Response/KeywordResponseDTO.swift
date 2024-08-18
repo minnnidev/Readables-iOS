@@ -11,3 +11,10 @@ struct KeywordResponseDTO: Decodable {
     let keyword: String
     let weight: String
 }
+
+extension KeywordResponseDTO {
+
+    func toModel() -> Keyword {
+        return .init(keyword: keyword)
+    }
+}
