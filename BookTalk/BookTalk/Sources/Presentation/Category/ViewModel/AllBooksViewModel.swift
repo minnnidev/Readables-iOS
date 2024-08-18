@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ThirdCategoryViewModel {
+final class AllBooksViewModel {
 
     enum Action {
         case sort(_ sortType: BookSortType)

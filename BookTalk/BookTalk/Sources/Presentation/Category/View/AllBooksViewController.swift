@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AllBookImagesViewController: BaseViewController {
+final class AllBooksViewController: BaseViewController {
 
     // MARK: - Properties
 
@@ -15,7 +15,7 @@ final class AllBookImagesViewController: BaseViewController {
     private let sortButton = UIButton()
     private let booksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
 
-    private let viewModel = ThirdCategoryViewModel()
+    private let viewModel = AllBooksViewModel()
 
     // MARK: - Lifecycle
 
@@ -119,7 +119,7 @@ final class AllBookImagesViewController: BaseViewController {
 
 // MARK: - UICollectionViewDataSource
 
-extension AllBookImagesViewController: UICollectionViewDataSource {
+extension AllBooksViewController: UICollectionViewDataSource {
 
     func collectionView(
         _ collectionView: UICollectionView,
@@ -143,7 +143,7 @@ extension AllBookImagesViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension AllBookImagesViewController: UICollectionViewDelegateFlowLayout {
+extension AllBooksViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
