@@ -44,6 +44,7 @@ final class SearchHistoryCell: BaseTableViewCell {
     
     override func setViews() {
         titleLabel.do {
+            $0.numberOfLines = 1
             $0.textColor = .systemGray
             $0.textAlignment = .left
             $0.font = .systemFont(ofSize: 15, weight: .medium)
@@ -60,14 +61,15 @@ final class SearchHistoryCell: BaseTableViewCell {
         [titleLabel, deleteButton].forEach { contentView.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(15)
+            $0.top.left.bottom.equalToSuperview().inset(15)
+            $0.right.equalTo(deleteButton.snp.left).offset(-10)
         }
         
         deleteButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalTo(titleLabel)
             $0.right.equalToSuperview().offset(-15)
             $0.left.equalTo(titleLabel.snp.right).offset(10)
+            $0.size.equalTo(20)
         }
     }
 }
