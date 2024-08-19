@@ -12,6 +12,8 @@ final class SubcategoryViewController: BaseViewController {
     // MARK: - Properties
 
     private let subcategoryTableView = UITableView(frame: .zero)
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
+    private let indicatorBackgroundView = UIView()
 
     private let viewModel: SubcategoryViewModel
 
@@ -54,16 +56,37 @@ final class SubcategoryViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init(top: 0, left: 12, bottom: 0, right: 12)
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+            $0.color = .white
+        }
+
+        indicatorBackgroundView.do {
+            $0.backgroundColor = .lightGray.withAlphaComponent(0.9)
+            $0.layer.cornerRadius = 10
+        }
     }
 
     override func setConstraints() {
-        [subcategoryTableView].forEach {
+        [subcategoryTableView, indicatorBackgroundView].forEach {
             view.addSubview($0)
         }
+
+        indicatorBackgroundView.addSubview(indicatorView)
 
         subcategoryTableView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
+        }
+
+        indicatorBackgroundView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(50)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
@@ -102,6 +125,13 @@ final class SubcategoryViewController: BaseViewController {
                     )
                 }
             }
+        }
+
+        viewModel.isLoading.subscribe { [weak self] isLoading in
+            guard let self = self else { return }
+
+            isLoading ? indicatorView.startAnimating() : indicatorView.stopAnimating()
+            indicatorBackgroundView.isHidden = !isLoading
         }
     }
 }
@@ -167,7 +197,7 @@ extension SubcategoryViewController: UITableViewDelegate {
         switch section {
 
         case .banner:
-            return 160
+            return .zero
 
         case .category, .allBookButton, .newBooks, .popularBooks:
             return UITableView.automaticDimension
