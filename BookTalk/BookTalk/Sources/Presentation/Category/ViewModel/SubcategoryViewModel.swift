@@ -73,6 +73,9 @@ final class SubcategoryViewModel {
 
                 } catch let error as NetworkError {
                     print("Error: \(error.localizedDescription)")
+                    await MainActor.run {
+                        isLoading.value = false
+                    }
                 }
             }
         }
