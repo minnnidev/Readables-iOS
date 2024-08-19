@@ -25,17 +25,21 @@ final class HomeViewModel {
     private let sectionsRelay = Observable<[HomeSection]>([])
     lazy var input: Input = { return bindInput() }()
     lazy var output: Output = { return transform() }()
-    
-    // MARK: - Initializer
-    
-    init() {
-        fetchSections()
-    }
-    
+
     // MARK: - Helpers
     
-    private func fetchSections() {
+    func fetchSections() {
         sectionsRelay.value = HomeMockData.sections
+        
+        Task {
+            do {
+                let result = try await BookService.getKeywords()
+                print(result)
+
+            } catch let error as NetworkError {
+                print(error)
+            }
+        }
     }
     
     private func toggleSection(section: Int) {
