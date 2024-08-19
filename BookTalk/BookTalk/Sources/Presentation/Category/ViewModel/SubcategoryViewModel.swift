@@ -13,8 +13,7 @@ final class SubcategoryViewModel {
 
     enum Action {
         case setSubcategory(subcategoryIdx: Int)
-        case loadPopularBooks(subcategoryIdx: Int)
-        case loadNewBooks(subcategoryIdx: Int)
+        case loadBooks(subcategoryIdx: Int)
     }
 
     // MARK: - Properties
@@ -22,10 +21,10 @@ final class SubcategoryViewModel {
     var subcategory: Observable<String> = Observable("전체")
     var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     var newBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
+    var isLoading = Observable(false)
     var subcategoryIdx: Int = 0 {
         didSet {
-            send(action: .loadPopularBooks(subcategoryIdx: subcategoryIdx))
-            send(action: .loadNewBooks(subcategoryIdx: subcategoryIdx))
+            send(action: .loadBooks(subcategoryIdx: subcategoryIdx))
         }
     }
 
@@ -47,10 +46,10 @@ final class SubcategoryViewModel {
             subcategoryIdx = subcategoryIndex
             subcategory.value = firstCategoryType.subcategories[subcategoryIndex]
 
-        case let .loadPopularBooks(subcategoryIdx):
-            let (month, week) = Date().currentWeekOfMonth()
-            popularBooks.value.headerTitle = "\(month)월 \(week)주차 TOP 10"
+        case let .loadBooks(subcategoryIdx):
+            isLoading.value = true
 
+            let (month, week) = Date().currentWeekOfMonth()
             let genreCode = "\(firstCategoryType.rawValue)\(subcategoryIdx)"
 
             Task {
@@ -58,32 +57,25 @@ final class SubcategoryViewModel {
                     let popularBooks = try await GenreService.getThisWeekTrend(
                         with: .init(genreCode: genreCode)
                     )
-
-                    await MainActor.run {
-                        self.popularBooks.value.books = popularBooks
-                    }
-
-                } catch let error as NetworkError {
-                    print("Error: \(error.localizedDescription)")
-                }
-            }
-
-        case let .loadNewBooks(subcategoryIdx):
-            let genreCode = "\(firstCategoryType.rawValue)\(subcategoryIdx)"
-
-            Task {
-                do {
                     let newBooks = try await GenreService.getNewTrend(
                         with: .init(genreCode: genreCode)
                     )
 
                     await MainActor.run {
-                        self.newBooks.value.books = newBooks
+                        self.popularBooks.value.headerTitle = "\(month)월 \(week)주차 TOP 10"
+                        self.popularBooks.value.books = popularBooks
+
                         self.newBooks.value.headerTitle = "새로 나온 책들을 확인해 보세요!"
+                        self.newBooks.value.books = newBooks
+
+                        isLoading.value = false
                     }
 
                 } catch let error as NetworkError {
                     print("Error: \(error.localizedDescription)")
+                    await MainActor.run {
+                        isLoading.value = false
+                    }
                 }
             }
         }
