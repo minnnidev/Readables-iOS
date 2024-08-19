@@ -7,16 +7,28 @@
 
 import UIKit
 
-final class AllBookImagesViewController: BaseViewController {
+final class AllBooksViewController: BaseViewController {
 
     // MARK: - Properties
 
     private let sortView = UIView()
     private let sortButton = UIButton()
     private let booksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    
+    private let viewModel: AllBooksViewModel
 
-    private let viewModel = ThirdCategoryViewModel()
+    // MARK: - Initializer
 
+    init(viewModel: AllBooksViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -24,6 +36,9 @@ final class AllBookImagesViewController: BaseViewController {
 
         registerCell()
         setCollectionView()
+        bind()
+
+        viewModel.send(action: .loadBooks(.popularityPerWeek))
     }
 
     // MARK: - UI Setup
@@ -54,6 +69,8 @@ final class AllBookImagesViewController: BaseViewController {
         booksCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .vertical
+            flowLayout.minimumLineSpacing = 24
+            flowLayout.minimumInteritemSpacing = 8
 
             $0.collectionViewLayout = flowLayout
             $0.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -90,7 +107,16 @@ final class AllBookImagesViewController: BaseViewController {
     // MARK: - Helpers
 
     private func registerCell() {
-        booksCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
+        booksCollectionView.register(
+            BookImageCell.self,
+            forCellWithReuseIdentifier: BookImageCell.identifier
+        )
+
+        booksCollectionView.register(
+            IndicatorFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: IndicatorFooterView.identifier
+        )
     }
 
     private func setCollectionView() {
@@ -105,8 +131,9 @@ final class AllBookImagesViewController: BaseViewController {
             let action: UIAction = .init(
                 title: sortType.title,
                 handler: { [weak self] _ in
+                    self?.viewModel.selectedFilter = sortType
                     self?.sortButton.setTitle(sortType.title, for: .normal)
-                    self?.viewModel.send(action: .sort(sortType))
+                    self?.viewModel.send(action: .loadBooks(sortType))
                 }
             )
 
@@ -115,17 +142,38 @@ final class AllBookImagesViewController: BaseViewController {
 
         return actions
     }
+
+    private func bind() {
+        viewModel.books.subscribe { books in
+            Task { [weak self] in
+                await MainActor.run {
+                    self?.booksCollectionView.reloadData()
+                }
+            }
+        }
+
+        viewModel.hasMoreResult.subscribe { [weak self] hasMore in
+            guard let self = self else { return }
+            let indexPath = IndexPath(item: 0, section: 0)
+            let context = UICollectionViewFlowLayoutInvalidationContext()
+            context.invalidateSupplementaryElements(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                at: [indexPath]
+            )
+            booksCollectionView.collectionViewLayout.invalidateLayout(with: context)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 
-extension AllBookImagesViewController: UICollectionViewDataSource {
+extension AllBooksViewController: UICollectionViewDataSource {
 
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 50
+        return viewModel.books.value.count
     }
 
     func collectionView(
@@ -137,13 +185,41 @@ extension AllBookImagesViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
+        cell.bind(with: viewModel.books.value[indexPath.row])
         return cell
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let footerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: IndicatorFooterView.identifier,
+            for: indexPath
+        ) as? IndicatorFooterView else { return UICollectionReusableView() }
+
+        return footerView
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        guard viewModel.hasMoreResult.value else { return }
+
+        let isLoadPoint = indexPath.item == viewModel.books.value.count - 9
+        guard isLoadPoint else { return }
+
+        viewModel.send(action: .loadMoreBooks(viewModel.selectedFilter))
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension AllBookImagesViewController: UICollectionViewDelegateFlowLayout {
+extension AllBooksViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
@@ -157,16 +233,13 @@ extension AllBookImagesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 24
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 8
+        referenceSizeForFooterInSection section: Int
+    ) -> CGSize {
+        guard viewModel.hasMoreResult.value else { return .zero }
+        
+        return CGSize(
+            width: collectionView.frame.width,
+            height: 50
+        )
     }
 }

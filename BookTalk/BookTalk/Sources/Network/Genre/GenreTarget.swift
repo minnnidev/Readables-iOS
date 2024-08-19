@@ -12,6 +12,9 @@ import Alamofire
 enum GenreTarget {
     case getThisWeekTrend(params: GenreTrendRequestDTO)
     case getNewTrend(params: GenreTrendRequestDTO)
+    case getRandom(params: GenreRandomRequestDTO)
+    case getWeekTrend(params: GenreTrendRequestDTO)
+    case getMonthTrend(params: GenreTrendRequestDTO)
 }
 
 extension GenreTarget: TargetType {
@@ -22,12 +25,18 @@ extension GenreTarget: TargetType {
             return "/api/genre/thisWeekTrend"
         case .getNewTrend:
             return "/api/genre/newTrend"
+        case .getRandom:
+            return "/api/genre/random"
+        case .getWeekTrend:
+            return "/api/genre/aWeekTrend"
+        case .getMonthTrend:
+            return "/api/genre/aMonthTrend"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getThisWeekTrend, .getNewTrend:
+        default:
             return .get
         }
     }
@@ -35,7 +44,12 @@ extension GenreTarget: TargetType {
     var task: APITask {
         switch self {
         case let .getThisWeekTrend(params),
-            let .getNewTrend(params):
+            let .getNewTrend(params),
+            let .getWeekTrend(params),
+            let .getMonthTrend(params):
+            return .requestParameters(parameters: params.toDictionary())
+
+        case let .getRandom(params):
             return .requestParameters(parameters: params.toDictionary())
         }
     }

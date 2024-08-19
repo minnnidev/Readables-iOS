@@ -48,9 +48,9 @@ final class BookImageCell: BaseCollectionViewCell {
     }
 
     func bind(with book: Book) {
-        guard let url = URL(string: book.imageURL) else { return }
-
-        bookImageView.kf.setImage(with: url)
         bookNameLabel.text = book.title
+        
+        guard let url = URL(string: book.imageURL) else { return }
+        bookImageView.kf.setImage(with: url)
     }
 }

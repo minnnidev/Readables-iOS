@@ -22,17 +22,16 @@ final class SubcategoryViewModel {
     var subcategory: Observable<String> = Observable("전체")
     var popularBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     var newBooks = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
-
-    private var subcategoryIdx: Int = 0 {
+    var subcategoryIdx: Int = 0 {
         didSet {
             send(action: .loadPopularBooks(subcategoryIdx: subcategoryIdx))
             send(action: .loadNewBooks(subcategoryIdx: subcategoryIdx))
         }
     }
 
-    // MARK: - Initializer
-
     let firstCategoryType: CategoryType
+
+    // MARK: - Initializer
 
     init(
         firstCategoryType: CategoryType
@@ -52,9 +51,7 @@ final class SubcategoryViewModel {
             let (month, week) = Date().currentWeekOfMonth()
             popularBooks.value.headerTitle = "\(month)월 \(week)주차 TOP 10"
 
-            let genreCode = getGenreCode(
-                firstCategoryType.rawValue, subcategoryIdx
-            )
+            let genreCode = "\(firstCategoryType.rawValue)\(subcategoryIdx)"
 
             Task {
                 do {
@@ -72,9 +69,7 @@ final class SubcategoryViewModel {
             }
 
         case let .loadNewBooks(subcategoryIdx):
-            let genreCode = getGenreCode(
-                firstCategoryType.rawValue, subcategoryIdx
-            )
+            let genreCode = "\(firstCategoryType.rawValue)\(subcategoryIdx)"
 
             Task {
                 do {
@@ -92,9 +87,5 @@ final class SubcategoryViewModel {
                 }
             }
         }
-    }
-
-    private func getGenreCode(_ firstCategoryCode: Int, _ subcategoryIndex: Int) -> String {
-        return "\(firstCategoryCode)\(subcategoryIndex)"
     }
 }
