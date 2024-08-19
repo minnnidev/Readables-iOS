@@ -110,6 +110,8 @@
 		ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */; };
 		ABB901AF2C727A2E00727875 /* BookTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AE2C727A2E00727875 /* BookTarget.swift */; };
 		ABB901B12C727A3400727875 /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901B02C727A3400727875 /* BookService.swift */; };
+		ABB901C42C73980600727875 /* OpenTalkResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */; };
+		ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C62C73983700727875 /* OpenTalkBookModel.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDADA3D2C70A6A3009ED3BB /* Date+.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
@@ -223,6 +225,8 @@
 		ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordResponseDTO.swift; sourceTree = "<group>"; };
 		ABB901AE2C727A2E00727875 /* BookTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTarget.swift; sourceTree = "<group>"; };
 		ABB901B02C727A3400727875 /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
+		ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkResponseDTO.swift; sourceTree = "<group>"; };
+		ABB901C62C73983700727875 /* OpenTalkBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkBookModel.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABDADA3D2C70A6A3009ED3BB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
@@ -546,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */,
+				ABB901C62C73983700727875 /* OpenTalkBookModel.swift */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -796,6 +801,7 @@
 			children = (
 				AB82055A2C6E666D0014C5A5 /* Genre */,
 				ABB901A92C72799400727875 /* Book */,
+				ABB901C22C7397E700727875 /* OpenTalk */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -849,6 +855,22 @@
 				ABB901B02C727A3400727875 /* BookService.swift */,
 			);
 			path = Book;
+			sourceTree = "<group>";
+		};
+		ABB901C22C7397E700727875 /* OpenTalk */ = {
+			isa = PBXGroup;
+			children = (
+				ABB901C52C73982800727875 /* Response */,
+			);
+			path = OpenTalk;
+			sourceTree = "<group>";
+		};
+		ABB901C52C73982800727875 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		ABD10DE62C516D26005F290E /* Category */ = {
@@ -1128,6 +1150,7 @@
 				AB2E7BC12C525CC700CE43CB /* CategoryType.swift in Sources */,
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				AB4CBA782C6E037B009A2AB6 /* SettingCell.swift in Sources */,
+				ABB901C42C73980600727875 /* OpenTalkResponseDTO.swift in Sources */,
 				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
 				AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */,
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
@@ -1137,6 +1160,7 @@
 				AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
+				ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
