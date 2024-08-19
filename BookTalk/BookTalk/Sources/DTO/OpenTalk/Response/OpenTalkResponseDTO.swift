@@ -7,8 +7,18 @@
 
 import Foundation
 
+struct OpenTalkMainResponseDTO: Decodable {
+    let hotOpenTalkList: [OpenTalkResponseDTO]
+    let favoriteOpenTalkList: [OpenTalkResponseDTO]
+
+    enum CodingKeys: String, CodingKey {
+        case hotOpenTalkList = "hotOpentalkList"
+        case favoriteOpenTalkList = "favoriteOpentalkList"
+    }
+}
+
 struct OpenTalkResponseDTO: Decodable {
-    let id: Int
+    let id: Int?
     let bookName: String
     let bookImageURL: String
 }
@@ -17,7 +27,7 @@ extension OpenTalkResponseDTO {
 
     func toModel() -> OpenTalkModel {
         return .init(
-            id: id,
+            id: id ?? 0,
             bookName: bookName,
             bookImageURL: bookImageURL
         )
