@@ -36,6 +36,9 @@ final class OpenTalkViewController: BaseViewController {
         
         setDelegate()
         registerCell()
+        bind()
+
+        viewModel.send(action: .loadOpenTalks)
     }
 
     // MARK: - UI Setup
@@ -73,6 +76,8 @@ final class OpenTalkViewController: BaseViewController {
         bookCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .vertical
+            flowLayout.minimumLineSpacing = 24
+            flowLayout.minimumInteritemSpacing = 8
 
             $0.collectionViewLayout = flowLayout
             $0.backgroundColor = .clear
@@ -124,6 +129,12 @@ final class OpenTalkViewController: BaseViewController {
         )
     }
 
+    private func bind() {
+        viewModel.openTalks.subscribe { [weak self] t in
+            self?.bookCollectionView.reloadData()
+        }
+    }
+
     // MARK: - Actions
 
     @objc private func searchIconDidTapped() {
@@ -145,7 +156,7 @@ extension OpenTalkViewController: UICollectionViewDataSource {
         if collectionView == pageCollectionView {
             return OpenTalkPageType.allCases.count
         } else {
-            return 10
+            return viewModel.openTalks.value.count
         }
     }
 
@@ -160,7 +171,11 @@ extension OpenTalkViewController: UICollectionViewDataSource {
             ) as? OpenTalkPageCell else { return UICollectionViewCell() }
 
             if indexPath.row == 0 {
-                collectionView.selectItem(at: indexPath, animated: false , scrollPosition: .init())
+                collectionView.selectItem(
+                    at: indexPath,
+                    animated: false,
+                    scrollPosition: .init()
+                )
                 cell.isSelected = true
             }
 
@@ -173,6 +188,14 @@ extension OpenTalkViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? BookImageCell else { return UICollectionViewCell() }
 
+            let openTalk = viewModel.openTalks.value[indexPath.item]
+            cell.bind(
+                with: Book(
+                    isbn: "",
+                    imageURL: openTalk.bookImageURL,
+                    title: openTalk.bookName
+                )
+            )
             return cell
         }
     }
@@ -197,33 +220,11 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        if collectionView == pageCollectionView {
-            return CGFloat()
-        } else {
-            return 8
-        }
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        if collectionView == pageCollectionView {
-            return CGFloat()
-        } else {
-            return 24
-        }
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        if collectionView == bookCollectionView {
+        if collectionView == pageCollectionView {
+            viewModel.send(action: .setPageType(OpenTalkPageType.allCases[indexPath.item]))
+        } else {
             // TODO: 디테일뷰로 이동이지만 임시로 채팅뷰로 바로 이동하도록 구현
             let viewModel = ChatViewModel()
             let chattingVC = ChatViewController(viewModel: viewModel)
