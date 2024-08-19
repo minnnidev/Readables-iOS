@@ -24,4 +24,33 @@ struct GenreService {
 
         return result.map { $0.toBookModel() }
     }
+
+    static func getBooksByFilter(of filter: BookSortType, with requestDTO: GenreTrendRequestDTO) async throws -> [Book] {
+        var result: [LoanItemResponseDTO] = .init()
+
+        switch filter {
+        case .popularityPerWeek:
+            result = try await NetworkService.shared.request(
+                target: GenreTarget.getWeekTrend(params: requestDTO)
+            )
+
+        case .popularityPerMonth:
+            result = try await NetworkService.shared.request(
+                target: GenreTarget.getMonthTrend(params: requestDTO)
+            )
+
+        case .newest, .random:
+            break
+        }
+
+        return result.map { $0.toBookModel() }
+    }
+
+    static func getRandomBooks(with requestDTO: GenreRandomRequestDTO) async throws -> [Book] {
+        let result: [LoanItemResponseDTO] = try await NetworkService.shared.request(
+            target: GenreTarget.getRandom(params: requestDTO)
+        )
+
+        return result.map { $0.toBookModel() }
+    }
 }
