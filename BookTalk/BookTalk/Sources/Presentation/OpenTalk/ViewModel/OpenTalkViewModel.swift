@@ -20,25 +20,30 @@ final class OpenTalkViewModel {
 
     enum Action {
         case setPageType(_ pageType: OpenTalkPageType)
-        case loadOpenTalks
+        case loadOpenTalks(_ pageType: OpenTalkPageType)
     }
 
     func send(action: Action) {
         switch action {
-        case let .setPageType(pageType):
-            switch pageType {
-            case .hot:
-                openTalks.value = hotOpenTalks
-            case .liked:
-                openTalks.value = favoriteOpenTalks
-            }
+        case let .setPageType(selectedPage):
+            selectedPageType = selectedPage
+            setOpenTalks(of: selectedPage)
 
-        case .loadOpenTalks:
+        case let .loadOpenTalks(selectedPage):
             // TODO: api 호출
             hotOpenTalks = [.stubOpenTalk1]
             favoriteOpenTalks = [.stubOpenTalk1, .stubOpenTalk2]
 
-            openTalks.value = selectedPageType == .hot ? hotOpenTalks : favoriteOpenTalks
+            setOpenTalks(of: selectedPage)
+        }
+    }
+
+    private func setOpenTalks(of selectedPage: OpenTalkPageType) {
+        switch selectedPage {
+        case .hot:
+            openTalks.value = hotOpenTalks
+        case .liked:
+            openTalks.value = favoriteOpenTalks
         }
     }
 }

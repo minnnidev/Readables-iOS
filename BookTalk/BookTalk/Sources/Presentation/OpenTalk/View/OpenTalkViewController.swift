@@ -40,7 +40,7 @@ final class OpenTalkViewController: BaseViewController {
         bind()
         addTarget()
 
-        viewModel.send(action: .loadOpenTalks)
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
     }
 
     // MARK: - UI Setup
@@ -141,7 +141,7 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.openTalks.subscribe { [weak self] t in
+        viewModel.openTalks.subscribe { [weak self] _ in
             self?.bookCollectionView.reloadData()
         }
     }
@@ -156,7 +156,8 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     @objc private func refreshCollectionView() {
-        viewModel.send(action: .loadOpenTalks)
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
+
         refreshControl.endRefreshing()
     }
 }
@@ -227,7 +228,10 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         if collectionView == pageCollectionView {
-            return CGSize(width: ScreenSize.width/2, height: collectionView.frame.height)
+            return CGSize(
+                width: ScreenSize.width/2,
+                height: collectionView.frame.height
+            )
         } else {
             let width = (ScreenSize.width-36) / 3
             return CGSize(width: width, height: 208)
@@ -241,7 +245,6 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == pageCollectionView {
             viewModel.send(action: .setPageType(OpenTalkPageType.allCases[indexPath.item]))
         } else {
-            // TODO: 디테일뷰로 이동이지만 임시로 채팅뷰로 바로 이동하도록 구현
             let viewModel = ChatViewModel()
             let chattingVC = ChatViewController(viewModel: viewModel)
             chattingVC.hidesBottomBarWhenPushed = true
