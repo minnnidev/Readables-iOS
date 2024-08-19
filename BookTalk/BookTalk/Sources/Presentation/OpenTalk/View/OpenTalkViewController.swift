@@ -15,6 +15,20 @@ final class OpenTalkViewController: BaseViewController {
     private let pageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
 
+    private let viewModel: OpenTalkViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: OpenTalkViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -100,8 +114,14 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func registerCell() {
-        pageCollectionView.register(OpenTalkPageCell.self, forCellWithReuseIdentifier: OpenTalkPageCell.identifier)
-        bookCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
+        pageCollectionView.register(
+            OpenTalkPageCell.self,
+            forCellWithReuseIdentifier: OpenTalkPageCell.identifier
+        )
+        bookCollectionView.register(
+            BookImageCell.self,
+            forCellWithReuseIdentifier: BookImageCell.identifier
+        )
     }
 
     // MARK: - Actions

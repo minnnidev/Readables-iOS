@@ -114,6 +114,7 @@
 		ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C62C73983700727875 /* OpenTalkBookModel.swift */; };
 		ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C92C7398C100727875 /* OpenTalkTarget.swift */; };
 		ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CB2C7398CA00727875 /* OpenTalkService.swift */; };
+		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDADA3D2C70A6A3009ED3BB /* Date+.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
@@ -231,6 +232,7 @@
 		ABB901C62C73983700727875 /* OpenTalkBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkBookModel.swift; sourceTree = "<group>"; };
 		ABB901C92C7398C100727875 /* OpenTalkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkTarget.swift; sourceTree = "<group>"; };
 		ABB901CB2C7398CA00727875 /* OpenTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkService.swift; sourceTree = "<group>"; };
+		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABDADA3D2C70A6A3009ED3BB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 			children = (
 				AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */,
 				AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */,
+				ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */,
 				AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */,
+				ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */,
 				ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */,
 				0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */,
 				0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,

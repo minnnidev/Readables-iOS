@@ -33,11 +33,12 @@ final class MainTabBarController: UITabBarController {
             rootViewController: FirstCategoryViewController()
         )
         
+        let openTalkViewModel = OpenTalkViewModel()
         let openTalk = createNavigationController(
             title: "오픈톡",
             unselectedImage: "message",
             selectedImage: "message.fill",
-            rootViewController: OpenTalkViewController()
+            rootViewController: OpenTalkViewController(viewModel: openTalkViewModel)
         )
         
         let goalViewModel = GoalViewModel()
