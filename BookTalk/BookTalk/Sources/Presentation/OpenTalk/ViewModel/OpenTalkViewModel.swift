@@ -38,7 +38,7 @@ final class OpenTalkViewModel {
             hotOpenTalks = [.stubOpenTalk1]
             favoriteOpenTalks = [.stubOpenTalk1, .stubOpenTalk2]
 
-            openTalks.value = hotOpenTalks
+            openTalks.value = selectedPageType == .hot ? hotOpenTalks : favoriteOpenTalks
         }
     }
 }
