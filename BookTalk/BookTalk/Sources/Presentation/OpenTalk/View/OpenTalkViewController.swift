@@ -15,6 +15,7 @@ final class OpenTalkViewController: BaseViewController {
     private let pageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
     private let refreshControl = UIRefreshControl()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: OpenTalkViewModel
 
@@ -87,10 +88,14 @@ final class OpenTalkViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = false
             $0.refreshControl = refreshControl
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
-        [bookBanner, pageCollectionView, bookCollectionView].forEach {
+        [bookBanner, pageCollectionView, bookCollectionView, indicatorView].forEach {
             view.addSubview($0)
         }
 
@@ -108,6 +113,10 @@ final class OpenTalkViewController: BaseViewController {
         bookCollectionView.snp.makeConstraints {
             $0.top.equalTo(pageCollectionView.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalTo(bookCollectionView)
         }
     }
 
@@ -141,10 +150,35 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.openTalks.subscribe { [weak self] _ in
-            self?.bookCollectionView.reloadData()
-        }
-    }
+         viewModel.openTalks.subscribe { [weak self] openTalkResult in
+             guard let self = self else { return }
+
+             guard !viewModel.isLoading.value else {
+                 bookCollectionView.reloadData()
+                 return
+             }
+
+             if openTalkResult.isEmpty {
+                 self.bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
+             } else {
+                 self.bookCollectionView.restore()
+             }
+             bookCollectionView.reloadData()
+         }
+
+         viewModel.isLoading.subscribe { [weak self] isLoading in
+             guard let self = self else { return }
+
+             if isLoading {
+                 if !refreshControl.isRefreshing {
+                     indicatorView.startAnimating()
+                 }
+             } else {
+                 refreshControl.endRefreshing()
+                 indicatorView.stopAnimating()
+             }
+         }
+     }
 
     // MARK: - Actions
 

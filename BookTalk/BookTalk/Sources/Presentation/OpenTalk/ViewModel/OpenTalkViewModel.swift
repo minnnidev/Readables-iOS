@@ -15,6 +15,7 @@ final class OpenTalkViewModel {
     var hotOpenTalks = [OpenTalkModel]()
     var favoriteOpenTalks = [OpenTalkModel]()
     var openTalks = Observable<[OpenTalkModel]>([])
+    var isLoading = Observable(true)
 
     // MARK: - Helpers
 
@@ -30,6 +31,9 @@ final class OpenTalkViewModel {
             setOpenTalks(of: selectedPage)
 
         case let .loadOpenTalks(selectedPage):
+            isLoading.value = true
+            openTalks.value.removeAll()
+
             Task {
                 do {
                     let result = try await OpenTalkService.getOpenTalkMainList()
@@ -39,9 +43,11 @@ final class OpenTalkViewModel {
                         favoriteOpenTalks = result.favoriteList
 
                         setOpenTalks(of: selectedPage)
+                        isLoading.value = false
                     }
                     
                 } catch let error as NetworkError {
+                    isLoading.value = false
                     print(error.localizedDescription)
                 }
             }
