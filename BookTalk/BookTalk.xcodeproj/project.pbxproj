@@ -25,6 +25,7 @@
 		054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */; };
 		054FA16B2C7463B50007D9C9 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 054FA16A2C7463B50007D9C9 /* login.json */; };
 		054FA16E2C7463D40007D9C9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 054FA16D2C7463D40007D9C9 /* Lottie */; };
+		054FA1752C74643C0007D9C9 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1742C74643C0007D9C9 /* OnboardingManager.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
 		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
@@ -141,6 +142,7 @@
 		054544142C5AA80700E64948 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		054FA16A2C7463B50007D9C9 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
+		054FA1742C74643C0007D9C9 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
@@ -379,6 +381,46 @@
 			path = BookInfo;
 			sourceTree = "<group>";
 		};
+		054FA16F2C7464120007D9C9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				054FA1732C7464200007D9C9 /* Manager */,
+				054FA1722C74641D0007D9C9 /* Enum */,
+				054FA1712C74641B0007D9C9 /* View */,
+				054FA1702C7464160007D9C9 /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		054FA1702C7464160007D9C9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		054FA1712C74641B0007D9C9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		054FA1722C74641D0007D9C9 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		054FA1732C7464200007D9C9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				054FA1742C74643C0007D9C9 /* OnboardingManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		056F2FEE2C5B4E3600931302 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +507,7 @@
 		057925442C4FF51400834EC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				054FA16F2C7464120007D9C9 /* Login */,
 				056F2FEE2C5B4E3600931302 /* MainTab */,
 				056F30472C60D4E400931302 /* BookDetail */,
 				0545432E2C53725200E64948 /* Home */,
@@ -1106,6 +1149,7 @@
 				ABED44132C665DD90073398A /* GoalModel.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
 				AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */,
+				054FA1752C74643C0007D9C9 /* OnboardingManager.swift in Sources */,
 				056F30502C60D57100931302 /* BookInfoCell.swift in Sources */,
 				051156032C64C71B00230CFE /* BaseTableViewCell.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
