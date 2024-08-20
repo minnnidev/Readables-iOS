@@ -51,7 +51,7 @@ final class AppFlowController {
     }
 
     @objc private func checkLoginState() {
-        let isLogin = UserDefaults.standard.bool(forKey: UserDefaults.Key.isLogin) == true
+        let isLogin = UserDefaults.standard.bool(forKey: UserDefaults.Key.isLoggedIn) == true
 
         if isLogin {
             goToHome()

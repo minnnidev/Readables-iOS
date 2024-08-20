@@ -10,6 +10,6 @@ import Foundation
 extension UserDefaults {
 
     struct Key {
-        static let isLogin = "isLogin"
+        static let isLoggedIn = "isLoggedIn"
     }
 }
