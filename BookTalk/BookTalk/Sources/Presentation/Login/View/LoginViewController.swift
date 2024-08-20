@@ -45,7 +45,12 @@ final class LoginViewController: BaseViewController {
     }
     
     @objc private func kakaoLoginTapped() {
-        viewModel.input.loginButtonTapped(.kakao)
+        // TODO: 로그인 로직 구현 후 삭제
+        UserDefaults.standard.setValue(true, forKey: UserDefaults.Key.isLogin)
+        NotificationCenter.default.post(
+            name: Notification.Name.authStateChanged,
+            object: nil
+        )
     }
     
     private func addTargets() {
