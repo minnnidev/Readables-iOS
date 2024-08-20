@@ -23,6 +23,7 @@
 		054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F82C5A24D000E64948 /* SearchResultCell.swift */; };
 		054544152C5AA80700E64948 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544142C5AA80700E64948 /* BookInfo.swift */; };
 		054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */; };
+		054FA16B2C7463B50007D9C9 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 054FA16A2C7463B50007D9C9 /* login.json */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
 		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
@@ -138,6 +139,7 @@
 		054543F82C5A24D000E64948 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		054544142C5AA80700E64948 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		054544222C5AAEFC00E64948 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
+		054FA16A2C7463B50007D9C9 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 		057925182C4F927C00834EC6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				054FA16A2C7463B50007D9C9 /* login.json */,
 				AB22AD442C4E8D9F00C9A0F3 /* Assets.xcassets */,
 				AB22AD462C4E8D9F00C9A0F3 /* LaunchScreen.storyboard */,
 			);
@@ -1022,6 +1025,7 @@
 			files = (
 				AB22AD452C4E8D9F00C9A0F3 /* Assets.xcassets in Resources */,
 				AB22AD482C4E8D9F00C9A0F3 /* Base in Resources */,
+				054FA16B2C7463B50007D9C9 /* login.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
