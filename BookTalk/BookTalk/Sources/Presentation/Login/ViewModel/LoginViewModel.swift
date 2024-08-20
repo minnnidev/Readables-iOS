@@ -75,8 +75,12 @@ final class LoginViewModel {
     private func handleLogin(type: LoginType) {
         switch type {
         case .apple:
-            // TODO:
-            return
+            oauthManager.loginWithApple()
+
+            oauthManager.appleLoginSucceed = { credential in
+                print(credential)
+                // TODO: API 호출
+            }
 
         case .kakao:
             oauthManager.loginWithKakao()

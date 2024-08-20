@@ -187,6 +187,7 @@
 		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
 		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
 		AB0784842C74FA1D0017812F /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
+		AB0784862C74FF2C0017812F /* BookTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookTalk.entitlements; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -671,6 +672,7 @@
 		AB22AD3A2C4E8D9D00C9A0F3 /* BookTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AB0784862C74FF2C0017812F /* BookTalk.entitlements */,
 				AB22AD492C4E8D9F00C9A0F3 /* Info.plist */,
 				057925182C4F927C00834EC6 /* Resources */,
 				057925172C4F927100834EC6 /* Sources */,
@@ -1430,9 +1432,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BASE_URL = "http://52.79.187.133:8080";
+				CODE_SIGN_ENTITLEMENTS = BookTalk/BookTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BTX96P3YD4;
+				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
@@ -1467,9 +1470,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BASE_URL = "http://52.79.187.133:8080";
+				CODE_SIGN_ENTITLEMENTS = BookTalk/BookTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BTX96P3YD4;
+				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
