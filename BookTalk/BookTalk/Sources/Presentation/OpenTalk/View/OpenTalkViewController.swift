@@ -14,7 +14,23 @@ final class OpenTalkViewController: BaseViewController {
     private let bookBanner = UIImageView()
     private let pageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private let refreshControl = UIRefreshControl()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
+    private let viewModel: OpenTalkViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: OpenTalkViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -22,6 +38,10 @@ final class OpenTalkViewController: BaseViewController {
         
         setDelegate()
         registerCell()
+        bind()
+        addTarget()
+
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
     }
 
     // MARK: - UI Setup
@@ -59,16 +79,23 @@ final class OpenTalkViewController: BaseViewController {
         bookCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .vertical
+            flowLayout.minimumLineSpacing = 24
+            flowLayout.minimumInteritemSpacing = 8
 
             $0.collectionViewLayout = flowLayout
             $0.backgroundColor = .clear
             $0.contentInset = .init(top: 10, left: 10, bottom: 10, right: 10)
             $0.showsVerticalScrollIndicator = false
+            $0.refreshControl = refreshControl
+        }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
         }
     }
 
     override func setConstraints() {
-        [bookBanner, pageCollectionView, bookCollectionView].forEach {
+        [bookBanner, pageCollectionView, bookCollectionView, indicatorView].forEach {
             view.addSubview($0)
         }
 
@@ -87,6 +114,10 @@ final class OpenTalkViewController: BaseViewController {
             $0.top.equalTo(pageCollectionView.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalTo(bookCollectionView)
+        }
     }
 
     // MARK: - Helpers
@@ -100,9 +131,54 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func registerCell() {
-        pageCollectionView.register(OpenTalkPageCell.self, forCellWithReuseIdentifier: OpenTalkPageCell.identifier)
-        bookCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
+        pageCollectionView.register(
+            OpenTalkPageCell.self,
+            forCellWithReuseIdentifier: OpenTalkPageCell.identifier
+        )
+        bookCollectionView.register(
+            BookImageCell.self,
+            forCellWithReuseIdentifier: BookImageCell.identifier
+        )
     }
+
+    private func addTarget() {
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshCollectionView),
+            for: .valueChanged
+        )
+    }
+
+    private func bind() {
+         viewModel.openTalks.subscribe { [weak self] openTalkResult in
+             guard let self = self else { return }
+
+             guard !viewModel.isLoading.value else {
+                 bookCollectionView.reloadData()
+                 return
+             }
+
+             if openTalkResult.isEmpty {
+                 self.bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
+             } else {
+                 self.bookCollectionView.restore()
+             }
+             bookCollectionView.reloadData()
+         }
+
+         viewModel.isLoading.subscribe { [weak self] isLoading in
+             guard let self = self else { return }
+
+             if isLoading {
+                 if !refreshControl.isRefreshing {
+                     indicatorView.startAnimating()
+                 }
+             } else {
+                 refreshControl.endRefreshing()
+                 indicatorView.stopAnimating()
+             }
+         }
+     }
 
     // MARK: - Actions
 
@@ -111,6 +187,12 @@ final class OpenTalkViewController: BaseViewController {
 
         searchVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchVC, animated: true)
+    }
+
+    @objc private func refreshCollectionView() {
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
+
+        refreshControl.endRefreshing()
     }
 }
 
@@ -125,7 +207,7 @@ extension OpenTalkViewController: UICollectionViewDataSource {
         if collectionView == pageCollectionView {
             return OpenTalkPageType.allCases.count
         } else {
-            return 10
+            return viewModel.openTalks.value.count
         }
     }
 
@@ -140,7 +222,11 @@ extension OpenTalkViewController: UICollectionViewDataSource {
             ) as? OpenTalkPageCell else { return UICollectionViewCell() }
 
             if indexPath.row == 0 {
-                collectionView.selectItem(at: indexPath, animated: false , scrollPosition: .init())
+                collectionView.selectItem(
+                    at: indexPath,
+                    animated: false,
+                    scrollPosition: .init()
+                )
                 cell.isSelected = true
             }
 
@@ -153,6 +239,14 @@ extension OpenTalkViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? BookImageCell else { return UICollectionViewCell() }
 
+            let openTalk = viewModel.openTalks.value[indexPath.item]
+            cell.bind(
+                with: Book(
+                    isbn: "",
+                    imageURL: openTalk.bookImageURL,
+                    title: openTalk.bookName
+                )
+            )
             return cell
         }
     }
@@ -168,7 +262,10 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         if collectionView == pageCollectionView {
-            return CGSize(width: ScreenSize.width/2, height: collectionView.frame.height)
+            return CGSize(
+                width: ScreenSize.width/2,
+                height: collectionView.frame.height
+            )
         } else {
             let width = (ScreenSize.width-36) / 3
             return CGSize(width: width, height: 208)
@@ -177,34 +274,11 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        if collectionView == pageCollectionView {
-            return CGFloat()
-        } else {
-            return 8
-        }
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        if collectionView == pageCollectionView {
-            return CGFloat()
-        } else {
-            return 24
-        }
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        if collectionView == bookCollectionView {
-            // TODO: 디테일뷰로 이동이지만 임시로 채팅뷰로 바로 이동하도록 구현
+        if collectionView == pageCollectionView {
+            viewModel.send(action: .setPageType(OpenTalkPageType.allCases[indexPath.item]))
+        } else {
             let viewModel = ChatViewModel()
             let chattingVC = ChatViewController(viewModel: viewModel)
             chattingVC.hidesBottomBarWhenPushed = true
