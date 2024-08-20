@@ -19,8 +19,6 @@ final class LoginViewController: BaseViewController {
     private let onboardingLabel = UILabel()
     private let waveView = WaveView()
     private let animationView: LottieAnimationView = .init(name: "login")
-//    private let appleLoginButton = SocialLoginButton(type: .apple)
-//    private let kakaoLoginButton = SocialLoginButton(type: .kakao)
     private let loginButtons = UIStackView()
 
     private let appleLoginButton = ASAuthorizationAppleIDButton(
