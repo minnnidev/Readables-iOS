@@ -118,7 +118,7 @@
 		AB949A2F2C7474580005C543 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A2E2C7474580005C543 /* AppFlowController.swift */; };
 		AB949A312C7475630005C543 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A302C7475630005C543 /* NotificationCenter.swift */; };
 		AB949A332C7475720005C543 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A322C7475720005C543 /* UserDefaults+.swift */; };
-		AB949A352C7484F80005C543 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A342C7484F80005C543 /* UICollectionView.swift */; };
+		AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A342C7484F80005C543 /* UICollectionView+.swift */; };
 		ABB901A42C71EDD700727875 /* GenreRandomRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */; };
 		ABB901A82C7241AD00727875 /* IndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */; };
 		ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */; };
@@ -249,7 +249,7 @@
 		AB949A2E2C7474580005C543 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
 		AB949A302C7475630005C543 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		AB949A322C7475720005C543 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
-		AB949A342C7484F80005C543 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		AB949A342C7484F80005C543 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRandomRequestDTO.swift; sourceTree = "<group>"; };
 		ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorFooterView.swift; sourceTree = "<group>"; };
 		ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordResponseDTO.swift; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 				ABDADA3D2C70A6A3009ED3BB /* Date+.swift */,
 				AB949A302C7475630005C543 /* NotificationCenter.swift */,
 				AB949A322C7475720005C543 /* UserDefaults+.swift */,
-				AB949A342C7484F80005C543 /* UICollectionView.swift */,
+				AB949A342C7484F80005C543 /* UICollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1271,7 +1271,7 @@
 				AB2E7BDF2C53B70700CE43CB /* SubcategoryViewModel.swift in Sources */,
 				054FA1832C7465B40007D9C9 /* LoginViewController.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
-				AB949A352C7484F80005C543 /* UICollectionView.swift in Sources */,
+				AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */,
 				ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */,
 				AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
