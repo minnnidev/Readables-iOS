@@ -30,11 +30,21 @@ final class OpenTalkViewModel {
             setOpenTalks(of: selectedPage)
 
         case let .loadOpenTalks(selectedPage):
-            // TODO: api 호출
-            hotOpenTalks = [.stubOpenTalk1]
-            favoriteOpenTalks = [.stubOpenTalk1, .stubOpenTalk2]
+            Task {
+                do {
+                    let result = try await OpenTalkService.getOpenTalkMainList()
 
-            setOpenTalks(of: selectedPage)
+                    await MainActor.run {
+                        hotOpenTalks = result.hotList
+                        favoriteOpenTalks = result.favoriteList
+
+                        setOpenTalks(of: selectedPage)
+                    }
+                    
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 

@@ -18,7 +18,7 @@ struct OpenTalkMainResponseDTO: Decodable {
 }
 
 struct OpenTalkResponseDTO: Decodable {
-    let id: Int?
+    let id: Int
     let bookName: String
     let bookImageURL: String
 }
@@ -27,7 +27,7 @@ extension OpenTalkResponseDTO {
 
     func toModel() -> OpenTalkModel {
         return .init(
-            id: id ?? 0,
+            id: id,
             bookName: bookName,
             bookImageURL: bookImageURL
         )
