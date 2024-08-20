@@ -29,6 +29,7 @@
 		054FA1772C74649B0007D9C9 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1762C74649B0007D9C9 /* LoginType.swift */; };
 		054FA1792C7464C50007D9C9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1782C7464C50007D9C9 /* LoginViewModel.swift */; };
 		054FA17B2C7464E30007D9C9 /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA17A2C7464E30007D9C9 /* SegmentedProgressBar.swift */; };
+		054FA17D2C7465260007D9C9 /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA17C2C7465260007D9C9 /* SocialLoginButton.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
 		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
@@ -149,6 +150,7 @@
 		054FA1762C74649B0007D9C9 /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
 		054FA1782C7464C50007D9C9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		054FA17A2C7464E30007D9C9 /* SegmentedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressBar.swift; sourceTree = "<group>"; };
+		054FA17C2C7465260007D9C9 /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
@@ -985,6 +987,7 @@
 				0579D10A2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift */,
 				0579D1082C6C9D5C0032AC1C /* PaddedLabel.swift */,
 				054FA17A2C7464E30007D9C9 /* SegmentedProgressBar.swift */,
+				054FA17C2C7465260007D9C9 /* SocialLoginButton.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1174,6 +1177,7 @@
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				AB0C0F7E2C5F6D83007812C5 /* CompletedReadingCell.swift in Sources */,
+				054FA17D2C7465260007D9C9 /* SocialLoginButton.swift in Sources */,
 				0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */,
 				ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
