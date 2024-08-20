@@ -1,5 +1,5 @@
 //
-//  UICollectionView.swift
+//  UICollectionView+.swift
 //  BookTalk
 //
 //  Created by 김민 on 8/20/24.

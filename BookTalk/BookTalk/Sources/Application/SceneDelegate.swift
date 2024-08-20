@@ -17,10 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarController()
-        window?.backgroundColor = .white
-        window?.makeKeyAndVisible()
+
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+
+        AppFlowController.shared.show(in: window)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

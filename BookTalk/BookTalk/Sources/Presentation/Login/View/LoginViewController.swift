@@ -30,8 +30,6 @@ final class LoginViewController: BaseViewController {
         
         addTargets()
         bind()
-        
-        viewModel.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +45,12 @@ final class LoginViewController: BaseViewController {
     }
     
     @objc private func kakaoLoginTapped() {
-        viewModel.input.loginButtonTapped(.kakao)
+        // TODO: 로그인 로직 구현 후 삭제
+        UserDefaults.standard.setValue(true, forKey: UserDefaults.Key.isLoggedIn)
+        NotificationCenter.default.post(
+            name: Notification.Name.authStateChanged,
+            object: nil
+        )
     }
     
     private func addTargets() {
@@ -164,17 +167,5 @@ final class LoginViewController: BaseViewController {
     private func makeAnimationViewCircular() {
         animationView.layer.cornerRadius = animationView.frame.width / 2
         animationView.layer.masksToBounds = true
-    }
-}
-
-// MARK: - LoginCoordinatorDelegate
-
-extension LoginViewController: LoginCoordinatorDelegate {
-    
-    func authenticationDidComplete() {
-        let mainTab = MainTabBarController()
-        mainTab.modalPresentationStyle = .fullScreen
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        present(mainTab, animated: true)
     }
 }
