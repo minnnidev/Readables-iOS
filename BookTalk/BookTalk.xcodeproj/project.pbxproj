@@ -36,6 +36,8 @@
 		054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1872C748CEE0007D9C9 /* ProfileInfoView.swift */; };
 		054FA18A2C748D020007D9C9 /* ProfileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1892C748D020007D9C9 /* ProfileInfoViewModel.swift */; };
 		054FA18C2C748D1F0007D9C9 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18B2C748D1F0007D9C9 /* FullScreenViewController.swift */; };
+		054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */; };
+		054FA1902C748DA70007D9C9 /* MyPageStickyTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
 		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
@@ -163,6 +165,8 @@
 		054FA1872C748CEE0007D9C9 /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
 		054FA1892C748D020007D9C9 /* ProfileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoViewModel.swift; sourceTree = "<group>"; };
 		054FA18B2C748D1F0007D9C9 /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
+		054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabView.swift; sourceTree = "<group>"; };
+		054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabViewModel.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
@@ -448,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				054FA1872C748CEE0007D9C9 /* ProfileInfoView.swift */,
+				054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -850,6 +855,7 @@
 			isa = PBXGroup;
 			children = (
 				054FA1892C748D020007D9C9 /* ProfileInfoViewModel.swift */,
+				054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */,
 				AB4CBA7A2C6E0755009A2AB6 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
@@ -1143,6 +1149,7 @@
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
+				054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */,
 				ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */,
 				054FA1812C7465710007D9C9 /* WaveView.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
@@ -1178,6 +1185,7 @@
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				AB0C0F822C5F6E2D007812C5 /* ChatMenuSectionType.swift in Sources */,
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
+				054FA1902C748DA70007D9C9 /* MyPageStickyTabViewModel.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				AB4CBA7B2C6E0755009A2AB6 /* SettingViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
