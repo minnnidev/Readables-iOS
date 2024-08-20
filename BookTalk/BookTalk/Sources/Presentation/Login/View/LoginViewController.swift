@@ -30,8 +30,6 @@ final class LoginViewController: BaseViewController {
         
         addTargets()
         bind()
-        
-        viewModel.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -164,17 +162,5 @@ final class LoginViewController: BaseViewController {
     private func makeAnimationViewCircular() {
         animationView.layer.cornerRadius = animationView.frame.width / 2
         animationView.layer.masksToBounds = true
-    }
-}
-
-// MARK: - LoginCoordinatorDelegate
-
-extension LoginViewController: LoginCoordinatorDelegate {
-    
-    func authenticationDidComplete() {
-        let mainTab = MainTabBarController()
-        mainTab.modalPresentationStyle = .fullScreen
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        present(mainTab, animated: true)
     }
 }

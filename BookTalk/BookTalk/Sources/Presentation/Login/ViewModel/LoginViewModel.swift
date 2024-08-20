@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol LoginCoordinatorDelegate: AnyObject {
-    func authenticationDidComplete()
-}
-
 final class LoginViewModel {
     
     // MARK: - Interactions
@@ -25,8 +21,6 @@ final class LoginViewModel {
     }
     
     // MARK: - Properties
-    
-    weak var delegate: LoginCoordinatorDelegate?
     
     let onboardingMessageManager: OnboardingManager
     
@@ -75,7 +69,7 @@ final class LoginViewModel {
     }
     
     private func handleLogin(type: LoginType) {
-        delegate?.authenticationDidComplete()
+
     }
     
     func cleanupTimers() {
