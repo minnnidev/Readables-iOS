@@ -27,6 +27,7 @@
 		054FA16E2C7463D40007D9C9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 054FA16D2C7463D40007D9C9 /* Lottie */; };
 		054FA1752C74643C0007D9C9 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1742C74643C0007D9C9 /* OnboardingManager.swift */; };
 		054FA1772C74649B0007D9C9 /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1762C74649B0007D9C9 /* LoginType.swift */; };
+		054FA1792C7464C50007D9C9 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1782C7464C50007D9C9 /* LoginViewModel.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
 		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
@@ -145,6 +146,7 @@
 		054FA16A2C7463B50007D9C9 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		054FA1742C74643C0007D9C9 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		054FA1762C74649B0007D9C9 /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
+		054FA1782C7464C50007D9C9 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		054FA1702C7464160007D9C9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				054FA1782C7464C50007D9C9 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1094,6 +1097,7 @@
 				0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */,
 				0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */,
+				054FA1792C7464C50007D9C9 /* LoginViewModel.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
 				0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */,
