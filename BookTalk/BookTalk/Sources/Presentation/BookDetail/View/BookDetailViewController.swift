@@ -86,6 +86,10 @@ final class BookDetailViewController: BaseViewController {
         viewModel.output.isDisliked.subscribe { [weak self] _ in
             self?.updateDislikeButtonState()
         }
+
+        viewModel.output.detailBook.subscribe { [weak self] book in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - Set UI
@@ -141,7 +145,7 @@ final class BookDetailViewController: BaseViewController {
             $0.rowHeight = 600
         }
     }
-    
+
     override func setConstraints() {
         [tableView,
          floatingButton,

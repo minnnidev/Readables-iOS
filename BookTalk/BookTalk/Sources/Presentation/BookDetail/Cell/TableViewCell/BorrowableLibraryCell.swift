@@ -19,12 +19,13 @@ final class BorrowableLibraryCell: BaseTableViewCell {
     
     func bind(_ viewModel: BookDetailViewModel) {
         viewModel.output.borrowableLibraries.subscribe { [weak self] libraries in
-            self?.updateLibraries(libraries)
-            print(libraries)
-        }
+            guard let self = self else { return }
 
-        viewModel.output.showLibraryRegistrationButton.subscribe { [weak self] isButtonVisible in
-            self?.registerLibraryButton.isHidden = !isButtonVisible
+            if let libraries = libraries {
+                updateLibraries(libraries)
+            } else {
+                registerLibraryButton.isHidden = true
+            }
         }
     }
     
