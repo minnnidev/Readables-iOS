@@ -15,14 +15,11 @@ final class BookDetailViewModel {
         let favoriteButtonTap: () -> Void
         let likeButtonTap: () -> Void
         let dislikeButtonTap: () -> Void
+        let loadDetailInfo: () -> Void
     }
     
     struct Output {
-        let coverImageURL: Observable<String>
-        let title: Observable<String>
-        let author: Observable<String>
-        let publisher: Observable<String>
-        let publicationDate: Observable<String>
+        let detailBook: Observable<DetailBookInfo?>
         let availabilityText: Observable<String>
         let availabilityTextColor: Observable<UIColor>
         let areChildButtonsVisible: Observable<Bool>
@@ -35,14 +32,16 @@ final class BookDetailViewModel {
     
     // MARK: - Properties
     
-    private let bookInfo: DetailBookInfo
+    private let isbn: String
+    private let bookDetailOb: Observable<DetailBookInfo?> = Observable(nil)
+
     lazy var input: Input = { return bindInput() }()
-    lazy var output: Output = { return transform() }()
-    
+    lazy var output: Output = { return bindOutput() }()
+
     // MARK: - Initializer
     
-    init(bookInfo: DetailBookInfo) {
-        self.bookInfo = bookInfo
+    init(isbn: String) {
+        self.isbn = isbn
     }
     
     // MARK: - Helpers
@@ -54,10 +53,9 @@ final class BookDetailViewModel {
     }
     
     private func updateAvailability(
-        _ libraries: [Library],
-        isRegistered: Bool
+        _ libraries: [Library]?
     ) -> (text: String, color: UIColor) {
-        guard isRegistered else {
+        guard let libraries = libraries else {
             return ("대출 여부를 확인하려면 도서관을 등록해주세요.", .systemGray)
         }
         
@@ -78,31 +76,40 @@ final class BookDetailViewModel {
             },
             dislikeButtonTap: { [weak self] in
                 self?.toggle(self?.output.isDisliked, opposite: self?.output.isLiked)
+            },
+            loadDetailInfo: {
+                Task { [weak self] in
+                    guard let self = self else { return }
+
+                    do {
+                        let bookDetail = try await BookService.getBookDetail(of: isbn)
+
+                        await MainActor.run {
+                            self.bookDetailOb.value = bookDetail
+                        }
+
+                    } catch let error as NetworkError {
+                        print(error.localizedDescription)
+                    }
+                }
             }
         )
     }
     
-    private func transform() -> Output {
-        let isLibraryRegistered = !bookInfo.registeredLibraries.isEmpty
-        let availability = updateAvailability(
-            bookInfo.registeredLibraries,
-            isRegistered: isLibraryRegistered
-        )
-        
+    private func bindOutput() -> Output {
+        let isRegistered = bookDetailOb.value?.registeredLibraries != nil
+        let availability = updateAvailability(bookDetailOb.value?.registeredLibraries)
+
         return Output(
-            coverImageURL: Observable(bookInfo.basicBookInfo.coverImageURL),
-            title: Observable(bookInfo.basicBookInfo.title),
-            author: Observable(bookInfo.basicBookInfo.author),
-            publisher: Observable(bookInfo.publisher),
-            publicationDate: Observable(bookInfo.publicationDate),
+            detailBook: bookDetailOb,
             availabilityText: Observable(availability.text),
             availabilityTextColor: Observable(availability.color),
-            areChildButtonsVisible: Observable(false),
+            areChildButtonsVisible:  Observable(false),
             isFavorite: Observable(false),
             isLiked: Observable(false),
             isDisliked: Observable(false),
-            showLibraryRegistrationButton: Observable(!isLibraryRegistered),
-            borrowableLibraries: Observable(bookInfo.registeredLibraries)
+            showLibraryRegistrationButton: Observable(isRegistered),
+            borrowableLibraries: Observable(bookDetailOb.value?.registeredLibraries ?? [])
         )
     }
 }

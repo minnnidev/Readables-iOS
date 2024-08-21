@@ -199,12 +199,12 @@ extension HomeViewController: UITableViewDelegate {
         let sectionInfo = viewModel.output.sections.value[indexPath.section]
         
         switch sectionInfo.type {
-        case .recommendation(let bookInfo):
+        case let .recommendation(bookInfo):
             let selectedBook = bookInfo[indexPath.row]
-            let detailViewModel = BookDetailViewModel(bookInfo: selectedBook)
-            let detailVC = BookDetailViewController()
-            detailVC.viewModel = detailViewModel
+            let detailViewModel = BookDetailViewModel(isbn: selectedBook.isbn)
+            let detailVC = BookDetailViewController(viewModel: detailViewModel)
             detailVC.hidesBottomBarWhenPushed = true
+
             navigationController?.pushViewController(detailVC, animated: true)
         default:
             break
@@ -268,10 +268,10 @@ extension HomeViewController: RecommendationBookCellDelegate {
         _ cell: RecommendationBookCell,
         didSelectBook book: DetailBookInfo
     ) {
-        let detailViewModel = BookDetailViewModel(bookInfo: book)
-        let detailVC = BookDetailViewController()
-        detailVC.viewModel = detailViewModel
+        let detailViewModel = BookDetailViewModel(isbn: book.isbn)
+        let detailVC = BookDetailViewController(viewModel: detailViewModel)
         detailVC.hidesBottomBarWhenPushed = true
+        
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

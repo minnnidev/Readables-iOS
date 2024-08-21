@@ -10,13 +10,26 @@ import UIKit
 final class BookDetailViewController: BaseViewController {
     
     // MARK: - Properties
-    
-    var viewModel: BookDetailViewModel!
+
     private var favoriteButton = UIBarButtonItem()
     private let floatingButton = UIButton(type: .system)
     private let likeButton = UIButton(type: .system)
     private let dislikeButton = UIButton(type: .system)
     private let tableView = UITableView(frame: .zero, style: .plain)
+
+    private let viewModel: BookDetailViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: BookDetailViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     
@@ -27,6 +40,8 @@ final class BookDetailViewController: BaseViewController {
         bind()
         registerCell()
         setDelegate()
+
+        viewModel.input.loadDetailInfo()
     }
     
     // MARK: - Actions
@@ -83,6 +98,7 @@ final class BookDetailViewController: BaseViewController {
             action: #selector(handleFavoriteButton)
         )
         
+        navigationItem.title = ""
         navigationItem.rightBarButtonItem = favoriteButton
     }
     
@@ -118,6 +134,11 @@ final class BookDetailViewController: BaseViewController {
         dislikeButton.do {
             $0.configuration?.baseBackgroundColor = .systemRed
             $0.setImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
+        }
+
+        // TODO: 삭제
+        tableView.do {
+            $0.rowHeight = 600
         }
     }
     
@@ -247,6 +268,7 @@ extension BookDetailViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             cell.bind(viewModel)
             return cell
+
         } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: BorrowableLibraryCell.identifier,

@@ -50,6 +50,8 @@
 		0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */; };
 		0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */; };
 		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
+		AB07848B2C75A89E0017812F /* BookDetailRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07848A2C75A89E0017812F /* BookDetailRequestDTO.swift */; };
+		AB07848D2C75A92D0017812F /* BookDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -183,6 +185,8 @@
 		0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
 		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
+		AB07848A2C75A89E0017812F /* BookDetailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailRequestDTO.swift; sourceTree = "<group>"; };
+		AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailResponseDTO.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -565,6 +569,14 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		AB0784892C75A88E0017812F /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				AB07848A2C75A89E0017812F /* BookDetailRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		AB0C0F552C5BD557007812C5 /* OpenTalk */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,6 +932,7 @@
 		ABB901A92C72799400727875 /* Book */ = {
 			isa = PBXGroup;
 			children = (
+				AB0784892C75A88E0017812F /* Request */,
 				ABB901AC2C7279AF00727875 /* Response */,
 			);
 			path = Book;
@@ -929,6 +942,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */,
+				AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1161,6 +1175,7 @@
 				ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */,
 				AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */,
 				ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */,
+				AB07848D2C75A92D0017812F /* BookDetailResponseDTO.swift in Sources */,
 				ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */,
 				0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */,
 				0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
@@ -1201,6 +1216,7 @@
 				AB82055C2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
 				AB4CBA602C6BB0E9009A2AB6 /* TargetType.swift in Sources */,
+				AB07848B2C75A89E0017812F /* BookDetailRequestDTO.swift in Sources */,
 				0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */,
 				054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */,
 				AB4CBA5D2C6BAFA5009A2AB6 /* NetworkEnvironment.swift in Sources */,

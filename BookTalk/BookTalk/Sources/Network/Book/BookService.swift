@@ -16,4 +16,14 @@ struct BookService {
 
         return result.map { $0.toModel() }
     }
+
+    static func getBookDetail(of isbn: String) async throws -> DetailBookInfo {
+        let params: BookDetailRequestDTO = .init(isbn: isbn)
+
+        let result: BookDetailResponseDTO = try await NetworkService.shared.request(
+            target: BookTarget.getBookDetail(params: params)
+        )
+
+        return result.toModel()
+    }
 }

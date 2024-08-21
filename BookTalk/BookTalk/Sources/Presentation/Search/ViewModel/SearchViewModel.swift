@@ -71,28 +71,7 @@ final class SearchViewModel {
             }
             
             filteredBooksRelay.value = filteredBooks
-            updateAvailability(for: filteredBooks)
         }
-    }
-    
-    private func updateAvailability(for books: [DetailBookInfo]) {
-        var availabilityTexts: [String] = []
-        var availabilityColors: [UIColor] = []
-        
-        for book in books {
-            let isRegistered = !book.registeredLibraries.isEmpty
-            if isRegistered {
-                let isAvailable = book.registeredLibraries.contains { $0.isAvailable }
-                availabilityTexts.append(isAvailable ? "대출 가능" : "대출 불가능")
-                availabilityColors.append(isAvailable ? UIColor.systemGreen : .systemRed)
-            } else {
-                availabilityTexts.append("대출 여부를 확인하려면 도서관을 등록해주세요.")
-                availabilityColors.append(.systemGray)
-            }
-        }
-        
-        availabilityTextsRelay.value = availabilityTexts
-        availabilityTextColorsRelay.value = availabilityColors
     }
     
     private func bindInput() -> Input {
