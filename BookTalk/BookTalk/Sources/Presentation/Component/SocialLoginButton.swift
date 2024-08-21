@@ -41,6 +41,7 @@ final class SocialLoginButton: UIButton {
                 authorizationButtonStyle: .black
             )
             self.addSubview(apple)
+
             self.do {
                 $0.appleLoginButton = apple
             }

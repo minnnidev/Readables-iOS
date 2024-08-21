@@ -19,10 +19,14 @@ final class LoginViewController: BaseViewController {
     private let onboardingLabel = UILabel()
     private let waveView = WaveView()
     private let animationView: LottieAnimationView = .init(name: "login")
-    private let appleLoginButton = SocialLoginButton(type: .apple)
-    private let kakaoLoginButton = SocialLoginButton(type: .kakao)
     private let loginButtons = UIStackView()
-    
+
+    private let appleLoginButton = ASAuthorizationAppleIDButton(
+        authorizationButtonType: .signIn,
+        authorizationButtonStyle: .black
+    )
+    private let kakaoLoginButton = UIButton()
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -30,8 +34,6 @@ final class LoginViewController: BaseViewController {
         
         addTargets()
         bind()
-        
-        viewModel.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,8 +53,16 @@ final class LoginViewController: BaseViewController {
     }
     
     private func addTargets() {
-        appleLoginButton.addTarget(self, action: #selector(appleLoginTapped), for: .touchUpInside)
-        kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginTapped), for: .touchUpInside)
+        appleLoginButton.addTarget(
+            self,
+            action: #selector(appleLoginTapped),
+            for: .touchUpInside
+        )
+        kakaoLoginButton.addTarget(
+            self,
+            action: #selector(kakaoLoginTapped),
+            for: .touchUpInside
+        )
     }
     
     // MARK: - Bind
@@ -106,9 +116,17 @@ final class LoginViewController: BaseViewController {
             $0.isLayoutMarginsRelativeArrangement = true
             $0.layoutMargins = .init(top: 0, left: 20, bottom: 0, right: 20)
         }
+
+        kakaoLoginButton.do {
+            $0.setBackgroundImage(UIImage(named: "kakaoLoginButton"), for: .normal)
+        }
     }
     
     override func setConstraints() {
+        [appleLoginButton, kakaoLoginButton].forEach {
+            loginButtons.addArrangedSubview($0)
+        }
+
         [progressView, onboardingLabel, waveView, animationView, loginButtons].forEach {
             view.addSubview($0)
         }
@@ -138,7 +156,15 @@ final class LoginViewController: BaseViewController {
             $0.left.equalToSuperview()
             $0.height.equalTo(animationView.snp.width)
         }
-        
+
+        appleLoginButton.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+
+        kakaoLoginButton.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+
         loginButtons.snp.makeConstraints {
             $0.centerX.left.equalToSuperview()
             $0.bottom.equalTo(view.snp.bottom)
@@ -164,17 +190,5 @@ final class LoginViewController: BaseViewController {
     private func makeAnimationViewCircular() {
         animationView.layer.cornerRadius = animationView.frame.width / 2
         animationView.layer.masksToBounds = true
-    }
-}
-
-// MARK: - LoginCoordinatorDelegate
-
-extension LoginViewController: LoginCoordinatorDelegate {
-    
-    func authenticationDidComplete() {
-        let mainTab = MainTabBarController()
-        mainTab.modalPresentationStyle = .fullScreen
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        present(mainTab, animated: true)
     }
 }

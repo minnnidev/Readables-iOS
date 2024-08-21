@@ -57,6 +57,9 @@
 		0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */; };
 		0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */; };
 		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
+		AB0784812C74F8910017812F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784802C74F8910017812F /* KakaoSDKAuth */; };
+		AB0784832C74F8910017812F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784822C74F8910017812F /* KakaoSDKUser */; };
+		AB0784852C74FA1D0017812F /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0784842C74FA1D0017812F /* OAuthManager.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -122,11 +125,20 @@
 		AB82055C2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */; };
 		AB8205602C6E67850014C5A5 /* LoanItemResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82055F2C6E67850014C5A5 /* LoanItemResponseDTO.swift */; };
 		AB8205622C6E687D0014C5A5 /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205612C6E687D0014C5A5 /* Encodable+.swift */; };
+		AB949A2F2C7474580005C543 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A2E2C7474580005C543 /* AppFlowController.swift */; };
+		AB949A312C7475630005C543 /* NotificationCenter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A302C7475630005C543 /* NotificationCenter+.swift */; };
+		AB949A332C7475720005C543 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A322C7475720005C543 /* UserDefaults+.swift */; };
+		AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A342C7484F80005C543 /* UICollectionView+.swift */; };
 		ABB901A42C71EDD700727875 /* GenreRandomRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */; };
 		ABB901A82C7241AD00727875 /* IndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */; };
 		ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */; };
 		ABB901AF2C727A2E00727875 /* BookTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AE2C727A2E00727875 /* BookTarget.swift */; };
 		ABB901B12C727A3400727875 /* BookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901B02C727A3400727875 /* BookService.swift */; };
+		ABB901C42C73980600727875 /* OpenTalkResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */; };
+		ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C62C73983700727875 /* OpenTalkBookModel.swift */; };
+		ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C92C7398C100727875 /* OpenTalkTarget.swift */; };
+		ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CB2C7398CA00727875 /* OpenTalkService.swift */; };
+		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDADA3D2C70A6A3009ED3BB /* Date+.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
@@ -188,6 +200,8 @@
 		0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
 		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
+		AB0784842C74FA1D0017812F /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
+		AB0784862C74FF2C0017812F /* BookTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookTalk.entitlements; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -251,11 +265,20 @@
 		AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreTrendRequestDTO.swift; path = BookTalk/Sources/DTO/Genre/Request/GenreTrendRequestDTO.swift; sourceTree = SOURCE_ROOT; };
 		AB82055F2C6E67850014C5A5 /* LoanItemResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanItemResponseDTO.swift; sourceTree = "<group>"; };
 		AB8205612C6E687D0014C5A5 /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
+		AB949A2E2C7474580005C543 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
+		AB949A302C7475630005C543 /* NotificationCenter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+.swift"; sourceTree = "<group>"; };
+		AB949A322C7475720005C543 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
+		AB949A342C7484F80005C543 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRandomRequestDTO.swift; sourceTree = "<group>"; };
 		ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorFooterView.swift; sourceTree = "<group>"; };
 		ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordResponseDTO.swift; sourceTree = "<group>"; };
 		ABB901AE2C727A2E00727875 /* BookTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTarget.swift; sourceTree = "<group>"; };
 		ABB901B02C727A3400727875 /* BookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookService.swift; sourceTree = "<group>"; };
+		ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkResponseDTO.swift; sourceTree = "<group>"; };
+		ABB901C62C73983700727875 /* OpenTalkBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkBookModel.swift; sourceTree = "<group>"; };
+		ABB901C92C7398C100727875 /* OpenTalkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkTarget.swift; sourceTree = "<group>"; };
+		ABB901CB2C7398CA00727875 /* OpenTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkService.swift; sourceTree = "<group>"; };
+		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABDADA3D2C70A6A3009ED3BB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
@@ -271,9 +294,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB0784812C74F8910017812F /* KakaoSDKAuth in Frameworks */,
 				AB22AD512C4E92C100C9A0F3 /* SnapKit in Frameworks */,
 				AB4CBA592C6BADD3009A2AB6 /* Alamofire in Frameworks */,
 				ABED440D2C66549E0073398A /* DGCharts in Frameworks */,
+				AB0784832C74F8910017812F /* KakaoSDKUser in Frameworks */,
 				AB22AD542C4E92C700C9A0F3 /* Then in Frameworks */,
 				AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */,
 				054FA16E2C7463D40007D9C9 /* Lottie in Frameworks */,
@@ -448,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				054FA1742C74643C0007D9C9 /* OnboardingManager.swift */,
+				AB0784842C74FA1D0017812F /* OAuthManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -540,6 +566,7 @@
 			children = (
 				AB22AD3B2C4E8D9D00C9A0F3 /* AppDelegate.swift */,
 				AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */,
+				AB949A2E2C7474580005C543 /* AppFlowController.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -634,6 +661,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */,
+				ABB901C62C73983700727875 /* OpenTalkBookModel.swift */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -643,6 +671,7 @@
 			children = (
 				AB0C0F6C2C5BFE5C007812C5 /* ChatViewModel.swift */,
 				AB4CBA4C2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift */,
+				ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -666,6 +695,7 @@
 		AB22AD3A2C4E8D9D00C9A0F3 /* BookTalk */ = {
 			isa = PBXGroup;
 			children = (
+				AB0784862C74FF2C0017812F /* BookTalk.entitlements */,
 				AB22AD492C4E8D9F00C9A0F3 /* Info.plist */,
 				057925182C4F927C00834EC6 /* Resources */,
 				057925172C4F927100834EC6 /* Sources */,
@@ -693,6 +723,9 @@
 				AB4CBA6F2C6DEFB8009A2AB6 /* Keychain+.swift */,
 				AB8205612C6E687D0014C5A5 /* Encodable+.swift */,
 				ABDADA3D2C70A6A3009ED3BB /* Date+.swift */,
+				AB949A302C7475630005C543 /* NotificationCenter+.swift */,
+				AB949A322C7475720005C543 /* UserDefaults+.swift */,
+				AB949A342C7484F80005C543 /* UICollectionView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -811,6 +844,7 @@
 				AB4CBA5E2C6BB059009A2AB6 /* Foundation */,
 				AB8205532C6E66060014C5A5 /* Genre */,
 				ABB901AD2C727A2000727875 /* Book */,
+				ABB901C82C7398AC00727875 /* OpenTalk */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -889,6 +923,7 @@
 			children = (
 				AB82055A2C6E666D0014C5A5 /* Genre */,
 				ABB901A92C72799400727875 /* Book */,
+				ABB901C22C7397E700727875 /* OpenTalk */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -942,6 +977,31 @@
 				ABB901B02C727A3400727875 /* BookService.swift */,
 			);
 			path = Book;
+			sourceTree = "<group>";
+		};
+		ABB901C22C7397E700727875 /* OpenTalk */ = {
+			isa = PBXGroup;
+			children = (
+				ABB901C52C73982800727875 /* Response */,
+			);
+			path = OpenTalk;
+			sourceTree = "<group>";
+		};
+		ABB901C52C73982800727875 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		ABB901C82C7398AC00727875 /* OpenTalk */ = {
+			isa = PBXGroup;
+			children = (
+				ABB901C92C7398C100727875 /* OpenTalkTarget.swift */,
+				ABB901CB2C7398CA00727875 /* OpenTalkService.swift */,
+			);
+			path = OpenTalk;
 			sourceTree = "<group>";
 		};
 		ABD10DE62C516D26005F290E /* Category */ = {
@@ -1069,6 +1129,8 @@
 				AB4CBA582C6BADD3009A2AB6 /* Alamofire */,
 				AB4ECF452C70848C00DC24A0 /* Kingfisher */,
 				054FA16D2C7463D40007D9C9 /* Lottie */,
+				AB0784802C74F8910017812F /* KakaoSDKAuth */,
+				AB0784822C74F8910017812F /* KakaoSDKUser */,
 			);
 			productName = BookTalk;
 			productReference = AB22AD382C4E8D9D00C9A0F3 /* BookTalk.app */;
@@ -1105,6 +1167,7 @@
 				AB4CBA572C6BADD3009A2AB6 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AB4ECF442C70848C00DC24A0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				054FA16C2C7463D40007D9C9 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				AB07847F2C74F8910017812F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = AB22AD392C4E8D9D00C9A0F3 /* Products */;
 			projectDirPath = "";
@@ -1133,10 +1196,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB949A332C7475720005C543 /* UserDefaults+.swift in Sources */,
 				AB3F15462C611DC100C77E13 /* Observable.swift in Sources */,
 				054543352C5374D900E64948 /* SearchViewController.swift in Sources */,
 				ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */,
 				AB4CBA542C6B3FCE009A2AB6 /* AddBookViewModel.swift in Sources */,
+				ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */,
 				ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */,
 				0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */,
 				0579D10B2C6C9D7F0032AC1C /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
@@ -1177,6 +1242,7 @@
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */,
 				AB4CBA622C6BB191009A2AB6 /* APITask.swift in Sources */,
+				AB0784852C74FA1D0017812F /* OAuthManager.swift in Sources */,
 				AB82055C2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift in Sources */,
 				054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
@@ -1186,6 +1252,7 @@
 				AB4CBA5D2C6BAFA5009A2AB6 /* NetworkEnvironment.swift in Sources */,
 				ABB901A42C71EDD700727875 /* GenreRandomRequestDTO.swift in Sources */,
 				AB4CBA6E2C6DE391009A2AB6 /* NetworkError.swift in Sources */,
+				ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */,
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */,
@@ -1196,9 +1263,11 @@
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				AB4CBA7B2C6E0755009A2AB6 /* SettingViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
+				ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */,
 				AB0C0F652C5BF3E3007812C5 /* OtherChatBubbleCell.swift in Sources */,
 				054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */,
 				AB2E7BDA2C53B3F300CE43CB /* SubcategoryViewController.swift in Sources */,
+				AB949A312C7475630005C543 /* NotificationCenter+.swift in Sources */,
 				ABB901A82C7241AD00727875 /* IndicatorFooterView.swift in Sources */,
 				AB4CBA562C6B44D7009A2AB6 /* LikedTitleHeaderView.swift in Sources */,
 				AB8205602C6E67850014C5A5 /* LoanItemResponseDTO.swift in Sources */,
@@ -1242,17 +1311,21 @@
 				AB2E7BC12C525CC700CE43CB /* CategoryType.swift in Sources */,
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				AB4CBA782C6E037B009A2AB6 /* SettingCell.swift in Sources */,
+				ABB901C42C73980600727875 /* OpenTalkResponseDTO.swift in Sources */,
 				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
 				AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */,
+				AB949A2F2C7474580005C543 /* AppFlowController.swift in Sources */,
 				0579253B2C4FF4CA00834EC6 /* HomeViewController.swift in Sources */,
 				AB2E7BDF2C53B70700CE43CB /* SubcategoryViewModel.swift in Sources */,
 				054FA18A2C748D020007D9C9 /* ProfileInfoViewModel.swift in Sources */,
 				054FA1832C7465B40007D9C9 /* LoginViewController.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
+				AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */,
 				ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */,
 				AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
+				ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1395,9 +1468,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BASE_URL = "http://52.79.187.133:8080";
+				CODE_SIGN_ENTITLEMENTS = BookTalk/BookTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BTX96P3YD4;
+				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
@@ -1414,7 +1488,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = min.BookTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = ieum.Readables;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1432,9 +1506,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BASE_URL = "http://52.79.187.133:8080";
+				CODE_SIGN_ENTITLEMENTS = BookTalk/BookTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BTX96P3YD4;
+				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
@@ -1451,7 +1526,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = min.BookTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = ieum.Readables;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1493,6 +1568,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.5.0;
+			};
+		};
+		AB07847F2C74F8910017812F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		AB22AD4F2C4E92C100C9A0F3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -1542,6 +1625,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 054FA16C2C7463D40007D9C9 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		AB0784802C74F8910017812F /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB07847F2C74F8910017812F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		AB0784822C74F8910017812F /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB07847F2C74F8910017812F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 		AB22AD502C4E92C100C9A0F3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

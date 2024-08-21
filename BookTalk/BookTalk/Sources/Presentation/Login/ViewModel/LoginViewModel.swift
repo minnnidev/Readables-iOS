@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol LoginCoordinatorDelegate: AnyObject {
-    func authenticationDidComplete()
-}
-
 final class LoginViewModel {
     
     // MARK: - Interactions
@@ -25,14 +21,15 @@ final class LoginViewModel {
     }
     
     // MARK: - Properties
-    
-    weak var delegate: LoginCoordinatorDelegate?
-    
+
+    private let oauthManager = OAuthManager()
+
     let onboardingMessageManager: OnboardingManager
     
     lazy var input: Input = { bindInput() }()
     lazy var output: Output = { transform() }()
-    
+
+
     // MARK: - Initializer
     
     init(onboardingMessageManager:
@@ -47,6 +44,7 @@ final class LoginViewModel {
     ) {
         self.onboardingMessageManager = onboardingMessageManager
         setupBindings()
+
         onboardingMessageManager.startRotation()
     }
     
@@ -75,7 +73,18 @@ final class LoginViewModel {
     }
     
     private func handleLogin(type: LoginType) {
-        delegate?.authenticationDidComplete()
+        switch type {
+        case .apple:
+            oauthManager.loginWithApple()
+
+            oauthManager.appleLoginSucceed = { credential in
+                print(credential)
+                // TODO: API 호출
+            }
+
+        case .kakao:
+            oauthManager.loginWithKakao()
+        }
     }
     
     func cleanupTimers() {
