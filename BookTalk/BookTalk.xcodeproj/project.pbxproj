@@ -38,8 +38,6 @@
 		054FA18C2C748D1F0007D9C9 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18B2C748D1F0007D9C9 /* FullScreenViewController.swift */; };
 		054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */; };
 		054FA1902C748DA70007D9C9 /* MyPageStickyTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */; };
-		054FA1922C748E1D0007D9C9 /* FinishedBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1912C748E1D0007D9C9 /* FinishedBookCell.swift */; };
-		054FA1942C748E350007D9C9 /* FavoriteBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1932C748E350007D9C9 /* FavoriteBookCell.swift */; };
 		054FA1962C748E740007D9C9 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1952C748E740007D9C9 /* EditInfoViewController.swift */; };
 		054FA1982C748E9F0007D9C9 /* EditLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1972C748E9F0007D9C9 /* EditLibraryViewController.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
@@ -171,8 +169,6 @@
 		054FA18B2C748D1F0007D9C9 /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabView.swift; sourceTree = "<group>"; };
 		054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabViewModel.swift; sourceTree = "<group>"; };
-		054FA1912C748E1D0007D9C9 /* FinishedBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedBookCell.swift; sourceTree = "<group>"; };
-		054FA1932C748E350007D9C9 /* FavoriteBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBookCell.swift; sourceTree = "<group>"; };
 		054FA1952C748E740007D9C9 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		054FA1972C748E9F0007D9C9 /* EditLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLibraryViewController.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
@@ -857,8 +853,6 @@
 			isa = PBXGroup;
 			children = (
 				AB4CBA772C6E037B009A2AB6 /* SettingCell.swift */,
-				054FA1912C748E1D0007D9C9 /* FinishedBookCell.swift */,
-				054FA1932C748E350007D9C9 /* FavoriteBookCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1223,8 +1217,6 @@
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
 				054FA17F2C7465490007D9C9 /* StickyHeaderFlowLayout.swift in Sources */,
-				054FA1922C748E1D0007D9C9 /* FinishedBookCell.swift in Sources */,
-				054FA1942C748E350007D9C9 /* FavoriteBookCell.swift in Sources */,
 				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,

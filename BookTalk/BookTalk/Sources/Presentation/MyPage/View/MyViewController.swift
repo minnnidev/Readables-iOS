@@ -13,6 +13,7 @@ final class MyViewController: BaseViewController {
     
     private let profileInfoViewModel = ProfileInfoViewModel()
     private let myPageStickyTabViewModel = MyPageStickyTabViewModel()
+    private let addBookViewModel = AddBookViewModel()
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
@@ -109,18 +110,16 @@ final class MyViewController: BaseViewController {
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                 withReuseIdentifier: ProfileInfoView.identifier
             )
+            
             $0.register(
                 MyPageStickyTabView.self,
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                 withReuseIdentifier: MyPageStickyTabView.identifier
             )
+            
             $0.register(
-                FinishedBookCell.self,
-                forCellWithReuseIdentifier: FinishedBookCell.identifier
-            )
-            $0.register(
-                FavoriteBookCell.self,
-                forCellWithReuseIdentifier: FavoriteBookCell.identifier
+                BookImageCell.self,
+                forCellWithReuseIdentifier: BookImageCell.identifier
             )
         }
     }
@@ -163,19 +162,29 @@ extension MyViewController: UICollectionViewDataSource {
         
         if myPageStickyTabViewModel.output.currentTabIndex.value == 0 {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: FinishedBookCell.identifier,
+                withReuseIdentifier: BookImageCell.identifier,
                 for: indexPath
-            ) as? FinishedBookCell else {
+            ) as? BookImageCell else {
                 return UICollectionViewCell()
             }
+            
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.cornerRadius = 10
+            
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: FavoriteBookCell.identifier,
+                withReuseIdentifier: BookImageCell.identifier,
                 for: indexPath
-            ) as? FavoriteBookCell else {
+            ) as? BookImageCell else {
                 return UICollectionViewCell()
             }
+            
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.layer.cornerRadius = 10
+            
             return cell
         }
     }
@@ -293,7 +302,12 @@ private extension MyViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createProfileHeaderItem()]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10,
+            leading: 0,
+            bottom: 10,
+            trailing: 0
+        )
         
         return section
     }
@@ -301,7 +315,7 @@ private extension MyViewController {
     static func createStickyTabHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(50)
+            heightDimension: .absolute(50)
         )
         
         let headerItem = NSCollectionLayoutBoundarySupplementaryItem(
@@ -317,22 +331,27 @@ private extension MyViewController {
     
     static func createBooksSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0 / 3.0),
-            heightDimension: .fractionalWidth(1.0 / 2.0)
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(150)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 1, bottom: 1, trailing: 1)
+        item.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(1.0 / 2.0)
+            heightDimension: .estimated(150)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createStickyTabHeaderItem()]
-        section.interGroupSpacing = 1
-        section.contentInsets = NSDirectionalEdgeInsets(top: -1, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10,
+            leading: 0,
+            bottom: 10,
+            trailing: 0
+        )
+        section.interGroupSpacing = 10
         
         return section
     }
