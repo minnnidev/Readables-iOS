@@ -16,8 +16,7 @@ final class AddBookViewModel {
 
     // MARK: - Properties
 
-    private(set) var favoriteBooks = Observable<[Book]>([])
-    private(set) var books = Observable<[String]>([]) // TODO: 수정
+    private(set) var books = Observable<[Book]>([])
     private(set) var searchText = Observable("")
     private(set) var loadState = Observable(LoadState.initial)
 
@@ -41,7 +40,7 @@ final class AddBookViewModel {
                     let favoriteBookResult = try await UserService.getFavoriteBooks()
 
                     await MainActor.run {
-                        favoriteBooks.value = favoriteBookResult
+                        books.value = favoriteBookResult
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
@@ -60,7 +59,7 @@ final class AddBookViewModel {
                     )
 
                     await MainActor.run {
-                        favoriteBooks.value = searchResult
+                        books.value = searchResult
                         loadState.value = .completed
                     }
                 } catch let error as NetworkError {

@@ -109,7 +109,7 @@ final class AddBookViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.favoriteBooks.subscribe { [weak self] _ in
+        viewModel.books.subscribe { [weak self] _ in
             self?.resultCollectionView.reloadData()
         }
 
@@ -134,7 +134,7 @@ final class AddBookViewController: BaseViewController {
             case .completed:
                 indicatorView.stopAnimating()
 
-                if viewModel.favoriteBooks.value.isEmpty {
+                if viewModel.books.value.isEmpty {
                     resultCollectionView.setEmptyMessage("검색 결과가 없습니다.")
                 } else {
                     resultCollectionView.restore()
@@ -152,7 +152,7 @@ extension AddBookViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return viewModel.favoriteBooks.value.count
+        return viewModel.books.value.count
     }
 
     func collectionView(
@@ -164,7 +164,7 @@ extension AddBookViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
-        cell.bind(with: viewModel.favoriteBooks.value[indexPath.item])
+        cell.bind(with: viewModel.books.value[indexPath.item])
         return cell
     }
 }
