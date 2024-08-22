@@ -171,6 +171,14 @@ extension AddBookViewController: UICollectionViewDataSource {
         cell.bind(with: viewModel.books.value[indexPath.item])
         return cell
     }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        // TODO: 읽은 책 추가 API 호출 후 pop
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
