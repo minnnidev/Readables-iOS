@@ -135,6 +135,7 @@
 		ABAAFDB22C76FDAD00FDA084 /* SearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB12C76FDAD00FDA084 /* SearchRequestDTO.swift */; };
 		ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB42C76FDE300FDA084 /* SearchService.swift */; };
 		ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB62C76FDED00FDA084 /* SearchTarget.swift */; };
+		ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDBA2C76FE9E00FDA084 /* LoadState.swift */; };
 		ABB901A42C71EDD700727875 /* GenreRandomRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */; };
 		ABB901A82C7241AD00727875 /* IndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */; };
 		ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */; };
@@ -281,6 +282,7 @@
 		ABAAFDB12C76FDAD00FDA084 /* SearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequestDTO.swift; sourceTree = "<group>"; };
 		ABAAFDB42C76FDE300FDA084 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		ABAAFDB62C76FDED00FDA084 /* SearchTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTarget.swift; sourceTree = "<group>"; };
+		ABAAFDBA2C76FE9E00FDA084 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRandomRequestDTO.swift; sourceTree = "<group>"; };
 		ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorFooterView.swift; sourceTree = "<group>"; };
 		ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordResponseDTO.swift; sourceTree = "<group>"; };
@@ -748,8 +750,8 @@
 				AB2E7BC32C5260AB00CE43CB /* Extension */,
 				AB2E7BD72C53B37500CE43CB /* Constant.swift */,
 				AB3F15452C611DC100C77E13 /* Observable.swift */,
-				051155F02C64B08F00230CFE /* ReusableIdentifier.swift */,
 				AB4CBA652C6BB398009A2AB6 /* KeychainManager.swift */,
+				ABAAFDBA2C76FE9E00FDA084 /* LoadState.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -775,6 +777,7 @@
 				051156002C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift */,
 				051156022C64C71B00230CFE /* BaseTableViewCell.swift */,
 				051156042C64C73F00230CFE /* BaseCollectionViewCell.swift */,
+				051155F02C64B08F00230CFE /* ReusableIdentifier.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1299,6 +1302,7 @@
 				ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */,
 				ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */,
 				054FA1812C7465710007D9C9 /* WaveView.swift in Sources */,
+				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
