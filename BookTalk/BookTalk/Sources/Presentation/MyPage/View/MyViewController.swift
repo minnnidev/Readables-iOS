@@ -249,7 +249,9 @@ extension MyViewController: MyPageStickyTabViewDelegate {
 extension MyViewController: ProfileInfoViewModelDelegate {
     
     func didTapAddFinishedBookButton() {
-        let searchVC = SearchViewController()
+        let viewModel = SearchViewModel()
+        let searchVC = SearchViewController(viewModel: viewModel)
+        
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
