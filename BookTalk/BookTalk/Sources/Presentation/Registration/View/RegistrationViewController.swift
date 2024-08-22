@@ -286,6 +286,7 @@ final class RegistrationViewController: BaseViewController {
             $0.datePickerMode = .date
             $0.preferredDatePickerStyle = .wheels
             $0.locale = .init(identifier: "ko-KR")
+            $0.maximumDate = Date()
         }
         
         signUpButton.do {
