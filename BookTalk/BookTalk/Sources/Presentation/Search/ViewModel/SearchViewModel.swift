@@ -116,11 +116,9 @@ final class SearchViewModel {
 
             isKeywordSearchRelay.value = isKeyword
 
-            if searchText != nil {
-                placeholderText.value = isKeyword ? 
-                    "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
-                loadResultFirstTime(of: searchTextOb.value)
-            }
+            placeholderText.value = isKeyword ?
+                "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+            loadResultFirstTime(of: searchTextOb.value)
         }
 
         let loadMoreResults: () -> Void = { [weak self] in
