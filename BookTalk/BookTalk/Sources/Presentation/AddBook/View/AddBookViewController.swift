@@ -106,13 +106,15 @@ final class AddBookViewController: BaseViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: LikedTitleHeaderView.identifier
         )
+
+        resultCollectionView.register(
+            IndicatorFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: IndicatorFooterView.identifier
+        )
     }
 
     private func bind() {
-        viewModel.books.subscribe { [weak self] _ in
-            self?.resultCollectionView.reloadData()
-        }
-
         viewModel.books.subscribe { [weak self] _ in
             self?.resultCollectionView.reloadData()
         }
@@ -187,13 +189,25 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: LikedTitleHeaderView.identifier,
-            for: indexPath
-        ) as? LikedTitleHeaderView else { return UICollectionReusableView() }
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: LikedTitleHeaderView.identifier,
+                for: indexPath
+            ) as? LikedTitleHeaderView else { return UICollectionReusableView() }
 
-        return headerView
+            return headerView
+        } else if kind == UICollectionView.elementKindSectionFooter {
+            guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                withReuseIdentifier: IndicatorFooterView.identifier,
+                for: indexPath
+            ) as? IndicatorFooterView else { return UICollectionReusableView() }
+
+            return footerView
+        }
+
+        return UICollectionReusableView()
     }
 
     func collectionView(
@@ -201,11 +215,26 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
     ) -> CGSize {
+        guard viewModel.hasMoreResult.value else { return .zero }
+
         if viewModel.loadState.value == .initial {
             return CGSize(width: collectionView.frame.width, height: 50)
         } else {
             return .zero
         }
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        guard viewModel.loadState.value != .initial else { return }
+
+        let isLoadPoint = indexPath.item == viewModel.books.value.count - 9
+        guard isLoadPoint else { return }
+
+        viewModel.send(action: .loadMoreResult(query: viewModel.searchText.value))
     }
 }
 

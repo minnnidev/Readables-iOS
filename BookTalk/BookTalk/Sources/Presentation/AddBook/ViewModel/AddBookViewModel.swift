@@ -12,6 +12,7 @@ final class AddBookViewModel {
     enum Action {
         case loadFavoriteBooks
         case loadResult(query: String)
+        case loadMoreResult(query: String)
     }
 
     // MARK: - Properties
@@ -19,6 +20,10 @@ final class AddBookViewModel {
     private(set) var books = Observable<[Book]>([])
     private(set) var searchText = Observable("")
     private(set) var loadState = Observable(LoadState.initial)
+    private(set) var hasMoreResult = Observable(true)
+
+    private var currentPage = 1
+    private var pageSize = 50
 
     private let bookName: String?
 
@@ -48,25 +53,51 @@ final class AddBookViewModel {
             }
 
         case let .loadResult(query):
+            searchText.value = query
             loadState.value = .loading
-            
-            Task {
-                do {
-                    let searchResult = try await SearchService.getSearchSimpleRsult(
-                        input: query,
-                        pageNo: 1,
-                        pageSize: 30
-                    )
 
-                    await MainActor.run {
-                        books.value = searchResult
-                        loadState.value = .completed
-                    }
-                } catch let error as NetworkError {
-                    print(error.localizedDescription)
+            currentPage = 1
+            books.value.removeAll()
+            hasMoreResult.value = true
+
+            loadResults(query: query, pageNum: currentPage, pageSize: pageSize)
+
+        case let .loadMoreResult(query):
+            currentPage += 1
+            loadResults(query: query, pageNum: currentPage, pageSize: pageSize)
+
+            return
+        }
+    }
+
+    private func loadResults(
+        query: String,
+        pageNum: Int,
+        pageSize: Int
+    ) {
+        guard hasMoreResult.value else { return }
+
+        loadState.value = .loading
+
+        Task {
+            do {
+                let searchResult = try await SearchService.getSearchSimpleRsult(
+                    input: query,
+                    pageNo: pageNum,
+                    pageSize: pageSize
+                )
+
+                if searchResult.isEmpty { hasMoreResult.value = false }
+
+                await MainActor.run {
+                    books.value.append(contentsOf: searchResult)
                     loadState.value = .completed
                 }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+                loadState.value = .completed
             }
         }
+
     }
 }
