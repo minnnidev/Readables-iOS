@@ -18,9 +18,12 @@ final class LoginViewModel {
     struct Output {
         let onboardingMessage: Observable<String>
         let progressUpdate: Observable<(Int, Float)>
+        let pushToRegister: Observable<Bool>
     }
     
     // MARK: - Properties
+
+    private var pushToRegisterOB = Observable(false)
 
     private let oauthManager = OAuthManager()
 
@@ -59,7 +62,8 @@ final class LoginViewModel {
     private func transform() -> Output {
         return Output(
             onboardingMessage: Observable(""),
-            progressUpdate: Observable((0, 1.0))
+            progressUpdate: Observable((0, 1.0)),
+            pushToRegister: pushToRegisterOB
         )
     }
     
@@ -75,6 +79,7 @@ final class LoginViewModel {
     private func handleLogin(type: LoginType) {
         switch type {
         case .apple:
+            // TODO: 애플 로그인
             oauthManager.loginWithApple()
 
             oauthManager.appleLoginSucceed = { credential in
@@ -83,7 +88,11 @@ final class LoginViewModel {
             }
 
         case .kakao:
-            oauthManager.loginWithKakao()
+            // FIXME: 임시로 입력폼으로 넘어가도록 구현 -> 추후 분기 처리하기
+            pushToRegisterOB.value.toggle()
+            return
+            // TODO: 카카오 로그인
+//            oauthManager.loginWithKakao()
         }
     }
     

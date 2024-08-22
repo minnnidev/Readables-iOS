@@ -20,16 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        // TODO: 변경
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: RegistrationViewController())
-        window?.backgroundColor = .white
-        window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
 
-//        let window = UIWindow(windowScene: windowScene)
-//        self.window = window
-//
-//        AppFlowController.shared.show(in: window)
+        AppFlowController.shared.show(in: window)
     }
 
     func scene(
