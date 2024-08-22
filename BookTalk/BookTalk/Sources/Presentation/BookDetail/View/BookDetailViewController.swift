@@ -16,6 +16,7 @@ final class BookDetailViewController: BaseViewController {
     private let likeButton = UIButton(type: .system)
     private let dislikeButton = UIButton(type: .system)
     private let tableView = UITableView(frame: .zero, style: .plain)
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: BookDetailViewModel
 
@@ -63,14 +64,38 @@ final class BookDetailViewController: BaseViewController {
     }
     
     private func addTarget() {
-        floatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
-        likeButton.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
-        dislikeButton.addTarget(self, action: #selector(handleDislikeButton), for: .touchUpInside)
+        floatingButton.addTarget(
+            self,
+            action: #selector(floatingButtonDidTap),
+            for: .touchUpInside
+        )
+        likeButton.addTarget(
+            self,
+            action: #selector(handleLikeButton),
+            for: .touchUpInside
+        )
+        dislikeButton.addTarget(
+            self,
+            action: #selector(handleDislikeButton),
+            for: .touchUpInside
+        )
     }
     
     // MARK: - Bind
     
     private func bind() {
+        viewModel.output.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .loading:
+                indicatorView.startAnimating()
+
+            case .completed, .initial:
+                indicatorView.stopAnimating()
+            }
+        }
+
         viewModel.output.isFavorite.subscribe { [weak self] _ in
             self?.updateFavoriteButtonState()
         }
@@ -144,14 +169,20 @@ final class BookDetailViewController: BaseViewController {
         tableView.do {
             $0.rowHeight = 600
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
         [tableView,
          floatingButton,
          likeButton,
-         dislikeButton].forEach { view.addSubview($0) }
-        
+         dislikeButton,
+         indicatorView
+       ].forEach { view.addSubview($0) }
+
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -173,11 +204,18 @@ final class BookDetailViewController: BaseViewController {
             $0.centerX.equalTo(floatingButton).offset(-15)
             $0.bottom.equalTo(floatingButton.snp.top).offset(-10)
         }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     private func registerCell() {
         tableView.do {
-            $0.register(BookInfoCell.self, forCellReuseIdentifier: BookInfoCell.identifier)
+            $0.register(
+                BookInfoCell.self,
+                forCellReuseIdentifier: BookInfoCell.identifier
+            )
             $0.register(
                 BorrowableLibraryCell.self,
                 forCellReuseIdentifier: BorrowableLibraryCell.identifier

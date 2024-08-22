@@ -14,6 +14,7 @@ struct BookDetailResponseDTO: Codable {
     let coLoanBooksDtoList: [CoLoanBooksDTO]
     let recommendResponseDtoList: [RecommendResponseDTO]
     let loanAvailableList: [LoanAvailableDTO]
+    let dibs: Bool
 }
 
 extension BookDetailResponseDTO {
@@ -29,7 +30,7 @@ extension BookDetailResponseDTO {
             keywords: keywordDtoList,
             publisher: bookInfoDto.publisher,
             publicationDate: bookInfoDto.publication_year,
-            isFavorite: false, // TODO: 수정
+            isFavorite: dibs,
             registeredLibraries: loanAvailableList.map { $0.toModel() }
         )
     }
@@ -77,6 +78,7 @@ struct RecommendResponseDTO: Codable {
 
 struct LoanAvailableDTO: Codable {
     let libCode: String
+    let libName: String
     let loanable: Bool
 }
 
@@ -84,7 +86,7 @@ extension LoanAvailableDTO {
 
     func toModel() -> Library {
         return .init(
-            name: libCode,
+            name: libName,
             isAvailable: loanable
         )
     }

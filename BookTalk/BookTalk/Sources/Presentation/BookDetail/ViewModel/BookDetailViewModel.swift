@@ -27,14 +27,18 @@ final class BookDetailViewModel {
         let isLiked: Observable<Bool>
         let isDisliked: Observable<Bool>
         let borrowableLibraries: Observable<[Library]?>
+        let loadState: Observable<LoadState>
     }
     
     // MARK: - Properties
 
     private let bookDetailOb: Observable<DetailBookInfo?> = Observable(nil)
     private let availableLibs: Observable<[Library]?> = Observable(nil)
+
     private var availabilityText = Observable("")
     private var availabilityColor = Observable(UIColor.black)
+    private var isFavoriteOb = Observable(false)
+    private var loadStateOb = Observable(LoadState.initial)
 
     lazy var input: Input = { return bindInput() }()
     lazy var output: Output = { return bindOutput() }()
@@ -60,7 +64,11 @@ final class BookDetailViewModel {
             dislikeButtonTap: { [weak self] in
                 self?.toggle(self?.output.isDisliked, opposite: self?.output.isLiked)
             },
-            loadDetailInfo: {
+            loadDetailInfo: { [weak self] in
+                guard let self = self else { return }
+
+                loadStateOb.value = .loading
+
                 Task { [weak self] in
                     guard let self = self else { return }
 
@@ -73,10 +81,14 @@ final class BookDetailViewModel {
                             bookDetailOb.value = bookDetail
                             availableLibs.value = bookDetail.registeredLibraries
                             (availabilityText.value, availabilityColor.value) = updateAvailability(availableLibs.value)
+                            isFavoriteOb.value = bookDetail.isFavorite
+
+                            loadStateOb.value = .completed
                         }
 
                     } catch let error as NetworkError {
                         print(error.localizedDescription)
+                        loadStateOb.value = .completed
                     }
                 }
             }
@@ -89,10 +101,11 @@ final class BookDetailViewModel {
             availabilityText: availabilityText,
             availabilityTextColor: availabilityColor,
             areChildButtonsVisible: Observable(false),
-            isFavorite: Observable(false),
+            isFavorite: isFavoriteOb,
             isLiked: Observable(false),
             isDisliked: Observable(false),
-            borrowableLibraries: availableLibs
+            borrowableLibraries: availableLibs,
+            loadState: loadStateOb
         )
     }
 }
