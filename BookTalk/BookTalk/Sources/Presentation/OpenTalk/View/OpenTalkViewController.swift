@@ -183,7 +183,8 @@ final class OpenTalkViewController: BaseViewController {
     // MARK: - Actions
 
     @objc private func searchIconDidTapped() {
-        let searchVC = SearchViewController()
+        let viewModel = SearchViewModel()
+        let searchVC = SearchViewController(viewModel: viewModel)
 
         searchVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchVC, animated: true)

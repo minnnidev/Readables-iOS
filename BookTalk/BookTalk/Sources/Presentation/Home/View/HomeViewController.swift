@@ -30,8 +30,10 @@ final class HomeViewController: BaseViewController {
     // MARK: - Actions
     
     @objc private func searchIconTapped() {
-        let searchVC = SearchViewController()
+        let viewModel = SearchViewModel()
+        let searchVC = SearchViewController(viewModel: viewModel)
         searchVC.hidesBottomBarWhenPushed = true
+
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
@@ -293,9 +295,10 @@ extension HomeViewController: KeywordHeaderViewDelegate {
 extension HomeViewController: KeywordCellDelegate {
     
     func didTapKeyword(_ keyword: String) {
-        let searchVC = SearchViewController()
+        let viewModel = SearchViewModel(searchText: keyword)
+        let searchVC = SearchViewController(viewModel: viewModel)
+
         searchVC.hidesBottomBarWhenPushed = true
-        searchVC.searchWithKeyword(keyword)
         navigationController?.pushViewController(searchVC, animated: true)
     }
 }

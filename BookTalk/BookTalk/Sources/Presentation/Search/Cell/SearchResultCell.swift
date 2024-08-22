@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 protocol SearchResultCellDelegate: AnyObject {
     
     func searchResultCell(_ cell: SearchResultCell, didSelectBook book: DetailBookInfo)
@@ -37,23 +39,24 @@ final class SearchResultCell: BaseTableViewCell {
     
     // MARK: - Bind
     
-    func bind(book: DetailBookInfo, availabilityText: String, availabilityTextColor: UIColor) {
+    func bind(book: DetailBookInfo) {
         titleLabel.text = book.basicBookInfo.title
         authorLabel.text = book.basicBookInfo.author
         publisherLabel.text = book.publisher
         publicationDateLabel.text = book.publicationDate
-        availabilityLabel.text = availabilityText
-        availabilityLabel.textColor = availabilityTextColor
         isFavorite = book.isFavorite
         updateFavoriteButton()
+
+        guard let url = URL(string: book.basicBookInfo.coverImageURL) else { return }
+        coverImageView.kf.setImage(with: url)
     }
     
     // MARK: - Set UI
     
     override func setViews() {
         coverImageView.do {
-            $0.backgroundColor = .gray100
-            $0.contentMode = .scaleAspectFill
+            $0.backgroundColor = .clear
+            $0.contentMode = .scaleAspectFit
         }
         
         titleLabel.do {
@@ -133,7 +136,7 @@ final class SearchResultCell: BaseTableViewCell {
         let imageName = isFavorite ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName)?
             .withConfiguration(
-                UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+                UIImage.SymbolConfiguration(pointSize: 15, weight: .medium)
             ), for: .normal
         )
     }
