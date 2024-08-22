@@ -21,8 +21,8 @@ extension BookDetailResponseDTO {
 
     func toModel() -> DetailBookInfo {
         return .init(
-            isbn: bookInfoDto.isbn13, 
             basicBookInfo: .init(
+                isbn: bookInfoDto.isbn13, 
                 coverImageURL: bookInfoDto.bookImageURL,
                 title: bookInfoDto.bookname,
                 author: bookInfoDto.authors

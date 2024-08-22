@@ -8,13 +8,13 @@
 import Foundation
 
 struct BasicBookInfo: Equatable {
+    let isbn: String
     let coverImageURL: String
     let title: String
     let author: String
 }
 
 struct DetailBookInfo: Equatable {
-    let isbn: String
     let basicBookInfo: BasicBookInfo
     let keywords: [String]
     let publisher: String
