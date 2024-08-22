@@ -23,7 +23,7 @@ final class RegistrationViewController: BaseViewController {
     private let datePicker = UIDatePicker()
     private let signUpButton = UIButton(type: .system)
     private let credentialsStackView = UIStackView()
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -54,21 +54,31 @@ final class RegistrationViewController: BaseViewController {
     }
     
     @objc private func selectMaleGender() {
-        viewModel.updateGender(.male)
+        viewModel.updateGender(.man)
     }
 
     @objc private func selectFemaleGender() {
-        viewModel.updateGender(.female)
+        viewModel.updateGender(.woman)
     }
     
     @objc private func dateChanged(_ sender: UIDatePicker) {
         viewModel.updateBirthDate(sender.date)
     }
     
-    @objc func doneButtonHandler() {
+    @objc private func doneButtonHandler() {
         birthTextField.attributedText = dateFormat(date: datePicker.date)
         viewModel.updateBirthDate(datePicker.date)
         birthTextField.resignFirstResponder()
+    }
+
+    @objc private func registerButtonDidTapped() {
+        viewModel.registerUserInfo(
+            nickname: viewModel.nickname.value,
+            gender: viewModel.selectedGender.value ?? .man,
+            birth: DateFormatter.koreanDateFormat.string(
+                from: viewModel.birthDate.value ?? Date()
+            )
+        )
     }
 
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -119,8 +129,7 @@ final class RegistrationViewController: BaseViewController {
         )
         maleButton.addTarget(
             self,
-            action: #selector(selectMaleGender
-                             ),
+            action: #selector(selectMaleGender),
             for: .touchUpInside)
         femaleButton.addTarget(
             self,
@@ -131,6 +140,11 @@ final class RegistrationViewController: BaseViewController {
             self,
             action: #selector(dateChanged),
             for: .valueChanged
+        )
+        signUpButton.addTarget(
+            self,
+            action: #selector(registerButtonDidTapped),
+            for: .touchUpInside
         )
     }
     
@@ -157,11 +171,11 @@ final class RegistrationViewController: BaseViewController {
     
     // MARK: - Helpers
     
-    private func updateGenderSelection(_ gender: Gender?) {
-        maleButton.backgroundColor = gender == .male ?
+    private func updateGenderSelection(_ gender: GenderType?) {
+        maleButton.backgroundColor = gender == .man ?
             .accentOrange : .accentOrange.withAlphaComponent(0.2)
         femaleButton.backgroundColor = gender ==
-            .female ? .accentOrange : .accentOrange.withAlphaComponent(0.2)
+            .woman ? .accentOrange : .accentOrange.withAlphaComponent(0.2)
     }
     
     private func dateFormat(date: Date?) -> NSAttributedString {
@@ -184,7 +198,7 @@ final class RegistrationViewController: BaseViewController {
     private func updateSignUpButtonState(isValid: Bool) {
         UIView.animate(withDuration: 0.3) {
             self.signUpButton.isEnabled = isValid
-            self.signUpButton.backgroundColor = isValid ? 
+            self.signUpButton.backgroundColor = isValid ?
                 .accentOrange : .accentOrange.withAlphaComponent(0.2)
             self.signUpButton.setTitleColor(
                 isValid ? .white : .systemBackground.withAlphaComponent(0.7),
@@ -192,7 +206,7 @@ final class RegistrationViewController: BaseViewController {
             )
         }
     }
-    
+
     // MARK: - Set UI
     
     override func setNavigationBar() {
@@ -434,8 +448,8 @@ private extension RegistrationViewController {
     }
     
     func setToolBar() {
-        let toolBar = UIToolbar()
-        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+
         let flexibleSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
