@@ -72,22 +72,22 @@ final class RegistrationViewController: BaseViewController {
     }
 
     @objc private func keyboardWillShow(_ notification: Notification) {
-        if !isKeyboardAlreadyShown {
-            UIView.animate(withDuration: 0.3) {
-                self.view.backgroundColor = .black.withAlphaComponent(0.8)
-                self.addPhotoButton.alpha = 0.2
-                self.view.bringSubviewToFront(self.credentialsStackView)
-            }
-            isKeyboardAlreadyShown = true
-        }
+//        if !isKeyboardAlreadyShown {
+//            UIView.animate(withDuration: 0.3) {
+//                self.view.backgroundColor = .black.withAlphaComponent(0.2)
+//                self.addPhotoButton.alpha = 0.2
+//                self.view.bringSubviewToFront(self.credentialsStackView)
+//            }
+//            isKeyboardAlreadyShown = true
+//        }
     }
 
     @objc private func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.view.backgroundColor = .white
-            self.addPhotoButton.alpha = 1
-        }
-        isKeyboardAlreadyShown = false
+//        UIView.animate(withDuration: 0.3) {
+//            self.view.backgroundColor = .white
+//            self.addPhotoButton.alpha = 1
+//        }
+//        isKeyboardAlreadyShown = false
     }
     
     private func registerKeyboardNotifications() {
@@ -107,20 +107,41 @@ final class RegistrationViewController: BaseViewController {
     }
     
     private func addTargets() {
-        addPhotoButton.addTarget(self, action: #selector(addPhotoButtonTapped), for: .touchUpInside)
-        nicknameTextField.addTarget(self, action: #selector(nicknameChanged), for: .editingChanged)
-        maleButton.addTarget(self, action: #selector(selectMaleGender), for: .touchUpInside)
-        femaleButton.addTarget(self, action: #selector(selectFemaleGender), for: .touchUpInside)
-        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        addPhotoButton.addTarget(
+            self,
+            action: #selector(addPhotoButtonTapped),
+            for: .touchUpInside
+        )
+        nicknameTextField.addTarget(
+            self,
+            action: #selector(nicknameChanged),
+            for: .editingChanged
+        )
+        maleButton.addTarget(
+            self,
+            action: #selector(selectMaleGender
+                             ),
+            for: .touchUpInside)
+        femaleButton.addTarget(
+            self,
+            action: #selector(selectFemaleGender),
+            for: .touchUpInside
+        )
+        datePicker.addTarget(
+            self,
+            action: #selector(dateChanged),
+            for: .valueChanged
+        )
     }
     
     // MARK: - Bind
     
     private func bind() {
-        viewModel.nickname.subscribe { [weak self] _ in
-            self?.nicknameTextField.text = self?.viewModel.nickname.value
+        viewModel.nickname.subscribe { [weak self] nickname in
+            self?.nicknameTextField.text = nickname
         }
         
+
         viewModel.selectedGender.subscribe { [weak self] gender in
             self?.updateGenderSelection(gender)
         }
@@ -179,19 +200,21 @@ final class RegistrationViewController: BaseViewController {
     }
     
     override func setViews() {
+        view.backgroundColor = .white
+        
         addPhotoButton.do {
             $0.setImage(
                 UIImage(systemName: "plus")?
-                    .withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
+                    .withTintColor(.gray100, renderingMode: .alwaysOriginal)
                     .withConfiguration(
-                        UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+                        UIImage.SymbolConfiguration(pointSize: 20, weight: .light)
                     ),
                 for: .normal
             )
-            $0.layer.cornerRadius = 180 / 2
+            $0.layer.cornerRadius = 150 / 2
             $0.layer.masksToBounds = true
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.accentOrange.cgColor
+            $0.layer.borderColor = UIColor.gray100.cgColor
         }
         
         setupTextField(
@@ -243,7 +266,7 @@ final class RegistrationViewController: BaseViewController {
             $0.addArrangedSubview(birthTextField)
             $0.addArrangedSubview(signUpButton)
             $0.axis = .vertical
-            $0.spacing = 10
+            $0.spacing = 20
         }
     }
     
@@ -254,7 +277,7 @@ final class RegistrationViewController: BaseViewController {
         addPhotoButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            $0.size.equalTo(180)
+            $0.size.equalTo(150)
         }
         
         nicknameTextField.snp.makeConstraints {
@@ -267,7 +290,7 @@ final class RegistrationViewController: BaseViewController {
         
         credentialsStackView.snp.makeConstraints {
             $0.centerX.equalTo(addPhotoButton)
-            $0.top.lessThanOrEqualTo(addPhotoButton.snp.bottom).offset(20)
+            $0.top.lessThanOrEqualTo(addPhotoButton.snp.bottom).offset(50)
             $0.left.equalTo(10)
             $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-20)
         }
