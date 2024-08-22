@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol BookWithHeaderCellDelegate: AnyObject {
-    func bookImageTapped()
+    func bookImageTapped(of isbn: String)
 }
 
 final class BookWithHeaderCell: BaseTableViewCell {
@@ -119,8 +119,11 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.bookImageTapped()
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        delegate?.bookImageTapped(of: books[indexPath.item].isbn)
     }
 }
 

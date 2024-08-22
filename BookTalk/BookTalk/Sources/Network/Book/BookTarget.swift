@@ -11,6 +11,7 @@ import Alamofire
 
 enum BookTarget {
     case getKeywords
+    case getBookDetail(params: BookDetailRequestDTO)
 }
 
 extension BookTarget: TargetType {
@@ -19,6 +20,8 @@ extension BookTarget: TargetType {
         switch self {
         case .getKeywords:
             return "/api/book/keyword"
+        case let .getBookDetail(params):
+            return "/api/book/detail"
         }
     }
     
@@ -33,6 +36,8 @@ extension BookTarget: TargetType {
         switch self {
         case .getKeywords:
             return .requestPlain
+        case let .getBookDetail(params):
+            return .requestParameters(parameters: params.toDictionary())
         }
     }
 }

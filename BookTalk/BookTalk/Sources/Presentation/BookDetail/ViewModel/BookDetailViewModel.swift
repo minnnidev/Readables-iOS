@@ -15,58 +15,43 @@ final class BookDetailViewModel {
         let favoriteButtonTap: () -> Void
         let likeButtonTap: () -> Void
         let dislikeButtonTap: () -> Void
+        let loadDetailInfo: () -> Void
     }
     
     struct Output {
-        let coverImageURL: Observable<String>
-        let title: Observable<String>
-        let author: Observable<String>
-        let publisher: Observable<String>
-        let publicationDate: Observable<String>
+        let detailBook: Observable<DetailBookInfo?>
         let availabilityText: Observable<String>
         let availabilityTextColor: Observable<UIColor>
         let areChildButtonsVisible: Observable<Bool>
         let isFavorite: Observable<Bool>
         let isLiked: Observable<Bool>
         let isDisliked: Observable<Bool>
-        let showLibraryRegistrationButton: Observable<Bool>
-        let borrowableLibraries: Observable<[Library]>
+        let borrowableLibraries: Observable<[Library]?>
+        let loadState: Observable<LoadState>
     }
     
     // MARK: - Properties
-    
-    private let bookInfo: DetailBookInfo
+
+    private let bookDetailOb: Observable<DetailBookInfo?> = Observable(nil)
+    private let availableLibs: Observable<[Library]?> = Observable(nil)
+
+    private var availabilityText = Observable("")
+    private var availabilityColor = Observable(UIColor.black)
+    private var isFavoriteOb = Observable(false)
+    private var loadStateOb = Observable(LoadState.initial)
+
     lazy var input: Input = { return bindInput() }()
-    lazy var output: Output = { return transform() }()
-    
+    lazy var output: Output = { return bindOutput() }()
+
+    private let isbn: String
+
     // MARK: - Initializer
     
-    init(bookInfo: DetailBookInfo) {
-        self.bookInfo = bookInfo
+    init(isbn: String) {
+        self.isbn = isbn
     }
     
     // MARK: - Helpers
-    
-    private func toggle(_ property: Observable<Bool>?, opposite: Observable<Bool>? = nil) {
-        guard let property = property else { return }
-        property.value.toggle()
-        if let opposite = opposite, property.value { opposite.value = false }
-    }
-    
-    private func updateAvailability(
-        _ libraries: [Library],
-        isRegistered: Bool
-    ) -> (text: String, color: UIColor) {
-        guard isRegistered else {
-            return ("대출 여부를 확인하려면 도서관을 등록해주세요.", .systemGray)
-        }
-        
-        let isAvailable = libraries.contains { $0.isAvailable }
-        let text = isAvailable ? "대출 가능" : "대출 불가능"
-        let color = isAvailable ? UIColor.systemGreen : .systemRed
-        
-        return (text, color)
-    }
     
     private func bindInput() -> Input {
         return Input(
@@ -78,31 +63,75 @@ final class BookDetailViewModel {
             },
             dislikeButtonTap: { [weak self] in
                 self?.toggle(self?.output.isDisliked, opposite: self?.output.isLiked)
+            },
+            loadDetailInfo: { [weak self] in
+                guard let self = self else { return }
+
+                loadStateOb.value = .loading
+
+                Task { [weak self] in
+                    guard let self = self else { return }
+
+                    do {
+                        let bookDetail = try await BookService.getBookDetail(of: isbn)
+
+                        await MainActor.run { [weak self] in
+                            guard let self = self else { return }
+
+                            bookDetailOb.value = bookDetail
+                            availableLibs.value = bookDetail.registeredLibraries
+                            (availabilityText.value, availabilityColor.value) = updateAvailability(availableLibs.value)
+                            isFavoriteOb.value = bookDetail.isFavorite
+
+                            loadStateOb.value = .completed
+                        }
+
+                    } catch let error as NetworkError {
+                        print(error.localizedDescription)
+                        loadStateOb.value = .completed
+                    }
+                }
             }
         )
     }
     
-    private func transform() -> Output {
-        let isLibraryRegistered = !bookInfo.registeredLibraries.isEmpty
-        let availability = updateAvailability(
-            bookInfo.registeredLibraries,
-            isRegistered: isLibraryRegistered
-        )
-        
+    private func bindOutput() -> Output {
         return Output(
-            coverImageURL: Observable(bookInfo.basicBookInfo.coverImageURL),
-            title: Observable(bookInfo.basicBookInfo.title),
-            author: Observable(bookInfo.basicBookInfo.author),
-            publisher: Observable(bookInfo.publisher),
-            publicationDate: Observable(bookInfo.publicationDate),
-            availabilityText: Observable(availability.text),
-            availabilityTextColor: Observable(availability.color),
+            detailBook: bookDetailOb,
+            availabilityText: availabilityText,
+            availabilityTextColor: availabilityColor,
             areChildButtonsVisible: Observable(false),
-            isFavorite: Observable(false),
+            isFavorite: isFavoriteOb,
             isLiked: Observable(false),
             isDisliked: Observable(false),
-            showLibraryRegistrationButton: Observable(!isLibraryRegistered),
-            borrowableLibraries: Observable(bookInfo.registeredLibraries)
+            borrowableLibraries: availableLibs,
+            loadState: loadStateOb
         )
+    }
+}
+
+extension BookDetailViewModel {
+
+    private func toggle(
+        _ property: Observable<Bool>?,
+        opposite: Observable<Bool>? = nil
+    ) {
+        guard let property = property else { return }
+        property.value.toggle()
+        if let opposite = opposite, property.value { opposite.value = false }
+    }
+
+    private func updateAvailability(
+        _ libraries: [Library]?
+    ) -> (text: String, color: UIColor) {
+        guard let libraries = libraries else {
+            return ("대출 여부를 확인하려면 도서관을 등록해주세요.", .systemGray)
+        }
+
+        let isAvailable = libraries.contains { $0.isAvailable }
+        let text = isAvailable ? "대출 가능" : "대출 불가능"
+        let color = isAvailable ? UIColor.systemGreen : .systemRed
+
+        return (text, color)
     }
 }

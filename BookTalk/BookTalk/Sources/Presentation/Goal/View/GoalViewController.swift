@@ -181,8 +181,8 @@ extension GoalViewController: UITableViewDelegate {
 
 extension GoalViewController: BookWithHeaderCellDelegate {
 
-    func bookImageTapped() {
-        // TODO: book id 등 구별할 수 있는 요소로 수정
+    func bookImageTapped(of isbn: String) {
+        // TODO: book id 등 구별할 수 있는 요소로 수정 - isbn 사용하여
 
         let viewModel = DetailGoalViewModel()
         let detailVC = DetailGoalViewController(viewModel: viewModel)

@@ -242,4 +242,15 @@ extension AllBooksViewController: UICollectionViewDelegateFlowLayout {
             height: 50
         )
     }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let book = viewModel.books.value[indexPath.item]
+        let viewModel = BookDetailViewModel(isbn: book.isbn)
+        let detailVC = BookDetailViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

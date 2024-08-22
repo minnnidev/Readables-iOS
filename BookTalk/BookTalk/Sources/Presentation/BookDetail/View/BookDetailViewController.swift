@@ -10,13 +10,27 @@ import UIKit
 final class BookDetailViewController: BaseViewController {
     
     // MARK: - Properties
-    
-    var viewModel: BookDetailViewModel!
+
     private var favoriteButton = UIBarButtonItem()
     private let floatingButton = UIButton(type: .system)
     private let likeButton = UIButton(type: .system)
     private let dislikeButton = UIButton(type: .system)
     private let tableView = UITableView(frame: .zero, style: .plain)
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
+
+    private let viewModel: BookDetailViewModel
+
+    // MARK: - Initializer
+
+    init(viewModel: BookDetailViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     
@@ -27,6 +41,8 @@ final class BookDetailViewController: BaseViewController {
         bind()
         registerCell()
         setDelegate()
+
+        viewModel.input.loadDetailInfo()
     }
     
     // MARK: - Actions
@@ -48,14 +64,38 @@ final class BookDetailViewController: BaseViewController {
     }
     
     private func addTarget() {
-        floatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
-        likeButton.addTarget(self, action: #selector(handleLikeButton), for: .touchUpInside)
-        dislikeButton.addTarget(self, action: #selector(handleDislikeButton), for: .touchUpInside)
+        floatingButton.addTarget(
+            self,
+            action: #selector(floatingButtonDidTap),
+            for: .touchUpInside
+        )
+        likeButton.addTarget(
+            self,
+            action: #selector(handleLikeButton),
+            for: .touchUpInside
+        )
+        dislikeButton.addTarget(
+            self,
+            action: #selector(handleDislikeButton),
+            for: .touchUpInside
+        )
     }
     
     // MARK: - Bind
     
     private func bind() {
+        viewModel.output.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .loading:
+                indicatorView.startAnimating()
+
+            case .completed, .initial:
+                indicatorView.stopAnimating()
+            }
+        }
+
         viewModel.output.isFavorite.subscribe { [weak self] _ in
             self?.updateFavoriteButtonState()
         }
@@ -71,6 +111,10 @@ final class BookDetailViewController: BaseViewController {
         viewModel.output.isDisliked.subscribe { [weak self] _ in
             self?.updateDislikeButtonState()
         }
+
+        viewModel.output.detailBook.subscribe { [weak self] book in
+            self?.tableView.reloadData()
+        }
     }
     
     // MARK: - Set UI
@@ -83,6 +127,7 @@ final class BookDetailViewController: BaseViewController {
             action: #selector(handleFavoriteButton)
         )
         
+        navigationItem.title = ""
         navigationItem.rightBarButtonItem = favoriteButton
     }
     
@@ -119,14 +164,25 @@ final class BookDetailViewController: BaseViewController {
             $0.configuration?.baseBackgroundColor = .systemRed
             $0.setImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
         }
+
+        // TODO: 삭제
+        tableView.do {
+            $0.rowHeight = 600
+        }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
-    
+
     override func setConstraints() {
         [tableView,
          floatingButton,
          likeButton,
-         dislikeButton].forEach { view.addSubview($0) }
-        
+         dislikeButton,
+         indicatorView
+       ].forEach { view.addSubview($0) }
+
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -148,11 +204,18 @@ final class BookDetailViewController: BaseViewController {
             $0.centerX.equalTo(floatingButton).offset(-15)
             $0.bottom.equalTo(floatingButton.snp.top).offset(-10)
         }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     private func registerCell() {
         tableView.do {
-            $0.register(BookInfoCell.self, forCellReuseIdentifier: BookInfoCell.identifier)
+            $0.register(
+                BookInfoCell.self,
+                forCellReuseIdentifier: BookInfoCell.identifier
+            )
             $0.register(
                 BorrowableLibraryCell.self,
                 forCellReuseIdentifier: BorrowableLibraryCell.identifier
@@ -247,6 +310,7 @@ extension BookDetailViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             cell.bind(viewModel)
             return cell
+
         } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: BorrowableLibraryCell.identifier,

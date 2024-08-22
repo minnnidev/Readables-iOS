@@ -181,6 +181,8 @@ extension SubcategoryViewController: UITableViewDataSource {
                 viewModel.popularBooks.value : viewModel.newBooks.value
             )
 
+            cell.delegate = self
+
             return cell
         }
     }
@@ -242,5 +244,15 @@ extension SubcategoryViewController: CategorySelectModalViewControllerDelegate {
 
     func subcategorySelected(subcategoryIndex: Int) {
         viewModel.send(action: .setSubcategory(subcategoryIdx: subcategoryIndex))
+    }
+}
+
+extension SubcategoryViewController: BookWithHeaderCellDelegate {
+
+    func bookImageTapped(of isbn: String) {
+        let viewModel = BookDetailViewModel(isbn: isbn)
+        let detailVC = BookDetailViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

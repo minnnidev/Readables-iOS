@@ -14,12 +14,13 @@ struct BasicBookInfo: Equatable {
 }
 
 struct DetailBookInfo: Equatable {
+    let isbn: String
     let basicBookInfo: BasicBookInfo
     let keywords: [String]
     let publisher: String
     let publicationDate: String
     var isFavorite: Bool
-    let registeredLibraries: [Library]
+    let registeredLibraries: [Library]?
 }
 
 struct Library: Equatable {

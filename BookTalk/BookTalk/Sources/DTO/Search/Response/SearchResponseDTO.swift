@@ -39,6 +39,7 @@ extension SearchResponseDTO {
 
     func toModel() -> DetailBookInfo {
         return .init(
+            isbn: isbn13,
             basicBookInfo: .init(
                 coverImageURL: bookImageURL,
                 title: bookName,

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Kingfisher
+
 final class BookInfoCell: BaseTableViewCell {
     
     // MARK: - Properties
@@ -22,28 +24,21 @@ final class BookInfoCell: BaseTableViewCell {
     private let markAsReadButton = UIButton(type: .system)
     
     // MARK: - Bind
-    
+
     func bind(_ viewModel: BookDetailViewModel) {
-        viewModel.output.coverImageURL.subscribe { [weak self] urlString in
-            self?.bookImageView.image = UIImage(named: urlString)
+        viewModel.output.detailBook.subscribe { [weak self] detail in
+            guard let self = self else { return }
+            guard let detail = detail else { return }
+
+            titleLabel.text = detail.basicBookInfo.title
+            authorLabel.text = detail.basicBookInfo.author
+            publisherLabel.text = detail.publisher
+            publicationDateLabel.text = detail.publicationDate
+
+            guard let imageURL = URL(string: detail.basicBookInfo.coverImageURL) else { return }
+            bookImageView.kf.setImage(with: imageURL)
         }
-        
-        viewModel.output.title.subscribe { [weak self] title in
-            self?.titleLabel.text = title
-        }
-        
-        viewModel.output.author.subscribe { [weak self] author in
-            self?.authorLabel.text = author
-        }
-        
-        viewModel.output.publisher.subscribe { [weak self] publisher in
-            self?.publisherLabel.text = publisher
-        }
-        
-        viewModel.output.publicationDate.subscribe { [weak self] publicationDate in
-            self?.publicationDateLabel.text = publicationDate
-        }
-        
+
         viewModel.output.availabilityText.subscribe { [weak self] availabilityText in
             self?.availabilityLabel.text = availabilityText
         }
@@ -58,13 +53,14 @@ final class BookInfoCell: BaseTableViewCell {
     override func setViews() {
         bookImageView.do {
             $0.contentMode = .scaleAspectFit
-            $0.backgroundColor = .gray100
+            $0.backgroundColor = .clear
         }
         
         titleLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
-            $0.font = .systemFont(ofSize: 25, weight: .bold)
+            $0.numberOfLines = 0
+            $0.font = .systemFont(ofSize: 23, weight: .bold)
         }
         
         authorLabel.do {
