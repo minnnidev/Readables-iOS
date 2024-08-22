@@ -154,7 +154,6 @@ final class RegistrationViewController: BaseViewController {
         viewModel.nickname.subscribe { [weak self] nickname in
             self?.nicknameTextField.text = nickname
         }
-        
 
         viewModel.selectedGender.subscribe { [weak self] gender in
             self?.updateGenderSelection(gender)
@@ -166,6 +165,29 @@ final class RegistrationViewController: BaseViewController {
         
         viewModel.isFormValid.subscribe { [weak self] isValid in
             self?.updateSignUpButtonState(isValid: isValid)
+        }
+
+        viewModel.pushToHomeView.subscribe { [weak self] isCompleted in
+            guard let self = self else { return }
+
+            if isCompleted {
+                let mainTabVC = MainTabBarController()
+
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+
+                    window.rootViewController = mainTabVC
+                    window.makeKeyAndVisible()
+
+                    UIView.transition(
+                        with: window,
+                        duration: 0.5,
+                        options: .transitionCrossDissolve,
+                        animations: nil,
+                        completion: nil
+                    )
+                }
+            }
         }
     }
     

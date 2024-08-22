@@ -15,7 +15,8 @@ struct RegistrationViewModel {
     let selectedGender = Observable<GenderType?>(nil)
     let birthDate = Observable<Date?>(nil)
     let isFormValid = Observable<Bool>(false)
-    
+    let pushToHomeView = Observable<Bool>(false)
+
     // MARK: - Actions
     
     func updateNickname(_ text: String) {
@@ -45,7 +46,8 @@ struct RegistrationViewModel {
                     gender: gender,
                     birthDate: birth
                 )
-                print(newUserInfo)
+
+                pushToHomeView.value.toggle()
             } catch let error as NetworkError {
                 print(error.localizedDescription)
             }
