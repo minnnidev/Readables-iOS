@@ -8,97 +8,141 @@
 import UIKit
 
 final class SearchViewModel {
-    
+
     // MARK: - Interactions
-    
+
     struct Input {
-        let searchTextChanged: (String) -> Void
-        let updateSearchMode: (Bool) -> Void
-        let loadBooks: () -> Void
+        let searchWithKeyword: (String?) -> Void
+        let searchButtonTapped: (String) -> Void
+        let keywordButtonTapped: (Bool) -> Void
+        let loadMoreResults: () -> Void
     }
-    
+
     struct Output {
-        let filteredBooks: Observable<[DetailBookInfo]>
+        let searchResult: Observable<[DetailBookInfo]>
         let isKeywordSearch: Observable<Bool>
-        let availabilityText: Observable<[String]>
-        let availabilityTextColor: Observable<[UIColor]>
+        let loadingState: Observable<LoadState>
+        let keywordSearchText: Observable<String>
+        let placeholderText: Observable<String>
     }
-    
+
     // MARK: - Properties
-    
-    private(set) var allBooks: [DetailBookInfo] = []
-    private let filteredBooksRelay = Observable<[DetailBookInfo]>([])
+
     private let isKeywordSearchRelay = Observable<Bool>(false)
-    private let availabilityTextsRelay = Observable<[String]>([])
-    private let availabilityTextColorsRelay = Observable<[UIColor]>([])
-    
-    lazy var input: Input = { return bindInput() }()
-    lazy var output: Output = { return transform() }()
-    
+    private let loadingState = Observable<LoadState>(.initial)
+    private let placeholderText = Observable<String>("")
+    private let searchTextOb = Observable<String>("")
+
+    private var searchResult = Observable<[DetailBookInfo]>([])
+    private var currentPage = 1
+    private var pageSize = 30
+    private var hasMoreResult = true
+
+    lazy var input: Input = { bindInput() }()
+    lazy var output: Output = { bindOutput() }()
+
     // MARK: - Initializer
-    
-    init() {
-        allBooks = SearchMockData.books
+
+    var searchText: String?
+
+    init(searchText: String? = nil) {
+        self.searchText = searchText
     }
-    
+
     // MARK: - Helpers
-    
-    private func filterBooks(searchText: String) {
-        let trimmedSearchText = searchText.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        ).lowercased().replacingOccurrences(of: " ", with: "")
-        
-        if trimmedSearchText.isEmpty {
-            filteredBooksRelay.value = []
-            availabilityTextsRelay.value = []
-            availabilityTextColorsRelay.value = []
-        } else {
-            let filteredBooks: [DetailBookInfo]
-            if isKeywordSearchRelay.value {
-                filteredBooks = allBooks.filter {
-                    $0.keywords.contains {
-                        $0.lowercased()
-                            .replacingOccurrences(of: " ", with: "").contains(trimmedSearchText)
+
+    func loadResults(of searchText: String, page: Int = 1) {
+        guard hasMoreResult else { return }
+
+        if page == 1 { loadingState.value = .loading }
+
+        Task {
+            do {
+                let searchResult = try await SearchService.getSearchResult(
+                    with: .init(
+                        isKeyword: isKeywordSearchRelay.value,
+                        input: searchText,
+                        pageNo: currentPage,
+                        pageSize: pageSize
+                    )
+                )
+
+                await MainActor.run {
+                    if page == 1 {
+                        self.searchResult.value = searchResult
+                    } else {
+                        self.searchResult.value.append(contentsOf: searchResult)
                     }
+
+                    loadingState.value = .completed
+                    if searchResult.isEmpty { hasMoreResult = false }
                 }
-            } else {
-                filteredBooks = allBooks.filter {
-                    $0.basicBookInfo.title.lowercased()
-                        .replacingOccurrences(of: " ", with: "").contains(trimmedSearchText) ||
-                    $0.basicBookInfo.author.lowercased()
-                        .replacingOccurrences(of: " ", with: "").contains(trimmedSearchText)
-                }
+
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+                loadingState.value = .completed
             }
-            
-            filteredBooksRelay.value = filteredBooks
         }
     }
-    
+
+    private func loadResultFirstTime(of searchText: String) {
+        hasMoreResult = true
+        searchResult.value.removeAll()
+        currentPage = 1
+
+        loadResults(of: searchText)
+    }
+
     private func bindInput() -> Input {
-        return Input(
-            searchTextChanged: { [weak self] searchText in
-                self?.filterBooks(searchText: searchText)
-            },
-            updateSearchMode: { [weak self] isKeywordSearch in
-                self?.isKeywordSearchRelay.value = isKeywordSearch
-                if let currentSearchText =
-                    self?.filteredBooksRelay.value.first?.basicBookInfo.title
-                {
-                    self?.filterBooks(searchText: currentSearchText)
-                }
-            },
-            loadBooks: { [weak self] in
-                self?.allBooks = SearchMockData.books
+        let searchWithKeyword: (String?) -> Void = { [weak self] searchText in
+            guard let self = self else { return }
+
+            if searchText != nil {
+                self.searchTextOb.value = searchText ?? ""
+
+                loadResultFirstTime(of: searchTextOb.value)
             }
+        }
+
+        let searchButtonTapped: (String) -> Void = { [weak self] searchText in
+            guard let self = self else { return }
+
+            searchTextOb.value = searchText
+            loadResultFirstTime(of: searchText)
+        }
+
+        let keywordButtonTapped: (Bool) -> Void = { [weak self] isKeyword in
+            guard let self = self else { return }
+
+            isKeywordSearchRelay.value = isKeyword
+
+            placeholderText.value = isKeyword ?
+                "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+            loadResultFirstTime(of: searchTextOb.value)
+        }
+
+        let loadMoreResults: () -> Void = { [weak self] in
+            guard let self = self else { return }
+
+            currentPage += 1
+            loadResults(of: searchTextOb.value, page: currentPage)
+        }
+
+        return Input(
+            searchWithKeyword: searchWithKeyword, 
+            searchButtonTapped: searchButtonTapped,
+            keywordButtonTapped: keywordButtonTapped,
+            loadMoreResults: loadMoreResults
         )
     }
-    
-    private func transform() -> Output {
+
+    private func bindOutput() -> Output {
         return Output(
-            filteredBooks: filteredBooksRelay,
+            searchResult: searchResult,
             isKeywordSearch: isKeywordSearchRelay,
-            availabilityText: availabilityTextsRelay,
-            availabilityTextColor: availabilityTextColorsRelay
+            loadingState: loadingState,
+            keywordSearchText: searchTextOb, 
+            placeholderText: placeholderText
         )
     }
 }
