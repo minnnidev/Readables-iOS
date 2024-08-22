@@ -43,7 +43,16 @@ final class AppFlowController {
 
     private func goToHome() {
         let mainTabVC = MainTabBarController()
-        rootViewController = mainTabVC
+
+        UIView.transition(
+            with: window,
+            duration: 0.5,
+            options: .transitionCrossDissolve, 
+            animations: {
+                self.rootViewController = mainTabVC
+            },
+            completion: nil
+        )
     }
 
     private func goToLogin() {
