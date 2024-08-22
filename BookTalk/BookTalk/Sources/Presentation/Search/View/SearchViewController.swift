@@ -49,14 +49,20 @@ final class SearchViewController: BaseViewController {
     // MARK: - Bind
 
     private func bind() {
-        viewModel.output.searchResult.subscribe { [weak self] _ in
-            self?.tableView.reloadData()
+        viewModel.input.searchWithKeyword(viewModel.searchText)
+
+        viewModel.output.keywordSearchText.subscribe { [weak self] searchText in
+            self?.searchBar.text = searchText
         }
 
         viewModel.output.isKeywordSearch.subscribe { [weak self] isKeywordSearch in
             self?.switchSearchModeButton.setOn(isKeywordSearch, animated: false)
             self?.searchBar.placeholder = isKeywordSearch ?
                 "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+        }
+
+        viewModel.output.searchResult.subscribe { [weak self] _ in
+            self?.tableView.reloadData()
         }
 
         viewModel.output.loadingState.subscribe { [weak self] state in

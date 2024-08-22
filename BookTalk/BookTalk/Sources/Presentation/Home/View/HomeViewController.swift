@@ -295,10 +295,10 @@ extension HomeViewController: KeywordHeaderViewDelegate {
 extension HomeViewController: KeywordCellDelegate {
     
     func didTapKeyword(_ keyword: String) {
-//        let searchVC = SearchViewController()
-//        searchVC.hidesBottomBarWhenPushed = true
-//        navigationController?.pushViewController(searchVC, animated: true)
+        let viewModel = SearchViewModel(searchText: keyword)
+        let searchVC = SearchViewController(viewModel: viewModel)
 
-        // TODO: 키워드 선택 시 이동
+        searchVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 }

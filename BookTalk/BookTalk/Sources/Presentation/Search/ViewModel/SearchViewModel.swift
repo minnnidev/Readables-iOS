@@ -12,6 +12,7 @@ final class SearchViewModel {
     // MARK: - Interactions
 
     struct Input {
+        let searchWithKeyword: (String?) -> Void
         let searchButtonTapped: (String) -> Void
         let keywordButtonTapped: (Bool) -> Void
         let loadMoreResults: () -> Void
@@ -21,21 +22,32 @@ final class SearchViewModel {
         let searchResult: Observable<[DetailBookInfo]>
         let isKeywordSearch: Observable<Bool>
         let loadingState: Observable<LoadState>
+        let keywordSearchText: Observable<String>
+        let placeholderText: Observable<String>
     }
 
     // MARK: - Properties
 
     private let isKeywordSearchRelay = Observable<Bool>(false)
     private let loadingState = Observable<LoadState>(.initial)
+    private let placeholderText = Observable<String>("")
+    private let searchTextOb = Observable<String>("")
 
     private var searchResult = Observable<[DetailBookInfo]>([])
     private var currentPage = 1
     private var pageSize = 30
-    private var searchText = ""
     private var hasMoreResult = true
 
     lazy var input: Input = { bindInput() }()
     lazy var output: Output = { bindOutput() }()
+
+    // MARK: - Initializer
+
+    var searchText: String?
+
+    init(searchText: String? = nil) {
+        self.searchText = searchText
+    }
 
     // MARK: - Helpers
 
@@ -74,6 +86,7 @@ final class SearchViewModel {
     }
 
     private func loadResultFirstTime(of searchText: String) {
+        hasMoreResult = true
         searchResult.value.removeAll()
         currentPage = 1
 
@@ -81,10 +94,20 @@ final class SearchViewModel {
     }
 
     private func bindInput() -> Input {
+        let searchWithKeyword: (String?) -> Void = { [weak self] searchText in
+            guard let self = self else { return }
+
+            if searchText != nil {
+                self.searchTextOb.value = searchText ?? ""
+
+                loadResultFirstTime(of: searchTextOb.value)
+            }
+        }
+
         let searchButtonTapped: (String) -> Void = { [weak self] searchText in
             guard let self = self else { return }
 
-            self.searchText = searchText
+            searchTextOb.value = searchText
             loadResultFirstTime(of: searchText)
         }
 
@@ -92,17 +115,23 @@ final class SearchViewModel {
             guard let self = self else { return }
 
             isKeywordSearchRelay.value = isKeyword
-            loadResultFirstTime(of: searchText)
+
+            if searchText != nil {
+                placeholderText.value = isKeyword ? 
+                    "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+                loadResultFirstTime(of: searchTextOb.value)
+            }
         }
 
         let loadMoreResults: () -> Void = { [weak self] in
             guard let self = self else { return }
 
             currentPage += 1
-            loadResults(of: searchText, page: currentPage)
+            loadResults(of: searchTextOb.value, page: currentPage)
         }
 
         return Input(
+            searchWithKeyword: searchWithKeyword, 
             searchButtonTapped: searchButtonTapped,
             keywordButtonTapped: keywordButtonTapped,
             loadMoreResults: loadMoreResults
@@ -113,7 +142,9 @@ final class SearchViewModel {
         return Output(
             searchResult: searchResult,
             isKeywordSearch: isKeywordSearchRelay,
-            loadingState: loadingState
+            loadingState: loadingState,
+            keywordSearchText: searchTextOb, 
+            placeholderText: placeholderText
         )
     }
 }
