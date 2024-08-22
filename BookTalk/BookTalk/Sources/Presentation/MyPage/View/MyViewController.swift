@@ -251,7 +251,7 @@ extension MyViewController: ProfileInfoViewModelDelegate {
     func didTapAddFinishedBookButton() {
         let viewModel = AddBookViewModel()
         let addBookVC = AddBookViewController(viewModel: viewModel)
-
+        addBookVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(addBookVC, animated: true)
     }
     

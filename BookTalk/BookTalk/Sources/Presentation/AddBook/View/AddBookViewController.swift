@@ -13,6 +13,7 @@ final class AddBookViewController: BaseViewController {
 
     private let searchBar = UISearchBar()
     private let resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: AddBookViewModel
 
@@ -64,16 +65,24 @@ final class AddBookViewController: BaseViewController {
             $0.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             $0.showsVerticalScrollIndicator = false
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
-        [searchBar, resultCollectionView].forEach {
+        [searchBar, resultCollectionView, indicatorView].forEach {
             view.addSubview($0)
         }
 
         resultCollectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
@@ -110,6 +119,27 @@ final class AddBookViewController: BaseViewController {
 
         viewModel.searchText.subscribe { [weak self] text in
             self?.searchBar.text = text
+        }
+
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .initial:
+                break
+
+            case .loading:
+                indicatorView.startAnimating()
+                
+            case .completed:
+                indicatorView.stopAnimating()
+
+                if viewModel.favoriteBooks.value.isEmpty {
+                    resultCollectionView.setEmptyMessage("검색 결과가 없습니다.")
+                } else {
+                    resultCollectionView.restore()
+                }
+            }
         }
     }
 }
@@ -171,7 +201,11 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
     ) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        if viewModel.loadState.value == .initial {
+            return CGSize(width: collectionView.frame.width, height: 50)
+        } else {
+            return .zero
+        }
     }
 }
 

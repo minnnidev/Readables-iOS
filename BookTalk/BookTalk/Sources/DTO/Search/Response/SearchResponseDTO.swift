@@ -52,5 +52,13 @@ extension SearchResponseDTO {
             registeredLibraries: .init()
         )
     }
+
+    func toModel() -> Book {
+        return .init(
+            isbn: isbn13,
+            imageURL: bookImageURL,
+            title: bookName
+        )
+    }
 }
 

@@ -49,8 +49,25 @@ final class AddBookViewModel {
             }
 
         case let .loadResult(query):
-            print(query)
-            return
+            loadState.value = .loading
+            
+            Task {
+                do {
+                    let searchResult = try await SearchService.getSearchSimpleRsult(
+                        input: query,
+                        pageNo: 1,
+                        pageSize: 30
+                    )
+
+                    await MainActor.run {
+                        favoriteBooks.value = searchResult
+                        loadState.value = .completed
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                    loadState.value = .completed
+                }
+            }
         }
     }
 }
