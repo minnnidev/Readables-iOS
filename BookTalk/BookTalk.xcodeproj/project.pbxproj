@@ -136,6 +136,7 @@
 		ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB42C76FDE300FDA084 /* SearchService.swift */; };
 		ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB62C76FDED00FDA084 /* SearchTarget.swift */; };
 		ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDBA2C76FE9E00FDA084 /* LoadState.swift */; };
+		ABAAFDBD2C76FEFA00FDA084 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */; };
 		ABB901A42C71EDD700727875 /* GenreRandomRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */; };
 		ABB901A82C7241AD00727875 /* IndicatorFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */; };
 		ABB901AB2C7279AA00727875 /* KeywordResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */; };
@@ -283,6 +284,7 @@
 		ABAAFDB42C76FDE300FDA084 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		ABAAFDB62C76FDED00FDA084 /* SearchTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTarget.swift; sourceTree = "<group>"; };
 		ABAAFDBA2C76FE9E00FDA084 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
+		ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		ABB901A32C71EDD700727875 /* GenreRandomRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRandomRequestDTO.swift; sourceTree = "<group>"; };
 		ABB901A72C7241AD00727875 /* IndicatorFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorFooterView.swift; sourceTree = "<group>"; };
 		ABB901AA2C7279AA00727875 /* KeywordResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordResponseDTO.swift; sourceTree = "<group>"; };
@@ -766,6 +768,7 @@
 				AB949A302C7475630005C543 /* NotificationCenter+.swift */,
 				AB949A322C7475720005C543 /* UserDefaults+.swift */,
 				AB949A342C7484F80005C543 /* UICollectionView+.swift */,
+				ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1318,6 +1321,7 @@
 				AB0C0F6A2C5BFDBE007812C5 /* ChatModel.swift in Sources */,
 				AB0C0F7C2C5F6D45007812C5 /* MyReadingProgressCell.swift in Sources */,
 				AB8205622C6E687D0014C5A5 /* Encodable+.swift in Sources */,
+				ABAAFDBD2C76FEFA00FDA084 /* UITableView+.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
 				056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */,
