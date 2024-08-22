@@ -29,8 +29,8 @@ struct HomeMockData {
         HomeSection(
             type: .recommendation([
                 DetailBookInfo(
-                    isbn: "9791162243077",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/1-1.png",
                         title: "Book 1-1",
                         author: "Author 1-1"
@@ -42,8 +42,8 @@ struct HomeMockData {
                     registeredLibraries: []
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/2-1.png",
                         title: "Book 2-1",
                         author: "Author 2-1"
@@ -55,8 +55,8 @@ struct HomeMockData {
                     registeredLibraries: [Library(name: "가 도서관", isAvailable: true)]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/3-1.png",
                         title: "Book 3-1",
                         author: "Author 3-1"
@@ -71,8 +71,8 @@ struct HomeMockData {
                     ]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/4-1.png",
                         title: "Book 4-1",
                         author: "Author 4-1"
@@ -88,8 +88,8 @@ struct HomeMockData {
                     ]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/5-1.png",
                         title: "Book 5-1",
                         author: "Author 5-1"
@@ -111,8 +111,8 @@ struct HomeMockData {
         HomeSection(
             type: .recommendation([
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/1-2.png",
                         title: "Book 1-2",
                         author: "Author 1-2"
@@ -124,8 +124,8 @@ struct HomeMockData {
                     registeredLibraries: []
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/2-2.png",
                         title: "Book 2-2",
                         author: "Author 2-2"
@@ -137,8 +137,8 @@ struct HomeMockData {
                     registeredLibraries: [Library(name: "가 도서관", isAvailable: true)]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/3-2.png",
                         title: "Book 3-2",
                         author: "Author 3-2"
@@ -153,8 +153,8 @@ struct HomeMockData {
                     ]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/4-2.png",
                         title: "Book 4-2",
                         author: "Author 4-2"
@@ -170,8 +170,8 @@ struct HomeMockData {
                     ]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/5-2.png",
                         title: "Book 5-2",
                         author: "Author 5-2"
@@ -193,8 +193,8 @@ struct HomeMockData {
         HomeSection(
             type: .recommendation([
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/1-3.png",
                         title: "Book 1-3",
                         author: "Author 1-3"
@@ -206,8 +206,8 @@ struct HomeMockData {
                     registeredLibraries: []
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/2-3.png",
                         title: "Book 2-3",
                         author: "Author 2-3"
@@ -219,8 +219,8 @@ struct HomeMockData {
                     registeredLibraries: [Library(name: "가 도서관", isAvailable: true)]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/3-3.png",
                         title: "Book 3-3",
                         author: "Author 3-3"
@@ -235,8 +235,8 @@ struct HomeMockData {
                     ]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/4-3.png",
                         title: "Book 4-3",
                         author: "Author 4-3"
@@ -252,8 +252,8 @@ struct HomeMockData {
                     ]
                 ),
                 DetailBookInfo(
-                    isbn: "",
                     basicBookInfo: BasicBookInfo(
+                        isbn: "9791162243077",
                         coverImageURL: "https://example.com/5-3.png",
                         title: "Book 5-3",
                         author: "Author 5-3"

@@ -186,7 +186,7 @@ final class SearchViewController: BaseViewController {
     // MARK: - Helpers
 
     private func navigateToBookDetail(with book: DetailBookInfo) {
-        let detailViewModel = BookDetailViewModel(isbn: book.isbn)
+        let detailViewModel = BookDetailViewModel(isbn: book.basicBookInfo.isbn)
         let detailVC = BookDetailViewController(viewModel: detailViewModel)
         detailVC.hidesBottomBarWhenPushed = true
         

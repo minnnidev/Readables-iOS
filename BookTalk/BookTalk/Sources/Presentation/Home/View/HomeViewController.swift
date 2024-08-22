@@ -203,7 +203,9 @@ extension HomeViewController: UITableViewDelegate {
         switch sectionInfo.type {
         case let .recommendation(bookInfo):
             let selectedBook = bookInfo[indexPath.row]
-            let detailViewModel = BookDetailViewModel(isbn: selectedBook.isbn)
+            let detailViewModel = BookDetailViewModel(
+                isbn: selectedBook.basicBookInfo.isbn
+            )
             let detailVC = BookDetailViewController(viewModel: detailViewModel)
             detailVC.hidesBottomBarWhenPushed = true
 
@@ -270,7 +272,9 @@ extension HomeViewController: RecommendationBookCellDelegate {
         _ cell: RecommendationBookCell,
         didSelectBook book: DetailBookInfo
     ) {
-        let detailViewModel = BookDetailViewModel(isbn: book.isbn)
+        let detailViewModel = BookDetailViewModel(
+            isbn: book.basicBookInfo.isbn
+        )
         let detailVC = BookDetailViewController(viewModel: detailViewModel)
         detailVC.hidesBottomBarWhenPushed = true
         
