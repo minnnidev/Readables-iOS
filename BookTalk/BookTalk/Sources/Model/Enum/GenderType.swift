@@ -8,7 +8,18 @@
 import Foundation
 
 enum GenderType: String {
-    case notSelcted = "G0"
-    case man = "G1"
-    case woman = "G2"
+    case notSelcted = "NOT_SELECTED"
+    case man = "MAN"
+    case woman = "WOMAN"
+
+    var code: String {
+        switch self {
+        case .notSelcted:
+            return "G0"
+        case .man:
+            return "G1"
+        case .woman:
+            return "G2"
+        }
+    }
 }

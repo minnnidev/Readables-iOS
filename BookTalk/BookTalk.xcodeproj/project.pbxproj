@@ -128,6 +128,9 @@
 		AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */; };
 		AB5D35552C775AB20028995C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35542C775AB20028995C /* UserInfo.swift */; };
 		AB5D35582C775ADE0028995C /* GenderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35572C775ADE0028995C /* GenderType.swift */; };
+		AB5D355B2C775DF70028995C /* UserTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D355A2C775DF70028995C /* UserTarget.swift */; };
+		AB5D355D2C775DFF0028995C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D355C2C775DFF0028995C /* UserService.swift */; };
+		AB5D355F2C7767A00028995C /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D355E2C7767A00028995C /* DateFormatter+.swift */; };
 		AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205542C6E661B0014C5A5 /* GenreTarget.swift */; };
 		AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205562C6E66240014C5A5 /* GenreService.swift */; };
 		AB82055C2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */; };
@@ -282,6 +285,9 @@
 		AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		AB5D35542C775AB20028995C /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		AB5D35572C775ADE0028995C /* GenderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderType.swift; sourceTree = "<group>"; };
+		AB5D355A2C775DF70028995C /* UserTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTarget.swift; sourceTree = "<group>"; };
+		AB5D355C2C775DFF0028995C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		AB5D355E2C7767A00028995C /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		AB8205542C6E661B0014C5A5 /* GenreTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTarget.swift; sourceTree = "<group>"; };
 		AB8205562C6E66240014C5A5 /* GenreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreService.swift; sourceTree = "<group>"; };
 		AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreTrendRequestDTO.swift; path = BookTalk/Sources/DTO/Genre/Request/GenreTrendRequestDTO.swift; sourceTree = SOURCE_ROOT; };
@@ -789,6 +795,7 @@
 				AB949A322C7475720005C543 /* UserDefaults+.swift */,
 				AB949A342C7484F80005C543 /* UICollectionView+.swift */,
 				ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */,
+				AB5D355E2C7767A00028995C /* DateFormatter+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -908,6 +915,7 @@
 			isa = PBXGroup;
 			children = (
 				AB4CBA5E2C6BB059009A2AB6 /* Foundation */,
+				AB5D35592C775DE70028995C /* User */,
 				AB8205532C6E66060014C5A5 /* Genre */,
 				ABB901AD2C727A2000727875 /* Book */,
 				ABB901C82C7398AC00727875 /* OpenTalk */,
@@ -1015,6 +1023,15 @@
 				AB5D35572C775ADE0028995C /* GenderType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		AB5D35592C775DE70028995C /* User */ = {
+			isa = PBXGroup;
+			children = (
+				AB5D355A2C775DF70028995C /* UserTarget.swift */,
+				AB5D355C2C775DFF0028995C /* UserService.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		AB8205532C6E66060014C5A5 /* Genre */ = {
@@ -1366,6 +1383,7 @@
 				AB2E7BE52C53C97800CE43CB /* BookWithHeaderCell.swift in Sources */,
 				ABB901B12C727A3400727875 /* BookService.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
+				AB5D355F2C7767A00028995C /* DateFormatter+.swift in Sources */,
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
@@ -1390,6 +1408,7 @@
 				AB0C0F7C2C5F6D45007812C5 /* MyReadingProgressCell.swift in Sources */,
 				AB8205622C6E687D0014C5A5 /* Encodable+.swift in Sources */,
 				ABAAFDBD2C76FEFA00FDA084 /* UITableView+.swift in Sources */,
+				AB5D355B2C775DF70028995C /* UserTarget.swift in Sources */,
 				AB5D35502C7759E60028995C /* EditUserInfoRequestDTO.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
@@ -1439,6 +1458,7 @@
 				ABAAFDB22C76FDAD00FDA084 /* SearchRequestDTO.swift in Sources */,
 				AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */,
 				054FA17B2C7464E30007D9C9 /* SegmentedProgressBar.swift in Sources */,
+				AB5D355D2C775DFF0028995C /* UserService.swift in Sources */,
 				AB4CBA6C2C6DD8E7009A2AB6 /* NetworkService.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,

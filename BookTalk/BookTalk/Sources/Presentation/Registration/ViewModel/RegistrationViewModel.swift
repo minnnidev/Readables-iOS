@@ -7,16 +7,12 @@
 
 import UIKit
 
-enum Gender {
-    case male, female
-}
-
 struct RegistrationViewModel {
     
     // MARK: - Inputs
     
     let nickname = Observable<String>("")
-    let selectedGender = Observable<Gender?>(nil)
+    let selectedGender = Observable<GenderType?>(nil)
     let birthDate = Observable<Date?>(nil)
     let isFormValid = Observable<Bool>(false)
     
@@ -27,7 +23,7 @@ struct RegistrationViewModel {
         validateForm()
     }
     
-    func updateGender(_ gender: Gender) {
+    func updateGender(_ gender: GenderType) {
         selectedGender.value = gender
         validateForm()
     }
@@ -36,7 +32,26 @@ struct RegistrationViewModel {
         birthDate.value = date
         validateForm()
     }
-    
+
+    func registerUserInfo(
+        nickname: String,
+        gender: GenderType,
+        birth: String
+    ) {
+        Task {
+            do {
+                let newUserInfo = try await UserService.editUserInfo(
+                    nickname: nickname,
+                    gender: gender,
+                    birthDate: birth
+                )
+                print(newUserInfo)
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     // MARK: - Helpers
     
     private func validateForm() {

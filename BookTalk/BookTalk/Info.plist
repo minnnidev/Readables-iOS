@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>앨범 접근 권한이 필요합니다.</string>
+	<string>프로필 사진 설정을 위해 앨범 접근 권한이 필요합니다.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>카메라 접근 권한이 필요합니다.</string>
+	<string>프로필 사진 설정을 위해 카메라 접근 권한이 필요합니다.</string>
 	<key>KakaoNativeAppKey</key>
 	<string>d3ddedc9b13b7bf5d046bd16a67e1e5c</string>
 	<key>BASE_URL</key>
