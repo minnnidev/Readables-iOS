@@ -11,6 +11,7 @@ import Alamofire
 
 enum UserTarget {
     case editUserInfo(body: EditUserInfoRequestDTO)
+    case getUserInfo
 }
 
 extension UserTarget: TargetType {
@@ -19,6 +20,8 @@ extension UserTarget: TargetType {
         switch self {
         case .editUserInfo:
             return "/api/user/info/edit"
+        case .getUserInfo:
+            return "/api/user/info"
         }
     }
     
@@ -26,6 +29,8 @@ extension UserTarget: TargetType {
         switch self {
         case .editUserInfo:
             return .put
+        case .getUserInfo:
+            return .get
         }
     }
     
@@ -33,6 +38,8 @@ extension UserTarget: TargetType {
         switch self {
         case let .editUserInfo(body):
             return .requestJSONEncodable(body: body)
+        case .getUserInfo:
+            return .requestPlain
         }
     }
 }

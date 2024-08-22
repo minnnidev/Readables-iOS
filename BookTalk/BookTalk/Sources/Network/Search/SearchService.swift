@@ -16,4 +16,23 @@ struct SearchService {
 
         return result.map { $0.toModel() }
     }
+
+    static func getSearchSimpleRsult(
+        input: String,
+        pageNo: Int,
+        pageSize: Int
+    ) async throws -> [Book] {
+        let params: SearchRequestDTO = .init(
+            isKeyword: false,
+            input: input,
+            pageNo: pageNo,
+            pageSize: pageSize
+        )
+
+        let result: [SearchResponseDTO] = try await NetworkService.shared.request(
+            target: SearchTarget.getSearchResult(params: params)
+        )
+
+        return result.map { $0.toModel() }
+    }
 }

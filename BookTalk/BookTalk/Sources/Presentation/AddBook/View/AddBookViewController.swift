@@ -36,6 +36,8 @@ final class AddBookViewController: BaseViewController {
         setDelegate()
         registerCell()
         bind()
+
+        viewModel.send(action: .loadFavoriteBooks)
     }
 
     // MARK: - UI Setup
@@ -54,6 +56,8 @@ final class AddBookViewController: BaseViewController {
         resultCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .vertical
+            flowLayout.minimumLineSpacing = 24
+            flowLayout.minimumInteritemSpacing = 8
 
             $0.collectionViewLayout = flowLayout
             $0.backgroundColor = .clear
@@ -93,6 +97,12 @@ final class AddBookViewController: BaseViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: LikedTitleHeaderView.identifier
         )
+
+        resultCollectionView.register(
+            IndicatorFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: IndicatorFooterView.identifier
+        )
     }
 
     private func bind() {
@@ -102,6 +112,38 @@ final class AddBookViewController: BaseViewController {
 
         viewModel.searchText.subscribe { [weak self] text in
             self?.searchBar.text = text
+        }
+
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .completed:
+                if viewModel.books.value.isEmpty {
+                    resultCollectionView.setEmptyMessage("검색 결과가 없습니다.")
+                } else {
+                    resultCollectionView.restore()
+                }
+
+            case .initial, .loading:
+                break
+
+            }
+        }
+
+        viewModel.hasMoreResult.subscribe { [weak self] hasMore in
+            guard let self = self else { return }
+
+            let indexPath = IndexPath(item: 0, section: 0)
+            let context = UICollectionViewFlowLayoutInvalidationContext()
+            context.invalidateSupplementaryElements(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                at: [indexPath]
+            )
+
+            DispatchQueue.main.async {
+                self.resultCollectionView.collectionViewLayout.invalidateLayout(with: context)
+            }
         }
     }
 }
@@ -114,7 +156,7 @@ extension AddBookViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 5
+        return viewModel.books.value.count
     }
 
     func collectionView(
@@ -126,7 +168,16 @@ extension AddBookViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
+        cell.bind(with: viewModel.books.value[indexPath.item])
         return cell
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        // TODO: 읽은 책 추가 API 호출 후 pop
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -145,32 +196,28 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 24
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 8
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: LikedTitleHeaderView.identifier,
-            for: indexPath
-        ) as? LikedTitleHeaderView else { return UICollectionReusableView() }
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: LikedTitleHeaderView.identifier,
+                for: indexPath
+            ) as? LikedTitleHeaderView else { return UICollectionReusableView() }
 
-        return headerView
+            return headerView
+        } else if kind == UICollectionView.elementKindSectionFooter {
+            guard let footerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                withReuseIdentifier: IndicatorFooterView.identifier,
+                for: indexPath
+            ) as? IndicatorFooterView else { return UICollectionReusableView() }
+
+            return footerView
+        }
+
+        return UICollectionReusableView()
     }
 
     func collectionView(
@@ -178,7 +225,40 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
     ) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        guard viewModel.hasMoreResult.value else { return .zero }
+
+        if viewModel.loadState.value == .initial {
+            return CGSize(width: collectionView.frame.width, height: 50)
+        } else {
+            return .zero
+        }
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForFooterInSection section: Int
+    ) -> CGSize {
+        guard viewModel.hasMoreResult.value else { return .zero }
+        guard viewModel.loadState.value == .loading else { return .zero }
+
+        return CGSize(
+            width: collectionView.frame.width,
+            height: 50
+        )
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        guard viewModel.loadState.value != .initial else { return }
+
+        let isLoadPoint = indexPath.item == viewModel.books.value.count - 9
+        guard isLoadPoint else { return }
+
+        viewModel.send(action: .loadMoreResult(query: viewModel.searchText.value))
     }
 }
 
