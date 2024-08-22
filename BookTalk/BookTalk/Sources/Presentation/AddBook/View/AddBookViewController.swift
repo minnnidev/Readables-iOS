@@ -36,6 +36,8 @@ final class AddBookViewController: BaseViewController {
         setDelegate()
         registerCell()
         bind()
+
+        viewModel.send(action: .loadFavoriteBooks)
     }
 
     // MARK: - UI Setup
@@ -54,6 +56,8 @@ final class AddBookViewController: BaseViewController {
         resultCollectionView.do {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .vertical
+            flowLayout.minimumLineSpacing = 24
+            flowLayout.minimumInteritemSpacing = 8
 
             $0.collectionViewLayout = flowLayout
             $0.backgroundColor = .clear
@@ -96,6 +100,10 @@ final class AddBookViewController: BaseViewController {
     }
 
     private func bind() {
+        viewModel.favoriteBooks.subscribe { [weak self] _ in
+            self?.resultCollectionView.reloadData()
+        }
+
         viewModel.books.subscribe { [weak self] _ in
             self?.resultCollectionView.reloadData()
         }
@@ -114,7 +122,7 @@ extension AddBookViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 5
+        return viewModel.favoriteBooks.value.count
     }
 
     func collectionView(
@@ -126,6 +134,7 @@ extension AddBookViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
+        cell.bind(with: viewModel.favoriteBooks.value[indexPath.item])
         return cell
     }
 }
@@ -141,22 +150,6 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         let width = (ScreenSize.width-36) / 3
         return CGSize(width: width, height: 208)
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 24
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 8
     }
 
     func collectionView(

@@ -24,4 +24,12 @@ struct UserService {
 
         return result
     }
+
+    static func getFavoriteBooks() async throws -> [Book] {
+        let result: UserInfoResponseDTO = try await NetworkService.shared.request(
+            target: UserTarget.getUserInfo
+        )
+
+        return result.dibs.map { $0.toModel() }
+    }
 }
