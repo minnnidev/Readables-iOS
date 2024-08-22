@@ -85,10 +85,22 @@ final class LoginViewController: BaseViewController {
                 self?.progressView.updateProgress(segmentIndex: index, progress: progress)
             }
         }
+
+        viewModel.output.pushToRegister.subscribe { [weak self] isLoginCompleted in
+            guard let self = self else { return }
+            guard isLoginCompleted else { return }
+
+            let registerVC = RegistrationViewController()
+            navigationController?.pushViewController(registerVC, animated: true)
+        }
     }
     
     // MARK: - Set UI
-    
+
+    override func setNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     override func setViews() {
         configureWaveView()
         configureAnimationView()
