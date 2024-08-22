@@ -13,7 +13,6 @@ final class AddBookViewController: BaseViewController {
 
     private let searchBar = UISearchBar()
     private let resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: AddBookViewModel
 
@@ -65,24 +64,16 @@ final class AddBookViewController: BaseViewController {
             $0.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             $0.showsVerticalScrollIndicator = false
         }
-
-        indicatorView.do {
-            $0.hidesWhenStopped = true
-        }
     }
 
     override func setConstraints() {
-        [searchBar, resultCollectionView, indicatorView].forEach {
+        [searchBar, resultCollectionView].forEach {
             view.addSubview($0)
         }
 
         resultCollectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
-        }
-
-        indicatorView.snp.makeConstraints {
-            $0.center.equalToSuperview()
         }
     }
 
@@ -127,20 +118,31 @@ final class AddBookViewController: BaseViewController {
             guard let self = self else { return }
 
             switch state {
-            case .initial:
-                break
-
-            case .loading:
-                indicatorView.startAnimating()
-                
             case .completed:
-                indicatorView.stopAnimating()
-
                 if viewModel.books.value.isEmpty {
                     resultCollectionView.setEmptyMessage("검색 결과가 없습니다.")
                 } else {
                     resultCollectionView.restore()
                 }
+
+            case .initial, .loading:
+                break
+
+            }
+        }
+
+        viewModel.hasMoreResult.subscribe { [weak self] hasMore in
+            guard let self = self else { return }
+
+            let indexPath = IndexPath(item: 0, section: 0)
+            let context = UICollectionViewFlowLayoutInvalidationContext()
+            context.invalidateSupplementaryElements(
+                ofKind: UICollectionView.elementKindSectionFooter,
+                at: [indexPath]
+            )
+
+            DispatchQueue.main.async {
+                self.resultCollectionView.collectionViewLayout.invalidateLayout(with: context)
             }
         }
     }
@@ -222,6 +224,20 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
         } else {
             return .zero
         }
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForFooterInSection section: Int
+    ) -> CGSize {
+        guard viewModel.hasMoreResult.value else { return .zero }
+        guard viewModel.loadState.value == .loading else { return .zero }
+
+        return CGSize(
+            width: collectionView.frame.width,
+            height: 50
+        )
     }
 
     func collectionView(
