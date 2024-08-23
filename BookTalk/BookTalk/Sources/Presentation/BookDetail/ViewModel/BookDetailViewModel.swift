@@ -80,7 +80,6 @@ final class BookDetailViewModel {
 
                             bookDetailOb.value = bookDetail
                             availableLibs.value = bookDetail.registeredLibraries
-                            (availabilityText.value, availabilityColor.value) = updateAvailability(availableLibs.value)
                             isFavoriteOb.value = bookDetail.isFavorite
 
                             loadStateOb.value = .completed
@@ -121,17 +120,18 @@ extension BookDetailViewModel {
         if let opposite = opposite, property.value { opposite.value = false }
     }
 
-    private func updateAvailability(
+    func updateAvailability(
         _ libraries: [Library]?
     ) -> (text: String, color: UIColor) {
-        guard let libraries = libraries else {
+        guard let libraries = libraries, !libraries.isEmpty else {
             return ("대출 여부를 확인하려면 도서관을 등록해주세요.", .systemGray)
         }
 
         let isAvailable = libraries.contains { $0.isAvailable }
-        let text = isAvailable ? "대출 가능" : "대출 불가능"
-        let color = isAvailable ? UIColor.systemGreen : .systemRed
-
-        return (text, color)
+        
+        return (
+            isAvailable ? "대출 가능" : "대출 불가능",
+            isAvailable ? .systemGreen : .systemRed
+        )
     }
 }
