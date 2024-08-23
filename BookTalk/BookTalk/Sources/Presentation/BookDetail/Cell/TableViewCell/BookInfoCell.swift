@@ -13,6 +13,7 @@ final class BookInfoCell: BaseTableViewCell {
     
     // MARK: - Properties
     
+    private var viewModel: BookDetailViewModel?
     private let bookImageView = UIImageView()
     private let titleLabel = UILabel()
     private let authorLabel = UILabel()
@@ -23,9 +24,37 @@ final class BookInfoCell: BaseTableViewCell {
     private let joinOpenTalkButton = UIButton(type: .system)
     private let markAsReadButton = UIButton(type: .system)
     
+    // MARK: - Initializer
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        addTargets()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func toggleMarkAsReadButton() {
+        viewModel?.input.markAsReadButtonTap()
+    }
+    
+    private func addTargets() {
+        markAsReadButton.addTarget(
+            self,
+            action: #selector(toggleMarkAsReadButton),
+            for: .touchUpInside
+        )
+    }
+    
     // MARK: - Bind
 
     func bind(_ viewModel: BookDetailViewModel) {
+        self.viewModel = viewModel
+        
         viewModel.output.detailBook.subscribe { [weak self] detail in
             guard let self = self else { return }
             guard let detail = detail else { return }
@@ -34,18 +63,55 @@ final class BookInfoCell: BaseTableViewCell {
             authorLabel.text = detail.basicBookInfo.author
             publisherLabel.text = detail.publisher
             publicationDateLabel.text = detail.publicationDate
-
+            
+            let (availabilityText, availabilityColor) = 
+                viewModel.updateAvailability(detail.registeredLibraries)
+            self.availabilityLabel.text = availabilityText
+            self.availabilityLabel.textColor = availabilityColor
+            
             guard let imageURL = URL(string: detail.basicBookInfo.coverImageURL) else { return }
             bookImageView.kf.setImage(with: imageURL)
-        }
-
-        viewModel.output.availabilityText.subscribe { [weak self] availabilityText in
-            self?.availabilityLabel.text = availabilityText
+            
+            updateLayout()
         }
         
-        viewModel.output.availabilityTextColor.subscribe { [weak self] textColor in
-            self?.availabilityLabel.textColor = textColor
+        viewModel.output.isMarkAsRead.subscribe { [weak self] isMarkedAsRead in
+            guard let self = self else { return }
+            updateMarkAsReadButton(isMarkedAsRead: isMarkedAsRead)
         }
+    }
+    
+    // MARK: - Helpers
+    
+    private func updateLayout() {
+        if let tableView = superview as? UITableView {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+    }
+    
+    private func updateMarkAsReadButton(isMarkedAsRead: Bool) {
+        var config = UIButton.Configuration.plain()
+        config.imagePlacement = .trailing
+        config.imagePadding = 5
+        config.attributedTitle = AttributedString(
+            NSAttributedString(
+                string: isMarkedAsRead ? "읽은 책에서 삭제하기" : "읽은 책으로 추가하기",
+                attributes: [
+                    .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+                    .foregroundColor: isMarkedAsRead ? UIColor.systemRed : UIColor.systemBlue
+                ]
+            )
+        )
+        
+        config.image = UIImage(systemName: isMarkedAsRead ? "minus" : "plus")?
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 12, weight: .bold))
+            .withTintColor(
+                isMarkedAsRead ? .systemRed : .systemBlue,
+                renderingMode: .alwaysOriginal
+            )
+        
+        markAsReadButton.configuration = config
     }
     
     // MARK: - Set UI
@@ -114,14 +180,6 @@ final class BookInfoCell: BaseTableViewCell {
         
         markAsReadButton.do {
             var config = UIButton.Configuration.plain()
-            config.attributedTitle = AttributedString(
-                NSAttributedString(
-                    string: "읽은 책으로 추가하기",
-                    attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)]
-                )
-            )
-            config.image = UIImage(systemName: "plus")?
-                .withConfiguration(UIImage.SymbolConfiguration(pointSize: 12, weight: .bold))
             config.imagePlacement = .trailing
             config.imagePadding = 5
             
@@ -131,7 +189,6 @@ final class BookInfoCell: BaseTableViewCell {
     
     override func setConstraints() {
         [bookImageView,
-         titleLabel,
          bookInfoStackView,
          joinOpenTalkButton,
          markAsReadButton].forEach { contentView.addSubview($0) }
