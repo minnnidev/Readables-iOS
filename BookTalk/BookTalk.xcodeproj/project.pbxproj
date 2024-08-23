@@ -142,6 +142,11 @@
 		AB8224A52C7842AD0082CD30 /* RegionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224A42C7842AD0082CD30 /* RegionType.swift */; };
 		AB8224A82C7842C80082CD30 /* LibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224A72C7842C80082CD30 /* LibraryCell.swift */; };
 		AB8224AC2C7843440082CD30 /* SearchLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224AB2C7843440082CD30 /* SearchLibraryViewController.swift */; };
+		AB8224AF2C7847430082CD30 /* LibrarySearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224AE2C7847430082CD30 /* LibrarySearchRequestDTO.swift */; };
+		AB8224B12C78476E0082CD30 /* LibraryInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B02C78476E0082CD30 /* LibraryInfoResponseDTO.swift */; };
+		AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B32C7847B70082CD30 /* LibraryInfo.swift */; };
+		AB8224B72C7847FE0082CD30 /* LibraryTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B62C7847FE0082CD30 /* LibraryTarget.swift */; };
+		AB8224B92C7848070082CD30 /* LibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B82C7848070082CD30 /* LibraryService.swift */; };
 		AB949A2F2C7474580005C543 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A2E2C7474580005C543 /* AppFlowController.swift */; };
 		AB949A312C7475630005C543 /* NotificationCenter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A302C7475630005C543 /* NotificationCenter+.swift */; };
 		AB949A332C7475720005C543 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A322C7475720005C543 /* UserDefaults+.swift */; };
@@ -305,6 +310,11 @@
 		AB8224A42C7842AD0082CD30 /* RegionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionType.swift; sourceTree = "<group>"; };
 		AB8224A72C7842C80082CD30 /* LibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCell.swift; sourceTree = "<group>"; };
 		AB8224AB2C7843440082CD30 /* SearchLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLibraryViewController.swift; sourceTree = "<group>"; };
+		AB8224AE2C7847430082CD30 /* LibrarySearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySearchRequestDTO.swift; sourceTree = "<group>"; };
+		AB8224B02C78476E0082CD30 /* LibraryInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryInfoResponseDTO.swift; sourceTree = "<group>"; };
+		AB8224B32C7847B70082CD30 /* LibraryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryInfo.swift; sourceTree = "<group>"; };
+		AB8224B62C7847FE0082CD30 /* LibraryTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTarget.swift; sourceTree = "<group>"; };
+		AB8224B82C7848070082CD30 /* LibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryService.swift; sourceTree = "<group>"; };
 		AB949A2E2C7474580005C543 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
 		AB949A302C7475630005C543 /* NotificationCenter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+.swift"; sourceTree = "<group>"; };
 		AB949A322C7475720005C543 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -849,6 +859,7 @@
 		AB2E7BEB2C53DAFE00CE43CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AB8224B22C7847A10082CD30 /* Library */,
 				AB5D35562C775ACB0028995C /* Enum */,
 				AB5D35532C775AA30028995C /* User */,
 				054544132C5AA7F100E64948 /* BookInfo */,
@@ -934,6 +945,7 @@
 				ABB901AD2C727A2000727875 /* Book */,
 				ABB901C82C7398AC00727875 /* OpenTalk */,
 				ABAAFDB32C76FDD800FDA084 /* Search */,
+				AB8224B52C7847F40082CD30 /* Library */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1051,6 +1063,7 @@
 		AB5D35602C7796D90028995C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				AB8224AD2C7847380082CD30 /* Request */,
 				AB5D35612C7796F50028995C /* Response */,
 			);
 			path = Library;
@@ -1060,6 +1073,7 @@
 			isa = PBXGroup;
 			children = (
 				AB5D35622C7797050028995C /* LibrariesResponseDTO.swift */,
+				AB8224B02C78476E0082CD30 /* LibraryInfoResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1169,6 +1183,31 @@
 				AB8224A72C7842C80082CD30 /* LibraryCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		AB8224AD2C7847380082CD30 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				AB8224AE2C7847430082CD30 /* LibrarySearchRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		AB8224B22C7847A10082CD30 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AB8224B32C7847B70082CD30 /* LibraryInfo.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		AB8224B52C7847F40082CD30 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AB8224B62C7847FE0082CD30 /* LibraryTarget.swift */,
+				AB8224B82C7848070082CD30 /* LibraryService.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		ABAAFDAC2C76FD4000FDA084 /* Search */ = {
@@ -1486,7 +1525,9 @@
 				AB4CBA812C6E09CD009A2AB6 /* SettingType.swift in Sources */,
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
+				AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */,
 				054FA1962C748E740007D9C9 /* EditInfoViewController.swift in Sources */,
+				AB8224B72C7847FE0082CD30 /* LibraryTarget.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* BookWithHeaderCell.swift in Sources */,
 				ABB901B12C727A3400727875 /* BookService.swift in Sources */,
@@ -1540,6 +1581,7 @@
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */,
+				AB8224B12C78476E0082CD30 /* LibraryInfoResponseDTO.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				AB0C0F822C5F6E2D007812C5 /* ChatMenuSectionType.swift in Sources */,
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
@@ -1591,9 +1633,11 @@
 				AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */,
 				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
 				054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */,
+				AB8224B92C7848070082CD30 /* LibraryService.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
 				AB4CBA702C6DEFB8009A2AB6 /* Keychain+.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* AllBooksViewModel.swift in Sources */,
+				AB8224AF2C7847430082CD30 /* LibrarySearchRequestDTO.swift in Sources */,
 				054FA1772C74649B0007D9C9 /* LoginType.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,
