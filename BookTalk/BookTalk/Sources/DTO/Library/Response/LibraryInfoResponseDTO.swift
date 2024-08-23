@@ -12,7 +12,7 @@ struct LibraryInfoResponseDTO: Decodable {
     let libName: String
     let address: String
     let tel: String
-    let fax: String
+    let fax: String?
     let latitude: String
     let longitude: String
     let homepage: String

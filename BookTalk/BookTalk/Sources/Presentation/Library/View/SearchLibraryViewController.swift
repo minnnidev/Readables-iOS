@@ -192,22 +192,35 @@ final class SearchLibraryViewController: BaseViewController {
 
     @objc private func doneButtonDidTapped() {
         if regionTextField.isFirstResponder {
+            let selectedRow = regionPicker.selectedRow(inComponent: 0)
+            let selectedRegion = RegionType.allCases[selectedRow]
+            viewModel.send(action: .selectRegion(region: selectedRegion))
             regionTextField.resignFirstResponder()
-            
-            guard viewModel.selectedRegion.value == nil else { return }
-
-            viewModel.send(action: .selectRegion(region: RegionType.allCases[0]))
         }
 
         if detailRegionTextField.isFirstResponder {
+            let selectedRow = detailRegionPicker.selectedRow(inComponent: 0)
+            let selectedDetailRegion = DetailRegionType.allCases[selectedRow]
+            viewModel.send(action: .selectDetailRegion(detailRegion: selectedDetailRegion))
             detailRegionTextField.resignFirstResponder()
-
-            guard viewModel.selectedDetailRegion.value == nil else { return }
-
-            viewModel.send(
-                action: .selectDetailRegion(detailRegion: DetailRegionType.allCases[0])
-            )
         }
+//        if regionTextField.isFirstResponder {
+//            regionTextField.resignFirstResponder()
+//            
+//            guard viewModel.selectedRegion.value == nil else { return }
+//
+//            viewModel.send(action: .selectRegion(region: RegionType.allCases[0]))
+//        }
+//
+//        if detailRegionTextField.isFirstResponder {
+//            detailRegionTextField.resignFirstResponder()
+//
+//            guard viewModel.selectedDetailRegion.value == nil else { return }
+//
+//            viewModel.send(
+//                action: .selectDetailRegion(detailRegion: DetailRegionType.allCases[0])
+//            )
+//        }
     }
 }
 
@@ -246,18 +259,6 @@ extension SearchLibraryViewController: UIPickerViewDelegate {
         }
 
         return nil
-    }
-
-    func pickerView(
-        _ pickerView: UIPickerView,
-        didSelectRow row: Int,
-        inComponent component: Int
-    ) {
-        if pickerView == regionPicker {
-            viewModel.send(action: .selectRegion(region: RegionType.allCases[row]))
-        } else if pickerView == detailRegionPicker {
-            viewModel.send(action: .selectDetailRegion(detailRegion: DetailRegionType.allCases[row]))
-        }
     }
 }
 
