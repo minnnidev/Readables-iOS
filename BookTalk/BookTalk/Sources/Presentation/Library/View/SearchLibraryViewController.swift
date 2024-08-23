@@ -18,9 +18,21 @@ final class SearchLibraryViewController: BaseViewController {
     private let libraryTableView = UITableView()
     private let indicatorView = UIActivityIndicatorView(style: .medium)
 
-    private let viewModel = SearchLibraryViewModel()
+    private let viewModel: SearchLibraryViewModel
 
     // MARK: - Initializer
+
+    init(viewModel: SearchLibraryViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +80,7 @@ final class SearchLibraryViewController: BaseViewController {
 
             case .loading:
                 indicatorView.startAnimating()
+                libraryTableView.restore()
 
             case .completed:
                 DispatchQueue.main.async { [weak self] in
@@ -81,6 +94,12 @@ final class SearchLibraryViewController: BaseViewController {
                     }
                 }
             }
+        }
+
+        viewModel.popToMyLibrary.subscribe { [weak self] isTrue in
+            guard isTrue else { return }
+
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -278,6 +297,7 @@ extension SearchLibraryViewController: UITableViewDelegate {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        // TODO: 수정 api 호출
+        let newLibrary = viewModel.libraryResult.value[indexPath.row]
+        viewModel.send(action: .editMyLibrary(newLibray: newLibrary))
     }
 }

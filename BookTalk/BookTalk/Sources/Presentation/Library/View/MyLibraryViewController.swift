@@ -18,20 +18,29 @@ final class MyLibraryViewController: BaseViewController {
     private let viewModel = MyLibraryViewModel()
 
     // MARK: - Lifecycle
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.send(action: .loadMyLibraries)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerCell()
         setDelegate()
         bind()
-
-        viewModel.send(action: .loadMyLibraries)
     }
 
     private func bind() {
-        viewModel.myLibraries.subscribe { [weak self] _ in
-            self?.libraryTableView.reloadData()
+        viewModel.myLibraries.subscribe { [weak self] libraries in
+            guard let self = self else { return }
+
+            let isAddButtonEnabled = viewModel.myLibraries.value.count < 3
+            navigationItem.rightBarButtonItems?[1].isEnabled = isAddButtonEnabled
+
+            libraryTableView.reloadData()
         }
 
         viewModel.loadState.subscribe { [weak self] state in
@@ -147,7 +156,8 @@ final class MyLibraryViewController: BaseViewController {
     }
 
     @objc private func addLibraryButtonDidTapped() {
-        let searchLibraryVC = SearchLibraryViewController()
+        let searchViewModel = SearchLibraryViewModel(myLibraries: viewModel.myLibraries.value)
+        let searchLibraryVC = SearchLibraryViewController(viewModel: searchViewModel)
         navigationController?.pushViewController(searchLibraryVC, animated: true)
     }
 }
