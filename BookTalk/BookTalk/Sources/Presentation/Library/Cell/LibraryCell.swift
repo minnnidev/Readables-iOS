@@ -61,6 +61,6 @@ final class LibraryCell: BaseTableViewCell {
     func bind(with library: LibraryInfo) {
         libraryNameLabel.text = library.name
         addressLabel.text = library.address
-        telNumberLabel.text = "TEL: \(library.tel)"
+        telNumberLabel.text = "TEL: \(library.tel ?? "")"
     }
 }

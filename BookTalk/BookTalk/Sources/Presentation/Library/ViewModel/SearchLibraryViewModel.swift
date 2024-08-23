@@ -9,17 +9,34 @@ import Foundation
 
 final class SearchLibraryViewModel {
 
+    // MARK: - Properties
+
     private(set) var selectedRegion: Observable<RegionType?> = Observable(nil)
     private(set) var selectedDetailRegion: Observable<DetailRegion?> = Observable(nil)
     private(set) var searchEnableState = Observable(false)
     private(set) var libraryResult = Observable<[LibraryInfo]>([])
     private(set) var loadState = Observable(LoadState.initial)
+    private(set) var popToMyLibrary = Observable(false)
+
+    private var myLibraries: [LibraryInfo]
+
+    // MARK: - Initializer
+
+    init(myLibraries: [LibraryInfo]) {
+        self.myLibraries = myLibraries 
+    }
+
+    // MARK: - Actions
 
     enum Action {
         case selectRegion(region: RegionType?)
         case selectDetailRegion(detailRegion: DetailRegion?)
         case loadLibraryResult(region: RegionType?, detailRegion: DetailRegion?)
+        case editMyLibrary(newLibray: LibraryInfo)
     }
+
+
+    // MARK: - Helpers
 
     func send(action: Action) {
         switch action {
@@ -56,6 +73,22 @@ final class SearchLibraryViewModel {
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                     loadState.value = .completed
+                }
+            }
+
+        case let .editMyLibrary(newLibrary):
+            myLibraries.append(newLibrary)
+
+            Task {
+                do {
+                    let _ = try await UserService.editUserLibraries(newLibraries: myLibraries)
+                    
+                    await MainActor.run {
+                        popToMyLibrary.value = true
+                    }
+                    
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
                 }
             }
         }

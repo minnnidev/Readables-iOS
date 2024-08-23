@@ -11,15 +11,58 @@ final class MyLibraryViewController: BaseViewController {
 
     // MARK: - Properties
 
+    private let descriptionLabel = UILabel()
     private let libraryTableView = UITableView()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
+
+    private let viewModel = MyLibraryViewModel()
 
     // MARK: - Lifecycle
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.send(action: .loadMyLibraries)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerCell()
         setDelegate()
+        bind()
+    }
+
+    private func bind() {
+        viewModel.myLibraries.subscribe { [weak self] libraries in
+            guard let self = self else { return }
+
+            let isAddButtonEnabled = viewModel.myLibraries.value.count < 3
+            navigationItem.rightBarButtonItems?[1].isEnabled = isAddButtonEnabled
+
+            libraryTableView.reloadData()
+        }
+
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .initial:
+                break
+
+            case .loading:
+                indicatorView.startAnimating()
+
+            case .completed:
+                indicatorView.stopAnimating()
+
+                if viewModel.myLibraries.value.isEmpty {
+                    libraryTableView.setEmptyMessage("등록된 내 도서관이 없습니다.")
+                } else {
+                    libraryTableView.restore()
+                }
+            }
+        }
     }
 
     // MARK: - Set UI
@@ -47,18 +90,41 @@ final class MyLibraryViewController: BaseViewController {
     override func setViews() {
         view.backgroundColor = .white
 
+        descriptionLabel.do {
+            $0.text = "내 도서관은 최대 3개까지 등록 가능합니다."
+            $0.font = .systemFont(ofSize: 14)
+            $0.textColor = .lightGray
+        }
+
         libraryTableView.do {
             $0.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
             $0.backgroundColor = .clear
+            $0.isScrollEnabled = false
             $0.rowHeight = UITableView.automaticDimension
+        }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
         }
     }
 
     override func setConstraints() {
-        view.addSubview(libraryTableView)
+        [descriptionLabel, libraryTableView, indicatorView].forEach {
+            view.addSubview($0)
+        }
+
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+        }
 
         libraryTableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        indicatorView.snp.makeConstraints { 
+            $0.center.equalToSuperview()
         }
     }
 
@@ -66,8 +132,8 @@ final class MyLibraryViewController: BaseViewController {
 
     private func registerCell() {
         libraryTableView.register(
-            LibraryCell.self,
-            forCellReuseIdentifier: LibraryCell.identifier
+            LibrarySimpleCell.self,
+            forCellReuseIdentifier: LibrarySimpleCell.identifier
         )
     }
 
@@ -83,10 +149,15 @@ final class MyLibraryViewController: BaseViewController {
         libraryTableView.setEditing(isEditing, animated: true)
 
         navigationItem.rightBarButtonItem?.title = isEditing ? "완료" : "삭제"
+
+        guard !isEditing else { return }
+        
+        viewModel.send(action: .editMyLibraries(newLibraries: viewModel.myLibraries.value))
     }
 
     @objc private func addLibraryButtonDidTapped() {
-        let searchLibraryVC = SearchLibraryViewController()
+        let searchViewModel = SearchLibraryViewModel(myLibraries: viewModel.myLibraries.value)
+        let searchLibraryVC = SearchLibraryViewController(viewModel: searchViewModel)
         navigationController?.pushViewController(searchLibraryVC, animated: true)
     }
 }
@@ -99,7 +170,7 @@ extension MyLibraryViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 3
+        return viewModel.myLibraries.value.count
     }
     
     func tableView(
@@ -107,10 +178,11 @@ extension MyLibraryViewController: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: LibraryCell.identifier,
+            withIdentifier: LibrarySimpleCell.identifier,
             for: indexPath
-        ) as? LibraryCell else { return UITableViewCell() }
+        ) as? LibrarySimpleCell else { return UITableViewCell() }
 
+        cell.bind(with: viewModel.myLibraries.value[indexPath.row].name)
         return cell
     }
 }
@@ -138,6 +210,6 @@ extension MyLibraryViewController: UITableViewDelegate {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
-        // TODO: 삭제하기
+        viewModel.send(action: .deleteMyLibraries(index: indexPath.row))
     }
 }
