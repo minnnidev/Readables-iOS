@@ -13,7 +13,7 @@ final class MyViewController: BaseViewController {
     
     private let profileInfoViewModel = ProfileInfoViewModel()
     private let myPageStickyTabViewModel = MyPageStickyTabViewModel()
-    private let addBookViewModel = AddBookViewModel()
+    private let myBooksViewModel = MyBooksViewModel()
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
@@ -60,8 +60,11 @@ final class MyViewController: BaseViewController {
     // MARK: - Bind
     
     private func updateBooksCount() {
-        myPageStickyTabViewModel.updateFinishedBookCount(0)
-        myPageStickyTabViewModel.updateFavoriteBookCount(0)
+        let finishedBooksCount = myBooksViewModel.finishedBooks.value.count
+        let favoriteBooksCount = myBooksViewModel.favoriteBooks.value.count
+        
+        myPageStickyTabViewModel.updateFinishedBookCount(finishedBooksCount)
+        myPageStickyTabViewModel.updateFavoriteBookCount(favoriteBooksCount)
     }
     
     // MARK: - Set UI
@@ -118,8 +121,13 @@ final class MyViewController: BaseViewController {
             )
             
             $0.register(
-                BookImageCell.self,
-                forCellWithReuseIdentifier: BookImageCell.identifier
+                FinishedBookCell.self,
+                forCellWithReuseIdentifier: FinishedBookCell.identifier
+            )
+            
+            $0.register(
+                FavoriteBookCell.self,
+                forCellWithReuseIdentifier: FavoriteBookCell.identifier
             )
         }
     }
@@ -162,28 +170,30 @@ extension MyViewController: UICollectionViewDataSource {
         
         if myPageStickyTabViewModel.output.currentTabIndex.value == 0 {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: BookImageCell.identifier,
+                withReuseIdentifier: FinishedBookCell.identifier,
                 for: indexPath
-            ) as? BookImageCell else {
+            ) as? FinishedBookCell else {
                 return UICollectionViewCell()
             }
             
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.cornerRadius = 10
+            cell.bind(with: myBooksViewModel.finishedBooks.value[indexPath.item])
             
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: BookImageCell.identifier,
+                withReuseIdentifier: FavoriteBookCell.identifier,
                 for: indexPath
-            ) as? BookImageCell else {
+            ) as? FavoriteBookCell else {
                 return UICollectionViewCell()
             }
             
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.cornerRadius = 10
+            cell.bind(with: myBooksViewModel.favoriteBooks.value[indexPath.item])
             
             return cell
         }

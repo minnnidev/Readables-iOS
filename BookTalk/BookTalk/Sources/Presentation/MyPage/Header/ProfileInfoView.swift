@@ -238,7 +238,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
             $0.top.equalTo(libraryTextStackView.snp.bottom).offset(10)
             $0.left.equalTo(15)
             $0.right.equalTo(-15)
-            $0.bottom.lessThanOrEqualToSuperview().offset(-10).priority(.low)
+            $0.bottom.greaterThanOrEqualTo(-10)
         }
     }
 }
