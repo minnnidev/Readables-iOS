@@ -9,11 +9,14 @@ import Foundation
 
 enum RegionType: CaseIterable {
     case seoul
+    case busan
 
     var name: String {
         switch self {
         case .seoul:
             return "서울"
+        case .busan:
+            return "부산"
         }
     }
 
@@ -21,6 +24,8 @@ enum RegionType: CaseIterable {
         switch self {
         case .seoul:
             return "11"
+        case .busan:
+            return "21"
         }
     }
 }

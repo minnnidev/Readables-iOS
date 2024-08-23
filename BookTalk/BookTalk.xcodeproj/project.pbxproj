@@ -147,6 +147,7 @@
 		AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B32C7847B70082CD30 /* LibraryInfo.swift */; };
 		AB8224B72C7847FE0082CD30 /* LibraryTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B62C7847FE0082CD30 /* LibraryTarget.swift */; };
 		AB8224B92C7848070082CD30 /* LibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224B82C7848070082CD30 /* LibraryService.swift */; };
+		AB8224BC2C7849610082CD30 /* SearchLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8224BB2C7849610082CD30 /* SearchLibraryViewModel.swift */; };
 		AB949A2F2C7474580005C543 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A2E2C7474580005C543 /* AppFlowController.swift */; };
 		AB949A312C7475630005C543 /* NotificationCenter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A302C7475630005C543 /* NotificationCenter+.swift */; };
 		AB949A332C7475720005C543 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A322C7475720005C543 /* UserDefaults+.swift */; };
@@ -315,6 +316,7 @@
 		AB8224B32C7847B70082CD30 /* LibraryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryInfo.swift; sourceTree = "<group>"; };
 		AB8224B62C7847FE0082CD30 /* LibraryTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTarget.swift; sourceTree = "<group>"; };
 		AB8224B82C7848070082CD30 /* LibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryService.swift; sourceTree = "<group>"; };
+		AB8224BB2C7849610082CD30 /* SearchLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLibraryViewModel.swift; sourceTree = "<group>"; };
 		AB949A2E2C7474580005C543 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
 		AB949A302C7475630005C543 /* NotificationCenter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+.swift"; sourceTree = "<group>"; };
 		AB949A322C7475720005C543 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -1210,6 +1212,14 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		AB8224BA2C7849450082CD30 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AB8224BB2C7849610082CD30 /* SearchLibraryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		ABAAFDAC2C76FD4000FDA084 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1333,6 +1343,7 @@
 				AB8224A32C78429E0082CD30 /* Enum */,
 				AB8224A62C7842B90082CD30 /* Cell */,
 				ABDC09112C782A5E00A54462 /* View */,
+				AB8224BA2C7849450082CD30 /* ViewModel */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1526,6 +1537,7 @@
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */,
+				AB8224BC2C7849610082CD30 /* SearchLibraryViewModel.swift in Sources */,
 				054FA1962C748E740007D9C9 /* EditInfoViewController.swift in Sources */,
 				AB8224B72C7847FE0082CD30 /* LibraryTarget.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,

@@ -17,6 +17,8 @@ final class SearchLibraryViewController: BaseViewController {
     private let detailRegionPicker = UIPickerView()
     private let libraryTableView = UITableView()
 
+    private let viewModel = SearchLibraryViewModel()
+
     // MARK: - Initializer
 
     override func viewDidLoad() {
@@ -25,6 +27,21 @@ final class SearchLibraryViewController: BaseViewController {
         setDelegate()
         setToolBar()
         registerCell()
+        bind()
+    }
+
+    private func bind() {
+        viewModel.selectedRegion.subscribe { [weak self] regionType in
+            guard let regionType = regionType else { return }
+
+            self?.regionTextField.text = regionType.name
+        }
+
+        viewModel.selectedDetailRegion.subscribe { [weak self] detailRegionType in
+            guard let detailRegionType = detailRegionType else { return }
+
+            self?.detailRegionTextField.text = detailRegionType.name
+        }
     }
 
     // MARK: - UI Setup
@@ -125,8 +142,23 @@ final class SearchLibraryViewController: BaseViewController {
     }
 
     @objc private func doneButtonDidTapped() {
-        regionTextField.resignFirstResponder()
-        detailRegionTextField.resignFirstResponder()
+        if regionTextField.isFirstResponder {
+            regionTextField.resignFirstResponder()
+            
+            guard viewModel.selectedRegion.value == nil else { return }
+
+            viewModel.send(action: .selectRegion(region: RegionType.allCases[0]))
+        }
+
+        if detailRegionTextField.isFirstResponder {
+            detailRegionTextField.resignFirstResponder()
+
+            guard viewModel.selectedDetailRegion.value == nil else { return }
+
+            viewModel.send(
+                action: .selectDetailRegion(detailRegion: DetailRegionType.allCases[0])
+            )
+        }
     }
 }
 
@@ -172,7 +204,11 @@ extension SearchLibraryViewController: UIPickerViewDelegate {
         didSelectRow row: Int,
         inComponent component: Int
     ) {
-        // TODO:
+        if pickerView == regionPicker {
+            viewModel.send(action: .selectRegion(region: RegionType.allCases[row]))
+        } else if pickerView == detailRegionPicker {
+            viewModel.send(action: .selectDetailRegion(detailRegion: DetailRegionType.allCases[row]))
+        }
     }
 }
 
