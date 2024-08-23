@@ -13,7 +13,6 @@ final class MyViewController: BaseViewController {
     
     private let profileInfoViewModel = ProfileInfoViewModel()
     private let myPageStickyTabViewModel = MyPageStickyTabViewModel()
-    private let addBookViewModel = AddBookViewModel()
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
