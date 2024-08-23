@@ -256,8 +256,8 @@ extension MyViewController: ProfileInfoViewModelDelegate {
     }
     
     func didTapEditLibraryButton() {
-        let editLibraryVC = EditLibraryViewController()
-        navigationController?.pushViewController(editLibraryVC, animated: true)
+        let myLibraryVC = MyLibraryViewController()
+        navigationController?.pushViewController(myLibraryVC, animated: true)
     }
 }
 

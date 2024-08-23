@@ -39,7 +39,7 @@
 		054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */; };
 		054FA1902C748DA70007D9C9 /* MyPageStickyTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */; };
 		054FA1962C748E740007D9C9 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1952C748E740007D9C9 /* EditInfoViewController.swift */; };
-		054FA1982C748E9F0007D9C9 /* EditLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1972C748E9F0007D9C9 /* EditLibraryViewController.swift */; };
+		054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1972C748E9F0007D9C9 /* MyLibraryViewController.swift */; };
 		056F304E2C60D54500931302 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304D2C60D54500931302 /* BookDetailViewModel.swift */; };
 		056F30502C60D57100931302 /* BookInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F304F2C60D57100931302 /* BookInfoCell.swift */; };
 		056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */; };
@@ -161,6 +161,7 @@
 		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDADA3D2C70A6A3009ED3BB /* Date+.swift */; };
+		ABDC09152C782C3500A54462 /* LibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC09142C782C3500A54462 /* LibraryCell.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
 		ABED44132C665DD90073398A /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44122C665DD90073398A /* GoalModel.swift */; };
@@ -202,7 +203,7 @@
 		054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabView.swift; sourceTree = "<group>"; };
 		054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabViewModel.swift; sourceTree = "<group>"; };
 		054FA1952C748E740007D9C9 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
-		054FA1972C748E9F0007D9C9 /* EditLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLibraryViewController.swift; sourceTree = "<group>"; };
+		054FA1972C748E9F0007D9C9 /* MyLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewController.swift; sourceTree = "<group>"; };
 		056F304D2C60D54500931302 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		056F304F2C60D57100931302 /* BookInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoCell.swift; sourceTree = "<group>"; };
 		056F30512C60D5A100931302 /* BorrowableLibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowableLibraryCell.swift; sourceTree = "<group>"; };
@@ -321,6 +322,7 @@
 		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABDADA3D2C70A6A3009ED3BB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		ABDC09142C782C3500A54462 /* LibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibraryCell.swift; path = ../../../../../../../../Documents/LibraryCell.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 		ABED44182C666F6E0073398A /* GoalChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalChartCell.swift; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 				ABED44072C6650910073398A /* Goal */,
 				AB4CBA722C6DFF6B009A2AB6 /* MyPage */,
 				AB5D356A2C7798E40028995C /* AddBook */,
+				ABDC09102C782A5700A54462 /* Library */,
 				ABED44142C6668FE0073398A /* Component */,
 			);
 			path = Presentation;
@@ -959,7 +962,6 @@
 			children = (
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
 				054FA1952C748E740007D9C9 /* EditInfoViewController.swift */,
-				054FA1972C748E9F0007D9C9 /* EditLibraryViewController.swift */,
 				AB4CBA742C6E00FC009A2AB6 /* SettingViewController.swift */,
 			);
 			path = View;
@@ -1266,6 +1268,39 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ABDC09102C782A5700A54462 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				ABDC09132C782C2000A54462 /* Cell */,
+				ABDC09112C782A5E00A54462 /* View */,
+				ABDC09122C782A6100A54462 /* ViewModel */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		ABDC09112C782A5E00A54462 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				054FA1972C748E9F0007D9C9 /* MyLibraryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ABDC09122C782A6100A54462 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ABDC09132C782C2000A54462 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ABDC09142C782C3500A54462 /* LibraryCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		ABED44072C6650910073398A /* Goal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1463,6 +1498,7 @@
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
 				054FA18C2C748D1F0007D9C9 /* FullScreenViewController.swift in Sources */,
+				ABDC09152C782C3500A54462 /* LibraryCell.swift in Sources */,
 				AB2E7BF22C53EDD800CE43CB /* AllBooksViewController.swift in Sources */,
 				ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */,
 				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
@@ -1547,7 +1583,7 @@
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */,
 				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
-				054FA1982C748E9F0007D9C9 /* EditLibraryViewController.swift in Sources */,
+				054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
 				AB4CBA702C6DEFB8009A2AB6 /* Keychain+.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* AllBooksViewModel.swift in Sources */,
