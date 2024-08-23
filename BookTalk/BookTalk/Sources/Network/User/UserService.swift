@@ -32,4 +32,12 @@ struct UserService {
 
         return result.dibs.map { $0.toModel() }
     }
+
+    static func getUserLibraries() async throws -> [LibraryInfo] {
+        let result: UserLibraryResponseDTO = try await NetworkService.shared.request(
+            target: UserTarget.getUserLibraries
+        )
+        
+        return result.libraries.map { $0.toModel() }
+    }
 }

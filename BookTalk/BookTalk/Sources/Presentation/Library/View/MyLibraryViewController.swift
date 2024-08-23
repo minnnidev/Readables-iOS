@@ -13,7 +13,8 @@ final class MyLibraryViewController: BaseViewController {
 
     private let descriptionLabel = UILabel()
     private let libraryTableView = UITableView()
-    
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
+
     private let viewModel = MyLibraryViewModel()
 
     // MARK: - Lifecycle
@@ -29,8 +30,29 @@ final class MyLibraryViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.myLibrary.subscribe { [weak self] _ in
+        viewModel.myLibraries.subscribe { [weak self] _ in
             self?.libraryTableView.reloadData()
+        }
+
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .initial:
+                break
+
+            case .loading:
+                indicatorView.startAnimating()
+
+            case .completed:
+                indicatorView.stopAnimating()
+
+                if viewModel.myLibraries.value.isEmpty {
+                    libraryTableView.setEmptyMessage("등록된 내 도서관이 없습니다.")
+                } else {
+                    libraryTableView.restore()
+                }
+            }
         }
     }
 
@@ -71,10 +93,14 @@ final class MyLibraryViewController: BaseViewController {
             $0.isScrollEnabled = false
             $0.rowHeight = UITableView.automaticDimension
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
-        [descriptionLabel, libraryTableView].forEach {
+        [descriptionLabel, libraryTableView, indicatorView].forEach {
             view.addSubview($0)
         }
 
@@ -86,6 +112,10 @@ final class MyLibraryViewController: BaseViewController {
         libraryTableView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(16)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        indicatorView.snp.makeConstraints { 
+            $0.center.equalToSuperview()
         }
     }
 
@@ -126,7 +156,7 @@ extension MyLibraryViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 3
+        return viewModel.myLibraries.value.count
     }
     
     func tableView(
@@ -138,6 +168,7 @@ extension MyLibraryViewController: UITableViewDataSource {
             for: indexPath
         ) as? LibrarySimpleCell else { return UITableViewCell() }
 
+        cell.bind(with: viewModel.myLibraries.value[indexPath.row].name)
         return cell
     }
 }
