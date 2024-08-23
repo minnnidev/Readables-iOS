@@ -86,7 +86,7 @@ final class MyLibraryViewController: BaseViewController {
     }
 
     @objc private func addLibraryButtonDidTapped() {
-        let searchLibraryVC = LibrarySearchViewController()
+        let searchLibraryVC = SearchLibraryViewController()
         navigationController?.pushViewController(searchLibraryVC, animated: true)
     }
 }
