@@ -16,6 +16,9 @@ final class SearchLibraryViewController: BaseViewController {
     private let regionPicker = UIPickerView()
     private let detailRegionPicker = UIPickerView()
     private let libraryTableView = UITableView()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
+
+    private let viewModel = SearchLibraryViewModel()
 
     // MARK: - Initializer
 
@@ -25,6 +28,60 @@ final class SearchLibraryViewController: BaseViewController {
         setDelegate()
         setToolBar()
         registerCell()
+        bind()
+    }
+
+    private func bind() {
+        viewModel.selectedRegion.subscribe { [weak self] regionType in
+            guard let regionType = regionType else { return }
+
+            self?.regionTextField.text = regionType.name
+        }
+
+        viewModel.selectedDetailRegion.subscribe { [weak self] detailRegionType in
+
+            self?.detailRegionTextField.text = detailRegionType?.name ?? ""
+        }
+
+        viewModel.searchEnableState.subscribe { [weak self] state in
+            guard let self = self else { return }
+            guard state else { return }
+
+           viewModel.send(
+                action: .loadLibraryResult(
+                    region: viewModel.selectedRegion.value,
+                    detailRegion: viewModel.selectedDetailRegion.value
+                )
+            )
+        }
+
+        viewModel.libraryResult.subscribe { [weak self] _ in
+            self?.libraryTableView.reloadData()
+        }
+
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .initial:
+                libraryTableView.setEmptyMessage("도서관을 검색해 주세요.")
+
+            case .loading:
+                indicatorView.startAnimating()
+
+            case .completed:
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    indicatorView.stopAnimating()
+
+                    if viewModel.libraryResult.value.isEmpty {
+                        libraryTableView.setEmptyMessage("검색된 도서관이 없습니다.")
+                    } else {
+                        libraryTableView.restore()
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - UI Setup
@@ -55,23 +112,27 @@ final class SearchLibraryViewController: BaseViewController {
             $0.backgroundColor = .clear
             $0.rowHeight = UITableView.automaticDimension
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
-        [regionTextField, detailRegionTextField, libraryTableView].forEach {
+        [regionTextField, detailRegionTextField, libraryTableView, indicatorView].forEach {
             view.addSubview($0)
         }
 
         regionTextField.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(12)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(40)
         }
 
         detailRegionTextField.snp.makeConstraints {
             $0.top.equalTo(regionTextField.snp.bottom).offset(8)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(12)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(40)
         }
@@ -79,6 +140,10 @@ final class SearchLibraryViewController: BaseViewController {
         libraryTableView.snp.makeConstraints {
             $0.top.equalTo(detailRegionTextField.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 
@@ -125,8 +190,19 @@ final class SearchLibraryViewController: BaseViewController {
     }
 
     @objc private func doneButtonDidTapped() {
-        regionTextField.resignFirstResponder()
-        detailRegionTextField.resignFirstResponder()
+        if regionTextField.isFirstResponder {
+            let selectedRow = regionPicker.selectedRow(inComponent: 0)
+            let selectedRegion = RegionType.allCases[selectedRow]
+            viewModel.send(action: .selectRegion(region: selectedRegion))
+            regionTextField.resignFirstResponder()
+        }
+
+        if detailRegionTextField.isFirstResponder {
+            let selectedRow = detailRegionPicker.selectedRow(inComponent: 0)
+            let selectedDetailRegion = viewModel.selectedRegion.value?.detailRegions[selectedRow]
+            viewModel.send(action: .selectDetailRegion(detailRegion: selectedDetailRegion))
+            detailRegionTextField.resignFirstResponder()
+        }
     }
 }
 
@@ -142,11 +218,12 @@ extension SearchLibraryViewController: UIPickerViewDataSource {
         numberOfRowsInComponent component: Int) -> Int {
             if pickerView == regionPicker {
                 return RegionType.allCases.count
-            } else if pickerView == detailRegionPicker {
-                return DetailRegionType.allCases.count
+            } else if pickerView == detailRegionPicker,
+                      let selectedRegion = viewModel.selectedRegion.value {
+                return selectedRegion.detailRegions.count
             }
             return 0
-    }
+        }
 }
 
 // MARK: - UIPickerViewDelegate
@@ -160,19 +237,11 @@ extension SearchLibraryViewController: UIPickerViewDelegate {
     ) -> String? {
         if pickerView == regionPicker {
             return RegionType.allCases[row].name
-        } else if pickerView == detailRegionPicker {
-            return DetailRegionType.allCases[row].name
+        } else if pickerView == detailRegionPicker,
+                  let selectedRegion = viewModel.selectedRegion.value {
+            return selectedRegion.detailRegions[row].name
         }
-
         return nil
-    }
-
-    func pickerView(
-        _ pickerView: UIPickerView,
-        didSelectRow row: Int,
-        inComponent component: Int
-    ) {
-        // TODO:
     }
 }
 
@@ -184,7 +253,7 @@ extension SearchLibraryViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 3
+        return viewModel.libraryResult.value.count
     }
 
     func tableView(
@@ -196,6 +265,7 @@ extension SearchLibraryViewController: UITableViewDataSource {
             for: indexPath
         ) as? LibraryCell else { return UITableViewCell() }
 
+        cell.bind(with: viewModel.libraryResult.value[indexPath.row])
         return cell
     }
 }

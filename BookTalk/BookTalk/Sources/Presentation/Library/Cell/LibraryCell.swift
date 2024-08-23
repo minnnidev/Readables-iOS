@@ -21,19 +21,16 @@ final class LibraryCell: BaseTableViewCell {
         selectionStyle = .none
 
         libraryNameLabel.do {
-            $0.text = "용산꿈나무 도서관"
             $0.textColor = .accentOrange
             $0.font = .systemFont(ofSize: 16, weight: .semibold)
         }
 
         addressLabel.do {
-            $0.text = "서울특별시 용산구 백범로 329, 3층"
             $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 14, weight: .regular)
         }
 
         telNumberLabel.do {
-            $0.text = "TEL: 02-775-9260"
             $0.font = .systemFont(ofSize: 14, weight: .regular)
         }
     }
@@ -45,7 +42,7 @@ final class LibraryCell: BaseTableViewCell {
 
         libraryNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(12)
+            $0.leading.equalToSuperview().offset(20)
         }
 
         addressLabel.snp.makeConstraints {
@@ -59,5 +56,11 @@ final class LibraryCell: BaseTableViewCell {
             $0.leading.equalTo(libraryNameLabel)
             $0.bottom.equalToSuperview().offset(-20)
         }
+    }
+
+    func bind(with library: LibraryInfo) {
+        libraryNameLabel.text = library.name
+        addressLabel.text = library.address
+        telNumberLabel.text = "TEL: \(library.tel)"
     }
 }
