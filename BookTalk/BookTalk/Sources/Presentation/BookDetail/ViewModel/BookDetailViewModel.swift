@@ -12,6 +12,7 @@ final class BookDetailViewModel {
     // MARK: - Interactions
     
     struct Input {
+        let markAsReadButtonTap: () -> Void
         let favoriteButtonTap: () -> Void
         let likeButtonTap: () -> Void
         let dislikeButtonTap: () -> Void
@@ -22,6 +23,7 @@ final class BookDetailViewModel {
         let detailBook: Observable<DetailBookInfo?>
         let availabilityText: Observable<String>
         let availabilityTextColor: Observable<UIColor>
+        let isMarkAsRead: Observable<Bool>
         let areChildButtonsVisible: Observable<Bool>
         let isFavorite: Observable<Bool>
         let isLiked: Observable<Bool>
@@ -37,6 +39,7 @@ final class BookDetailViewModel {
 
     private var availabilityText = Observable("")
     private var availabilityColor = Observable(UIColor.black)
+    private var isMarkAsReadOb = Observable(false)
     private var isFavoriteOb = Observable(false)
     private var loadStateOb = Observable(LoadState.initial)
 
@@ -55,6 +58,9 @@ final class BookDetailViewModel {
     
     private func bindInput() -> Input {
         return Input(
+            markAsReadButtonTap: { [weak self] in
+                self?.toggle(self?.output.isMarkAsRead)
+            },
             favoriteButtonTap: { [weak self] in
                 self?.toggle(self?.output.isFavorite)
             },
@@ -98,7 +104,8 @@ final class BookDetailViewModel {
         return Output(
             detailBook: bookDetailOb,
             availabilityText: availabilityText,
-            availabilityTextColor: availabilityColor,
+            availabilityTextColor: availabilityColor, 
+            isMarkAsRead: isMarkAsReadOb,
             areChildButtonsVisible: Observable(false),
             isFavorite: isFavoriteOb,
             isLiked: Observable(false),
