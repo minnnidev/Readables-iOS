@@ -114,7 +114,7 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
-        cell.bind(with: books[indexPath.row])
+        cell.bind(with: books[indexPath.row], layoutType: .small)
 
         return cell
     }
