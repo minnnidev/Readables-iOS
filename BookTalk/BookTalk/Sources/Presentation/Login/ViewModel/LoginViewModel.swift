@@ -93,13 +93,13 @@ final class LoginViewModel {
 
                 switch result {
                 case let .success(idToken):
-                    Task {
+                    Task { [weak self] in
+                        guard let self = self else { return }
+
                         do {
                             let isNewUser = try await AuthService.loginWithkakao(idToken: idToken)
 
-                            await MainActor.run { [weak self] in
-                                self?.setAppFlow(with: isNewUser)
-                            }
+                            await setAppFlow(with: isNewUser)
 
                         } catch let error as NetworkError {
                             print(error.localizedDescription)
@@ -117,11 +117,12 @@ final class LoginViewModel {
     /// 2. 신규회원이 아닐 경우
     ///     - 유저 정보가 존재하면 홈으로
     ///     - 유저 정보가 존재하지 않으면 입력폼으로
-    private func setAppFlow(with isNewUser: Bool) {
+    @MainActor
+    private func setAppFlow(with isNewUser: Bool) async {
         if isNewUser {
             pushToRegisterOB.value.toggle()
         } else {
-            if isUserInfoExist() {
+            if await isUserInfoExist() {
                 UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
                 NotificationCenter.default.post(name: .authStateChanged, object: nil)
             } else {
@@ -130,10 +131,17 @@ final class LoginViewModel {
         }
     }
 
-    private func isUserInfoExist() -> Bool {
-        // TODO: UserInfo check
+    private func isUserInfoExist() async -> Bool {
+        do {
+            let userInfo = try await UserService.getUserInfo()
 
-        return true
+            return !userInfo.nickname.isEmpty
+        } catch let error as NetworkError {
+            print(error.localizedDescription)
+            return false
+        } catch {
+            return false
+        }
     }
 
 

@@ -9,6 +9,14 @@ import Foundation
 
 struct UserService {
 
+    static func getUserInfo() async throws -> UserInfo {
+        let result: UserInfoResponseDTO = try await NetworkService.shared.request(
+            target: UserTarget.getUserInfo
+        )
+        
+        return result.userDto.toModel()
+    }
+
     static func editUserInfo(
         nickname: String,
         gender: GenderType,

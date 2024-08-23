@@ -22,4 +22,17 @@ enum GenderType: String {
             return "G2"
         }
     }
+
+    init(code: String) {
+        switch code {
+        case "G0":
+            self = .notSelcted
+        case "G1":
+            self = .man
+        case "G2":
+            self = .woman
+        default:
+            self = .notSelcted
+        }
+    }
 }
