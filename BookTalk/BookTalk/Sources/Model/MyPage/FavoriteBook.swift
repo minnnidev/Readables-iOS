@@ -25,18 +25,3 @@ extension FavoriteBook {
         FavoriteBook(bookName: "1984", bookAuthor: "George Orwell")
     ]
 }
-
-extension FavoriteBook: BookDisplayable {
-    
-    var title: String {
-        return self.bookName
-    }
-    
-    var author: String {
-        return self.bookAuthor
-    }
-    
-    var imageURL: String {
-        return ""
-    }
-}

@@ -27,18 +27,3 @@ extension FinishedBook {
         FinishedBook(bookName: "Jane Eyre", bookAuthor: "Charlotte Brontë")
     ]
 }
-
-extension FinishedBook: BookDisplayable {
-    
-    var title: String {
-        return self.bookName
-    }
-    
-    var author: String {
-        return self.bookAuthor
-    }
-    
-    var imageURL: String {
-        return ""
-    }
-}
