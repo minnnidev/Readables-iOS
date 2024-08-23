@@ -37,7 +37,21 @@ struct UserService {
         let result: UserLibraryResponseDTO = try await NetworkService.shared.request(
             target: UserTarget.getUserLibraries
         )
-        
+
+        return result.libraries.map { $0.toModel() }
+    }
+
+    static func editUserLibraries(newLibraries: [LibraryInfo]) async throws -> [LibraryInfo] {
+        let body: EditLibraryRequestDTO = .init(
+            libraries: newLibraries.map {
+            .init(code: $0.code, name: $0.name)
+        }
+        )
+
+        let result: UserLibraryResponseDTO = try await NetworkService.shared.request(
+            target: UserTarget.editUserLibraries(body: body)
+        )
+
         return result.libraries.map { $0.toModel() }
     }
 }

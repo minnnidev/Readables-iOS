@@ -154,6 +154,7 @@
 		AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB949A342C7484F80005C543 /* UICollectionView+.swift */; };
 		AB963F022C78A6AE0098F092 /* LibrarySimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB963F012C78A6AE0098F092 /* LibrarySimpleCell.swift */; };
 		AB9C5D652C78A9C900CE44AF /* MyLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D642C78A9C900CE44AF /* MyLibraryViewModel.swift */; };
+		AB9C5D672C78AEFC00CE44AF /* EditLibraryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D662C78AEFC00CE44AF /* EditLibraryRequestDTO.swift */; };
 		ABAAFDAF2C76FD5E00FDA084 /* SearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDAE2C76FD5E00FDA084 /* SearchResponseDTO.swift */; };
 		ABAAFDB22C76FDAD00FDA084 /* SearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB12C76FDAD00FDA084 /* SearchRequestDTO.swift */; };
 		ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB42C76FDE300FDA084 /* SearchService.swift */; };
@@ -325,6 +326,7 @@
 		AB949A342C7484F80005C543 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		AB963F012C78A6AE0098F092 /* LibrarySimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySimpleCell.swift; sourceTree = "<group>"; };
 		AB9C5D642C78A9C900CE44AF /* MyLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewModel.swift; sourceTree = "<group>"; };
+		AB9C5D662C78AEFC00CE44AF /* EditLibraryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLibraryRequestDTO.swift; sourceTree = "<group>"; };
 		ABAAFDAE2C76FD5E00FDA084 /* SearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponseDTO.swift; sourceTree = "<group>"; };
 		ABAAFDB12C76FDAD00FDA084 /* SearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequestDTO.swift; sourceTree = "<group>"; };
 		ABAAFDB42C76FDE300FDA084 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
@@ -1196,6 +1198,7 @@
 			isa = PBXGroup;
 			children = (
 				AB8224AE2C7847430082CD30 /* LibrarySearchRequestDTO.swift */,
+				AB9C5D662C78AEFC00CE44AF /* EditLibraryRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1668,6 +1671,7 @@
 				AB8224AC2C7843440082CD30 /* SearchLibraryViewController.swift in Sources */,
 				05CB069C2C7699E100673947 /* RegistrationViewModel.swift in Sources */,
 				ABB901C42C73980600727875 /* OpenTalkResponseDTO.swift in Sources */,
+				AB9C5D672C78AEFC00CE44AF /* EditLibraryRequestDTO.swift in Sources */,
 				AB0C0F672C5BFC53007812C5 /* MyChatBubbleCell.swift in Sources */,
 				AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */,
 				AB949A2F2C7474580005C543 /* AppFlowController.swift in Sources */,
