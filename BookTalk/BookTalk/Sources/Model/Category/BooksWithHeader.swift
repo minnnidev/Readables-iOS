@@ -17,3 +17,18 @@ struct Book {
     var imageURL: String
     var title: String
 }
+
+extension Book: BookDisplayable {
+    
+    var author: String {
+        return ""
+    }
+    
+    var bookTitle: String {
+        return self.title
+    }
+
+    var bookImageURL: String {
+        return self.imageURL
+    }
+}
