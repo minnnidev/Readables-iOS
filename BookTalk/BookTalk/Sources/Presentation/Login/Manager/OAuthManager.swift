@@ -13,29 +13,27 @@ import KakaoSDKUser
 final class OAuthManager: NSObject {
 
     var appleLoginSucceed: ((ASAuthorizationAppleIDCredential) -> Void)?
+    var kakaoLoginSucceed: ((String) -> Void)?
 
-    func loginWithKakao() {
-        
-        if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+    func loginWithKakao(completion: @escaping (Result<String, Error>) -> Void) {
+        if UserApi.isKakaoTalkLoginAvailable() {
+            UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
                 if let error = error {
-                    print(error)
-                }
-                else {
-                    print("loginWithKakaoTalk() success.")
-
-                    _ = oauthToken
+                    completion(.failure(error))
+                } else if let idToken = oauthToken?.idToken {
+                    completion(.success(idToken))
+                } else {
+                    completion(.failure(NetworkError.unknownError))
                 }
             }
         } else {
-            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+            UserApi.shared.loginWithKakaoAccount { (oauthToken, error) in
                 if let error = error {
-                    print(error)
-                }
-                else {
-                    print("loginWithKakaoAccount() success.")
-
-                    _ = oauthToken
+                    completion(.failure(error))
+                } else if let idToken = oauthToken?.idToken {
+                    completion(.success(idToken))
+                } else {
+                    completion(.failure(NetworkError.unknownError))
                 }
             }
         }

@@ -88,14 +88,55 @@ final class LoginViewModel {
             }
 
         case .kakao:
-            // FIXME: 임시로 입력폼으로 넘어가도록 구현 -> 추후 분기 처리하기
-            pushToRegisterOB.value.toggle()
-            return
-            // TODO: 카카오 로그인
-//            oauthManager.loginWithKakao()
+            oauthManager.loginWithKakao { [weak self] result in
+                guard let self = self else { return }
+
+                switch result {
+                case let .success(idToken):
+                    Task {
+                        do {
+                            let isNewUser = try await AuthService.loginWithkakao(idToken: idToken)
+
+                            await MainActor.run { [weak self] in
+                                self?.setAppFlow(with: isNewUser)
+                            }
+
+                        } catch let error as NetworkError {
+                            print(error.localizedDescription)
+                        }
+                    }
+                case let .failure(error):
+                    print("Kakao idToken 발급 불가 \(error.localizedDescription)")
+                }
+            }
         }
     }
-    
+
+    /// 신규 회원인지 여부에 따른 App flow 조정 메서드
+    /// 1. 신규회원이면 입력폼으로 이동
+    /// 2. 신규회원이 아닐 경우
+    ///     - 유저 정보가 존재하면 홈으로
+    ///     - 유저 정보가 존재하지 않으면 입력폼으로
+    private func setAppFlow(with isNewUser: Bool) {
+        if isNewUser {
+            pushToRegisterOB.value.toggle()
+        } else {
+            if isUserInfoExist() {
+                UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
+                NotificationCenter.default.post(name: .authStateChanged, object: nil)
+            } else {
+                pushToRegisterOB.value.toggle()
+            }
+        }
+    }
+
+    private func isUserInfoExist() -> Bool {
+        // TODO: UserInfo check
+
+        return true
+    }
+
+
     func cleanupTimers() {
         onboardingMessageManager.stop()
     }

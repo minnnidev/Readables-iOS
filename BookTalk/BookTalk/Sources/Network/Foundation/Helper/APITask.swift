@@ -17,5 +17,5 @@ enum APITask {
     /// Parameter을 포함하는 request
     case requestParameters(parameters: Parameters)
     /// Interceptor를 포함하지 않는 request
-    case requestWithoutInterceptor
+    case requestWithoutInterceptor(parameters: Parameters)
 }

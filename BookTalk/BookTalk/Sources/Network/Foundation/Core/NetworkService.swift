@@ -105,14 +105,19 @@ extension NetworkService {
                 url,
                 method: endpoint.method,
                 parameters: parameters,
-                encoding: URLEncoding.default,
+                encoding: URLEncoding.queryString,
                 headers: endpoint.header,
                 interceptor: interceptor
             )
 
-        case .requestWithoutInterceptor:
-            // TODO: - 인터셉터 없는 request 형식 추가
-            return AF.request(url)
+        case let .requestWithoutInterceptor(parameters):
+            return AF.request(
+                url,
+                method: endpoint.method,
+                parameters: parameters,
+                encoding: URLEncoding.queryString,
+                headers: endpoint.header
+            )
         }
     }
 }

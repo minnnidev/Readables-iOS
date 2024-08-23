@@ -160,6 +160,11 @@
 		AB963F022C78A6AE0098F092 /* LibrarySimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB963F012C78A6AE0098F092 /* LibrarySimpleCell.swift */; };
 		AB9C5D652C78A9C900CE44AF /* MyLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D642C78A9C900CE44AF /* MyLibraryViewModel.swift */; };
 		AB9C5D672C78AEFC00CE44AF /* EditLibraryRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D662C78AEFC00CE44AF /* EditLibraryRequestDTO.swift */; };
+		AB9C5D6C2C78C1F900CE44AF /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D6B2C78C1F900CE44AF /* LoginRequestDTO.swift */; };
+		AB9C5D6E2C78C42A00CE44AF /* LoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D6D2C78C42A00CE44AF /* LoginResponseDTO.swift */; };
+		AB9C5D712C78C48C00CE44AF /* AuthTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D702C78C48C00CE44AF /* AuthTarget.swift */; };
+		AB9C5D732C78C4C100CE44AF /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D722C78C4C100CE44AF /* AuthService.swift */; };
+		AB9C5D762C78C80600CE44AF /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9C5D752C78C80600CE44AF /* Tokens.swift */; };
 		ABAAFDAF2C76FD5E00FDA084 /* SearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDAE2C76FD5E00FDA084 /* SearchResponseDTO.swift */; };
 		ABAAFDB22C76FDAD00FDA084 /* SearchRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB12C76FDAD00FDA084 /* SearchRequestDTO.swift */; };
 		ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAFDB42C76FDE300FDA084 /* SearchService.swift */; };
@@ -337,6 +342,11 @@
 		AB963F012C78A6AE0098F092 /* LibrarySimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySimpleCell.swift; sourceTree = "<group>"; };
 		AB9C5D642C78A9C900CE44AF /* MyLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewModel.swift; sourceTree = "<group>"; };
 		AB9C5D662C78AEFC00CE44AF /* EditLibraryRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLibraryRequestDTO.swift; sourceTree = "<group>"; };
+		AB9C5D6B2C78C1F900CE44AF /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
+		AB9C5D6D2C78C42A00CE44AF /* LoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDTO.swift; sourceTree = "<group>"; };
+		AB9C5D702C78C48C00CE44AF /* AuthTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTarget.swift; sourceTree = "<group>"; };
+		AB9C5D722C78C4C100CE44AF /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		AB9C5D752C78C80600CE44AF /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		ABAAFDAE2C76FD5E00FDA084 /* SearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponseDTO.swift; sourceTree = "<group>"; };
 		ABAAFDB12C76FDAD00FDA084 /* SearchRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequestDTO.swift; sourceTree = "<group>"; };
 		ABAAFDB42C76FDE300FDA084 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
@@ -886,6 +896,7 @@
 		AB2E7BEB2C53DAFE00CE43CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AB9C5D742C78C7F500CE44AF /* Auth */,
 				AB8224B22C7847A10082CD30 /* Library */,
 				AB5D35562C775ACB0028995C /* Enum */,
 				AB5D35532C775AA30028995C /* User */,
@@ -968,6 +979,7 @@
 			isa = PBXGroup;
 			children = (
 				AB4CBA5E2C6BB059009A2AB6 /* Foundation */,
+				AB9C5D6F2C78C47E00CE44AF /* Auth */,
 				AB5D35592C775DE70028995C /* User */,
 				AB8205532C6E66060014C5A5 /* Genre */,
 				ABB901AD2C727A2000727875 /* Book */,
@@ -1163,6 +1175,7 @@
 		AB8205592C6E665B0014C5A5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				AB9C5D682C78C1E500CE44AF /* Auth */,
 				AB5D354C2C7759790028995C /* User */,
 				AB5D35602C7796D90028995C /* Library */,
 				ABAAFDAC2C76FD4000FDA084 /* Search */,
@@ -1250,6 +1263,48 @@
 				AB9C5D642C78A9C900CE44AF /* MyLibraryViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AB9C5D682C78C1E500CE44AF /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C5D692C78C1EB00CE44AF /* Request */,
+				AB9C5D6A2C78C1EF00CE44AF /* Response */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		AB9C5D692C78C1EB00CE44AF /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C5D6B2C78C1F900CE44AF /* LoginRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		AB9C5D6A2C78C1EF00CE44AF /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C5D6D2C78C42A00CE44AF /* LoginResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		AB9C5D6F2C78C47E00CE44AF /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C5D702C78C48C00CE44AF /* AuthTarget.swift */,
+				AB9C5D722C78C4C100CE44AF /* AuthService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		AB9C5D742C78C7F500CE44AF /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				AB9C5D752C78C80600CE44AF /* Tokens.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		ABAAFDAC2C76FD4000FDA084 /* Search */ = {
@@ -1583,6 +1638,7 @@
 				054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */,
 				ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */,
 				ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */,
+				AB9C5D712C78C48C00CE44AF /* AuthTarget.swift in Sources */,
 				054FA1812C7465710007D9C9 /* WaveView.swift in Sources */,
 				AB5D35632C7797050028995C /* LibrariesResponseDTO.swift in Sources */,
 				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
@@ -1597,6 +1653,7 @@
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */,
 				057925412C4FF4DC00834EC6 /* GoalViewController.swift in Sources */,
+				AB9C5D6E2C78C42A00CE44AF /* LoginResponseDTO.swift in Sources */,
 				AB2E7BED2C53DB2200CE43CB /* BooksWithHeader.swift in Sources */,
 				AB2E7BFA2C54A53900CE43CB /* CategorySelectModalViewController.swift in Sources */,
 				AB0C0F6A2C5BFDBE007812C5 /* ChatModel.swift in Sources */,
@@ -1616,6 +1673,7 @@
 				ABAAFDAF2C76FD5E00FDA084 /* SearchResponseDTO.swift in Sources */,
 				054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
+				AB9C5D6C2C78C1F900CE44AF /* LoginRequestDTO.swift in Sources */,
 				AB4CBA602C6BB0E9009A2AB6 /* TargetType.swift in Sources */,
 				AB07848B2C75A89E0017812F /* BookDetailRequestDTO.swift in Sources */,
 				0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */,
@@ -1664,6 +1722,7 @@
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
 				054FA17F2C7465490007D9C9 /* StickyHeaderFlowLayout.swift in Sources */,
+				AB9C5D732C78C4C100CE44AF /* AuthService.swift in Sources */,
 				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
 				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
@@ -1674,6 +1733,7 @@
 				ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
 				058B77BC2C7858FF00A1110B /* FavoriteBook.swift in Sources */,
+				AB9C5D762C78C80600CE44AF /* Tokens.swift in Sources */,
 				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				058B77BE2C785BE100A1110B /* MyBooksViewModel.swift in Sources */,
 				051155F12C64B08F00230CFE /* ReusableIdentifier.swift in Sources */,
