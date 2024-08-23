@@ -8,6 +8,7 @@
 import Foundation
 
 struct LibraryInfo {
+    let code: String
     let name: String
     let address: String
     let tel: String

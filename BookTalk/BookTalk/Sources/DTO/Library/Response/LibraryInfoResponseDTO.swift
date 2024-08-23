@@ -25,6 +25,7 @@ extension LibraryInfoResponseDTO {
 
     func toModel() -> LibraryInfo {
         return .init(
+            code: libCode,
             name: libName,
             address: address,
             tel: tel

@@ -12,6 +12,8 @@ final class SearchLibraryViewModel {
     private(set) var selectedRegion: Observable<RegionType?> = Observable(nil)
     private(set) var selectedDetailRegion: Observable<DetailRegionType?> = Observable(nil)
     private(set) var searchEnableState = Observable(false)
+    private(set) var libraryResult = Observable<[LibraryInfo]>([])
+    private(set) var loadState = Observable(LoadState.initial)
 
     enum Action {
         case selectRegion(region: RegionType?)
@@ -32,8 +34,29 @@ final class SearchLibraryViewModel {
             updateSearchState()
 
         case let .loadLibraryResult(region, detailRegion):
-            return
+            guard let region = region else { return }
+            guard let detailRegion = detailRegion else { return }
 
+            libraryResult.value.removeAll()
+            loadState.value = .loading
+
+            Task {
+                do {
+                    let libraries = try await LibraryService.getLibrarySearchResult(
+                        region: region,
+                        detailRegion: detailRegion
+                    )
+
+                    await MainActor.run {
+                        libraryResult.value = libraries
+                        loadState.value = .completed
+                    }
+
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                    loadState.value = .completed
+                }
+            }
         }
     }
 
