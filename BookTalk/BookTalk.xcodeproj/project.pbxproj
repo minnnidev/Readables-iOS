@@ -162,6 +162,8 @@
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDADA3D2C70A6A3009ED3BB /* Date+.swift */; };
 		ABDC09152C782C3500A54462 /* LibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC09142C782C3500A54462 /* LibraryCell.swift */; };
+		ABDC09172C78317700A54462 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC09162C78317700A54462 /* LibrarySearchViewController.swift */; };
+		ABDC091A2C78333000A54462 /* RegionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC09192C78333000A54462 /* RegionType.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
 		ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED440F2C665CDB0073398A /* GoalViewModel.swift */; };
 		ABED44132C665DD90073398A /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED44122C665DD90073398A /* GoalModel.swift */; };
@@ -323,6 +325,8 @@
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABDADA3D2C70A6A3009ED3BB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ABDC09142C782C3500A54462 /* LibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibraryCell.swift; path = ../../../../../../../../Documents/LibraryCell.swift; sourceTree = "<group>"; };
+		ABDC09162C78317700A54462 /* LibrarySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibrarySearchViewController.swift; path = ../../../../../../../../Documents/LibrarySearchViewController.swift; sourceTree = "<group>"; };
+		ABDC09192C78333000A54462 /* RegionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegionType.swift; path = ../../../../../../../../Documents/RegionType.swift; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		ABED44122C665DD90073398A /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 		ABED44182C666F6E0073398A /* GoalChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalChartCell.swift; sourceTree = "<group>"; };
@@ -1271,6 +1275,7 @@
 		ABDC09102C782A5700A54462 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				ABDC09182C78332500A54462 /* Enum */,
 				ABDC09132C782C2000A54462 /* Cell */,
 				ABDC09112C782A5E00A54462 /* View */,
 				ABDC09122C782A6100A54462 /* ViewModel */,
@@ -1282,6 +1287,7 @@
 			isa = PBXGroup;
 			children = (
 				054FA1972C748E9F0007D9C9 /* MyLibraryViewController.swift */,
+				ABDC09162C78317700A54462 /* LibrarySearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1299,6 +1305,14 @@
 				ABDC09142C782C3500A54462 /* LibraryCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		ABDC09182C78332500A54462 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				ABDC09192C78333000A54462 /* RegionType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		ABED44072C6650910073398A /* Goal */ = {
@@ -1487,6 +1501,7 @@
 				AB5D355F2C7767A00028995C /* DateFormatter+.swift in Sources */,
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
+				ABDC091A2C78333000A54462 /* RegionType.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
 				054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */,
 				ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */,
@@ -1533,6 +1548,7 @@
 				AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */,
 				AB22AD3E2C4E8D9D00C9A0F3 /* SceneDelegate.swift in Sources */,
 				0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */,
+				ABDC09172C78317700A54462 /* LibrarySearchViewController.swift in Sources */,
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				AB0C0F822C5F6E2D007812C5 /* ChatMenuSectionType.swift in Sources */,
 				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
