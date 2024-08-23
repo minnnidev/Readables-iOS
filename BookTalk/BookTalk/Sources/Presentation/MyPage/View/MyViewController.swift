@@ -121,8 +121,13 @@ final class MyViewController: BaseViewController {
             )
             
             $0.register(
-                BookImageCell.self,
-                forCellWithReuseIdentifier: BookImageCell.identifier
+                FinishedBookCell.self,
+                forCellWithReuseIdentifier: FinishedBookCell.identifier
+            )
+            
+            $0.register(
+                FavoriteBookCell.self,
+                forCellWithReuseIdentifier: FavoriteBookCell.identifier
             )
         }
     }
@@ -165,36 +170,30 @@ extension MyViewController: UICollectionViewDataSource {
         
         if myPageStickyTabViewModel.output.currentTabIndex.value == 0 {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: BookImageCell.identifier,
+                withReuseIdentifier: FinishedBookCell.identifier,
                 for: indexPath
-            ) as? BookImageCell else {
+            ) as? FinishedBookCell else {
                 return UICollectionViewCell()
             }
             
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.cornerRadius = 10
-            cell.bind(
-                with: myBooksViewModel.finishedBooks.value[indexPath.item],
-                layoutType: .large
-            )
+            cell.bind(with: myBooksViewModel.finishedBooks.value[indexPath.item])
             
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: BookImageCell.identifier,
+                withReuseIdentifier: FavoriteBookCell.identifier,
                 for: indexPath
-            ) as? BookImageCell else {
+            ) as? FavoriteBookCell else {
                 return UICollectionViewCell()
             }
             
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.cornerRadius = 10
-            cell.bind(
-                with: myBooksViewModel.favoriteBooks.value[indexPath.item],
-                layoutType: .large
-            )
+            cell.bind(with: myBooksViewModel.favoriteBooks.value[indexPath.item])
             
             return cell
         }
