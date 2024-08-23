@@ -31,7 +31,7 @@ final class MyLibraryViewController: BaseViewController {
             title: "추가",
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(addLibraryButtonDidTapped)
         )
 
         let editButton = UIBarButtonItem(
@@ -83,6 +83,11 @@ final class MyLibraryViewController: BaseViewController {
         libraryTableView.setEditing(isEditing, animated: true)
 
         navigationItem.rightBarButtonItem?.title = isEditing ? "완료" : "삭제"
+    }
+
+    @objc private func addLibraryButtonDidTapped() {
+        let searchLibraryVC = LibrarySearchViewController()
+        navigationController?.pushViewController(searchLibraryVC, animated: true)
     }
 }
 
