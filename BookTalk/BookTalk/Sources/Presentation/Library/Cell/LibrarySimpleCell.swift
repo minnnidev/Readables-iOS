@@ -13,7 +13,7 @@ final class LibrarySimpleCell: BaseTableViewCell {
 
     override func setViews() {
         selectionStyle = .none
-        
+
         contentView.backgroundColor = .clear
 
         libraryTitleLabel.do {

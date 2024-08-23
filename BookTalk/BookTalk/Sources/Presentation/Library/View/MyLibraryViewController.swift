@@ -13,6 +13,8 @@ final class MyLibraryViewController: BaseViewController {
 
     private let descriptionLabel = UILabel()
     private let libraryTableView = UITableView()
+    
+    private let viewModel = MyLibraryViewModel()
 
     // MARK: - Lifecycle
     
@@ -21,6 +23,15 @@ final class MyLibraryViewController: BaseViewController {
 
         registerCell()
         setDelegate()
+        bind()
+
+        viewModel.send(action: .loadMyLibraries)
+    }
+
+    private func bind() {
+        viewModel.myLibrary.subscribe { [weak self] _ in
+            self?.libraryTableView.reloadData()
+        }
     }
 
     // MARK: - Set UI
