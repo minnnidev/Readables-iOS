@@ -185,7 +185,7 @@ extension AllBooksViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
-        cell.bind(with: viewModel.books.value[indexPath.row], layoutType: .small)
+        cell.bind(with: viewModel.books.value[indexPath.row])
         return cell
     }
 

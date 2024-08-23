@@ -246,7 +246,7 @@ extension OpenTalkViewController: UICollectionViewDataSource {
                     isbn: "",
                     imageURL: openTalk.bookImageURL,
                     title: openTalk.bookName
-                ), layoutType: .small
+                )
             )
             return cell
         }

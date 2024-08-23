@@ -168,7 +168,7 @@ extension AddBookViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
-        cell.bind(with: viewModel.books.value[indexPath.item], layoutType: .small)
+        cell.bind(with: viewModel.books.value[indexPath.item])
         return cell
     }
 
