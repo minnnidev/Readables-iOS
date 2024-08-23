@@ -140,6 +140,10 @@ final class MyLibraryViewController: BaseViewController {
         libraryTableView.setEditing(isEditing, animated: true)
 
         navigationItem.rightBarButtonItem?.title = isEditing ? "완료" : "삭제"
+
+        guard !isEditing else { return }
+        
+        viewModel.send(action: .editMyLibraries(newLibraries: viewModel.myLibraries.value))
     }
 
     @objc private func addLibraryButtonDidTapped() {
@@ -196,6 +200,6 @@ extension MyLibraryViewController: UITableViewDelegate {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
-        // TODO: 삭제하기
+        viewModel.send(action: .deleteMyLibraries(index: indexPath.row))
     }
 }

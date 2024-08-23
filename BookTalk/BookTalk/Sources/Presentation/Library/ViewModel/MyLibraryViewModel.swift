@@ -13,6 +13,8 @@ final class MyLibraryViewModel {
 
     enum Action {
         case loadMyLibraries
+        case deleteMyLibraries(index: Int)
+        case editMyLibraries(newLibraries: [LibraryInfo])
     }
 
     func send(action: Action) {
@@ -33,7 +35,19 @@ final class MyLibraryViewModel {
                     loadState.value = .completed
                 }
             }
-            return
+
+        case let .deleteMyLibraries(index):
+            myLibraries.value.remove(at: index)
+
+        case let .editMyLibraries(newLibraries):
+            Task {
+                do {
+                    let _ = try await UserService.editUserLibraries(newLibraries: newLibraries)
+
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }
