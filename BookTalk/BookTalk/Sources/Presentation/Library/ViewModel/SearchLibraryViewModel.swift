@@ -10,15 +10,15 @@ import Foundation
 final class SearchLibraryViewModel {
 
     private(set) var selectedRegion: Observable<RegionType?> = Observable(nil)
-    private(set) var selectedDetailRegion: Observable<DetailRegionType?> = Observable(nil)
+    private(set) var selectedDetailRegion: Observable<DetailRegion?> = Observable(nil)
     private(set) var searchEnableState = Observable(false)
     private(set) var libraryResult = Observable<[LibraryInfo]>([])
     private(set) var loadState = Observable(LoadState.initial)
 
     enum Action {
         case selectRegion(region: RegionType?)
-        case selectDetailRegion(detailRegion: DetailRegionType?)
-        case loadLibraryResult(region: RegionType?, detailRegion: DetailRegionType?)
+        case selectDetailRegion(detailRegion: DetailRegion?)
+        case loadLibraryResult(region: RegionType?, detailRegion: DetailRegion?)
     }
 
     func send(action: Action) {
@@ -26,6 +26,7 @@ final class SearchLibraryViewModel {
         case let .selectRegion(region):
             guard let region = region else { return }
             selectedRegion.value = region
+            selectedDetailRegion.value = .none
             updateSearchState()
 
         case let .selectDetailRegion(detailRegion):
@@ -61,9 +62,9 @@ final class SearchLibraryViewModel {
     }
 
     private func updateSearchState() {
-        guard let _ = selectedRegion.value else { return }
-        guard let _ = selectedDetailRegion.value else { return }
-
+        guard selectedRegion.value != nil else { return }
+        guard selectedDetailRegion.value != nil else { return }
+        
         searchEnableState.value = true
     }
 }

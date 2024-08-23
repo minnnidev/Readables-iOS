@@ -11,7 +11,7 @@ struct LibraryService {
 
     static func getLibrarySearchResult(
         region: RegionType,
-        detailRegion: DetailRegionType
+        detailRegion: DetailRegion
     ) async throws -> [LibraryInfo] {
         let params: LibrarySearchRequestDTO = .init(
             regionCode: region.code,

@@ -39,9 +39,8 @@ final class SearchLibraryViewController: BaseViewController {
         }
 
         viewModel.selectedDetailRegion.subscribe { [weak self] detailRegionType in
-            guard let detailRegionType = detailRegionType else { return }
 
-            self?.detailRegionTextField.text = detailRegionType.name
+            self?.detailRegionTextField.text = detailRegionType?.name ?? ""
         }
 
         viewModel.searchEnableState.subscribe { [weak self] state in
@@ -200,27 +199,10 @@ final class SearchLibraryViewController: BaseViewController {
 
         if detailRegionTextField.isFirstResponder {
             let selectedRow = detailRegionPicker.selectedRow(inComponent: 0)
-            let selectedDetailRegion = DetailRegionType.allCases[selectedRow]
+            let selectedDetailRegion = viewModel.selectedRegion.value?.detailRegions[selectedRow]
             viewModel.send(action: .selectDetailRegion(detailRegion: selectedDetailRegion))
             detailRegionTextField.resignFirstResponder()
         }
-//        if regionTextField.isFirstResponder {
-//            regionTextField.resignFirstResponder()
-//            
-//            guard viewModel.selectedRegion.value == nil else { return }
-//
-//            viewModel.send(action: .selectRegion(region: RegionType.allCases[0]))
-//        }
-//
-//        if detailRegionTextField.isFirstResponder {
-//            detailRegionTextField.resignFirstResponder()
-//
-//            guard viewModel.selectedDetailRegion.value == nil else { return }
-//
-//            viewModel.send(
-//                action: .selectDetailRegion(detailRegion: DetailRegionType.allCases[0])
-//            )
-//        }
     }
 }
 
@@ -236,11 +218,12 @@ extension SearchLibraryViewController: UIPickerViewDataSource {
         numberOfRowsInComponent component: Int) -> Int {
             if pickerView == regionPicker {
                 return RegionType.allCases.count
-            } else if pickerView == detailRegionPicker {
-                return DetailRegionType.allCases.count
+            } else if pickerView == detailRegionPicker,
+                      let selectedRegion = viewModel.selectedRegion.value {
+                return selectedRegion.detailRegions.count
             }
             return 0
-    }
+        }
 }
 
 // MARK: - UIPickerViewDelegate
@@ -254,10 +237,10 @@ extension SearchLibraryViewController: UIPickerViewDelegate {
     ) -> String? {
         if pickerView == regionPicker {
             return RegionType.allCases[row].name
-        } else if pickerView == detailRegionPicker {
-            return DetailRegionType.allCases[row].name
+        } else if pickerView == detailRegionPicker,
+                  let selectedRegion = viewModel.selectedRegion.value {
+            return selectedRegion.detailRegions[row].name
         }
-
         return nil
     }
 }
