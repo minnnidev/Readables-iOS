@@ -70,7 +70,7 @@ final class SearchLibraryViewController: BaseViewController {
         }
 
         detailRegionTextField.snp.makeConstraints {
-            $0.top.equalTo(regionTextField.snp.bottom).offset(4)
+            $0.top.equalTo(regionTextField.snp.bottom).offset(8)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(12)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(40)
