@@ -11,6 +11,7 @@ final class MyLibraryViewController: BaseViewController {
 
     // MARK: - Properties
 
+    private let descriptionLabel = UILabel()
     private let libraryTableView = UITableView()
 
     // MARK: - Lifecycle
@@ -47,18 +48,33 @@ final class MyLibraryViewController: BaseViewController {
     override func setViews() {
         view.backgroundColor = .white
 
+        descriptionLabel.do {
+            $0.text = "내 도서관은 최대 3개까지 등록 가능합니다."
+            $0.font = .systemFont(ofSize: 14)
+            $0.textColor = .lightGray
+        }
+
         libraryTableView.do {
             $0.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
             $0.backgroundColor = .clear
+            $0.isScrollEnabled = false
             $0.rowHeight = UITableView.automaticDimension
         }
     }
 
     override func setConstraints() {
-        view.addSubview(libraryTableView)
+        [descriptionLabel, libraryTableView].forEach {
+            view.addSubview($0)
+        }
+
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+        }
 
         libraryTableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 
@@ -66,8 +82,8 @@ final class MyLibraryViewController: BaseViewController {
 
     private func registerCell() {
         libraryTableView.register(
-            LibraryCell.self,
-            forCellReuseIdentifier: LibraryCell.identifier
+            LibrarySimpleCell.self,
+            forCellReuseIdentifier: LibrarySimpleCell.identifier
         )
     }
 
@@ -107,9 +123,9 @@ extension MyLibraryViewController: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: LibraryCell.identifier,
+            withIdentifier: LibrarySimpleCell.identifier,
             for: indexPath
-        ) as? LibraryCell else { return UITableViewCell() }
+        ) as? LibrarySimpleCell else { return UITableViewCell() }
 
         return cell
     }
