@@ -13,6 +13,19 @@ final class BookImageCell: BaseCollectionViewCell {
 
     private let bookImageView = UIImageView()
     private let bookNameLabel = UILabel()
+    
+    // MARK: - Helpers
+
+    func bind(with book: Book) {
+        bookNameLabel.text = book.title
+        
+        if let url = URL(string: book.imageURL) {
+            bookImageView.kf.setImage(with: url)
+        } else {
+            bookImageView.kf.cancelDownloadTask()
+            bookImageView.image = nil
+        }
+    }
 
     // MARK: - UI Setup
 
@@ -34,27 +47,16 @@ final class BookImageCell: BaseCollectionViewCell {
         [bookImageView, bookNameLabel].forEach {
             contentView.addSubview($0)
         }
-
+        
         bookImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(150)
         }
-
+        
         bookNameLabel.snp.makeConstraints {
             $0.top.equalTo(bookImageView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-        }
-    }
-
-    func bind(with book: Book) {
-        bookNameLabel.text = book.title
-        
-        if let url = URL(string: book.imageURL) {
-            bookImageView.kf.setImage(with: url)
-        } else {
-            bookImageView.kf.cancelDownloadTask()
-            bookImageView.image = nil
         }
     }
 }
