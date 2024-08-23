@@ -7,24 +7,58 @@
 
 import UIKit
 
+protocol BorrowableLibraryCellDelegate: AnyObject {
+    func pushToMyLibraryVC()
+}
+
 final class BorrowableLibraryCell: BaseTableViewCell {
     
     // MARK: - Properties
     
+    weak var delegate: BorrowableLibraryCellDelegate?
+    
     private let titleLabel = UILabel()
     private let libraryStackView = UIStackView()
     private let registerLibraryButton = UIButton(type: .system)
+    
+    // MARK: - Initializer
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        addTargets()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func pushToMyLibraryVC() {
+        delegate?.pushToMyLibraryVC()
+    }
+    
+    private func addTargets() {
+        registerLibraryButton.addTarget(
+            self,
+            action: #selector(pushToMyLibraryVC),
+            for: .touchUpInside
+        )
+    }
     
     // MARK: - Bind
     
     func bind(_ viewModel: BookDetailViewModel) {
         viewModel.output.borrowableLibraries.subscribe { [weak self] libraries in
             guard let self = self else { return }
-
-            if let libraries = libraries {
+            
+            if let libraries = libraries, !libraries.isEmpty {
+                registerLibraryButton.isHidden = true
                 updateLibraries(libraries)
             } else {
-                registerLibraryButton.isHidden = true
+                registerLibraryButton.isHidden = false
+                libraryStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
             }
         }
     }
@@ -90,7 +124,6 @@ final class BorrowableLibraryCell: BaseTableViewCell {
             $0.setTitle("도서관 등록하기", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
-            $0.isHidden = true
         }
     }
     

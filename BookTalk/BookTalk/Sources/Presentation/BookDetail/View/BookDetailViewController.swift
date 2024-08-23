@@ -325,6 +325,7 @@ extension BookDetailViewController: UITableViewDataSource {
             ) as? BorrowableLibraryCell else {
                 return UITableViewCell()
             }
+            cell.delegate = self
             cell.selectionStyle = .none
             cell.bind(viewModel)
             return cell
@@ -346,5 +347,15 @@ extension BookDetailViewController: UITableViewDelegate {
         } else {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         }
+    }
+}
+
+// MARK: - BorrowableLibraryCellDelegate
+
+extension BookDetailViewController: BorrowableLibraryCellDelegate {
+    
+    func pushToMyLibraryVC() {
+        let myLibraryVC = MyLibraryViewController()
+        navigationController?.pushViewController(myLibraryVC, animated: true)
     }
 }
