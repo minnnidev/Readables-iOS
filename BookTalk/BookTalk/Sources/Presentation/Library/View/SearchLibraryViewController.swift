@@ -42,6 +42,18 @@ final class SearchLibraryViewController: BaseViewController {
 
             self?.detailRegionTextField.text = detailRegionType.name
         }
+
+        viewModel.searchEnableState.subscribe { [weak self] state in
+            guard let self = self else { return }
+            guard state else { return }
+
+           viewModel.send(
+                action: .loadLibraryResult(
+                    region: viewModel.selectedRegion.value,
+                    detailRegion: viewModel.selectedDetailRegion.value
+                )
+            )
+        }
     }
 
     // MARK: - UI Setup
