@@ -45,6 +45,13 @@ final class BookDetailViewController: BaseViewController {
         viewModel.input.loadDetailInfo()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let bottomInset = view.bounds.height - floatingButton.frame.minY
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+    }
+    
     // MARK: - Actions
     
     @objc private func handleFavoriteButton() {
@@ -133,7 +140,12 @@ final class BookDetailViewController: BaseViewController {
     
     override func setViews() {
         view.backgroundColor = .white
-        tableView.separatorInset = .zero
+        
+        tableView.do {
+            $0.separatorInset = .zero
+            $0.estimatedRowHeight = 600
+            $0.rowHeight = UITableView.automaticDimension
+        }
         
         floatingButton.do {
             var config = UIButton.Configuration.filled()
@@ -164,12 +176,7 @@ final class BookDetailViewController: BaseViewController {
             $0.configuration?.baseBackgroundColor = .systemRed
             $0.setImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
         }
-
-        // TODO: 삭제
-        tableView.do {
-            $0.rowHeight = 600
-        }
-
+        
         indicatorView.do {
             $0.hidesWhenStopped = true
         }

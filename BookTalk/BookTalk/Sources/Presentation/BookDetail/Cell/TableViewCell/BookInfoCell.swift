@@ -66,28 +66,33 @@ final class BookInfoCell: BaseTableViewCell {
         authorLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
+            $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 15, weight: .medium)
         }
         
         publisherLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
+            $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 15, weight: .medium)
         }
         
         publicationDateLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
+            $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 15, weight: .medium)
         }
         
         availabilityLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
+            $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 15, weight: .bold)
         }
         
         bookInfoStackView.do {
+            $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(authorLabel)
             $0.addArrangedSubview(publisherLabel)
             $0.addArrangedSubview(publicationDateLabel)
@@ -138,29 +143,22 @@ final class BookInfoCell: BaseTableViewCell {
             $0.height.equalTo(250)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(bookImageView.snp.bottom).offset(10)
-            $0.left.equalTo(bookImageView)
-        }
-        
         bookInfoStackView.snp.makeConstraints {
-            $0.centerX.left.equalTo(titleLabel)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.centerX.left.equalTo(bookImageView)
+            $0.top.equalTo(bookImageView.snp.bottom).offset(10)
         }
         
         joinOpenTalkButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.centerX.left.equalTo(bookInfoStackView)
             $0.top.equalTo(bookInfoStackView.snp.bottom).offset(15)
-            $0.left.equalTo(bookInfoStackView)
             $0.height.equalTo(50)
         }
         
         markAsReadButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.centerX.left.equalTo(joinOpenTalkButton)
             $0.top.equalTo(joinOpenTalkButton.snp.bottom).offset(15)
-            $0.left.equalTo(joinOpenTalkButton)
-            $0.bottom.equalToSuperview().offset(-15)
+            $0.bottom.equalTo(-15)
+            $0.height.equalTo(30)
         }
     }
 }

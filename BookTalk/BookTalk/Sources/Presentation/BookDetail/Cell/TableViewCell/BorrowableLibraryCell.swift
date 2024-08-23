@@ -78,7 +78,7 @@ final class BorrowableLibraryCell: BaseTableViewCell {
         
         libraryStackView.do {
             $0.axis = .vertical
-            $0.alignment = .leading
+            $0.alignment = .fill
             $0.distribution = .fill
             $0.spacing = 5
         }
@@ -110,10 +110,9 @@ final class BorrowableLibraryCell: BaseTableViewCell {
         }
         
         registerLibraryButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.centerX.left.equalTo(libraryStackView)
             $0.top.equalTo(titleLabel.snp.bottom).offset(15)
-            $0.left.equalTo(15)
-            $0.bottom.equalToSuperview().inset(15)
+            $0.bottom.equalToSuperview()
             $0.height.equalTo(50)
         }
     }
