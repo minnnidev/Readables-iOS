@@ -12,6 +12,7 @@ final class MyViewController: BaseViewController {
     // MARK: - Properties
 
     private let viewModel = MyPageViewModel()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
@@ -35,7 +36,17 @@ final class MyViewController: BaseViewController {
         
         viewModel.send(action: .loadUserInfo)
     }
-    
+
+    // MARK: - Bind
+
+    private func bind() {
+        viewModel.userInfoOb.subscribe { [weak self] _ in
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+
     // MARK: - Actions
     
     @objc private func editInfoButtonDidTap() {
@@ -86,13 +97,22 @@ final class MyViewController: BaseViewController {
             $0.contentInset = .zero
             $0.showsHorizontalScrollIndicator = false
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
     
     override func setConstraints() {
         view.addSubview(collectionView)
-        
+        collectionView.addSubview(indicatorView)
+
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     
@@ -120,14 +140,6 @@ final class MyViewController: BaseViewController {
     private func setDelegate() {
         collectionView.dataSource = self
         collectionView.delegate = self
-    }
-
-    private func bind() {
-        viewModel.userInfoOb.subscribe { [weak self] _ in
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadData()
-            }
-        }
     }
 }
 
@@ -214,6 +226,29 @@ extension MyViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension MyViewController: UICollectionViewDelegate {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        switch viewModel.selectedTab.value {
+        case 0:
+            let book = viewModel.readBooksOb.value[indexPath.row]
+            pushToDetailViewController(of: book.isbn)
+        case 1:
+            let book = viewModel.dibBooksOb.value[indexPath.row]
+            pushToDetailViewController(of: book.isbn)
+        default:
+            return
+        }
+    }
+
+    private func pushToDetailViewController(of isbn: String) {
+        let viewModel = BookDetailViewModel(isbn: isbn)
+        let detailVC = BookDetailViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - MyPageStickyTabViewDelegate
