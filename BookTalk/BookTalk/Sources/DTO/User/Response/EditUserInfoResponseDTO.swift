@@ -12,3 +12,15 @@ struct EditUserInfoResponseDTO: Decodable {
     let gender: String
     let birthDate: String
 }
+
+extension EditUserInfoResponseDTO {
+
+    func toModel() -> UserBasicInfo {
+        return .init(
+            profileImage: "", // TODO:
+            nickname: nickname,
+            gender: GenderType(code: gender),
+            birth: birthDate.toKoreanAge()
+        )
+    }
+}

@@ -39,11 +39,13 @@ struct RegistrationViewModel {
     ) {
         Task {
             do {
-                _ = try await UserService.editUserInfo(
+                let newUserInfo = try await UserService.editUserInfo(
                     nickname: nickname,
                     gender: gender,
                     birthDate: birth
                 )
+
+                UserData.shared.saveUser(newUserInfo)
 
                 await MainActor.run {
                     UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)

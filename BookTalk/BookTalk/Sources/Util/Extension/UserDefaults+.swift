@@ -11,5 +11,6 @@ extension UserDefaults {
 
     struct Key {
         static let isLoggedIn = "isLoggedIn"
+        static let userData = "userData"
     }
 }

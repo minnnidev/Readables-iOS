@@ -12,9 +12,9 @@ struct UserInfo {
     let dibs: [Book]
 }
 
-struct UserBasicInfo {
+struct UserBasicInfo: Codable {
     let profileImage: String
     let nickname: String
     let gender: GenderType
-    let birth: String // TODO: 나이 계산
+    let birth: String
 }
