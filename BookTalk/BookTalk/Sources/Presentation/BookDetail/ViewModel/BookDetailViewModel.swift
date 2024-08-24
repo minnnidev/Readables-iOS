@@ -62,7 +62,13 @@ final class BookDetailViewModel {
                 self?.toggle(self?.output.isMarkAsRead)
             },
             favoriteButtonTap: { [weak self] in
-                self?.toggle(self?.output.isFavorite)
+                guard let self = self else { return }
+
+                if isFavoriteOb.value {
+                    deleteFavoriteBook(of: bookDetailOb.value?.basicBookInfo)
+                } else {
+                    addFavoriteBook(of: bookDetailOb.value?.basicBookInfo)
+                }
             },
             likeButtonTap: { [weak self] in
                 self?.toggle(self?.output.isLiked, opposite: self?.output.isDisliked)
@@ -140,5 +146,31 @@ extension BookDetailViewModel {
             isAvailable ? "대출 가능" : "대출 불가능",
             isAvailable ? .systemGreen : .systemRed
         )
+    }
+
+    private func addFavoriteBook(of book: BasicBookInfo?) {
+        guard let book = book else { return }
+
+        Task {
+            do {
+                try await BookService.postFavoriteBook(of: book)
+                isFavoriteOb.value = true
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func deleteFavoriteBook(of book: BasicBookInfo?) {
+        guard let book = book else { return }
+
+        Task {
+            do {
+                try await BookService.deleteFavoriteBook(of: book)
+                isFavoriteOb.value = false
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
     }
 }

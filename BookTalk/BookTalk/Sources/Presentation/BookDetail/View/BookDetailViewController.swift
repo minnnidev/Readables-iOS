@@ -103,10 +103,10 @@ final class BookDetailViewController: BaseViewController {
             }
         }
 
-        viewModel.output.isFavorite.subscribe { [weak self] _ in
-            self?.updateFavoriteButtonState()
+        viewModel.output.isFavorite.subscribe { [weak self] isFavorite in
+            self?.updateFavoriteButtonState(isFavorite)
         }
-        
+
         viewModel.output.areChildButtonsVisible.subscribe { [weak self] _ in
             self?.updateChildButtonVisibility()
         }
@@ -237,14 +237,17 @@ final class BookDetailViewController: BaseViewController {
     
     // MARK: - Helpers
     
-    private func updateFavoriteButtonState() {
-        let imageName = viewModel.output.isFavorite.value ? "heart.fill" : "heart"
-        favoriteButton.image = UIImage(systemName: imageName)
-        
-        let tintColor: UIColor = viewModel.output.isFavorite.value ? .systemRed : .black
-        favoriteButton.tintColor = tintColor
+    private func updateFavoriteButtonState(_ isFavorite: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let imageName = isFavorite ? "heart.fill" : "heart"
+            favoriteButton.image = UIImage(systemName: imageName)
+
+            let tintColor: UIColor = isFavorite ? .systemRed : .black
+            favoriteButton.tintColor = tintColor
+        }
     }
-    
+
     private func updateLikeButtonState() {
         let imageName = viewModel.output.isLiked.value ? "hand.thumbsup.fill" : "hand.thumbsup"
         likeButton.setImage(UIImage(systemName: imageName), for: .normal)
