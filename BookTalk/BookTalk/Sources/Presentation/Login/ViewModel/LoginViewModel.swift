@@ -19,11 +19,13 @@ final class LoginViewModel {
         let onboardingMessage: Observable<String>
         let progressUpdate: Observable<(Int, Float)>
         let pushToRegister: Observable<Bool>
+        let loadState: Observable<LoadState>
     }
     
     // MARK: - Properties
 
     private var pushToRegisterOB = Observable(false)
+    private var loadStateOb = Observable(LoadState.initial)
 
     private let oauthManager = OAuthManager()
 
@@ -63,7 +65,8 @@ final class LoginViewModel {
         return Output(
             onboardingMessage: Observable(""),
             progressUpdate: Observable((0, 1.0)),
-            pushToRegister: pushToRegisterOB
+            pushToRegister: pushToRegisterOB, 
+            loadState: loadStateOb
         )
     }
     
@@ -88,14 +91,66 @@ final class LoginViewModel {
             }
 
         case .kakao:
-            // FIXME: 임시로 입력폼으로 넘어가도록 구현 -> 추후 분기 처리하기
-            pushToRegisterOB.value.toggle()
-            return
-            // TODO: 카카오 로그인
-//            oauthManager.loginWithKakao()
+            oauthManager.loginWithKakao { [weak self] result in
+                guard let self = self else { return }
+
+                switch result {
+                case let .success(idToken):
+                    loadStateOb.value = .loading
+
+                    Task { [weak self] in
+                        guard let self = self else { return }
+
+                        do {
+                            let isNewUser = try await AuthService.loginWithkakao(idToken: idToken)
+
+                            await setAppFlow(with: isNewUser)
+                            loadStateOb.value = .completed
+
+                        } catch let error as NetworkError {
+                            print(error.localizedDescription)
+                            loadStateOb.value = .completed
+                        }
+                    }
+                case let .failure(error):
+                    print("Kakao idToken 발급 불가 \(error.localizedDescription)")
+                }
+            }
         }
     }
-    
+
+    /// 신규 회원인지 여부에 따른 App flow 조정 메서드
+    /// 1. 신규회원이면 입력폼으로 이동
+    /// 2. 신규회원이 아닐 경우
+    ///     - 유저 정보가 존재하면 홈으로
+    ///     - 유저 정보가 존재하지 않으면 입력폼으로
+    @MainActor
+    private func setAppFlow(with isNewUser: Bool) async {
+        if isNewUser {
+            pushToRegisterOB.value.toggle()
+        } else {
+            if await isUserInfoExist() {
+                UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
+                NotificationCenter.default.post(name: .authStateChanged, object: nil)
+            } else {
+                pushToRegisterOB.value.toggle()
+            }
+        }
+    }
+
+    private func isUserInfoExist() async -> Bool {
+        do {
+            let userInfo = try await UserService.getUserInfo()
+
+            return !userInfo.nickname.isEmpty
+        } catch let error as NetworkError {
+            print(error.localizedDescription)
+            return false
+        } catch {
+            return false
+        }
+    }
+
     func cleanupTimers() {
         onboardingMessageManager.stop()
     }

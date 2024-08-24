@@ -15,11 +15,22 @@ struct UserInfoResponseDTO: Decodable {
 
 struct UserResponseDTO: Decodable {
     let userId: Int
-    let loginId: String
+    let loginId: String?
     let kakaoId: String?
     let regDate: String
-    let nickname: String
+    let nickname: String?
     let password: String
-    let gender: String
-    let birthDate: String 
+    let gender: String?
+    let birthDate: String?
+}
+
+extension UserResponseDTO {
+
+    func toModel() -> UserInfo {
+        return .init(
+            nickname: nickname ?? "",
+            gender: GenderType(code: gender ?? "G0"),
+            birth: birthDate ?? ""
+        )
+    }
 }
