@@ -12,7 +12,6 @@ final class MyViewController: BaseViewController {
     // MARK: - Properties
 
     private let viewModel = MyPageViewModel()
-    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
@@ -102,22 +101,13 @@ final class MyViewController: BaseViewController {
             $0.contentInset = .zero
             $0.showsHorizontalScrollIndicator = false
         }
-
-        indicatorView.do {
-            $0.hidesWhenStopped = true
-        }
     }
     
     override func setConstraints() {
         view.addSubview(collectionView)
-        collectionView.addSubview(indicatorView)
 
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-
-        indicatorView.snp.makeConstraints {
-            $0.center.equalToSuperview()
         }
     }
     
@@ -226,7 +216,11 @@ extension MyViewController: UICollectionViewDataSource {
                 myPageStickyTabView.setSelectedTab(
                     index: viewModel.selectedTab.value
                 )
-                
+                myPageStickyTabView.bind(
+                    readCnt: viewModel.readBooksOb.value.count,
+                    dibCnt: viewModel.dibBooksOb.value.count
+                )
+
                 return myPageStickyTabView
             }
         }

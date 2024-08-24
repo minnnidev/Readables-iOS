@@ -101,9 +101,11 @@ final class BookDetailViewController: BaseViewController {
             switch state {
             case .loading:
                 indicatorView.startAnimating()
+                tableView.isHidden = true
 
             case .completed, .initial:
                 indicatorView.stopAnimating()
+                tableView.isHidden = false
             }
         }
 
