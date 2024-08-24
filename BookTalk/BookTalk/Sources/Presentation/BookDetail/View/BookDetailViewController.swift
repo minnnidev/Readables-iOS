@@ -188,9 +188,9 @@ final class BookDetailViewController: BaseViewController {
 
     override func setConstraints() {
         [tableView,
-         floatingButton,
-         likeButton,
-         dislikeButton,
+//         floatingButton,
+//         likeButton,
+//         dislikeButton,
          indicatorView
        ].forEach { view.addSubview($0) }
 
@@ -198,23 +198,23 @@ final class BookDetailViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         
-        floatingButton.snp.makeConstraints {
-            $0.width.height.equalTo(60)
-            $0.right.equalToSuperview().inset(15)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-15)
-        }
-        
-        likeButton.snp.makeConstraints {
-            $0.width.height.equalTo(50)
-            $0.right.equalTo(floatingButton.snp.left).offset(-10)
-            $0.centerY.equalTo(floatingButton).offset(-15)
-        }
-
-        dislikeButton.snp.makeConstraints {
-            $0.width.height.equalTo(50)
-            $0.centerX.equalTo(floatingButton).offset(-15)
-            $0.bottom.equalTo(floatingButton.snp.top).offset(-10)
-        }
+//        floatingButton.snp.makeConstraints {
+//            $0.width.height.equalTo(60)
+//            $0.right.equalToSuperview().inset(15)
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-15)
+//        }
+//        
+//        likeButton.snp.makeConstraints {
+//            $0.width.height.equalTo(50)
+//            $0.right.equalTo(floatingButton.snp.left).offset(-10)
+//            $0.centerY.equalTo(floatingButton).offset(-15)
+//        }
+//
+//        dislikeButton.snp.makeConstraints {
+//            $0.width.height.equalTo(50)
+//            $0.centerX.equalTo(floatingButton).offset(-15)
+//            $0.bottom.equalTo(floatingButton.snp.top).offset(-10)
+//        }
 
         indicatorView.snp.makeConstraints {
             $0.center.equalToSuperview()
