@@ -177,6 +177,12 @@ final class UserInfoViewController: BaseViewController {
         viewModel.isFormValid.subscribe { [weak self] isValid in
             self?.updateSignUpButtonState(isValid: isValid)
         }
+
+        viewModel.popToMyPage.subscribe { [weak self] isCompleted in
+            guard isCompleted else { return }
+
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     // MARK: - Helpers

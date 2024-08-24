@@ -11,11 +11,11 @@ struct UserInfoViewModel {
 
     // MARK: - Properties
 
-    let nickname = Observable<String>("")
-    let selectedGender = Observable<GenderType?>(nil)
-    let birthDate = Observable<Date?>(nil)
-    let isFormValid = Observable<Bool>(false)
-    let pushToHomeView = Observable<Bool>(false)
+    private(set) var nickname = Observable<String>("")
+    private(set) var selectedGender = Observable<GenderType?>(nil)
+    private(set) var birthDate = Observable<Date?>(nil)
+    private(set) var isFormValid = Observable<Bool>(false)
+    private(set) var popToMyPage = Observable<Bool>(false)
 
     private let isInitialEdit: Bool
 
@@ -55,14 +55,16 @@ struct UserInfoViewModel {
                     birthDate: birth
                 )
 
-                UserData.shared.saveUser(newUserInfo)
-
                 await MainActor.run {
-                    UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
-                    NotificationCenter.default.post(
-                        name: Notification.Name.authStateChanged,
-                        object: nil
-                    )
+                    if isInitialEdit {
+                        UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
+                        NotificationCenter.default.post(
+                            name: Notification.Name.authStateChanged,
+                            object: nil
+                        )
+                    } else {
+                        popToMyPage.value.toggle()
+                    }
                 }
             } catch let error as NetworkError {
                 print(error.localizedDescription)
