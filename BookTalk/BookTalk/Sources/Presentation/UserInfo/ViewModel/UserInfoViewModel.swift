@@ -23,10 +23,24 @@ struct UserInfoViewModel {
 
     init(isInitialEdit: Bool) {
         self.isInitialEdit = isInitialEdit
+
+        setUserInfoIfNeeded()
     }
 
     // MARK: - Actions
-    
+
+    private func setUserInfoIfNeeded() {
+        guard !isInitialEdit else { return }
+
+        let oldUserInfo = UserData.shared.getUser()
+        guard let oldUserInfo = oldUserInfo else { return }
+
+        nickname.value = oldUserInfo.nickname
+        selectedGender.value = oldUserInfo.gender
+        birthDate.value = oldUserInfo.birth.toDate()
+    }
+
+
     func updateNickname(_ text: String) {
         nickname.value = text
         validateForm()
@@ -49,7 +63,7 @@ struct UserInfoViewModel {
     ) {
         Task {
             do {
-                let newUserInfo = try await UserService.editUserInfo(
+                let _ = try await UserService.editUserInfo(
                     nickname: nickname,
                     gender: gender,
                     birthDate: birth

@@ -20,7 +20,7 @@ extension EditUserInfoResponseDTO {
             profileImage: "", // TODO:
             nickname: nickname,
             gender: GenderType(code: gender),
-            birth: birthDate.toKoreanAge()
+            birth: birthDate
         )
     }
 }

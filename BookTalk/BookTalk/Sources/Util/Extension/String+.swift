@@ -33,4 +33,13 @@ extension String {
 
         return "\(koreanAge)"
     }
+
+    func toDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0) 
+
+        return dateFormatter.date(from: self)
+    }
 }
