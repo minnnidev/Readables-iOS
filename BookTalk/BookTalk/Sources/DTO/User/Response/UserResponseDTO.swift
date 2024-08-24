@@ -28,6 +28,7 @@ extension UserResponseDTO {
 
     func toModel() -> UserInfo {
         return .init(
+            profileImage: "", // TODO: 
             nickname: nickname ?? "",
             gender: GenderType(code: gender ?? "G0"),
             birth: birthDate ?? ""
