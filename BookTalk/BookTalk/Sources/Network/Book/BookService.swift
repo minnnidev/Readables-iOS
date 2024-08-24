@@ -18,12 +18,32 @@ struct BookService {
     }
 
     static func getBookDetail(of isbn: String) async throws -> DetailBookInfo {
-        let params: BookDetailRequestDTO = .init(isbn: isbn)
+        let params: ISBNRequestDTO = .init(isbn: isbn)
 
         let result: BookDetailResponseDTO = try await NetworkService.shared.request(
             target: BookTarget.getBookDetail(params: params)
         )
 
         return result.toModel()
+    }
+
+    static func postFavoriteBook(of book: BasicBookInfo) async throws {
+        let params: BookRequestDTO = .init(
+            isbn: book.isbn,
+            bookName: book.title,
+            bookImgURL: book.coverImageURL
+        )
+
+        let _: [DibResponseDTO] = try await NetworkService.shared.request(
+            target: BookTarget.postFavoriteBook(params: params)
+        )
+    }
+
+    static func deleteFavoriteBook(of book: BasicBookInfo) async throws {
+        let params: ISBNRequestDTO = .init(isbn: book.isbn)
+
+        let _: [DibResponseDTO] = try await NetworkService.shared.request(
+            target: BookTarget.deleteFavoriteBook(params: params)
+        )
     }
 }
