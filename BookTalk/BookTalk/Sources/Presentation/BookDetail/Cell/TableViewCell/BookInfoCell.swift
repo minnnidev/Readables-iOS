@@ -85,8 +85,10 @@ final class BookInfoCell: BaseTableViewCell {
     
     private func updateLayout() {
         if let tableView = superview as? UITableView {
-            tableView.beginUpdates()
-            tableView.endUpdates()
+            UIView.performWithoutAnimation {
+                tableView.beginUpdates()
+                tableView.endUpdates()
+            }
         }
     }
     
