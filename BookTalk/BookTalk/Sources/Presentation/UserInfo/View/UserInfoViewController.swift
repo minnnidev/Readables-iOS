@@ -93,22 +93,11 @@ final class UserInfoViewController: BaseViewController {
     }
 
     @objc private func keyboardWillShow(_ notification: Notification) {
-//        if !isKeyboardAlreadyShown {
-//            UIView.animate(withDuration: 0.3) {
-//                self.view.backgroundColor = .black.withAlphaComponent(0.2)
-//                self.addPhotoButton.alpha = 0.2
-//                self.view.bringSubviewToFront(self.credentialsStackView)
-//            }
-//            isKeyboardAlreadyShown = true
-//        }
+        // TODO:
     }
 
     @objc private func keyboardWillHide(_ notification: Notification) {
-//        UIView.animate(withDuration: 0.3) {
-//            self.view.backgroundColor = .white
-//            self.addPhotoButton.alpha = 1
-//        }
-//        isKeyboardAlreadyShown = false
+        // TODO:
     }
     
     private func registerKeyboardNotifications() {
@@ -182,6 +171,23 @@ final class UserInfoViewController: BaseViewController {
             guard isCompleted else { return }
 
             self?.navigationController?.popViewController(animated: true)
+        }
+
+        viewModel.presentAlert.subscribe { [weak self] isPresented in
+            DispatchQueue.main.async { [weak self] in
+                guard isPresented else { return }
+
+                let alertVC = UIAlertController(
+                    title: "닉네임이 중복됐어요.\n다른 닉네임을 입력해 주세요!",
+                    message: nil,
+                    preferredStyle: .alert
+                )
+
+                let action = UIAlertAction(title: "확인", style: .default)
+                alertVC.addAction(action)
+
+                self?.present(alertVC, animated: true)
+            }
         }
     }
     
