@@ -11,11 +11,12 @@ struct UserInfoViewModel {
 
     // MARK: - Properties
 
-    private(set) var nickname = Observable<String>("")
+    private(set) var nickname = Observable("")
     private(set) var selectedGender = Observable<GenderType?>(nil)
     private(set) var birthDate = Observable<Date?>(nil)
-    private(set) var isFormValid = Observable<Bool>(false)
-    private(set) var popToMyPage = Observable<Bool>(false)
+    private(set) var isFormValid = Observable(false)
+    private(set) var popToMyPage = Observable(false)
+    private(set) var presentAlert = Observable(false)
 
     private let isInitialEdit: Bool
 
@@ -81,7 +82,16 @@ struct UserInfoViewModel {
                     }
                 }
             } catch let error as NetworkError {
-                print(error.localizedDescription)
+                switch error {
+                case let .invalidStatusCode(statusCode, message):
+                    if statusCode == 400 &&
+                        message == "사용자의 닉네임이 중복됩니다." {
+                        presentAlert.value = true
+                    }
+                    return
+                default:
+                    print(error.localizedDescription)
+                }
             }
         }
     }
