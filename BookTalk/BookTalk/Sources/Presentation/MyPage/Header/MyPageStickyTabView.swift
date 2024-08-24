@@ -45,7 +45,7 @@ final class MyPageStickyTabView: BaseCollectionViewHeaderFooterView {
         feedbackGenerator.impactOccurred()
         delegate?.didSelectTab(index: selectedTabIndex)
     }
-    
+
     // MARK: - Helpers
     
     func setSelectedTab(index: Int) {

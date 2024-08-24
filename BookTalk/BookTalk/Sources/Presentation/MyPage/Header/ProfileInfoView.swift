@@ -78,24 +78,17 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - Bind
     
-    func bind() {
+    func bind(with userInfo: UserBasicInfo?) {
+        guard let userInfo = userInfo else { return }
         
-//        viewModel.output.profileImage.subscribe { [weak self] image in
-//            self?.profileImageView.image = image
-//        }
-//        
-//        viewModel.output.name.subscribe { [weak self] name in
-//            self?.nameLabel.text = name
-//        }
-//        
-//        viewModel.output.genderAgeText.subscribe { [weak self] text in
-//            self?.genderAndAgeLabel.text = text
-//        }
-//        
-//        viewModel.output.addedTexts.subscribe { [weak self] texts in
-//            self?.displayAddedTexts(texts)
-//            self?.invalidateCollectionViewLayout()
-//        }
+        nameLabel.text = userInfo.nickname
+        genderAndAgeLabel.text = "\(userInfo.gender.koreanTitle)/\(userInfo.birth)"
+
+        if let url = URL(string: userInfo.profileImage) {
+            profileImageView.kf.setImage(with: url)
+        } else {
+            profileImageView.image = nil
+        }
     }
     
     // MARK: - Helpers
@@ -125,7 +118,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         profileImageView.do {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 180 / 2
-            $0.backgroundColor = #colorLiteral(red: 0.8912894652, green: 0.8912894652, blue: 0.8912894652, alpha: 1)
+            $0.backgroundColor = .gray100
             $0.tintColor = .white
             $0.contentMode = .scaleAspectFill
             $0.isUserInteractionEnabled = true

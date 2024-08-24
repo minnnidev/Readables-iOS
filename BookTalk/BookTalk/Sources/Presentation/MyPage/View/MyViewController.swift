@@ -27,14 +27,13 @@ final class MyViewController: BaseViewController {
         
         registerCell()
         setDelegate()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIView.performWithoutAnimation {
-            collectionView.layoutIfNeeded()
-        }
+        viewModel.send(action: .loadUserInfo)
     }
     
     // MARK: - Actions
@@ -122,6 +121,14 @@ final class MyViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+
+    private func bind() {
+        viewModel.userInfoOb.subscribe { [weak self] _ in
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -139,8 +146,8 @@ extension MyViewController: UICollectionViewDataSource {
         guard section == 1 else { return 0 }
 
         switch viewModel.selectedTab.value {
-        case 0: return 10
-        case 1: return 5
+        case 0: return viewModel.readBooksOb.value.count
+        case 1: return viewModel.dibBooksOb.value.count
         default: return 0
         }
     }
@@ -157,6 +164,9 @@ extension MyViewController: UICollectionViewDataSource {
         ) as? BookImageCell else {
             return UICollectionViewCell()
         }
+
+        // TODO: select 타입에 대한 구분
+        cell.bind(with: viewModel.dibBooksOb.value[indexPath.item])
 
         return cell
     }
@@ -177,6 +187,7 @@ extension MyViewController: UICollectionViewDataSource {
                 }
 
                 profileInfoView.delegate = self
+                profileInfoView.bind(with: viewModel.userInfoOb.value?.userInfo)
 
                 return profileInfoView
             } else {

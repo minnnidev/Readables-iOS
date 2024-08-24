@@ -168,7 +168,7 @@ final class LoginViewModel {
         do {
             let userInfo = try await UserService.getUserInfo()
 
-            return !userInfo.nickname.isEmpty
+            return !userInfo.userInfo.nickname.isEmpty
         } catch let error as NetworkError {
             print(error.localizedDescription)
             return false
