@@ -23,6 +23,17 @@ enum GenderType: String {
         }
     }
 
+    var koreanTitle: String {
+        switch self {
+        case .notSelcted:
+            return "선택없음"
+        case .man:
+            return "남"
+        case .woman:
+            return "여"
+        }
+    }
+
     init(code: String) {
         switch code {
         case "G0":

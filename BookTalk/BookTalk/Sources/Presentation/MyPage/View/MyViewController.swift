@@ -8,12 +8,11 @@
 import UIKit
 
 final class MyViewController: BaseViewController {
-    
+
     // MARK: - Properties
-    
-    private let profileInfoViewModel = ProfileInfoViewModel()
-    private let myPageStickyTabViewModel = MyPageStickyTabViewModel()
-    private let myBooksViewModel = MyBooksViewModel()
+
+    private let viewModel = MyPageViewModel()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
@@ -29,17 +28,25 @@ final class MyViewController: BaseViewController {
         
         registerCell()
         setDelegate()
-        updateBooksCount()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIView.performWithoutAnimation {
-            collectionView.layoutIfNeeded()
+        viewModel.send(action: .loadUserInfo)
+    }
+
+    // MARK: - Bind
+
+    private func bind() {
+        viewModel.userInfoOb.subscribe { [weak self] _ in
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
         }
     }
-    
+
     // MARK: - Actions
     
     @objc private func editInfoButtonDidTap() {
@@ -56,17 +63,7 @@ final class MyViewController: BaseViewController {
         
         navigationController?.pushViewController(settingVC, animated: true)
     }
-    
-    // MARK: - Bind
-    
-    private func updateBooksCount() {
-        let finishedBooksCount = myBooksViewModel.finishedBooks.value.count
-        let favoriteBooksCount = myBooksViewModel.favoriteBooks.value.count
-        
-        myPageStickyTabViewModel.updateFinishedBookCount(finishedBooksCount)
-        myPageStickyTabViewModel.updateFavoriteBookCount(favoriteBooksCount)
-    }
-    
+
     // MARK: - Set UI
     
     override func setNavigationBar() {
@@ -94,15 +91,28 @@ final class MyViewController: BaseViewController {
     }
     
     override func setViews() {
-        collectionView.backgroundColor = .clear
-        collectionView.alwaysBounceVertical = true
+        collectionView.do {
+            $0.backgroundColor = .clear
+            $0.alwaysBounceVertical = true
+            $0.contentInset = .zero
+            $0.showsHorizontalScrollIndicator = false
+        }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
     
     override func setConstraints() {
         view.addSubview(collectionView)
-        
+        collectionView.addSubview(indicatorView)
+
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     
@@ -121,13 +131,8 @@ final class MyViewController: BaseViewController {
             )
             
             $0.register(
-                FinishedBookCell.self,
-                forCellWithReuseIdentifier: FinishedBookCell.identifier
-            )
-            
-            $0.register(
-                FavoriteBookCell.self,
-                forCellWithReuseIdentifier: FavoriteBookCell.identifier
+                BookImageCell.self,
+                forCellWithReuseIdentifier: BookImageCell.identifier
             )
         }
     }
@@ -135,7 +140,6 @@ final class MyViewController: BaseViewController {
     private func setDelegate() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        profileInfoViewModel.delegate = self
     }
 }
 
@@ -152,12 +156,10 @@ extension MyViewController: UICollectionViewDataSource {
         numberOfItemsInSection section: Int
     ) -> Int {
         guard section == 1 else { return 0 }
-        
-        let viewModelOutput = myPageStickyTabViewModel.output
-        
-        switch viewModelOutput.currentTabIndex.value {
-        case 0: return viewModelOutput.finishedBookCount.value
-        case 1: return viewModelOutput.favoriteBookCount.value
+
+        switch viewModel.selectedTab.value {
+        case 0: return viewModel.readBooksOb.value.count
+        case 1: return viewModel.dibBooksOb.value.count
         default: return 0
         }
     }
@@ -167,36 +169,24 @@ extension MyViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard indexPath.section == 1 else { return UICollectionViewCell() }
-        
-        if myPageStickyTabViewModel.output.currentTabIndex.value == 0 {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: FinishedBookCell.identifier,
-                for: indexPath
-            ) as? FinishedBookCell else {
-                return UICollectionViewCell()
-            }
-            
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.cornerRadius = 10
-            cell.bind(with: myBooksViewModel.finishedBooks.value[indexPath.item])
-            
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: FavoriteBookCell.identifier,
-                for: indexPath
-            ) as? FavoriteBookCell else {
-                return UICollectionViewCell()
-            }
-            
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.cornerRadius = 10
-            cell.bind(with: myBooksViewModel.favoriteBooks.value[indexPath.item])
-            
-            return cell
+
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: BookImageCell.identifier,
+            for: indexPath
+        ) as? BookImageCell else {
+            return UICollectionViewCell()
         }
+
+        switch viewModel.selectedTab.value {
+        case 0:
+            cell.bind(with: viewModel.readBooksOb.value[indexPath.item])
+        case 1:
+            cell.bind(with: viewModel.dibBooksOb.value[indexPath.item])
+        default:
+            break
+        }
+
+        return cell
     }
     
     func collectionView(
@@ -213,9 +203,10 @@ extension MyViewController: UICollectionViewDataSource {
                 ) as? ProfileInfoView else {
                     return UICollectionReusableView()
                 }
-                
-                profileInfoView.bind(profileInfoViewModel)
-                
+
+                profileInfoView.delegate = self
+                profileInfoView.bind(with: viewModel.userInfoOb.value?.userInfo)
+
                 return profileInfoView
             } else {
                 guard let myPageStickyTabView = collectionView.dequeueReusableSupplementaryView(
@@ -227,9 +218,8 @@ extension MyViewController: UICollectionViewDataSource {
                 }
                 
                 myPageStickyTabView.delegate = self
-                myPageStickyTabView.bind(myPageStickyTabViewModel)
                 myPageStickyTabView.setSelectedTab(
-                    index: myPageStickyTabViewModel.output.currentTabIndex.value
+                    index: viewModel.selectedTab.value
                 )
                 
                 return myPageStickyTabView
@@ -242,6 +232,29 @@ extension MyViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension MyViewController: UICollectionViewDelegate {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        switch viewModel.selectedTab.value {
+        case 0:
+            let book = viewModel.readBooksOb.value[indexPath.row]
+            pushToDetailViewController(of: book.isbn)
+        case 1:
+            let book = viewModel.dibBooksOb.value[indexPath.row]
+            pushToDetailViewController(of: book.isbn)
+        default:
+            return
+        }
+    }
+
+    private func pushToDetailViewController(of isbn: String) {
+        let viewModel = BookDetailViewModel(isbn: isbn)
+        let detailVC = BookDetailViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - MyPageStickyTabViewDelegate
@@ -249,15 +262,15 @@ extension MyViewController: UICollectionViewDelegate {
 extension MyViewController: MyPageStickyTabViewDelegate {
     
     func didSelectTab(index: Int) {
-        myPageStickyTabViewModel.input.tabSelected(index)
+        viewModel.send(action: .selectTab(index: index))
         collectionView.reloadData()
     }
 }
 
 // MARK: - ProfileInfoViewModelDelegate
 
-extension MyViewController: ProfileInfoViewModelDelegate {
-    
+extension MyViewController: ProfileInfoViewDelegate {
+
     func didTapAddFinishedBookButton() {
         let viewModel = AddBookViewModel()
         let addBookVC = AddBookViewController(viewModel: viewModel)
@@ -343,15 +356,15 @@ private extension MyViewController {
     
     static func createBooksSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(150)
+            widthDimension: .fractionalWidth(1/3),
+            heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
-        
+        item.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
+
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(150)
+            heightDimension: .estimated(180)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -359,12 +372,12 @@ private extension MyViewController {
         section.boundarySupplementaryItems = [createStickyTabHeaderItem()]
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
-            leading: 0,
+            leading: 4,
             bottom: 10,
-            trailing: 0
+            trailing: 4
         )
-        section.interGroupSpacing = 10
-        
+        section.interGroupSpacing = 24
+
         return section
     }
 }

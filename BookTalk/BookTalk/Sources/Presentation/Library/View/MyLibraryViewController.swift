@@ -44,22 +44,24 @@ final class MyLibraryViewController: BaseViewController {
         }
 
         viewModel.loadState.subscribe { [weak self] state in
-            guard let self = self else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
 
-            switch state {
-            case .initial:
-                break
+                switch state {
+                case .initial:
+                    break
 
-            case .loading:
-                indicatorView.startAnimating()
+                case .loading:
+                    indicatorView.startAnimating()
 
-            case .completed:
-                indicatorView.stopAnimating()
+                case .completed:
+                    indicatorView.stopAnimating()
 
-                if viewModel.myLibraries.value.isEmpty {
-                    libraryTableView.setEmptyMessage("등록된 내 도서관이 없습니다.")
-                } else {
-                    libraryTableView.restore()
+                    if viewModel.myLibraries.value.isEmpty {
+                        libraryTableView.setEmptyMessage("등록된 내 도서관이 없습니다.")
+                    } else {
+                        libraryTableView.restore()
+                    }
                 }
             }
         }

@@ -13,6 +13,16 @@ struct UserInfoResponseDTO: Decodable {
     let dibs: [DibResponseDTO]
 }
 
+extension UserInfoResponseDTO {
+
+    func toModel() -> UserInfo {
+        return .init(
+            userInfo: userDto.toModel(),
+            dibs: dibs.map { $0.toModel() }
+        )
+    }
+}
+
 struct UserResponseDTO: Decodable {
     let userId: Int
     let loginId: String?
@@ -26,8 +36,9 @@ struct UserResponseDTO: Decodable {
 
 extension UserResponseDTO {
 
-    func toModel() -> UserInfo {
+    func toModel() -> UserBasicInfo {
         return .init(
+            profileImage: "", // TODO: 
             nickname: nickname ?? "",
             gender: GenderType(code: gender ?? "G0"),
             birth: birthDate ?? ""

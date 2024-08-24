@@ -14,7 +14,7 @@ struct UserService {
             target: UserTarget.getUserInfo
         )
         
-        return result.userDto.toModel()
+        return result.toModel()
     }
 
     static func editUserInfo(
