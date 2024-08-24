@@ -102,6 +102,7 @@ final class SearchResultCell: BaseTableViewCell {
         }
         
         favoriteButton.do {
+            $0.isHidden = true
             $0.tintColor = .systemRed
             $0.addTarget(self, action: #selector(favoriteButtonDidTap), for: .touchUpInside)
         }
