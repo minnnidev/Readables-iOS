@@ -138,6 +138,7 @@
 		AB5D35692C77978D0028995C /* DibsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35682C77978D0028995C /* DibsResponseDTO.swift */; };
 		AB6C19CD2C79A0ED00BF844C /* BookRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C19CC2C79A0ED00BF844C /* BookRequestDTO.swift */; };
 		AB6C19D12C79C01C00BF844C /* MyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C19D02C79C01C00BF844C /* MyViewModel.swift */; };
+		AB6C19D32C79D3B100BF844C /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C19D22C79D3B100BF844C /* String+.swift */; };
 		AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205542C6E661B0014C5A5 /* GenreTarget.swift */; };
 		AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205562C6E66240014C5A5 /* GenreService.swift */; };
 		AB82055C2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */; };
@@ -319,6 +320,7 @@
 		AB5D35682C77978D0028995C /* DibsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DibsResponseDTO.swift; sourceTree = "<group>"; };
 		AB6C19CC2C79A0ED00BF844C /* BookRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRequestDTO.swift; sourceTree = "<group>"; };
 		AB6C19D02C79C01C00BF844C /* MyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewModel.swift; sourceTree = "<group>"; };
+		AB6C19D22C79D3B100BF844C /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		AB8205542C6E661B0014C5A5 /* GenreTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTarget.swift; sourceTree = "<group>"; };
 		AB8205562C6E66240014C5A5 /* GenreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreService.swift; sourceTree = "<group>"; };
 		AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreTrendRequestDTO.swift; path = BookTalk/Sources/DTO/Genre/Request/GenreTrendRequestDTO.swift; sourceTree = SOURCE_ROOT; };
@@ -856,6 +858,7 @@
 				AB949A342C7484F80005C543 /* UICollectionView+.swift */,
 				ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */,
 				AB5D355E2C7767A00028995C /* DateFormatter+.swift */,
+				AB6C19D22C79D3B100BF844C /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1705,6 +1708,7 @@
 				ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
 				058B77BC2C7858FF00A1110B /* FavoriteBook.swift in Sources */,
+				AB6C19D32C79D3B100BF844C /* String+.swift in Sources */,
 				AB9C5D762C78C80600CE44AF /* Tokens.swift in Sources */,
 				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				051155F12C64B08F00230CFE /* ReusableIdentifier.swift in Sources */,

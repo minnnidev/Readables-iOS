@@ -177,8 +177,14 @@ extension MyViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        // TODO: select 타입에 대한 구분
-        cell.bind(with: viewModel.dibBooksOb.value[indexPath.item])
+        switch viewModel.selectedTab.value {
+        case 0:
+            cell.bind(with: viewModel.readBooksOb.value[indexPath.item])
+        case 1:
+            cell.bind(with: viewModel.dibBooksOb.value[indexPath.item])
+        default:
+            break
+        }
 
         return cell
     }

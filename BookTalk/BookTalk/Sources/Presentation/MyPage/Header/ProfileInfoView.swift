@@ -16,9 +16,9 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - Properties
 
-    let profileImageView = UIImageView()
-    let nameLabel = UILabel()
-    let genderAndAgeLabel = UILabel()
+    private let profileImageView = UIImageView()
+    private let nameLabel = UILabel()
+    private let genderAndAgeLabel = UILabel()
     private let userInfoStackView = UIStackView()
     private let libraryTextStackView = UIStackView()
     private let addFinishedBookButton = UIButton(type: .system)
@@ -82,7 +82,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         guard let userInfo = userInfo else { return }
         
         nameLabel.text = userInfo.nickname
-        genderAndAgeLabel.text = "\(userInfo.gender.koreanTitle)/\(userInfo.birth)"
+        genderAndAgeLabel.text = "\(userInfo.gender.koreanTitle)/\(userInfo.birth.toKoreanAge())"
 
         if let url = URL(string: userInfo.profileImage) {
             profileImageView.kf.setImage(with: url)
@@ -125,8 +125,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         }
         
         nameLabel.do {
-            $0.text = "애벌레"
-            $0.font = .systemFont(ofSize: 25, weight: .bold)
+            $0.font = .systemFont(ofSize: 23, weight: .bold)
             $0.numberOfLines = 1
             $0.lineBreakMode = .byTruncatingTail
             $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -134,8 +133,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         }
         
         genderAndAgeLabel.do {
-            $0.text = "남"
-            $0.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            $0.textColor = .lightGray
             $0.font = .systemFont(ofSize: 15, weight: .medium)
             $0.numberOfLines = 1
             $0.setContentHuggingPriority(.required, for: .horizontal)
