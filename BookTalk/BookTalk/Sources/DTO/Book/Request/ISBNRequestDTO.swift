@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct BookDetailRequestDTO: Encodable {
+struct ISBNRequestDTO: Encodable {
     let isbn: String
 }
