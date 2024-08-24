@@ -25,7 +25,7 @@ final class RegistrationViewController: BaseViewController {
     private let credentialsStackView = UIStackView()
 
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -209,9 +209,10 @@ final class RegistrationViewController: BaseViewController {
     // MARK: - Set UI
     
     override func setNavigationBar() {
-        navigationItem.hidesBackButton = true
         navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.topItem?.title = "정보 등록"
+        navigationController?.navigationBar.tintColor = .black
+        navigationItem.title = "정보 등록"
+
     }
     
     override func setViews() {

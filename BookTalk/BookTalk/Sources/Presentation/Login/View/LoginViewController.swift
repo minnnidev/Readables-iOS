@@ -30,7 +30,14 @@ final class LoginViewController: BaseViewController {
     private let kakaoLoginButton = UIButton()
 
     // MARK: - Lifecycle
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationItem.backButtonTitle = ""
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -115,10 +122,6 @@ final class LoginViewController: BaseViewController {
     }
     
     // MARK: - Set UI
-
-    override func setNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
 
     override func setViews() {
         configureWaveView()

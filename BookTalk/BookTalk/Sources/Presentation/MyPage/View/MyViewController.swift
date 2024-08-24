@@ -50,10 +50,11 @@ final class MyViewController: BaseViewController {
     // MARK: - Actions
     
     @objc private func editInfoButtonDidTap() {
-        let editInfoVC = EditInfoViewController()
-        editInfoVC.hidesBottomBarWhenPushed = true
-        
-        navigationController?.pushViewController(editInfoVC, animated: true)
+        let infoVC = RegistrationViewController()
+        infoVC.navigationItem.backButtonTitle = ""
+        infoVC.hidesBottomBarWhenPushed = true
+
+        navigationController?.pushViewController(infoVC, animated: true)
     }
     
     @objc private func settingButtonDidTap() {
@@ -72,7 +73,7 @@ final class MyViewController: BaseViewController {
         appearance.shadowColor = nil
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
+
         let editButton = UIBarButtonItem(
             image: UIImage(systemName: "pencil"),
             style: .plain,
@@ -88,6 +89,9 @@ final class MyViewController: BaseViewController {
         )
 
         navigationItem.rightBarButtonItems = [settingButton, editButton]
+        navigationItem.title = "내 정보"
+        navigationItem.backBarButtonItem?.tintColor = .black
+        navigationItem.backButtonTitle = ""
     }
     
     override func setViews() {
