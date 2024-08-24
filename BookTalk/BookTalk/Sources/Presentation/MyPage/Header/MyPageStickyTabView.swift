@@ -47,7 +47,12 @@ final class MyPageStickyTabView: BaseCollectionViewHeaderFooterView {
     }
 
     // MARK: - Helpers
-    
+
+    func bind(readCnt: Int, dibCnt: Int) {
+        finishedBookButton.setTitle("읽은 책 \(readCnt)", for: .normal)
+        favoriteBookButton.setTitle("찜한 책 \(dibCnt)", for: .normal)
+    }
+
     func setSelectedTab(index: Int) {
         updateTabSelection(to: index, animated: false)
     }
