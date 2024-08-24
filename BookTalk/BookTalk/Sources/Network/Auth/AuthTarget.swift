@@ -11,6 +11,7 @@ import Alamofire
 
 enum AuthTarget {
     case loginWithKakao(params: LoginRequestDTO)
+    case loginWithApple(params: LoginRequestDTO)
 }
 
 extension AuthTarget: TargetType {
@@ -19,19 +20,22 @@ extension AuthTarget: TargetType {
         switch self {
         case .loginWithKakao:
             return "/api/auth/kakaoLogin"
+        case .loginWithApple:
+            return "/api/auth/appleLogin"
         }
     }
-    
+
     var method: HTTPMethod {
         switch self {
-        case .loginWithKakao:
+        case .loginWithKakao, .loginWithApple:
             return .post
         }
     }
-    
+
     var task: APITask {
         switch self {
-        case let .loginWithKakao(params):
+        case let .loginWithKakao(params),
+            let .loginWithApple(params):
             return .requestWithoutInterceptor(parameters: ["idToken": params.idToken])
         }
     }

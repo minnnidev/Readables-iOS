@@ -13,7 +13,6 @@ import KakaoSDKUser
 final class OAuthManager: NSObject {
 
     var appleLoginSucceed: ((ASAuthorizationAppleIDCredential) -> Void)?
-    var kakaoLoginSucceed: ((String) -> Void)?
 
     func loginWithKakao(completion: @escaping (Result<String, Error>) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() {
@@ -39,13 +38,18 @@ final class OAuthManager: NSObject {
         }
     }
 
-    func loginWithApple() {
+    func loginWithApple(completion: @escaping (Result<ASAuthorizationAppleIDCredential, Error>) -> Void) {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
 
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
+
+        self.appleLoginSucceed = { credential in
+            completion(.success(credential))
+        }
+
         authorizationController.performRequests()
     }
 }
