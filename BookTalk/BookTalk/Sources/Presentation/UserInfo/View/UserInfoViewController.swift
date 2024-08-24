@@ -11,9 +11,6 @@ final class UserInfoViewController: BaseViewController {
 
     // MARK: - Properties
     
-    private var viewModel = UserInfoViewModel()
-    private var isKeyboardAlreadyShown = false
-    
     private let addPhotoButton = UIButton(type: .system)
     private let nicknameTextField = UITextField()
     private let maleButton = UIButton(type: .system)
@@ -24,6 +21,20 @@ final class UserInfoViewController: BaseViewController {
     private let signUpButton = UIButton(type: .system)
     private let credentialsStackView = UIStackView()
 
+    // MARK: - Initializer
+
+    private var viewModel: UserInfoViewModel
+
+    init(viewModel: UserInfoViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -395,7 +406,7 @@ extension UserInfoViewController: UINavigationControllerDelegate {
 // MARK: - UITextFieldDelegate
 
 extension UserInfoViewController: UITextFieldDelegate {
-    
+
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,

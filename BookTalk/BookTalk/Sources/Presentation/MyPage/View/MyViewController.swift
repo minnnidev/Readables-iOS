@@ -50,7 +50,8 @@ final class MyViewController: BaseViewController {
     // MARK: - Actions
     
     @objc private func editInfoButtonDidTap() {
-        let infoVC = UserInfoViewController()
+        let viewModel = UserInfoViewModel(isInitialEdit: false)
+        let infoVC = UserInfoViewController(viewModel: viewModel)
         infoVC.navigationItem.backButtonTitle = ""
         infoVC.hidesBottomBarWhenPushed = true
 

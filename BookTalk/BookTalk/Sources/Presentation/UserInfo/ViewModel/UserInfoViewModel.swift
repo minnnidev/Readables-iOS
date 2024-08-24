@@ -8,12 +8,22 @@
 import UIKit
 
 struct UserInfoViewModel {
-    
+
+    // MARK: - Properties
+
     let nickname = Observable<String>("")
     let selectedGender = Observable<GenderType?>(nil)
     let birthDate = Observable<Date?>(nil)
     let isFormValid = Observable<Bool>(false)
     let pushToHomeView = Observable<Bool>(false)
+
+    private let isInitialEdit: Bool
+
+    // MARK: - Initializer
+
+    init(isInitialEdit: Bool) {
+        self.isInitialEdit = isInitialEdit
+    }
 
     // MARK: - Actions
     
