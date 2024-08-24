@@ -7,16 +7,40 @@
 
 import UIKit
 
-struct RegistrationViewModel {
-    
-    let nickname = Observable<String>("")
-    let selectedGender = Observable<GenderType?>(nil)
-    let birthDate = Observable<Date?>(nil)
-    let isFormValid = Observable<Bool>(false)
-    let pushToHomeView = Observable<Bool>(false)
+struct UserInfoViewModel {
+
+    // MARK: - Properties
+
+    private(set) var nickname = Observable<String>("")
+    private(set) var selectedGender = Observable<GenderType?>(nil)
+    private(set) var birthDate = Observable<Date?>(nil)
+    private(set) var isFormValid = Observable<Bool>(false)
+    private(set) var popToMyPage = Observable<Bool>(false)
+
+    private let isInitialEdit: Bool
+
+    // MARK: - Initializer
+
+    init(isInitialEdit: Bool) {
+        self.isInitialEdit = isInitialEdit
+
+        setUserInfoIfNeeded()
+    }
 
     // MARK: - Actions
-    
+
+    private func setUserInfoIfNeeded() {
+        guard !isInitialEdit else { return }
+
+        let oldUserInfo = UserData.shared.getUser()
+        guard let oldUserInfo = oldUserInfo else { return }
+
+        nickname.value = oldUserInfo.nickname
+        selectedGender.value = oldUserInfo.gender
+        birthDate.value = oldUserInfo.birth.toDate()
+    }
+
+
     func updateNickname(_ text: String) {
         nickname.value = text
         validateForm()
@@ -39,18 +63,22 @@ struct RegistrationViewModel {
     ) {
         Task {
             do {
-                _ = try await UserService.editUserInfo(
+                let _ = try await UserService.editUserInfo(
                     nickname: nickname,
                     gender: gender,
                     birthDate: birth
                 )
 
                 await MainActor.run {
-                    UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
-                    NotificationCenter.default.post(
-                        name: Notification.Name.authStateChanged,
-                        object: nil
-                    )
+                    if isInitialEdit {
+                        UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
+                        NotificationCenter.default.post(
+                            name: Notification.Name.authStateChanged,
+                            object: nil
+                        )
+                    } else {
+                        popToMyPage.value.toggle()
+                    }
                 }
             } catch let error as NetworkError {
                 print(error.localizedDescription)

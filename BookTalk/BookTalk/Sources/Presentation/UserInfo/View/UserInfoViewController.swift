@@ -1,5 +1,5 @@
 //
-//  RegistrationViewController.swift
+//  UserInfoViewController.swift
 //  BookTalk
 //
 //  Created by RAFA on 8/22/24.
@@ -7,12 +7,9 @@
 
 import UIKit
 
-final class RegistrationViewController: BaseViewController {
-    
+final class UserInfoViewController: BaseViewController {
+
     // MARK: - Properties
-    
-    private var viewModel = RegistrationViewModel()
-    private var isKeyboardAlreadyShown = false
     
     private let addPhotoButton = UIButton(type: .system)
     private let nicknameTextField = UITextField()
@@ -24,6 +21,20 @@ final class RegistrationViewController: BaseViewController {
     private let signUpButton = UIButton(type: .system)
     private let credentialsStackView = UIStackView()
 
+    // MARK: - Initializer
+
+    private var viewModel: UserInfoViewModel
+
+    init(viewModel: UserInfoViewModel) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -166,6 +177,12 @@ final class RegistrationViewController: BaseViewController {
         viewModel.isFormValid.subscribe { [weak self] isValid in
             self?.updateSignUpButtonState(isValid: isValid)
         }
+
+        viewModel.popToMyPage.subscribe { [weak self] isCompleted in
+            guard isCompleted else { return }
+
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     // MARK: - Helpers
@@ -266,7 +283,11 @@ final class RegistrationViewController: BaseViewController {
             $0.datePickerMode = .date
             $0.preferredDatePickerStyle = .wheels
             $0.locale = .init(identifier: "ko-KR")
-            $0.maximumDate = Date()
+            $0.maximumDate = Calendar.current.date(
+                byAdding: .day,
+                value: -1,
+                to: Date()
+            )
         }
         
         signUpButton.do {
@@ -324,8 +345,8 @@ final class RegistrationViewController: BaseViewController {
 
 // MARK: - UIImagePickerControllerDelegate
 
-extension RegistrationViewController: UIImagePickerControllerDelegate {
-    
+extension UserInfoViewController: UIImagePickerControllerDelegate {
+
     func imagePickerController(
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
@@ -354,8 +375,8 @@ extension RegistrationViewController: UIImagePickerControllerDelegate {
 
 // MARK: - UINavigationControllerDelegate
 
-extension RegistrationViewController: UINavigationControllerDelegate {
-    
+extension UserInfoViewController: UINavigationControllerDelegate {
+
     private func presentImagePickerActionSheet() {
         let actionSheet = UIAlertController(
             title: "사진 선택",
@@ -394,8 +415,8 @@ extension RegistrationViewController: UINavigationControllerDelegate {
 
 // MARK: - UITextFieldDelegate
 
-extension RegistrationViewController: UITextFieldDelegate {
-    
+extension UserInfoViewController: UITextFieldDelegate {
+
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
@@ -407,7 +428,7 @@ extension RegistrationViewController: UITextFieldDelegate {
 
 // MARK: - Set UI Helpers
 
-private extension RegistrationViewController {
+private extension UserInfoViewController {
 
     func setupTextField(textField: UITextField, placeholder: String? = nil, spacerWidth: CGFloat) {
         textField.do {

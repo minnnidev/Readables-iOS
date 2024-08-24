@@ -14,14 +14,18 @@ struct UserService {
             target: UserTarget.getUserInfo
         )
         
-        return result.toModel()
+        let userInfo = result.toModel()
+        
+        UserData.shared.saveUser(userInfo.userInfo)
+
+        return userInfo
     }
 
     static func editUserInfo(
         nickname: String,
         gender: GenderType,
         birthDate: String
-    ) async throws -> EditUserInfoResponseDTO {
+    ) async throws -> UserBasicInfo {
         let body: EditUserInfoRequestDTO = .init(
             nickname: nickname,
             gender: gender.rawValue,
@@ -29,8 +33,11 @@ struct UserService {
         )
 
         let result: EditUserInfoResponseDTO = try await NetworkService.shared.request(target: UserTarget.editUserInfo(body: body))
+        let newUser = result.toModel()
 
-        return result
+        UserData.shared.saveUser(newUser)
+
+        return newUser
     }
 
     static func getFavoriteBooks() async throws -> [Book] {
