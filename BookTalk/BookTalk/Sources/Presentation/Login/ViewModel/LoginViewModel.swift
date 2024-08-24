@@ -19,11 +19,13 @@ final class LoginViewModel {
         let onboardingMessage: Observable<String>
         let progressUpdate: Observable<(Int, Float)>
         let pushToRegister: Observable<Bool>
+        let loadState: Observable<LoadState>
     }
     
     // MARK: - Properties
 
     private var pushToRegisterOB = Observable(false)
+    private var loadStateOb = Observable(LoadState.initial)
 
     private let oauthManager = OAuthManager()
 
@@ -63,7 +65,8 @@ final class LoginViewModel {
         return Output(
             onboardingMessage: Observable(""),
             progressUpdate: Observable((0, 1.0)),
-            pushToRegister: pushToRegisterOB
+            pushToRegister: pushToRegisterOB, 
+            loadState: loadStateOb
         )
     }
     
@@ -93,6 +96,8 @@ final class LoginViewModel {
 
                 switch result {
                 case let .success(idToken):
+                    loadStateOb.value = .loading
+
                     Task { [weak self] in
                         guard let self = self else { return }
 
@@ -100,9 +105,11 @@ final class LoginViewModel {
                             let isNewUser = try await AuthService.loginWithkakao(idToken: idToken)
 
                             await setAppFlow(with: isNewUser)
+                            loadStateOb.value = .completed
 
                         } catch let error as NetworkError {
                             print(error.localizedDescription)
+                            loadStateOb.value = .completed
                         }
                     }
                 case let .failure(error):
@@ -143,7 +150,6 @@ final class LoginViewModel {
             return false
         }
     }
-
 
     func cleanupTimers() {
         onboardingMessageManager.stop()

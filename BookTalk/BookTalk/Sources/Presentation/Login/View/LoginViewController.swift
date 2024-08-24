@@ -20,6 +20,8 @@ final class LoginViewController: BaseViewController {
     private let waveView = WaveView()
     private let animationView: LottieAnimationView = .init(name: "login")
     private let loginButtons = UIStackView()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
+    private let indicatorBackgroundView = UIView()
 
     private let appleLoginButton = ASAuthorizationAppleIDButton(
         authorizationButtonType: .signIn,
@@ -93,6 +95,23 @@ final class LoginViewController: BaseViewController {
             let registerVC = RegistrationViewController()
             navigationController?.pushViewController(registerVC, animated: true)
         }
+
+        viewModel.output.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            Task {
+                await MainActor.run {
+                    switch state {
+                    case .initial, .completed:
+                        self.indicatorView.stopAnimating()
+                        self.indicatorBackgroundView.isHidden = true
+                    case .loading:
+                        self.indicatorView.startAnimating()
+                        self.indicatorBackgroundView.isHidden = false
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Set UI
@@ -104,7 +123,7 @@ final class LoginViewController: BaseViewController {
     override func setViews() {
         configureWaveView()
         configureAnimationView()
-        
+
         onboardingLabel.do {
             $0.font = .systemFont(ofSize: 30, weight: .heavy)
             $0.textColor = .black
@@ -132,6 +151,16 @@ final class LoginViewController: BaseViewController {
         kakaoLoginButton.do {
             $0.setBackgroundImage(UIImage(named: "kakaoLoginButton"), for: .normal)
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+            $0.color = .white
+        }
+
+        indicatorBackgroundView.do {
+            $0.backgroundColor = .lightGray.withAlphaComponent(0.9)
+            $0.layer.cornerRadius = 10
+        }
     }
     
     override func setConstraints() {
@@ -139,10 +168,15 @@ final class LoginViewController: BaseViewController {
             loginButtons.addArrangedSubview($0)
         }
 
-        [progressView, onboardingLabel, waveView, animationView, loginButtons].forEach {
+        [
+            progressView, onboardingLabel, waveView,
+            animationView, loginButtons, indicatorBackgroundView
+        ].forEach {
             view.addSubview($0)
         }
-        
+
+        indicatorBackgroundView.addSubview(indicatorView)
+
         progressView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -180,6 +214,15 @@ final class LoginViewController: BaseViewController {
         loginButtons.snp.makeConstraints {
             $0.centerX.left.equalToSuperview()
             $0.bottom.equalTo(view.snp.bottom)
+        }
+
+        indicatorBackgroundView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(50)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     
