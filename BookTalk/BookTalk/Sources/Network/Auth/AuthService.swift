@@ -21,4 +21,16 @@ struct AuthService {
 
         return result.isNewUser
     }
-}
+
+    static func loginWithApple(idToken: String) async throws -> Bool {
+        let params: LoginRequestDTO = .init(idToken: idToken)
+
+        let result: LoginResponseDTO = try await NetworkService.shared.request(
+            target: AuthTarget.loginWithApple(params: params)
+        )
+
+        KeychainManager.shared.save(key: TokenKey.accessToken, token: result.accessToken)
+        KeychainManager.shared.save(key: TokenKey.refreshToken, token: result.refreshToken)
+
+        return result.isNewUser
+    }}

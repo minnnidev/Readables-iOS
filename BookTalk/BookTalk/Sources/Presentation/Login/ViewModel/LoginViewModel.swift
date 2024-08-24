@@ -82,12 +82,38 @@ final class LoginViewModel {
     private func handleLogin(type: LoginType) {
         switch type {
         case .apple:
-            // TODO: 애플 로그인
-            oauthManager.loginWithApple()
+            oauthManager.loginWithApple { [weak self] result in
+                guard let self = self else { return }
 
-            oauthManager.appleLoginSucceed = { credential in
-                print(credential)
-                // TODO: API 호출
+                switch result {
+                case let .success(credential):
+                    loadStateOb.value = .loading
+
+                    Task { [weak self] in
+                        guard let self = self else { return }
+
+                        do {
+                            if let idTokenData = credential.identityToken,
+                               let idTokenStr = String(data: idTokenData, encoding: .utf8) {
+
+                                let isNewUser = try await AuthService.loginWithApple(idToken: idTokenStr)
+
+                                await setAppFlow(with: isNewUser)
+                                loadStateOb.value = .completed
+                            } else {
+                                print("idToken 변환 실패")
+                                loadStateOb.value = .completed
+                            }
+                        } catch let error as NetworkError {
+                            print(error.localizedDescription)
+                            loadStateOb.value = .completed
+                        }
+                    }
+
+
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
             }
 
         case .kakao:
