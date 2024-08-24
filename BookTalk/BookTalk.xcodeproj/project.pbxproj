@@ -36,7 +36,6 @@
 		054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1872C748CEE0007D9C9 /* ProfileInfoView.swift */; };
 		054FA18C2C748D1F0007D9C9 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18B2C748D1F0007D9C9 /* FullScreenViewController.swift */; };
 		054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */; };
-		054FA1962C748E740007D9C9 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1952C748E740007D9C9 /* EditInfoViewController.swift */; };
 		054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FA1972C748E9F0007D9C9 /* MyLibraryViewController.swift */; };
 		0551400D2C78A3ED009D3B4E /* FinishedBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551400C2C78A3ED009D3B4E /* FinishedBookCell.swift */; };
 		0551400F2C78A609009D3B4E /* FavoriteBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551400E2C78A609009D3B4E /* FavoriteBookCell.swift */; };
@@ -222,7 +221,6 @@
 		054FA1872C748CEE0007D9C9 /* ProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoView.swift; sourceTree = "<group>"; };
 		054FA18B2C748D1F0007D9C9 /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		054FA18D2C748D8D0007D9C9 /* MyPageStickyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageStickyTabView.swift; sourceTree = "<group>"; };
-		054FA1952C748E740007D9C9 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
 		054FA1972C748E9F0007D9C9 /* MyLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewController.swift; sourceTree = "<group>"; };
 		0551400C2C78A3ED009D3B4E /* FinishedBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedBookCell.swift; sourceTree = "<group>"; };
 		0551400E2C78A609009D3B4E /* FavoriteBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBookCell.swift; sourceTree = "<group>"; };
@@ -1021,7 +1019,6 @@
 			isa = PBXGroup;
 			children = (
 				057925422C4FF4E100834EC6 /* MyViewController.swift */,
-				054FA1952C748E740007D9C9 /* EditInfoViewController.swift */,
 				AB4CBA742C6E00FC009A2AB6 /* SettingViewController.swift */,
 			);
 			path = View;
@@ -1604,7 +1601,6 @@
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */,
 				AB8224BC2C7849610082CD30 /* SearchLibraryViewModel.swift in Sources */,
-				054FA1962C748E740007D9C9 /* EditInfoViewController.swift in Sources */,
 				AB8224B72C7847FE0082CD30 /* LibraryTarget.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* BookWithHeaderCell.swift in Sources */,
