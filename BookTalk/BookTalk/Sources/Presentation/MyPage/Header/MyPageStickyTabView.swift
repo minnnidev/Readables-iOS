@@ -18,8 +18,7 @@ final class MyPageStickyTabView: BaseCollectionViewHeaderFooterView {
     // MARK: - Properties
     
     weak var delegate: MyPageStickyTabViewDelegate?
-    
-    private var viewModel: MyPageStickyTabViewModel?
+
     private let finishedBookButton = UIButton(type: .system)
     private let favoriteBookButton = UIButton(type: .system)
     private let tabsStackView = UIStackView()
@@ -42,29 +41,9 @@ final class MyPageStickyTabView: BaseCollectionViewHeaderFooterView {
     // MARK: - Actions
     
     @objc private func tabButtonTapped(_ sender: UIButton) {
-        guard let viewModel = viewModel else { return }
         let selectedTabIndex = sender.tag
-        viewModel.input.tabSelected(selectedTabIndex)
         feedbackGenerator.impactOccurred()
         delegate?.didSelectTab(index: selectedTabIndex)
-    }
-    
-    // MARK: - Bind
-    
-    func bind(_ viewModel: MyPageStickyTabViewModel) {
-        self.viewModel = viewModel
-        
-        viewModel.output.currentTabIndex.subscribe { [weak self] index in
-            self?.updateTabSelection(to: index, animated: true)
-        }
-        
-        viewModel.output.finishedBookCount.subscribe { [weak self] count in
-            self?.finishedBookButton.setTitle("읽은 책 \(count)", for: .normal)
-        }
-        
-        viewModel.output.favoriteBookCount.subscribe { [weak self] count in
-            self?.favoriteBookButton.setTitle("찜한 도서 \(count)", for: .normal)
-        }
     }
     
     // MARK: - Helpers
@@ -94,12 +73,14 @@ final class MyPageStickyTabView: BaseCollectionViewHeaderFooterView {
     
     override func setViews() {
         finishedBookButton.do {
+            $0.setTitle("읽은 책", for: .normal)
             $0.setTitleColor(.black, for: .normal)
             $0.tag = 0
             $0.addTarget(self, action: #selector(tabButtonTapped), for: .touchUpInside)
         }
         
         favoriteBookButton.do {
+            $0.setTitle("찜한 책", for: .normal)
             $0.setTitleColor(.lightGray, for: .normal)
             $0.tag = 1
             $0.addTarget(self, action: #selector(tabButtonTapped), for: .touchUpInside)

@@ -12,8 +12,9 @@ final class MyViewController: BaseViewController {
     // MARK: - Properties
     
     private let profileInfoViewModel = ProfileInfoViewModel()
-    private let myPageStickyTabViewModel = MyPageStickyTabViewModel()
     private let myBooksViewModel = MyBooksViewModel()
+
+    private let viewModel = MyPageViewModel()
 
     private let collectionView: UICollectionView = {
         let layout = StickyHeaderFlowLayout()
@@ -29,7 +30,6 @@ final class MyViewController: BaseViewController {
         
         registerCell()
         setDelegate()
-        updateBooksCount()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,17 +56,7 @@ final class MyViewController: BaseViewController {
         
         navigationController?.pushViewController(settingVC, animated: true)
     }
-    
-    // MARK: - Bind
-    
-    private func updateBooksCount() {
-        let finishedBooksCount = myBooksViewModel.finishedBooks.value.count
-        let favoriteBooksCount = myBooksViewModel.favoriteBooks.value.count
-        
-        myPageStickyTabViewModel.updateFinishedBookCount(finishedBooksCount)
-        myPageStickyTabViewModel.updateFavoriteBookCount(favoriteBooksCount)
-    }
-    
+
     // MARK: - Set UI
     
     override func setNavigationBar() {
@@ -152,12 +142,10 @@ extension MyViewController: UICollectionViewDataSource {
         numberOfItemsInSection section: Int
     ) -> Int {
         guard section == 1 else { return 0 }
-        
-        let viewModelOutput = myPageStickyTabViewModel.output
-        
-        switch viewModelOutput.currentTabIndex.value {
-        case 0: return viewModelOutput.finishedBookCount.value
-        case 1: return viewModelOutput.favoriteBookCount.value
+
+        switch viewModel.selectedTab.value {
+        case 0: return 10
+        case 1: return 5
         default: return 0
         }
     }
@@ -168,7 +156,7 @@ extension MyViewController: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         guard indexPath.section == 1 else { return UICollectionViewCell() }
         
-        if myPageStickyTabViewModel.output.currentTabIndex.value == 0 {
+        if viewModel.selectedTab.value == 0 {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: FinishedBookCell.identifier,
                 for: indexPath
@@ -179,7 +167,6 @@ extension MyViewController: UICollectionViewDataSource {
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.cornerRadius = 10
-            cell.bind(with: myBooksViewModel.finishedBooks.value[indexPath.item])
             
             return cell
         } else {
@@ -193,7 +180,6 @@ extension MyViewController: UICollectionViewDataSource {
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
             cell.layer.cornerRadius = 10
-            cell.bind(with: myBooksViewModel.favoriteBooks.value[indexPath.item])
             
             return cell
         }
@@ -214,8 +200,6 @@ extension MyViewController: UICollectionViewDataSource {
                     return UICollectionReusableView()
                 }
                 
-                profileInfoView.bind(profileInfoViewModel)
-                
                 return profileInfoView
             } else {
                 guard let myPageStickyTabView = collectionView.dequeueReusableSupplementaryView(
@@ -227,9 +211,8 @@ extension MyViewController: UICollectionViewDataSource {
                 }
                 
                 myPageStickyTabView.delegate = self
-                myPageStickyTabView.bind(myPageStickyTabViewModel)
                 myPageStickyTabView.setSelectedTab(
-                    index: myPageStickyTabViewModel.output.currentTabIndex.value
+                    index: viewModel.selectedTab.value
                 )
                 
                 return myPageStickyTabView
@@ -249,7 +232,7 @@ extension MyViewController: UICollectionViewDelegate {
 extension MyViewController: MyPageStickyTabViewDelegate {
     
     func didSelectTab(index: Int) {
-        myPageStickyTabViewModel.input.tabSelected(index)
+        viewModel.send(action: .selectTab(index: index))
         collectionView.reloadData()
     }
 }

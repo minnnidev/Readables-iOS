@@ -10,8 +10,7 @@ import UIKit
 final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - Properties
-    
-    private var viewModel: ProfileInfoViewModel!
+
     let profileImageView = UIImageView()
     let nameLabel = UILabel()
     let genderAndAgeLabel = UILabel()
@@ -37,11 +36,11 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     // MARK: - Actions
     
     @objc private func addFinishedBookButtonTapped() {
-        viewModel.input.addFinishedBookButtonTap()
+        // TODO:
     }
     
     @objc private func editLibraryButtonTapped() {
-        viewModel.input.editLibraryButtonTap()
+        // TODO: 
     }
     
     @objc private func imageViewTapped() {
@@ -72,25 +71,24 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - Bind
     
-    func bind(_ viewModel: ProfileInfoViewModel) {
-        self.viewModel = viewModel
+    func bind() {
         
-        viewModel.output.profileImage.subscribe { [weak self] image in
-            self?.profileImageView.image = image
-        }
-        
-        viewModel.output.name.subscribe { [weak self] name in
-            self?.nameLabel.text = name
-        }
-        
-        viewModel.output.genderAgeText.subscribe { [weak self] text in
-            self?.genderAndAgeLabel.text = text
-        }
-        
-        viewModel.output.addedTexts.subscribe { [weak self] texts in
-            self?.displayAddedTexts(texts)
-            self?.invalidateCollectionViewLayout()
-        }
+//        viewModel.output.profileImage.subscribe { [weak self] image in
+//            self?.profileImageView.image = image
+//        }
+//        
+//        viewModel.output.name.subscribe { [weak self] name in
+//            self?.nameLabel.text = name
+//        }
+//        
+//        viewModel.output.genderAgeText.subscribe { [weak self] text in
+//            self?.genderAndAgeLabel.text = text
+//        }
+//        
+//        viewModel.output.addedTexts.subscribe { [weak self] texts in
+//            self?.displayAddedTexts(texts)
+//            self?.invalidateCollectionViewLayout()
+//        }
     }
     
     // MARK: - Helpers
@@ -127,6 +125,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         }
         
         nameLabel.do {
+            $0.text = "애벌레"
             $0.font = .systemFont(ofSize: 25, weight: .bold)
             $0.numberOfLines = 1
             $0.lineBreakMode = .byTruncatingTail
@@ -135,6 +134,7 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         }
         
         genderAndAgeLabel.do {
+            $0.text = "남"
             $0.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             $0.font = .systemFont(ofSize: 15, weight: .medium)
             $0.numberOfLines = 1

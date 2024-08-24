@@ -140,6 +140,7 @@
 		AB5D35652C7797370028995C /* UserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35642C7797370028995C /* UserResponseDTO.swift */; };
 		AB5D35692C77978D0028995C /* DibsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35682C77978D0028995C /* DibsResponseDTO.swift */; };
 		AB6C19CD2C79A0ED00BF844C /* BookRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C19CC2C79A0ED00BF844C /* BookRequestDTO.swift */; };
+		AB6C19CF2C79A90900BF844C /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C19CE2C79A90900BF844C /* MyPageViewModel.swift */; };
 		AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205542C6E661B0014C5A5 /* GenreTarget.swift */; };
 		AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8205562C6E66240014C5A5 /* GenreService.swift */; };
 		AB82055C2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */; };
@@ -323,6 +324,7 @@
 		AB5D35642C7797370028995C /* UserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseDTO.swift; sourceTree = "<group>"; };
 		AB5D35682C77978D0028995C /* DibsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DibsResponseDTO.swift; sourceTree = "<group>"; };
 		AB6C19CC2C79A0ED00BF844C /* BookRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRequestDTO.swift; sourceTree = "<group>"; };
+		AB6C19CE2C79A90900BF844C /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		AB8205542C6E661B0014C5A5 /* GenreTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTarget.swift; sourceTree = "<group>"; };
 		AB8205562C6E66240014C5A5 /* GenreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreService.swift; sourceTree = "<group>"; };
 		AB82055B2C6E66BD0014C5A5 /* GenreTrendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreTrendRequestDTO.swift; path = BookTalk/Sources/DTO/Genre/Request/GenreTrendRequestDTO.swift; sourceTree = SOURCE_ROOT; };
@@ -1043,6 +1045,7 @@
 				054FA18F2C748DA70007D9C9 /* MyPageStickyTabViewModel.swift */,
 				058B77BD2C785BE100A1110B /* MyBooksViewModel.swift */,
 				AB4CBA7A2C6E0755009A2AB6 /* SettingViewModel.swift */,
+				AB6C19CE2C79A90900BF844C /* MyPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1660,6 +1663,7 @@
 				ABAAFDAF2C76FD5E00FDA084 /* SearchResponseDTO.swift in Sources */,
 				054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
+				AB6C19CF2C79A90900BF844C /* MyPageViewModel.swift in Sources */,
 				AB9C5D6C2C78C1F900CE44AF /* LoginRequestDTO.swift in Sources */,
 				AB4CBA602C6BB0E9009A2AB6 /* TargetType.swift in Sources */,
 				AB07848B2C75A89E0017812F /* ISBNRequestDTO.swift in Sources */,
