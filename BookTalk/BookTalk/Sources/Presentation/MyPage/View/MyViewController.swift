@@ -8,11 +8,8 @@
 import UIKit
 
 final class MyViewController: BaseViewController {
-    
+
     // MARK: - Properties
-    
-    private let profileInfoViewModel = ProfileInfoViewModel()
-    private let myBooksViewModel = MyBooksViewModel()
 
     private let viewModel = MyPageViewModel()
 
@@ -125,7 +122,6 @@ final class MyViewController: BaseViewController {
     private func setDelegate() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        profileInfoViewModel.delegate = self
     }
 }
 
@@ -199,7 +195,9 @@ extension MyViewController: UICollectionViewDataSource {
                 ) as? ProfileInfoView else {
                     return UICollectionReusableView()
                 }
-                
+
+                profileInfoView.delegate = self
+
                 return profileInfoView
             } else {
                 guard let myPageStickyTabView = collectionView.dequeueReusableSupplementaryView(
@@ -239,8 +237,8 @@ extension MyViewController: MyPageStickyTabViewDelegate {
 
 // MARK: - ProfileInfoViewModelDelegate
 
-extension MyViewController: ProfileInfoViewModelDelegate {
-    
+extension MyViewController: ProfileInfoViewDelegate {
+
     func didTapAddFinishedBookButton() {
         let viewModel = AddBookViewModel()
         let addBookVC = AddBookViewController(viewModel: viewModel)

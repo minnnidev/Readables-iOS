@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ProfileInfoViewDelegate: AnyObject {
+    func didTapAddFinishedBookButton()
+    func didTapEditLibraryButton()
+}
+
 final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - Properties
@@ -19,7 +24,9 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     private let addFinishedBookButton = UIButton(type: .system)
     private let editLibraryButton = UIButton(type: .system)
     private let profileBottomButtons = UIStackView()
-    
+
+    weak var delegate: ProfileInfoViewDelegate?
+
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -36,11 +43,11 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     // MARK: - Actions
     
     @objc private func addFinishedBookButtonTapped() {
-        // TODO:
+        delegate?.didTapAddFinishedBookButton()
     }
     
     @objc private func editLibraryButtonTapped() {
-        // TODO: 
+        delegate?.didTapEditLibraryButton()
     }
     
     @objc private func imageViewTapped() {
