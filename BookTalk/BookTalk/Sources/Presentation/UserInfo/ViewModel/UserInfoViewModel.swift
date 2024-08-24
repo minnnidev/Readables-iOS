@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct RegistrationViewModel {
+struct UserInfoViewModel {
     
     let nickname = Observable<String>("")
     let selectedGender = Observable<GenderType?>(nil)

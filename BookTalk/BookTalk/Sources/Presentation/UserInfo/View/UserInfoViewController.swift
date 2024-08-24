@@ -1,5 +1,5 @@
 //
-//  RegistrationViewController.swift
+//  UserInfoViewController.swift
 //  BookTalk
 //
 //  Created by RAFA on 8/22/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class RegistrationViewController: BaseViewController {
-    
+final class UserInfoViewController: BaseViewController {
+
     // MARK: - Properties
     
-    private var viewModel = RegistrationViewModel()
+    private var viewModel = UserInfoViewModel()
     private var isKeyboardAlreadyShown = false
     
     private let addPhotoButton = UIButton(type: .system)
@@ -324,8 +324,8 @@ final class RegistrationViewController: BaseViewController {
 
 // MARK: - UIImagePickerControllerDelegate
 
-extension RegistrationViewController: UIImagePickerControllerDelegate {
-    
+extension UserInfoViewController: UIImagePickerControllerDelegate {
+
     func imagePickerController(
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
@@ -354,8 +354,8 @@ extension RegistrationViewController: UIImagePickerControllerDelegate {
 
 // MARK: - UINavigationControllerDelegate
 
-extension RegistrationViewController: UINavigationControllerDelegate {
-    
+extension UserInfoViewController: UINavigationControllerDelegate {
+
     private func presentImagePickerActionSheet() {
         let actionSheet = UIAlertController(
             title: "사진 선택",
@@ -394,7 +394,7 @@ extension RegistrationViewController: UINavigationControllerDelegate {
 
 // MARK: - UITextFieldDelegate
 
-extension RegistrationViewController: UITextFieldDelegate {
+extension UserInfoViewController: UITextFieldDelegate {
     
     func textField(
         _ textField: UITextField,
@@ -407,7 +407,7 @@ extension RegistrationViewController: UITextFieldDelegate {
 
 // MARK: - Set UI Helpers
 
-private extension RegistrationViewController {
+private extension UserInfoViewController {
 
     func setupTextField(textField: UITextField, placeholder: String? = nil, spacerWidth: CGFloat) {
         textField.do {

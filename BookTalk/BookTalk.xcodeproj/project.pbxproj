@@ -59,8 +59,8 @@
 		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
 		058B77B72C78581000A1110B /* FinishedBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B77B62C78581000A1110B /* FinishedBook.swift */; };
 		058B77BC2C7858FF00A1110B /* FavoriteBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B77BB2C7858FF00A1110B /* FavoriteBook.swift */; };
-		05CB069C2C7699E100673947 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069B2C7699E100673947 /* RegistrationViewModel.swift */; };
-		05CB069E2C769A1700673947 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069D2C769A1700673947 /* RegistrationViewController.swift */; };
+		05CB069C2C7699E100673947 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069B2C7699E100673947 /* UserInfoViewModel.swift */; };
+		05CB069E2C769A1700673947 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069D2C769A1700673947 /* UserInfoViewController.swift */; };
 		AB0784812C74F8910017812F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784802C74F8910017812F /* KakaoSDKAuth */; };
 		AB0784832C74F8910017812F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784822C74F8910017812F /* KakaoSDKUser */; };
 		AB0784852C74FA1D0017812F /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0784842C74FA1D0017812F /* OAuthManager.swift */; };
@@ -245,8 +245,8 @@
 		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
 		058B77B62C78581000A1110B /* FinishedBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedBook.swift; sourceTree = "<group>"; };
 		058B77BB2C7858FF00A1110B /* FavoriteBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBook.swift; sourceTree = "<group>"; };
-		05CB069B2C7699E100673947 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
-		05CB069D2C769A1700673947 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		05CB069B2C7699E100673947 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		05CB069D2C769A1700673947 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		AB0784842C74FA1D0017812F /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		AB0784862C74FF2C0017812F /* BookTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookTalk.entitlements; sourceTree = "<group>"; };
 		AB07848A2C75A89E0017812F /* ISBNRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNRequestDTO.swift; sourceTree = "<group>"; };
@@ -662,7 +662,7 @@
 			isa = PBXGroup;
 			children = (
 				054FA16F2C7464120007D9C9 /* Login */,
-				05CB06982C7699CD00673947 /* Registration */,
+				05CB06982C7699CD00673947 /* UserInfo */,
 				056F2FEE2C5B4E3600931302 /* MainTab */,
 				056F30472C60D4E400931302 /* BookDetail */,
 				0545432E2C53725200E64948 /* Home */,
@@ -695,19 +695,19 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
-		05CB06982C7699CD00673947 /* Registration */ = {
+		05CB06982C7699CD00673947 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
 				05CB069A2C7699D900673947 /* View */,
 				05CB06992C7699D400673947 /* ViewModel */,
 			);
-			path = Registration;
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		05CB06992C7699D400673947 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				05CB069B2C7699E100673947 /* RegistrationViewModel.swift */,
+				05CB069B2C7699E100673947 /* UserInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -715,7 +715,7 @@
 		05CB069A2C7699D900673947 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				05CB069D2C769A1700673947 /* RegistrationViewController.swift */,
+				05CB069D2C769A1700673947 /* UserInfoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1717,7 +1717,7 @@
 				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				051155F12C64B08F00230CFE /* ReusableIdentifier.swift in Sources */,
 				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
-				05CB069E2C769A1700673947 /* RegistrationViewController.swift in Sources */,
+				05CB069E2C769A1700673947 /* UserInfoViewController.swift in Sources */,
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */,
 				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
@@ -1737,7 +1737,7 @@
 				AB2E7BFE2C5602A500CE43CB /* Category.swift in Sources */,
 				AB4CBA782C6E037B009A2AB6 /* SettingCell.swift in Sources */,
 				AB8224AC2C7843440082CD30 /* SearchLibraryViewController.swift in Sources */,
-				05CB069C2C7699E100673947 /* RegistrationViewModel.swift in Sources */,
+				05CB069C2C7699E100673947 /* UserInfoViewModel.swift in Sources */,
 				ABB901C42C73980600727875 /* OpenTalkResponseDTO.swift in Sources */,
 				AB9C5D672C78AEFC00CE44AF /* EditLibraryRequestDTO.swift in Sources */,
 				AB6C19CD2C79A0ED00BF844C /* BookRequestDTO.swift in Sources */,
