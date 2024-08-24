@@ -20,10 +20,14 @@ extension UITableView {
             return label
         }()
 
-        backgroundView = messageLabel
+        DispatchQueue.main.async { [weak self] in
+            self?.backgroundView = messageLabel
+        }
     }
 
     func restore() {
-        backgroundView = nil
+        DispatchQueue.main.async { [weak self] in
+            self?.backgroundView = nil
+        }
     }
 }

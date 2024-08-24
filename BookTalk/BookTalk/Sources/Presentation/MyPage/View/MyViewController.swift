@@ -81,8 +81,12 @@ final class MyViewController: BaseViewController {
     }
     
     override func setViews() {
-        collectionView.backgroundColor = .clear
-        collectionView.alwaysBounceVertical = true
+        collectionView.do {
+            $0.backgroundColor = .clear
+            $0.alwaysBounceVertical = true
+            $0.contentInset = .zero
+            $0.showsHorizontalScrollIndicator = false
+        }
     }
     
     override func setConstraints() {
@@ -108,13 +112,8 @@ final class MyViewController: BaseViewController {
             )
             
             $0.register(
-                FinishedBookCell.self,
-                forCellWithReuseIdentifier: FinishedBookCell.identifier
-            )
-            
-            $0.register(
-                FavoriteBookCell.self,
-                forCellWithReuseIdentifier: FavoriteBookCell.identifier
+                BookImageCell.self,
+                forCellWithReuseIdentifier: BookImageCell.identifier
             )
         }
     }
@@ -151,34 +150,15 @@ extension MyViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard indexPath.section == 1 else { return UICollectionViewCell() }
-        
-        if viewModel.selectedTab.value == 0 {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: FinishedBookCell.identifier,
-                for: indexPath
-            ) as? FinishedBookCell else {
-                return UICollectionViewCell()
-            }
-            
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.cornerRadius = 10
-            
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: FavoriteBookCell.identifier,
-                for: indexPath
-            ) as? FavoriteBookCell else {
-                return UICollectionViewCell()
-            }
-            
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGray.cgColor
-            cell.layer.cornerRadius = 10
-            
-            return cell
+
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: BookImageCell.identifier,
+            for: indexPath
+        ) as? BookImageCell else {
+            return UICollectionViewCell()
         }
+
+        return cell
     }
     
     func collectionView(
@@ -324,15 +304,15 @@ private extension MyViewController {
     
     static func createBooksSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(150)
+            widthDimension: .fractionalWidth(1/3),
+            heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
-        
+        item.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
+
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(150)
+            heightDimension: .estimated(180)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -340,12 +320,12 @@ private extension MyViewController {
         section.boundarySupplementaryItems = [createStickyTabHeaderItem()]
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
-            leading: 0,
+            leading: 4,
             bottom: 10,
-            trailing: 0
+            trailing: 4
         )
-        section.interGroupSpacing = 10
-        
+        section.interGroupSpacing = 24
+
         return section
     }
 }
