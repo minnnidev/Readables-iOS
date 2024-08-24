@@ -283,7 +283,11 @@ final class UserInfoViewController: BaseViewController {
             $0.datePickerMode = .date
             $0.preferredDatePickerStyle = .wheels
             $0.locale = .init(identifier: "ko-KR")
-            $0.maximumDate = Date()
+            $0.maximumDate = Calendar.current.date(
+                byAdding: .day,
+                value: -1,
+                to: Date()
+            )
         }
         
         signUpButton.do {
