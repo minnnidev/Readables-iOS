@@ -32,7 +32,7 @@ final class OpenTalkViewController: BaseViewController {
     }
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -167,15 +167,17 @@ final class OpenTalkViewController: BaseViewController {
          }
 
          viewModel.isLoading.subscribe { [weak self] isLoading in
-             guard let self = self else { return }
+             DispatchQueue.main.async { [weak self] in
+                 guard let self = self else { return }
 
-             if isLoading {
-                 if !refreshControl.isRefreshing {
-                     indicatorView.startAnimating()
+                 if isLoading {
+                     if !refreshControl.isRefreshing {
+                         indicatorView.startAnimating()
+                     }
+                 } else {
+                     refreshControl.endRefreshing()
+                     indicatorView.stopAnimating()
                  }
-             } else {
-                 refreshControl.endRefreshing()
-                 indicatorView.stopAnimating()
              }
          }
      }
@@ -243,7 +245,7 @@ extension OpenTalkViewController: UICollectionViewDataSource {
             let openTalk = viewModel.openTalks.value[indexPath.item]
             cell.bind(
                 with: Book(
-                    isbn: "",
+                    isbn: openTalk.isbn,
                     imageURL: openTalk.bookImageURL,
                     title: openTalk.bookName
                 )
@@ -280,7 +282,8 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == pageCollectionView {
             viewModel.send(action: .setPageType(OpenTalkPageType.allCases[indexPath.item]))
         } else {
-            let viewModel = ChatViewModel()
+            let book = viewModel.openTalks.value[indexPath.item]
+            let viewModel = ChatViewModel(isbn: book.isbn)
             let chattingVC = ChatViewController(viewModel: viewModel)
             chattingVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(chattingVC, animated: true)

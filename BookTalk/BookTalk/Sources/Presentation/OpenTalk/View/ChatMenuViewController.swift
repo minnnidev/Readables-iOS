@@ -41,7 +41,6 @@ final class ChatMenuViewController: BaseViewController {
     // MARK: - UI Setup
 
     override func setNavigationBar() {
-        navigationItem.title = "책 제목"
         navigationItem.backButtonTitle = ""
     }
 

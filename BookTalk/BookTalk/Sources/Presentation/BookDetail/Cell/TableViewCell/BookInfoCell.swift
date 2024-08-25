@@ -9,6 +9,10 @@ import UIKit
 
 import Kingfisher
 
+protocol BookInfoCellDelegate: AnyObject {
+    func openTalkButtonDidTapped()
+}
+
 final class BookInfoCell: BaseTableViewCell {
     
     // MARK: - Properties
@@ -23,7 +27,9 @@ final class BookInfoCell: BaseTableViewCell {
     private let bookInfoStackView = UIStackView()
     private let joinOpenTalkButton = UIButton(type: .system)
     private let markAsReadButton = UIButton(type: .system)
-    
+
+    weak var delegate: BookInfoCellDelegate?
+
     // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -46,6 +52,12 @@ final class BookInfoCell: BaseTableViewCell {
         markAsReadButton.addTarget(
             self,
             action: #selector(toggleMarkAsReadButton),
+            for: .touchUpInside
+        )
+
+        joinOpenTalkButton.addTarget(
+            self,
+            action: #selector(openTalkButtonDidTapped),
             for: .touchUpInside
         )
     }
@@ -219,5 +231,9 @@ final class BookInfoCell: BaseTableViewCell {
             $0.bottom.equalTo(-15)
             $0.height.equalTo(30)
         }
+    }
+
+    @objc private func openTalkButtonDidTapped() {
+        delegate?.openTalkButtonDidTapped()
     }
 }

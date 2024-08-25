@@ -12,9 +12,9 @@ final class OpenTalkViewModel {
     // MARK: - Properties
 
     var selectedPageType = OpenTalkPageType.hot
-    var hotOpenTalks = [OpenTalkModel]()
-    var favoriteOpenTalks = [OpenTalkModel]()
-    var openTalks = Observable<[OpenTalkModel]>([])
+    var hotOpenTalks = [OpenTalkBookModel]()
+    var favoriteOpenTalks = [OpenTalkBookModel]()
+    var openTalks = Observable<[OpenTalkBookModel]>([])
     var isLoading = Observable(true)
 
     // MARK: - Helpers
