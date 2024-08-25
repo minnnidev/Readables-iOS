@@ -14,7 +14,7 @@ final class LikedTitleHeaderView: BaseCollectionViewHeaderFooterView {
     override func setViews() {
         titleLabel.do {
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
-            $0.text = "애벌레님이 찜한 책" // TODO: 이름 변경
+            $0.text = "\(UserData.shared.getUser()?.nickname ?? "알 수 없음")님이 찜한 책" 
             $0.textColor = .black
         }
     }
