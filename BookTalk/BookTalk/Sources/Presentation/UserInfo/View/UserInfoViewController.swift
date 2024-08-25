@@ -11,7 +11,6 @@ final class UserInfoViewController: BaseViewController {
 
     // MARK: - Properties
     
-    private let addPhotoButton = UIButton(type: .system)
     private let nicknameTextField = UITextField()
     private let maleButton = UIButton(type: .system)
     private let femaleButton = UIButton(type: .system)
@@ -55,10 +54,6 @@ final class UserInfoViewController: BaseViewController {
     }
     
     // MARK: - Actions
-    
-    @objc private func addPhotoButtonTapped() {
-        presentImagePickerActionSheet()
-    }
     
     @objc private func nicknameChanged() {
         viewModel.updateNickname(nicknameTextField.text ?? "")
@@ -117,11 +112,6 @@ final class UserInfoViewController: BaseViewController {
     }
     
     private func addTargets() {
-        addPhotoButton.addTarget(
-            self,
-            action: #selector(addPhotoButtonTapped),
-            for: .touchUpInside
-        )
         nicknameTextField.addTarget(
             self,
             action: #selector(nicknameChanged),
@@ -241,21 +231,6 @@ final class UserInfoViewController: BaseViewController {
     override func setViews() {
         view.backgroundColor = .white
         
-        addPhotoButton.do {
-            $0.setImage(
-                UIImage(systemName: "plus")?
-                    .withTintColor(.gray100, renderingMode: .alwaysOriginal)
-                    .withConfiguration(
-                        UIImage.SymbolConfiguration(pointSize: 20, weight: .light)
-                    ),
-                for: .normal
-            )
-            $0.layer.cornerRadius = 150 / 2
-            $0.layer.masksToBounds = true
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray100.cgColor
-        }
-        
         setupTextField(
             textField: nicknameTextField,
             placeholder: "닉네임 (한글 2자 이상, 영어 3자 이상)",
@@ -315,14 +290,7 @@ final class UserInfoViewController: BaseViewController {
     }
     
     override func setConstraints() {
-        [addPhotoButton,
-         credentialsStackView].forEach { view.addSubview($0) }
-        
-        addPhotoButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            $0.size.equalTo(150)
-        }
+        [credentialsStackView].forEach { view.addSubview($0) }
         
         nicknameTextField.snp.makeConstraints {
             $0.height.equalTo(50)
@@ -333,10 +301,10 @@ final class UserInfoViewController: BaseViewController {
         }
         
         credentialsStackView.snp.makeConstraints {
-            $0.centerX.equalTo(addPhotoButton)
-            $0.top.lessThanOrEqualTo(addPhotoButton.snp.bottom).offset(50)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
             $0.left.equalTo(10)
-            $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-20)
+            $0.bottom.greaterThanOrEqualTo(view.keyboardLayoutGuide.snp.top).offset(-20)
         }
         
         birthTextField.snp.makeConstraints {
@@ -346,76 +314,6 @@ final class UserInfoViewController: BaseViewController {
         signUpButton.snp.makeConstraints {
             $0.height.equalTo(50)
         }
-    }
-}
-
-// MARK: - UIImagePickerControllerDelegate
-
-extension UserInfoViewController: UIImagePickerControllerDelegate {
-
-    func imagePickerController(
-        _ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
-    ) {
-        if let editedImage = info[.editedImage] as? UIImage {
-            addPhotoButton.setImage(
-                editedImage.withRenderingMode(.alwaysOriginal),
-                for: .normal
-            )
-        } else if let originalImage = info[.originalImage] as? UIImage {
-            addPhotoButton.setImage(
-                originalImage.withRenderingMode(.alwaysOriginal),
-                for: .normal
-            )
-        }
-        
-        addPhotoButton.layer.borderColor = UIColor.clear.cgColor
-        addPhotoButton.contentMode = .scaleAspectFill
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-// MARK: - UINavigationControllerDelegate
-
-extension UserInfoViewController: UINavigationControllerDelegate {
-
-    private func presentImagePickerActionSheet() {
-        let actionSheet = UIAlertController(
-            title: "사진 선택",
-            message: "프로필 사진을 선택하세요.",
-            preferredStyle: .actionSheet
-        )
-        
-        let cameraAction = UIAlertAction(title: "카메라", style: .default) { _ in
-            self.presentImagePicker(sourceType: .camera)
-        }
-        
-        let libraryAction = UIAlertAction(title: "사진 앨범", style: .default) { _ in
-            self.presentImagePicker(sourceType: .photoLibrary)
-        }
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        actionSheet.addAction(cameraAction)
-        actionSheet.addAction(libraryAction)
-        actionSheet.addAction(cancelAction)
-        
-        present(actionSheet, animated: true, completion: nil)
-    }
-    
-    private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
-        guard UIImagePickerController.isSourceTypeAvailable(sourceType) else { return }
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        
-        present(imagePicker, animated: true, completion: nil)
     }
 }
 
