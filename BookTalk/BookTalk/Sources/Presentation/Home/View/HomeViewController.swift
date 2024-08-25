@@ -155,7 +155,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.bind(keywords: viewModel.keywordOb.value.map { $0.keyword })
             return cell
 
-        case .monthRecommend, .ageRecommend, .popularLoan:
+        case .weekRecommendation, .ageRecommend, .popularLoan:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
             cell.bind(.init(headerTitle: "하이",
