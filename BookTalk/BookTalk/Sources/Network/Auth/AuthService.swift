@@ -52,4 +52,14 @@ struct AuthService {
         KeychainManager.shared.delete(key: TokenKey.accessToken)
         KeychainManager.shared.delete(key: TokenKey.refreshToken)
     }
+
+    static func reissueToken(with refreshToken: String) async throws -> Tokens {
+        let params: ReissueTokenRequestDTO = .init(refreshToken: refreshToken)
+
+        let newTokens: TokenResponseDTO = try await NetworkService.shared.request(
+            target: AuthTarget.reissueToken(params: params)
+        )
+
+        return newTokens.toModel()
+    }
 }

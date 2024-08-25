@@ -41,6 +41,35 @@ final class ServerRequestInterceptor: RequestInterceptor {
         dueTo error: any Error,
         completion: @escaping (RetryResult) -> Void
     ) {
-        // TODO: JWT Token 갱신 로직 추가 -> 갱신 실패 시 로그아웃
+        // TODO: status code 수정
+        guard let response = request.task?.response as? HTTPURLResponse,
+              response.statusCode == 401 else {
+            completion(.doNotRetryWithError(error))
+            return
+        }
+
+        guard let _ = KeychainManager.shared.read(key: TokenKey.accessToken),
+              let refreshToken = KeychainManager.shared.read(key: TokenKey.refreshToken) else {
+            return
+        }
+
+        Task {
+            do {
+                // 토큰 재발급 성공 시, 재발급 받은 토큰으로 통신 재시도
+                let newTokens = try await AuthService.reissueToken(with: refreshToken)
+
+                KeychainManager.shared.save(key: TokenKey.accessToken, token: newTokens.accessToken)
+                KeychainManager.shared.save(key: TokenKey.refreshToken, token: newTokens.refreshToken)
+
+                completion(.retry)
+            } catch let error as NetworkError {
+                // 재발급 불가 시, 로그아웃
+                // TODO: - user default 삭제
+                UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
+                NotificationCenter.default.post(name: .authStateChanged, object: nil)
+
+                completion(.doNotRetryWithError(error))
+            }
+        }
     }
 }
