@@ -13,6 +13,7 @@ final class AddBookViewModel {
         case loadFavoriteBooks
         case loadResult(query: String)
         case loadMoreResult(query: String)
+        case addToReadBooks(book: Book)
     }
 
     // MARK: - Properties
@@ -21,6 +22,7 @@ final class AddBookViewModel {
     private(set) var searchText = Observable("")
     private(set) var loadState = Observable(LoadState.initial)
     private(set) var hasMoreResult = Observable(true)
+    private(set) var addBookSucceed = Observable(false)
 
     private var currentPage = 1
     private var pageSize = 50
@@ -67,6 +69,19 @@ final class AddBookViewModel {
             loadResults(query: query, pageNum: currentPage, pageSize: pageSize)
 
             return
+
+        case let .addToReadBooks(book):
+            Task {
+                do {
+                    try await BookService.postReadBook(of: book)
+
+                    await MainActor.run {
+                        addBookSucceed.value = true
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 

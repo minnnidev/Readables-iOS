@@ -145,6 +145,12 @@ final class AddBookViewController: BaseViewController {
                 self.resultCollectionView.collectionViewLayout.invalidateLayout(with: context)
             }
         }
+
+        viewModel.addBookSucceed.subscribe { [weak self] isSucceed in
+            guard isSucceed else { return }
+
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -176,8 +182,8 @@ extension AddBookViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        // TODO: 읽은 책 추가 API 호출 후 pop
-        navigationController?.popViewController(animated: true)
+        let book = viewModel.books.value[indexPath.item]
+        viewModel.send(action: .addToReadBooks(book: book))
     }
 }
 

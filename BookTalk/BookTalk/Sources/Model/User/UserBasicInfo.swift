@@ -10,6 +10,7 @@ import Foundation
 struct UserInfo {
     let userInfo: UserBasicInfo
     let dibs: [Book]
+    let readBooks: [Book]
 }
 
 struct UserBasicInfo: Codable {
