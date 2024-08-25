@@ -10,28 +10,17 @@ import UIKit
 final class OtherChatBubbleCell: BaseTableViewCell {
 
     // MARK: - Properties
-
-    private let profileImageView = UIImageView()
+    
     private let nicknameLabel = UILabel()
     private let chatMessageLabel = UILabel()
     private let bubbleView = UIView()
 
     // MARK: - UI Setup
 
-    override func layoutSubviews() {
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-    }
-
     override func setViews() {
         selectionStyle = .none
 
         backgroundColor = .clear
-
-        profileImageView.do {
-            $0.backgroundColor = .gray100
-            $0.layer.masksToBounds = false
-            $0.clipsToBounds = true
-        }
 
         nicknameLabel.do {
             $0.font = .systemFont(ofSize: 13, weight: .regular)
@@ -52,21 +41,15 @@ final class OtherChatBubbleCell: BaseTableViewCell {
     }
 
     override func setConstraints() {
-        [profileImageView, nicknameLabel, bubbleView].forEach {
+        [nicknameLabel, bubbleView].forEach {
             contentView.addSubview($0)
         }
 
         bubbleView.addSubview(chatMessageLabel)
 
-        profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(12)
-            $0.leading.equalToSuperview().offset(16)
-            $0.width.height.equalTo(40)
-        }
-
         nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView).offset(4)
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(12)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(16)
+            $0.leading.equalTo(16)
         }
 
         bubbleView.snp.makeConstraints {

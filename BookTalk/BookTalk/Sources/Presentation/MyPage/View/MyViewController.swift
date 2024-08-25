@@ -301,7 +301,7 @@ private extension MyViewController {
     static func createProfileHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(270)
+            heightDimension: .estimated(150)
         )
         
         return NSCollectionLayoutBoundarySupplementaryItem(
@@ -320,7 +320,7 @@ private extension MyViewController {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(270)
+            heightDimension: .estimated(150)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         

@@ -15,8 +15,7 @@ protocol ProfileInfoViewDelegate: AnyObject {
 final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     
     // MARK: - Properties
-
-    private let profileImageView = UIImageView()
+    
     private let nameLabel = UILabel()
     private let genderAndAgeLabel = UILabel()
     private let userInfoStackView = UIStackView()
@@ -33,7 +32,6 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         super.init(frame: frame)
         
         addTargets()
-        addGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -50,14 +48,6 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         delegate?.didTapEditLibraryButton()
     }
     
-    @objc private func imageViewTapped() {
-        let fullScreen = FullScreenViewController()
-        fullScreen.modalTransitionStyle = .crossDissolve
-        fullScreen.modalPresentationStyle = .overFullScreen
-        fullScreen.image = profileImageView.image
-        window?.rootViewController?.present(fullScreen, animated: true)
-    }
-    
     private func addTargets() {
         addFinishedBookButton.addTarget(
             self,
@@ -71,11 +61,6 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         )
     }
     
-    private func addGestureRecognizers() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
-        profileImageView.addGestureRecognizer(tapGesture)
-    }
-    
     // MARK: - Bind
     
     func bind(with userInfo: UserBasicInfo?) {
@@ -83,12 +68,6 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
         
         nameLabel.text = userInfo.nickname
         genderAndAgeLabel.text = "\(userInfo.gender.koreanTitle)/\(userInfo.birth.toKoreanAge())"
-
-        if let url = URL(string: userInfo.profileImage) {
-            profileImageView.kf.setImage(with: url)
-        } else {
-            profileImageView.image = nil
-        }
     }
     
     // MARK: - Helpers
@@ -115,35 +94,23 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     // MARK: - Set UI
     
     override func setViews() {
-        profileImageView.do {
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 180 / 2
-            $0.backgroundColor = .gray100
-            $0.tintColor = .white
-            $0.contentMode = .scaleAspectFill
-            $0.isUserInteractionEnabled = true
-        }
-        
         nameLabel.do {
-            $0.font = .systemFont(ofSize: 23, weight: .bold)
-            $0.numberOfLines = 1
-            $0.lineBreakMode = .byTruncatingTail
-            $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
-            $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            $0.font = .systemFont(ofSize: 30, weight: .bold)
+            $0.numberOfLines = 0
+            $0.textAlignment = .center
         }
         
         genderAndAgeLabel.do {
             $0.textColor = .lightGray
-            $0.font = .systemFont(ofSize: 15, weight: .medium)
+            $0.font = .systemFont(ofSize: 20, weight: .medium)
             $0.numberOfLines = 1
-            $0.setContentHuggingPriority(.required, for: .horizontal)
-            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+            $0.textAlignment = .center
         }
         
         userInfoStackView.do {
             $0.addArrangedSubview(nameLabel)
             $0.addArrangedSubview(genderAndAgeLabel)
-            $0.axis = .horizontal
+            $0.axis = .vertical
             $0.alignment = .fill
             $0.distribution = .fillProportionally
             $0.spacing = 5
@@ -204,20 +171,14 @@ final class ProfileInfoView: BaseCollectionViewHeaderFooterView {
     }
     
     override func setConstraints() {
-        [profileImageView, userInfoStackView, libraryTextStackView,  profileBottomButtons].forEach {
+        [userInfoStackView, libraryTextStackView,  profileBottomButtons].forEach {
             addSubview($0)
         }
         
-        profileImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(10)
-            $0.size.equalTo(180)
-        }
-        
         userInfoStackView.snp.makeConstraints {
-            $0.centerX.equalTo(profileImageView)
-            $0.top.equalTo(profileImageView.snp.bottom).offset(5)
-            $0.left.greaterThanOrEqualTo(15)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
+            $0.left.equalTo(15)
         }
         
         libraryTextStackView.snp.makeConstraints {
