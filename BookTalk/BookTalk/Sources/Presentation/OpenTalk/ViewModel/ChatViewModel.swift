@@ -33,7 +33,7 @@ final class ChatViewModel {
         case loadChats(openTalkId: Int?)
         case toggleBookmark(isFavorite: Bool)
         case textFieldChanged(text: String)
-        case sendMessage(text: String)
+        case sendMessage(openTalkId: Int?, message: String)
     }
 
     func send(action: Action) {
@@ -82,10 +82,22 @@ final class ChatViewModel {
         case let .textFieldChanged(text):
             message.value = text
 
-        case let .sendMessage(text):
-            // TODO: 채팅 보내기 API 통신
-            print(text)
-            return
+        case let .sendMessage(openTalkId, text):
+            guard let openTalkId = openTalkId else { return }
+
+            Task {
+                do {
+                    let newChat = try await OpenTalkService.sendMessage(of: openTalkId, text: text)
+
+                    await MainActor.run {
+                        chats.value.append(newChat)
+                        message.value.removeAll()
+
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 

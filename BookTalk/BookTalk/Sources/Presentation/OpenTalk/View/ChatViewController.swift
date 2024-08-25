@@ -53,7 +53,6 @@ final class ChatViewController: BaseViewController {
     // MARK: - UI Setup
 
     override func setNavigationBar() {
-        navigationItem.title = "책 제목"
         navigationItem.backButtonTitle = ""
 
         let menuButton = UIBarButtonItem(
@@ -177,6 +176,12 @@ final class ChatViewController: BaseViewController {
             action: #selector(textFieldDidChanged(_:)),
             for: .editingChanged
         )
+
+        sendButton.addTarget(
+            self,
+            action: #selector(sendButtonDidTapped),
+            for: .touchUpInside
+        )
     }
 
     private func bind() {
@@ -206,12 +211,22 @@ final class ChatViewController: BaseViewController {
 
         viewModel.message.subscribe { [weak self] text in
             self?.sendButton.isEnabled = !text.isEmpty
+            self?.messageTextField.text = text
         }
     }
 
     // MARK: - Actions
 
-    @objc func hideKeyboard() {
+    @objc private func sendButtonDidTapped() {
+        viewModel.send(
+            action: .sendMessage(
+                openTalkId: viewModel.openTalkId,
+                message: viewModel.message.value
+            )
+        )
+    }
+
+    @objc private func hideKeyboard() {
         view.endEditing(true)
     }
 

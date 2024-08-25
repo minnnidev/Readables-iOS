@@ -196,6 +196,7 @@
 		ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441B2C6670940073398A /* GoalSectionType.swift */; };
 		ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441D2C66793C0073398A /* DetailGoalViewController.swift */; };
 		ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */; };
+		ABF5D4262C7B4E49004E625C /* ChatSendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF5D4252C7B4E49004E625C /* ChatSendRequestDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -383,6 +384,7 @@
 		ABED441B2C6670940073398A /* GoalSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionType.swift; sourceTree = "<group>"; };
 		ABED441D2C66793C0073398A /* DetailGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewController.swift; sourceTree = "<group>"; };
 		ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewModel.swift; sourceTree = "<group>"; };
+		ABF5D4252C7B4E49004E625C /* ChatSendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendRequestDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1391,6 +1393,7 @@
 				ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */,
 				AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */,
 				AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */,
+				ABF5D4252C7B4E49004E625C /* ChatSendRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1752,6 +1755,7 @@
 				054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */,
 				AB8224B92C7848070082CD30 /* LibraryService.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
+				ABF5D4262C7B4E49004E625C /* ChatSendRequestDTO.swift in Sources */,
 				AB4CBA702C6DEFB8009A2AB6 /* Keychain+.swift in Sources */,
 				AB2E7BF82C53F71B00CE43CB /* AllBooksViewModel.swift in Sources */,
 				AB8224AF2C7847430082CD30 /* LibrarySearchRequestDTO.swift in Sources */,
