@@ -27,13 +27,13 @@ extension UserInfoResponseDTO {
 
 struct UserResponseDTO: Decodable {
     let userId: Int
-    let loginId: String?
     let kakaoId: String?
+    let appleId: String?
     let regDate: String
     let nickname: String?
-    let password: String
     let gender: String?
     let birthDate: String?
+    let profileImageUrl: String?
 }
 
 extension UserResponseDTO {

@@ -20,9 +20,12 @@ extension UIViewController {
             preferredStyle: .alert
         )
 
-        present(alertVC, animated: true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                alertVC.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            present(alertVC, animated: true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                    alertVC.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

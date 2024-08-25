@@ -26,7 +26,7 @@ final class HomeViewController: BaseViewController {
 
         viewModel.fetchSections()
     }
-    
+
     // MARK: - Actions
     
     @objc private func searchIconTapped() {

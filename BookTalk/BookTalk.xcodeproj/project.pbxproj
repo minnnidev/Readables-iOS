@@ -126,6 +126,7 @@
 		AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */; };
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
+		AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54682C2C7B936B0062F899 /* UIViewController+.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
 		AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */; };
 		AB5712FB2C7B49AC007058FC /* ChatListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */; };
@@ -317,6 +318,7 @@
 		AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		AB54682C2C7B936B0062F899 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
 		AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkIdRequestDTO.swift; sourceTree = "<group>"; };
 		AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRequestDTO.swift; sourceTree = "<group>"; };
@@ -879,6 +881,7 @@
 				ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */,
 				AB5D355E2C7767A00028995C /* DateFormatter+.swift */,
 				AB6C19D22C79D3B100BF844C /* String+.swift */,
+				AB54682C2C7B936B0062F899 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1739,6 +1742,7 @@
 				AB4CBA6C2C6DD8E7009A2AB6 /* NetworkService.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
+				AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */,
 				054FA17F2C7465490007D9C9 /* StickyHeaderFlowLayout.swift in Sources */,
 				AB9C5D732C78C4C100CE44AF /* AuthService.swift in Sources */,
 				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,

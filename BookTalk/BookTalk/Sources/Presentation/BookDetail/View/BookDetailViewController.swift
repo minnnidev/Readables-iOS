@@ -96,16 +96,18 @@ final class BookDetailViewController: BaseViewController {
     
     private func bind() {
         viewModel.output.loadState.subscribe { [weak self] state in
-            guard let self = self else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
 
-            switch state {
-            case .loading:
-                indicatorView.startAnimating()
-                tableView.isHidden = true
+                switch state {
+                case .loading:
+                    indicatorView.startAnimating()
+                    tableView.isHidden = true
 
-            case .completed, .initial:
-                indicatorView.stopAnimating()
-                tableView.isHidden = false
+                case .completed, .initial:
+                    indicatorView.stopAnimating()
+                    tableView.isHidden = false
+                }
             }
         }
 

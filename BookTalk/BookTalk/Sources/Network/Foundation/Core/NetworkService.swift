@@ -29,8 +29,11 @@ final class NetworkService: NetworkServiceType {
 
     func request<T: Decodable>(target: TargetType) async throws -> T {
         let dataRequest = createDataRequest(for: target)
-        let response = await dataRequest.serializingData().response
-        
+        let response = await dataRequest
+            .validate(statusCode: 200..<300)
+            .serializingData()
+            .response
+
         guard response.response != nil,
               let data = response.data else {
             throw NetworkError.invalidResponse
