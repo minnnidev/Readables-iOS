@@ -186,25 +186,17 @@ final class ChatViewController: BaseViewController {
             let prevContentHeight = chatTableView.contentSize.height
             chatTableView.reloadData()
 
-            if chats.count > 0 {
+            if viewModel.isInitialLoad && chats.count > 0 {
                 chatTableView.scrollToRow(
                     at: IndexPath(row: chats.count - 1, section: 0),
                     at: .bottom,
                     animated: false
                 )
+            } else {
+                let newContentHeight = chatTableView.contentSize.height
+                let offset = newContentHeight - prevContentHeight
+                chatTableView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
             }
-
-//            if viewModel.isInitialLoad && chats.count > 0 {
-//                chatTableView.scrollToRow(
-//                    at: IndexPath(row: chats.count - 1, section: 0),
-//                    at: .bottom,
-//                    animated: false
-//                )
-//            } else {
-//                let newContentHeight = chatTableView.contentSize.height
-//                let offset = newContentHeight - prevContentHeight
-//                chatTableView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
-//            }
         }
 
         viewModel.isBookmarked.subscribe { [weak self] state in
@@ -306,7 +298,7 @@ extension ChatViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         if scrollView.contentOffset.y < 0 && scrollView.isDragging {
-//            viewModel.send(action: .loadMoreChats)
+            viewModel.send(action: .loadChats(openTalkId: viewModel.openTalkId))
         }
     }
 }

@@ -128,6 +128,7 @@
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
 		AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */; };
+		AB5712FB2C7B49AC007058FC /* ChatListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */; };
 		AB5D35502C7759E60028995C /* EditUserInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D354F2C7759E60028995C /* EditUserInfoRequestDTO.swift */; };
 		AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */; };
 		AB5D35552C775AB20028995C /* UserBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35542C775AB20028995C /* UserBasicInfo.swift */; };
@@ -315,6 +316,7 @@
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
 		AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkIdRequestDTO.swift; sourceTree = "<group>"; };
+		AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRequestDTO.swift; sourceTree = "<group>"; };
 		AB5D354F2C7759E60028995C /* EditUserInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoRequestDTO.swift; sourceTree = "<group>"; };
 		AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		AB5D35542C775AB20028995C /* UserBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBasicInfo.swift; sourceTree = "<group>"; };
@@ -1388,6 +1390,7 @@
 			children = (
 				ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */,
 				AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */,
+				AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1652,6 +1655,7 @@
 				ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */,
 				AB8224A52C7842AD0082CD30 /* RegionType.swift in Sources */,
 				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
+				AB5712FB2C7B49AC007058FC /* ChatListRequestDTO.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */,
 				AB516B602C7A052C00168EEF /* UserData.swift in Sources */,
