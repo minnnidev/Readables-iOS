@@ -39,7 +39,8 @@ struct HomeMockData {
                     publisher: "Publisher 1-1",
                     publicationDate: "2024-01-01",
                     isFavorite: false,
-                    registeredLibraries: []
+                    registeredLibraries: [],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -52,7 +53,8 @@ struct HomeMockData {
                     publisher: "Publisher 2-1",
                     publicationDate: "2024-02-01",
                     isFavorite: false,
-                    registeredLibraries: [Library(name: "가 도서관", isAvailable: true)]
+                    registeredLibraries: [Library(name: "가 도서관", isAvailable: true)],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -68,7 +70,8 @@ struct HomeMockData {
                     registeredLibraries: [
                         Library(name: "가 도서관", isAvailable: true),
                         Library(name: "나 도서관", isAvailable: false)
-                    ]
+                    ],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -85,7 +88,8 @@ struct HomeMockData {
                         Library(name: "가 도서관", isAvailable: false),
                         Library(name: "나 도서관", isAvailable: false),
                         Library(name: "다 도서관", isAvailable: true)
-                    ]
+                    ],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -102,7 +106,8 @@ struct HomeMockData {
                         Library(name: "가 도서관", isAvailable: false),
                         Library(name: "나 도서관", isAvailable: false),
                         Library(name: "다 도서관", isAvailable: false)
-                    ]
+                    ],
+                    isRead: false
                 )
             ]),
             headerTitle: "이번 달 북토크가 추천드리는 책",
@@ -121,7 +126,8 @@ struct HomeMockData {
                     publisher: "Publisher 1-2",
                     publicationDate: "2024-01-02",
                     isFavorite: false,
-                    registeredLibraries: []
+                    registeredLibraries: [],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -134,7 +140,8 @@ struct HomeMockData {
                     publisher: "Publisher 2-2",
                     publicationDate: "2024-02-02",
                     isFavorite: false,
-                    registeredLibraries: [Library(name: "가 도서관", isAvailable: true)]
+                    registeredLibraries: [Library(name: "가 도서관", isAvailable: true)],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -150,7 +157,8 @@ struct HomeMockData {
                     registeredLibraries: [
                         Library(name: "가 도서관", isAvailable: true),
                         Library(name: "나 도서관", isAvailable: false)
-                    ]
+                    ],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -167,7 +175,8 @@ struct HomeMockData {
                         Library(name: "가 도서관", isAvailable: false),
                         Library(name: "나 도서관", isAvailable: false),
                         Library(name: "다 도서관", isAvailable: true)
-                    ]
+                    ],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -184,7 +193,8 @@ struct HomeMockData {
                         Library(name: "가 도서관", isAvailable: false),
                         Library(name: "나 도서관", isAvailable: false),
                         Library(name: "다 도서관", isAvailable: false)
-                    ]
+                    ],
+                    isRead: false
                 )
             ]),
             headerTitle: "OOO님 나이대에서 인기있는 도서",
@@ -203,7 +213,8 @@ struct HomeMockData {
                     publisher: "Publisher 1-3",
                     publicationDate: "2024-01-03",
                     isFavorite: false,
-                    registeredLibraries: []
+                    registeredLibraries: [],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -216,7 +227,8 @@ struct HomeMockData {
                     publisher: "Publisher 2-3",
                     publicationDate: "2024-02-03",
                     isFavorite: false,
-                    registeredLibraries: [Library(name: "가 도서관", isAvailable: true)]
+                    registeredLibraries: [Library(name: "가 도서관", isAvailable: true)],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -232,7 +244,8 @@ struct HomeMockData {
                     registeredLibraries: [
                         Library(name: "가 도서관", isAvailable: true),
                         Library(name: "나 도서관", isAvailable: false)
-                    ]
+                    ],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -249,7 +262,8 @@ struct HomeMockData {
                         Library(name: "가 도서관", isAvailable: false),
                         Library(name: "나 도서관", isAvailable: false),
                         Library(name: "다 도서관", isAvailable: true)
-                    ]
+                    ],
+                    isRead: false
                 ),
                 DetailBookInfo(
                     basicBookInfo: BasicBookInfo(
@@ -266,7 +280,8 @@ struct HomeMockData {
                         Library(name: "가 도서관", isAvailable: false),
                         Library(name: "나 도서관", isAvailable: false),
                         Library(name: "다 도서관", isAvailable: false)
-                    ]
+                    ],
+                    isRead: false
                 )
             ]),
             headerTitle: "대출 급상승 도서 🔥",

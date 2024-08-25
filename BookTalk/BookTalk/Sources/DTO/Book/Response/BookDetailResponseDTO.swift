@@ -15,6 +15,7 @@ struct BookDetailResponseDTO: Codable {
     let recommendResponseDtoList: [RecommendResponseDTO]
     let loanAvailableList: [LoanAvailableDTO]
     let dibs: Bool
+    let favorite: Bool
 }
 
 extension BookDetailResponseDTO {
@@ -31,7 +32,8 @@ extension BookDetailResponseDTO {
             publisher: bookInfoDto.publisher,
             publicationDate: bookInfoDto.publication_year,
             isFavorite: dibs,
-            registeredLibraries: loanAvailableList.map { $0.toModel() }
+            registeredLibraries: loanAvailableList.map { $0.toModel() },
+            isRead: favorite
         )
     }
 }

@@ -49,7 +49,8 @@ extension SearchResponseDTO {
             publisher: publisher,
             publicationDate: publicationYear,
             isFavorite: dibs, 
-            registeredLibraries: .init()
+            registeredLibraries: .init(),
+            isRead: nil
         )
     }
 
