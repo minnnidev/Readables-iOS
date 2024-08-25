@@ -12,3 +12,11 @@ enum HomeSectionType: Equatable {
     case keyword([Keyword])
     case recommendation([DetailBookInfo])
 }
+
+enum HomeSectionKind: CaseIterable {
+    case suggestion
+    case keyword
+    case monthRecommend
+    case ageRecommend
+    case popularLoan
+}
