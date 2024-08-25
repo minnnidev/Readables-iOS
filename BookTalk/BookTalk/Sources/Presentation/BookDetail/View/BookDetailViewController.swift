@@ -48,14 +48,7 @@ final class BookDetailViewController: BaseViewController {
         registerCell()
         setDelegate()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        let bottomInset = view.bounds.height - floatingButton.frame.minY
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
-    }
-    
+
     // MARK: - Actions
     
     @objc private func handleFavoriteButton() {
