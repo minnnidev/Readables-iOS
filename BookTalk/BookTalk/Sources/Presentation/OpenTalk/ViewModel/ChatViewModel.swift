@@ -12,6 +12,7 @@ final class ChatViewModel {
     private(set) var isBookmarked = Observable(false)
     private(set) var chats = Observable<[ChatModel]>([])
     private(set) var message = Observable("")
+    private(set) var sendMessageSucceed = Observable(false)
     private(set) var isInitialLoad = true
 
     private var pageSize = 10
@@ -84,6 +85,7 @@ final class ChatViewModel {
 
         case let .sendMessage(openTalkId, text):
             guard let openTalkId = openTalkId else { return }
+            sendMessageSucceed.value = false
 
             Task {
                 do {
@@ -92,7 +94,7 @@ final class ChatViewModel {
                     await MainActor.run {
                         chats.value.append(newChat)
                         message.value.removeAll()
-
+                        sendMessageSucceed.value = true
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
