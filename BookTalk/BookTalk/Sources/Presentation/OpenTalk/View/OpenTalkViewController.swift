@@ -32,7 +32,13 @@ final class OpenTalkViewController: BaseViewController {
     }
     
     // MARK: - Lifecycle
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,8 +46,6 @@ final class OpenTalkViewController: BaseViewController {
         registerCell()
         bind()
         addTarget()
-
-        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
     }
 
     // MARK: - UI Setup
@@ -101,13 +105,13 @@ final class OpenTalkViewController: BaseViewController {
 
         bookBanner.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(190)
+            $0.height.equalTo(0)
         }
 
         pageCollectionView.snp.makeConstraints {
             $0.top.equalTo(bookBanner.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(50)
+            $0.height.equalTo(60)
         }
 
         bookCollectionView.snp.makeConstraints {

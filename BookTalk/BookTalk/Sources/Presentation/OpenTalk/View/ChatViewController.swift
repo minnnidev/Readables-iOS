@@ -206,7 +206,7 @@ final class ChatViewController: BaseViewController {
 
         viewModel.isBookmarked.subscribe { [weak self] state in
             self?.bookmarkBarButton.image = state ?
-                UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark")
+            UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark")
         }
 
         viewModel.message.subscribe { [weak self] text in
@@ -231,23 +231,26 @@ final class ChatViewController: BaseViewController {
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+            as? NSValue {
+           let keyboardRectangle = keyboardFrame.cgRectValue
 
-            textInputView.snp.updateConstraints {
-                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-keyboardHeight)
-            }
-
-            view.layoutIfNeeded()
+            UIView.animate(
+                withDuration: 0.3,
+                animations: {
+                    self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardRectangle.height)
+                }
+            )
         }
     }
 
     @objc private func keyboardWillHide(notification: NSNotification) {
-        textInputView.snp.updateConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-
-        view.layoutIfNeeded()
+        UIView.animate(
+            withDuration: 0.3,
+            animations: {
+                self.view.transform = .identity
+            }
+        )
     }
 
     @objc private func menuButtonDidTapped() {
