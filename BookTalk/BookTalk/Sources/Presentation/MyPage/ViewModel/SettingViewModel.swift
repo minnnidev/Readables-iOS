@@ -17,12 +17,23 @@ final class SettingViewModel {
     func send(action: Action) {
         switch action {
         case .logout:
-            // TODO: 로그아웃 api
+            Task {
+                do {
+                    try await AuthService.logout()
+
+                    await MainActor.run {
+                        // TODO: 삭제
+                        UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
+                        NotificationCenter.default.post(name: .authStateChanged, object: nil)
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
             return
 
         case .withdraw:
-            // TODO: 탈퇴 api
-            return
+            print("탈퇴 tapped")
         }
     }
 }
