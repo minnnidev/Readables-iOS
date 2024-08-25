@@ -36,7 +36,7 @@ struct UserInfoViewModel {
         let oldUserInfo = UserData.shared.getUser()
         guard let oldUserInfo = oldUserInfo else { return }
 
-        nickname.value = oldUserInfo.nickname
+        nickname.value = oldUserInfo.nickname ?? ""
         selectedGender.value = oldUserInfo.gender
         birthDate.value = oldUserInfo.birth.toDate()
     }
