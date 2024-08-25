@@ -55,7 +55,7 @@ final class ChatViewController: BaseViewController {
     override func setNavigationBar() {
         navigationItem.backButtonTitle = ""
 
-        let menuButton = UIBarButtonItem(
+        let _ = UIBarButtonItem(
             image: UIImage(systemName: "line.3.horizontal"),
             style: .plain,
             target: self,
@@ -69,7 +69,7 @@ final class ChatViewController: BaseViewController {
             action: #selector(bookmarkButtonDidTapped)
         )
 
-        navigationItem.rightBarButtonItems = [menuButton, bookmarkBarButton]
+        navigationItem.rightBarButtonItems = [bookmarkBarButton]
     }
 
     override func setViews() {
