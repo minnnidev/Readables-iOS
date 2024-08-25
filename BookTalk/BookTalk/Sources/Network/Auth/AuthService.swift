@@ -51,9 +51,5 @@ struct AuthService {
 
         KeychainManager.shared.delete(key: TokenKey.accessToken)
         KeychainManager.shared.delete(key: TokenKey.refreshToken)
-
-        // TODO: 삭제
-        UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
-        NotificationCenter.default.post(name: .authStateChanged, object: nil)
     }
 }

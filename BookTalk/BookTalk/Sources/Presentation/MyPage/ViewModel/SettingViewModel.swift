@@ -30,10 +30,21 @@ final class SettingViewModel {
                     print(error.localizedDescription)
                 }
             }
-            return
 
         case .withdraw:
-            print("탈퇴 tapped")
+            Task {
+                do {
+                    try await AuthService.withdraw()
+
+                    await MainActor.run {
+                        // TODO: 삭제
+                        UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
+                        NotificationCenter.default.post(name: .authStateChanged, object: nil)
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }
