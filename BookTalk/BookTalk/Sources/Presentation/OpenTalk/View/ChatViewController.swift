@@ -26,11 +26,11 @@ final class ChatViewController: BaseViewController {
 
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -46,16 +46,17 @@ final class ChatViewController: BaseViewController {
         addTapGesture()
         addTarget()
         bind()
-        
+
         viewModel.send(action: .joinToOpenTalk(isbn: viewModel.isbn))
     }
 
     // MARK: - UI Setup
 
     override func setNavigationBar() {
+        navigationItem.title = "책 제목"
         navigationItem.backButtonTitle = ""
 
-        let _ = UIBarButtonItem(
+        let menuButton = UIBarButtonItem(
             image: UIImage(systemName: "line.3.horizontal"),
             style: .plain,
             target: self,
@@ -69,8 +70,7 @@ final class ChatViewController: BaseViewController {
             action: #selector(bookmarkButtonDidTapped)
         )
 
-        // TODO: 채팅 메뉴 추가
-        navigationItem.rightBarButtonItems = [bookmarkBarButton]
+        navigationItem.rightBarButtonItems = [menuButton, bookmarkBarButton]
     }
 
     override func setViews() {
@@ -111,7 +111,8 @@ final class ChatViewController: BaseViewController {
         }
 
         chatTableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(textInputView.snp.top)
         }
 
         textInputView.snp.makeConstraints {
@@ -136,11 +137,19 @@ final class ChatViewController: BaseViewController {
 
     private func setDelegate() {
         chatTableView.dataSource = self
+        chatTableView.delegate = self
     }
 
     private func registerCell() {
-        chatTableView.register(OtherChatBubbleCell.self, forCellReuseIdentifier: OtherChatBubbleCell.identifier)
-        chatTableView.register(MyChatBubbleCell.self, forCellReuseIdentifier: MyChatBubbleCell.identifier)
+        chatTableView.register(
+            OtherChatBubbleCell.self,
+            forCellReuseIdentifier: OtherChatBubbleCell.identifier
+        )
+
+        chatTableView.register(
+            MyChatBubbleCell.self,
+            forCellReuseIdentifier: MyChatBubbleCell.identifier
+        )
     }
 
     private func setKeyboardNotifications() {
@@ -172,7 +181,30 @@ final class ChatViewController: BaseViewController {
 
     private func bind() {
         viewModel.chats.subscribe { [weak self] chats in
-            self?.chatTableView.reloadData()
+            guard let self = self else { return }
+
+            let prevContentHeight = chatTableView.contentSize.height
+            chatTableView.reloadData()
+
+            if chats.count > 0 {
+                chatTableView.scrollToRow(
+                    at: IndexPath(row: chats.count - 1, section: 0),
+                    at: .bottom,
+                    animated: false
+                )
+            }
+
+//            if viewModel.isInitialLoad && chats.count > 0 {
+//                chatTableView.scrollToRow(
+//                    at: IndexPath(row: chats.count - 1, section: 0),
+//                    at: .bottom,
+//                    animated: false
+//                )
+//            } else {
+//                let newContentHeight = chatTableView.contentSize.height
+//                let offset = newContentHeight - prevContentHeight
+//                chatTableView.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+//            }
         }
 
         viewModel.isBookmarked.subscribe { [weak self] state in
@@ -232,23 +264,20 @@ final class ChatViewController: BaseViewController {
 
 extension ChatViewController: UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         return viewModel.chats.value.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let chat = viewModel.chats.value[indexPath.row]
 
         if chat.isMine {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: OtherChatBubbleCell.identifier,
-                for: indexPath
-            ) as? OtherChatBubbleCell else { return UITableViewCell() }
-
-            cell.bind(with: chat)
-
-            return cell
-        } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: MyChatBubbleCell.identifier,
                 for: indexPath
@@ -257,6 +286,27 @@ extension ChatViewController: UITableViewDataSource {
             cell.bind(with: chat.message)
 
             return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: OtherChatBubbleCell.identifier,
+                for: indexPath
+            ) as? OtherChatBubbleCell else { return UITableViewCell() }
+
+            cell.bind(with: chat)
+
+            return cell
+        }
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension ChatViewController: UITableViewDelegate {
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        if scrollView.contentOffset.y < 0 && scrollView.isDragging {
+//            viewModel.send(action: .loadMoreChats)
         }
     }
 }

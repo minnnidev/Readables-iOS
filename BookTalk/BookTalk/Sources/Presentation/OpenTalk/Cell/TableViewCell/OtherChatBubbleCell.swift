@@ -24,7 +24,7 @@ final class OtherChatBubbleCell: BaseTableViewCell {
 
     override func setViews() {
         selectionStyle = .none
-        
+
         backgroundColor = .clear
 
         profileImageView.do {
@@ -46,6 +46,7 @@ final class OtherChatBubbleCell: BaseTableViewCell {
         chatMessageLabel.do {
             $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.textColor = .black
+            $0.lineBreakMode = .byTruncatingMiddle
             $0.numberOfLines = 0
         }
     }
@@ -72,7 +73,7 @@ final class OtherChatBubbleCell: BaseTableViewCell {
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(8)
             $0.leading.equalTo(nicknameLabel)
             $0.width.lessThanOrEqualTo(250)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-4)
         }
 
         chatMessageLabel.snp.makeConstraints {

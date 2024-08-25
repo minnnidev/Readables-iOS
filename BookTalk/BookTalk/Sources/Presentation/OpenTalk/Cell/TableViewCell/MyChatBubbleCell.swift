@@ -29,6 +29,7 @@ final class MyChatBubbleCell: BaseTableViewCell {
         chatMessageLabel.do {
             $0.font = .systemFont(ofSize: 15, weight: .regular)
             $0.textColor = .black
+            $0.lineBreakMode = .byTruncatingMiddle
             $0.numberOfLines = 0
         }
     }
@@ -44,7 +45,7 @@ final class MyChatBubbleCell: BaseTableViewCell {
             $0.top.equalToSuperview().offset(12)
             $0.trailing.equalToSuperview().offset(-16)
             $0.width.lessThanOrEqualTo(250)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-4)
         }
 
         chatMessageLabel.snp.makeConstraints {

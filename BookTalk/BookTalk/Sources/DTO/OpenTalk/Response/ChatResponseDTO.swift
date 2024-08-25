@@ -19,7 +19,7 @@ extension ChatResponseDTO {
         return .init(
             nickname: nickname ?? "이름 없음", // TODO: 지우기
             message: content,
-            isMine: false // TODO: 수정
+            isMine: nickname == UserData.shared.getUser()?.nickname
         )
     }
 }

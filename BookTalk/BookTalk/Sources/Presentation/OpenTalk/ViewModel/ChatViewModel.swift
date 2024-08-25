@@ -44,6 +44,7 @@ final class ChatViewModel {
                     )
 
                     await MainActor.run {
+                        chats.value = openTalkInfo.chats.reversed()
                         isBookmarked.value = openTalkInfo.isFavorite
                         openTalkId = openTalkInfo.openTalkId
                     }
