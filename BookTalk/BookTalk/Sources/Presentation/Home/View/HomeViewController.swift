@@ -24,7 +24,7 @@ final class HomeViewController: BaseViewController {
         setDelegate()
         bind()
 
-        viewModel.fetchSections()
+        viewModel.send(action: .loadKeyword)
     }
 
     // MARK: - Actions
@@ -45,7 +45,7 @@ final class HomeViewController: BaseViewController {
         
         switch sectionInfo.type {
         case .keyword:
-            viewModel.input.toggleSection(section)
+            viewModel.send(action: .setKeywordExpandState(newState: !viewModel.isKeywordOpened.value))
         case .recommendation:
             print("DEBUG: \(viewModel.output.sections.value[section].headerTitle)")
         default:
@@ -147,7 +147,7 @@ extension HomeViewController: UITableViewDataSource {
         let sectionInfo = viewModel.output.sections.value[section]
         switch sectionInfo.type {
         case .keyword:
-            return sectionInfo.isExpanded ? 1 : 0
+            return viewModel.isKeywordOpened.value ? 1 : 0
         default:
             return 1
         }
@@ -168,6 +168,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.isUserInteractionEnabled = false
             cell.bind("OOO님, 오늘의 추천 도서를 확인해보세요!")
             return cell
+
         case .keyword(let keywords):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: KeywordCell.identifier,
@@ -176,8 +177,9 @@ extension HomeViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.bind(keywords: keywords.map { $0.keyword })
+            cell.bind(keywords: viewModel.keywordOb.value.map { $0.keyword })
             return cell
+
         case .recommendation(let bookInfo):
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: RecommendationBookCell.identifier,
@@ -231,8 +233,9 @@ extension HomeViewController: UITableViewDelegate {
                 return nil
             }
             headerView.delegate = self
-            headerView.bind(sectionInfo)
+            headerView.bind(viewModel.isKeywordOpened.value)
             headerView.section = section
+
             return headerView
         default:
             guard let headerView = tableView.dequeueReusableHeaderFooterView(
@@ -258,7 +261,8 @@ extension HomeViewController: UITableViewDelegate {
         let sectionInfo = viewModel.output.sections.value[indexPath.section]
         switch sectionInfo.type {
         case .suggestion: return UITableView.automaticDimension
-        case .keyword: return sectionInfo.isExpanded ? UITableView.automaticDimension : 0
+        case .keyword: return viewModel.isKeywordOpened.value ?
+            UITableView.automaticDimension : 0
         default: return 208
         }
     }
@@ -288,8 +292,10 @@ extension HomeViewController: KeywordHeaderViewDelegate {
     
     func didTapKeywordHeader(section: Int) {
         tableView.beginUpdates()
-        viewModel.input.toggleSection(section)
-        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+        viewModel.send(
+            action: .setKeywordExpandState(newState: !viewModel.isKeywordOpened.value)
+        )
+        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         tableView.endUpdates()
     }
 }

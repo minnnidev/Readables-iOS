@@ -43,9 +43,7 @@ final class KeywordHeaderView: BaseTableViewHeaderFooterView {
     
     // MARK: - Bind
     
-    func bind(_ section: HomeSection) {
-        titleLabel.text = section.headerTitle
-        isExpanded = section.isExpanded
+    func bind(_ isExpanded: Bool) {
         toggleLabel.text = isExpanded ? "접기" : "펼치기"
     }
     
@@ -62,8 +60,9 @@ final class KeywordHeaderView: BaseTableViewHeaderFooterView {
         contentView.backgroundColor = .white
         
         titleLabel.do {
+            $0.text = "지난 달 키워드 확인하기"
             $0.numberOfLines = 2
-            $0.font = .systemFont(ofSize: 20, weight: .medium)
+            $0.font = .systemFont(ofSize: 18, weight: .medium)
             $0.textAlignment = .left
         }
         
