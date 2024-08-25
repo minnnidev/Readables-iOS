@@ -8,27 +8,49 @@
 import UIKit
 
 final class HomeViewController: BaseViewController {
-    
+
     // MARK: - Properties
-    
-    private let viewModel = HomeViewModel()
+
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    
+
+    private let viewModel = HomeViewModel()
+
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.input.loadBooks()
+
         registerCell()
         setDelegate()
         bind()
 
-        viewModel.fetchSections()
+        viewModel.send(action: .loadBooks)
+    }
+
+    // MARK: - Bind
+
+    private func bind() {
+        viewModel.thisWeekRecommendOb.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.weekRecommendation.rawValue
+            self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+        }
+
+        viewModel.ageTrendOb.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.ageRecommend.rawValue
+            self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+        }
+
+        viewModel.popularLoansOb.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.popularLoan.rawValue
+            self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+        }
     }
 
     // MARK: - Actions
-    
+
     @objc private func searchIconTapped() {
         let viewModel = SearchViewModel()
         let searchVC = SearchViewController(viewModel: viewModel)
@@ -36,99 +58,62 @@ final class HomeViewController: BaseViewController {
 
         navigationController?.pushViewController(searchVC, animated: true)
     }
-    
-    @objc private func headerViewTapped(_ sender: UITapGestureRecognizer) {
-        guard let headerView = sender.view as? BaseTableViewHeaderFooterView else { return }
-        guard let section = headerView.section else { return }
-        
-        let sectionInfo = viewModel.output.sections.value[section]
-        
-        switch sectionInfo.type {
-        case .keyword:
-            viewModel.input.toggleSection(section)
-        case .recommendation:
-            print("DEBUG: \(viewModel.output.sections.value[section].headerTitle)")
-        default:
-            break
-        }
-    }
-    
-    // MARK: - Bind
-    
-    private func bind() {
-        viewModel.output.sections.subscribe { [weak self] _ in
-            self?.tableView.reloadData()
-        }
-    }
-    
+
     // MARK: - Set UI
-    
+
     override func setNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        
+
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
+
         let searchIcon = UIBarButtonItem(
             image: UIImage(systemName: "magnifyingglass"),
             style: .plain,
             target: self,
             action: #selector(searchIconTapped)
         )
-        
+
         navigationItem.rightBarButtonItem = searchIcon
     }
-    
+
     override func setViews() {
         view.addSubview(tableView)
-        
+
         tableView.do {
-            $0.separatorStyle = .none
             $0.backgroundColor = .clear
-            $0.contentInsetAdjustmentBehavior = .never
-            $0.automaticallyAdjustsScrollIndicatorInsets = false
-            $0.estimatedRowHeight = 208
-            $0.estimatedSectionHeaderHeight = 50
-            $0.sectionHeaderHeight = UITableView.automaticDimension
-            $0.rowHeight = UITableView.automaticDimension
-            $0.contentInset = UIEdgeInsets(top: -23, left: 0, bottom: 0, right: 0)
+            $0.showsVerticalScrollIndicator = false
+            $0.separatorInset = .init(top: 0, left: 12, bottom: 0, right: 12)
         }
     }
-    
+
     override func setConstraints() {
         tableView.snp.makeConstraints {
-            $0.centerX.left.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
+
     private func registerCell() {
         tableView.do {
             $0.register(
                 SuggestionCell.self,
                 forCellReuseIdentifier: SuggestionCell.identifier
             )
-            
+
             $0.register(
                 KeywordHeaderView.self,
                 forHeaderFooterViewReuseIdentifier: KeywordHeaderView.identifier
             )
-            
+
             $0.register(KeywordCell.self, forCellReuseIdentifier: KeywordCell.identifier)
-            
+
             $0.register(
-                HomeHeaderView.self,
-                forHeaderFooterViewReuseIdentifier: HomeHeaderView.identifier
-            )
-            
-            $0.register(
-                RecommendationBookCell.self,
-                forCellReuseIdentifier: RecommendationBookCell.identifier
+                BookWithHeaderCell.self,
+                forCellReuseIdentifier: BookWithHeaderCell.identifier
             )
         }
     }
-    
+
     private func setDelegate() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -138,25 +123,29 @@ final class HomeViewController: BaseViewController {
 // MARK: - UITableViewDataSource
 
 extension HomeViewController: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.output.sections.value.count
+        return HomeSectionKind.allCases.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = viewModel.output.sections.value[section]
-        switch sectionInfo.type {
+        let sectionKind = HomeSectionKind.allCases[section]
+
+        switch sectionKind {
         case .keyword:
-            return sectionInfo.isExpanded ? 1 : 0
+            return viewModel.isKeywordOpened.value ? 1 : 0
         default:
             return 1
         }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let sectionInfo = viewModel.output.sections.value[indexPath.section]
-        
-        switch sectionInfo.type {
+
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let sectionKind = HomeSectionKind.allCases[indexPath.section]
+
+        switch sectionKind {
         case .suggestion:
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: SuggestionCell.identifier,
@@ -166,9 +155,12 @@ extension HomeViewController: UITableViewDataSource {
             }
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
-            cell.bind("OOO님, 오늘의 추천 도서를 확인해보세요!")
+            cell.bind(
+                "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님, 오늘의 추천 도서를 확인해보세요!"
+            )
             return cell
-        case .keyword(let keywords):
+
+        case .keyword:
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: KeywordCell.identifier,
                 for: indexPath
@@ -176,18 +168,34 @@ extension HomeViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.bind(keywords: keywords.map { $0.keyword })
+            cell.bind(keywords: viewModel.keywordOb.value.map { $0.keyword })
             return cell
-        case .recommendation(let bookInfo):
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: RecommendationBookCell.identifier,
-                for: indexPath
-            ) as? RecommendationBookCell else {
-                return UITableViewCell()
+
+        case .weekRecommendation, .ageRecommend, .popularLoan:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
+
+            if sectionKind == .weekRecommendation {
+                cell.bind(
+                    .init(
+                        headerTitle: "이번 주 인기 도서를 확인해 보세요",
+                        books: viewModel.thisWeekRecommendOb.value.books
+                    ))
+            } else if sectionKind == .popularLoan {
+                cell.bind(
+                    .init(
+                        headerTitle: "대출 급상승 🔥",
+                        books: viewModel.popularLoansOb.value.books
+                    ))
+            } else if sectionKind == .ageRecommend {
+                cell.bind(
+                    .init(
+                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님 나이대에서 인기 있는 도서",
+                        books: viewModel.ageTrendOb.value.books
+                    ))
             }
-            cell.selectionStyle = .none
-            cell.bind(bookInfo)
+
             cell.delegate = self
+
             return cell
         }
     }
@@ -196,34 +204,14 @@ extension HomeViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sectionInfo = viewModel.output.sections.value[indexPath.section]
-        
-        switch sectionInfo.type {
-        case let .recommendation(bookInfo):
-            let selectedBook = bookInfo[indexPath.row]
-            let detailViewModel = BookDetailViewModel(
-                isbn: selectedBook.basicBookInfo.isbn
-            )
-            let detailVC = BookDetailViewController(viewModel: detailViewModel)
-            detailVC.hidesBottomBarWhenPushed = true
 
-            navigationController?.pushViewController(detailVC, animated: true)
-        default:
-            break
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionInfo = viewModel.output.sections.value[section]
-        
-        switch sectionInfo.type {
-        case .suggestion: return nil
+    func tableView(
+        _ tableView: UITableView,
+        viewForHeaderInSection section: Int
+    ) -> UIView? {
+        let sectionType = HomeSectionKind.allCases[section]
+
+        switch sectionType {
         case .keyword:
             guard let headerView = tableView.dequeueReusableHeaderFooterView(
                 withIdentifier: KeywordHeaderView.identifier
@@ -231,35 +219,52 @@ extension HomeViewController: UITableViewDelegate {
                 return nil
             }
             headerView.delegate = self
-            headerView.bind(sectionInfo)
+            headerView.bind(viewModel.isKeywordOpened.value)
             headerView.section = section
+
             return headerView
+
         default:
-            guard let headerView = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: HomeHeaderView.identifier
-            ) as? HomeHeaderView else {
-                return nil
-            }
-            headerView.bind(with: sectionInfo.headerTitle, section: section)
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(headerViewTapped)
-            )
-            headerView.addGestureRecognizer(tapGesture)
-            return headerView
+            return nil
         }
     }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+
+    func tableView(
+        _ tableView: UITableView,
+        heightForHeaderInSection section: Int
+    ) -> CGFloat {
+        let sectionType = HomeSectionKind.allCases[section]
+
+        switch sectionType {
+        case .keyword:
+            return 60
+        default:
+            return .zero
+        }
     }
-    
+
+    func tableView(
+        _ tableView: UITableView,
+        viewForFooterInSection section: Int
+    ) -> UIView? {
+        return nil
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        heightForFooterInSection section: Int
+    ) -> CGFloat {
+        return .zero
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let sectionInfo = viewModel.output.sections.value[indexPath.section]
-        switch sectionInfo.type {
-        case .suggestion: return UITableView.automaticDimension
-        case .keyword: return sectionInfo.isExpanded ? UITableView.automaticDimension : 0
-        default: return 208
+        let sectionType = HomeSectionKind.allCases[indexPath.section]
+
+        switch sectionType {
+        case .keyword: return viewModel.isKeywordOpened.value ?
+            UITableView.automaticDimension : 0
+        default:
+            return UITableView.automaticDimension
         }
     }
 }
@@ -267,7 +272,7 @@ extension HomeViewController: UITableViewDelegate {
 // MARK: - RecommendationBookCellDelegate
 
 extension HomeViewController: RecommendationBookCellDelegate {
-    
+
     func recommendationBookCell(
         _ cell: RecommendationBookCell,
         didSelectBook book: DetailBookInfo
@@ -277,7 +282,7 @@ extension HomeViewController: RecommendationBookCellDelegate {
         )
         let detailVC = BookDetailViewController(viewModel: detailViewModel)
         detailVC.hidesBottomBarWhenPushed = true
-        
+
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -285,11 +290,13 @@ extension HomeViewController: RecommendationBookCellDelegate {
 // MARK: - KeywordHeaderViewDelegate
 
 extension HomeViewController: KeywordHeaderViewDelegate {
-    
+
     func didTapKeywordHeader(section: Int) {
         tableView.beginUpdates()
-        viewModel.input.toggleSection(section)
-        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+        viewModel.send(
+            action: .setKeywordExpandState(newState: !viewModel.isKeywordOpened.value)
+        )
+        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         tableView.endUpdates()
     }
 }
@@ -297,12 +304,23 @@ extension HomeViewController: KeywordHeaderViewDelegate {
 // MARK: - KeywordCellDelegate
 
 extension HomeViewController: KeywordCellDelegate {
-    
+
     func didTapKeyword(_ keyword: String) {
         let viewModel = SearchViewModel(searchText: keyword)
         let searchVC = SearchViewController(viewModel: viewModel)
 
         searchVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchVC, animated: true)
+    }
+}
+
+extension HomeViewController: BookWithHeaderCellDelegate {
+
+    func bookImageTapped(of isbn: String) {
+        let detailViewModel = BookDetailViewModel(isbn: isbn)
+        let detailVC = BookDetailViewController(viewModel: detailViewModel)
+        detailVC.hidesBottomBarWhenPushed = true
+
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

@@ -8,58 +8,89 @@
 import UIKit
 
 final class HomeViewModel {
-    
-    // MARK: - Interactions
-    
-    struct Input {
-        let loadBooks: () -> Void
-        let toggleSection: (Int) -> Void
-    }
-    
-    struct Output {
-        let sections: Observable<[HomeSection]>
-    }
-    
-    // MARK: - Properties
-    
-    private let sectionsRelay = Observable<[HomeSection]>([])
-    lazy var input: Input = { return bindInput() }()
-    lazy var output: Output = { return transform() }()
 
-    // MARK: - Helpers
-    
-    func fetchSections() {
-        sectionsRelay.value = HomeMockData.sections
-        
+    private(set) var isKeywordOpened = Observable(false)
+    private(set) var keywordOb = Observable<[Keyword]>([])
+    private(set) var thisWeekRecommendOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
+    private(set) var popularLoansOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
+    private(set) var ageTrendOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
+    private(set) var loadState = Observable(LoadState.initial)
+
+    enum Action {
+        case setKeywordExpandState(newState: Bool)
+        case loadBooks
+    }
+
+    func send(action: Action) {
+        switch action {
+        case let .setKeywordExpandState(newState):
+            isKeywordOpened.value = newState
+
+        case .loadBooks:
+            loadKeyword()
+            loadHotTrend()
+            loadThisWeekTrend()
+            loadAgeTrend()
+        }
+    }
+
+    private func loadKeyword() {
         Task {
             do {
                 let result = try await BookService.getKeywords()
-                print(result)
+
+                await MainActor.run {
+                    keywordOb.value = result
+                }
 
             } catch let error as NetworkError {
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
-    
-    private func toggleSection(section: Int) {
-        var sections = sectionsRelay.value
-        sections[section].isExpanded.toggle()
-        sectionsRelay.value = sections
-    }
-    
-    private func bindInput() -> Input {
-        return Input(
-            loadBooks: { [weak self] in
-                self?.fetchSections()
-            },
-            toggleSection: { [weak self] section in
-                self?.toggleSection(section: section)
+
+    private func loadHotTrend() {
+        Task {
+            do {
+                let result = try await HomeService.getHotTrend()
+
+                await MainActor.run {
+                    popularLoansOb.value.books = result
+                }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
             }
-        )
+        }
     }
-    
-    private func transform() -> Output {
-        return Output(sections: sectionsRelay)
+
+    private func loadThisWeekTrend() {
+        Task {
+            do {
+                let result = try await HomeService.getThisWeekTrend()
+
+                await MainActor.run {
+                    thisWeekRecommendOb.value.books = result
+                }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func loadAgeTrend() {
+        guard let userBirth = UserData.shared.getUser()?.birth else { return }
+        let userAge = userBirth.toKoreanAge()
+
+        Task {
+            do {
+                let result = try await HomeService.getAgeTrend(of: userAge)
+
+                await MainActor.run {
+                    ageTrendOb.value.books = result
+                }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
     }
 }

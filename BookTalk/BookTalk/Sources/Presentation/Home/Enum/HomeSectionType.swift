@@ -7,8 +7,10 @@
 
 import Foundation
 
-enum HomeSectionType: Equatable {
+enum HomeSectionKind: Int, CaseIterable {
     case suggestion
-    case keyword([Keyword])
-    case recommendation([DetailBookInfo])
+    case keyword
+    case weekRecommendation
+    case ageRecommend
+    case popularLoan
 }
