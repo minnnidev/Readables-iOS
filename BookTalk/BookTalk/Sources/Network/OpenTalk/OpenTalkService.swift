@@ -35,4 +35,20 @@ struct OpenTalkService {
 
         return result.toModel()
     }
+
+    static func postOpenTalkFavorite(of openTalkId: Int) async throws{
+        let params: OpenTalkIdRequestDTO = .init(openTalkId: openTalkId)
+
+        let _: [Int] = try await NetworkService.shared.request(
+            target: OpenTalkTarget.postFavoriteOpenTalk(params: params)
+        )
+    }
+
+    static func deleteOpenTalkFavorite(of openTalkId: Int) async throws{
+        let params: OpenTalkIdRequestDTO = .init(openTalkId: openTalkId)
+
+        let _: [Int] = try await NetworkService.shared.request(
+            target: OpenTalkTarget.deleteFavoriteOpenTalk(params: params)
+        )
+    }
 }

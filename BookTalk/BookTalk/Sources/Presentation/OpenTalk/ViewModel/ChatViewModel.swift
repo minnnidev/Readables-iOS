@@ -12,9 +12,9 @@ final class ChatViewModel {
     private(set) var isBookmarked = Observable(false)
     private(set) var chats = Observable<[ChatModel]>([])
     private(set) var message = Observable("")
-    private(set) var openTalkId = Observable<Int?>(nil)
 
     private var pageSize = 10
+    private var openTalkId: Int?
 
     let isbn: String
 
@@ -45,6 +45,7 @@ final class ChatViewModel {
 
                     await MainActor.run {
                         isBookmarked.value = openTalkInfo.isFavorite
+                        openTalkId = openTalkInfo.openTalkId
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
@@ -56,10 +57,12 @@ final class ChatViewModel {
             chats.value.append(contentsOf: [.chatStub1, .chatStub2, .chatStub3])
 
         case let .toggleBookmark(isFavorite):
+            guard let id = openTalkId else { return }
+
             if isFavorite {
-                deleteBookMark()
+                deleteBookMark(of: id)
             } else {
-                doBookMark()
+                doBookMark(of: id)
             }
 
         case let .textFieldChanged(text):
@@ -71,10 +74,31 @@ final class ChatViewModel {
         }
     }
 
-    private func doBookMark() {
+    private func doBookMark(of openTalkId: Int) {
+        Task {
+            do {
+                try await OpenTalkService.postOpenTalkFavorite(of: openTalkId)
+
+                await MainActor.run {
+                    isBookmarked.value = true
+                }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
     }
 
-    private func deleteBookMark() {
+    private func deleteBookMark(of openTalkId: Int) {
+        Task {
+            do {
+                try await OpenTalkService.deleteOpenTalkFavorite(of: openTalkId)
 
+                await MainActor.run {
+                    isBookmarked.value = false
+                }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
     }
 }

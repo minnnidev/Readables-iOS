@@ -33,6 +33,12 @@ final class OpenTalkViewController: BaseViewController {
     
     // MARK: - Lifecycle
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,8 +46,6 @@ final class OpenTalkViewController: BaseViewController {
         registerCell()
         bind()
         addTarget()
-
-        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
     }
 
     // MARK: - UI Setup
@@ -167,15 +171,17 @@ final class OpenTalkViewController: BaseViewController {
          }
 
          viewModel.isLoading.subscribe { [weak self] isLoading in
-             guard let self = self else { return }
+             DispatchQueue.main.async { [weak self] in
+                 guard let self = self else { return }
 
-             if isLoading {
-                 if !refreshControl.isRefreshing {
-                     indicatorView.startAnimating()
+                 if isLoading {
+                     if !refreshControl.isRefreshing {
+                         indicatorView.startAnimating()
+                     }
+                 } else {
+                     refreshControl.endRefreshing()
+                     indicatorView.stopAnimating()
                  }
-             } else {
-                 refreshControl.endRefreshing()
-                 indicatorView.stopAnimating()
              }
          }
      }

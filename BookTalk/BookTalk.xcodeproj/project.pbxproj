@@ -127,6 +127,7 @@
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
+		AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */; };
 		AB5D35502C7759E60028995C /* EditUserInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D354F2C7759E60028995C /* EditUserInfoRequestDTO.swift */; };
 		AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */; };
 		AB5D35552C775AB20028995C /* UserBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35542C775AB20028995C /* UserBasicInfo.swift */; };
@@ -313,6 +314,7 @@
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
+		AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkIdRequestDTO.swift; sourceTree = "<group>"; };
 		AB5D354F2C7759E60028995C /* EditUserInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoRequestDTO.swift; sourceTree = "<group>"; };
 		AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		AB5D35542C775AB20028995C /* UserBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBasicInfo.swift; sourceTree = "<group>"; };
@@ -1385,6 +1387,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */,
+				AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1630,6 +1633,7 @@
 				AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
 				AB5D355F2C7767A00028995C /* DateFormatter+.swift in Sources */,
+				AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */,
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
