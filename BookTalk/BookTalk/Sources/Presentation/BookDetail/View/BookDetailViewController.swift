@@ -373,6 +373,7 @@ extension BookDetailViewController: BookInfoCellDelegate {
             isbn: viewModel.output.detailBook.value?.basicBookInfo.isbn ?? ""
         )
         let chatVC = ChatViewController(viewModel: viewModel)
+        chatVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(chatVC, animated: true)
     }
 }
