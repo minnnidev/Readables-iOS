@@ -13,12 +13,9 @@
 		051156052C64C73F00230CFE /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051156042C64C73F00230CFE /* BaseCollectionViewCell.swift */; };
 		054543352C5374D900E64948 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543342C5374D900E64948 /* SearchViewController.swift */; };
 		054543992C5749F300E64948 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543982C5749F300E64948 /* HomeViewModel.swift */; };
-		0545439B2C574B9000E64948 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439A2C574B9000E64948 /* HomeSection.swift */; };
-		054543A02C5750B200E64948 /* HomeMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545439F2C5750B200E64948 /* HomeMockData.swift */; };
 		054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A12C5751DD00E64948 /* SuggestionCell.swift */; };
 		054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A32C57520C00E64948 /* RecommendationBookCell.swift */; };
 		054543A92C57531C00E64948 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A82C57531C00E64948 /* HomeHeaderView.swift */; };
-		054543F22C5A233600E64948 /* SearchMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F12C5A233600E64948 /* SearchMockData.swift */; };
 		054543F72C5A249200E64948 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F62C5A249200E64948 /* SearchViewModel.swift */; };
 		054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543F82C5A24D000E64948 /* SearchResultCell.swift */; };
 		054544152C5AA80700E64948 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054544142C5AA80700E64948 /* BookInfo.swift */; };
@@ -55,7 +52,6 @@
 		0579D1122C6C9F6B0032AC1C /* KeywordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1112C6C9F6B0032AC1C /* KeywordHeaderView.swift */; };
 		0579D1142C6C9F8C0032AC1C /* KeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */; };
 		0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */; };
-		0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */; };
 		058B77B72C78581000A1110B /* FinishedBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B77B62C78581000A1110B /* FinishedBook.swift */; };
 		058B77BC2C7858FF00A1110B /* FavoriteBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058B77BB2C7858FF00A1110B /* FavoriteBook.swift */; };
 		05CB069C2C7699E100673947 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069B2C7699E100673947 /* UserInfoViewModel.swift */; };
@@ -199,6 +195,10 @@
 		ABED441C2C6670940073398A /* GoalSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441B2C6670940073398A /* GoalSectionType.swift */; };
 		ABED441E2C66793C0073398A /* DetailGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441D2C66793C0073398A /* DetailGoalViewController.swift */; };
 		ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */; };
+		ABEF812E2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEF812D2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift */; };
+		ABEF81332C7BD156007D1DC7 /* HomeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEF81322C7BD156007D1DC7 /* HomeTarget.swift */; };
+		ABEF81352C7BD15C007D1DC7 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEF81342C7BD15C007D1DC7 /* HomeService.swift */; };
+		ABEF81382C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEF81372C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift */; };
 		ABF5D4262C7B4E49004E625C /* ChatSendRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF5D4252C7B4E49004E625C /* ChatSendRequestDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -209,12 +209,9 @@
 		051156042C64C73F00230CFE /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		054543342C5374D900E64948 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		054543982C5749F300E64948 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		0545439A2C574B9000E64948 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
-		0545439F2C5750B200E64948 /* HomeMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMockData.swift; sourceTree = "<group>"; };
 		054543A12C5751DD00E64948 /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
 		054543A32C57520C00E64948 /* RecommendationBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationBookCell.swift; sourceTree = "<group>"; };
 		054543A82C57531C00E64948 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
-		054543F12C5A233600E64948 /* SearchMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMockData.swift; sourceTree = "<group>"; };
 		054543F62C5A249200E64948 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		054543F82C5A24D000E64948 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		054544142C5AA80700E64948 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
@@ -250,7 +247,6 @@
 		0579D1112C6C9F6B0032AC1C /* KeywordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordHeaderView.swift; sourceTree = "<group>"; };
 		0579D1132C6C9F8C0032AC1C /* KeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCell.swift; sourceTree = "<group>"; };
 		0579D1152C6C9FA30032AC1C /* KeywordCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordCollectionCell.swift; sourceTree = "<group>"; };
-		0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
 		058B77B62C78581000A1110B /* FinishedBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedBook.swift; sourceTree = "<group>"; };
 		058B77BB2C7858FF00A1110B /* FavoriteBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBook.swift; sourceTree = "<group>"; };
 		05CB069B2C7699E100673947 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
@@ -390,6 +386,10 @@
 		ABED441B2C6670940073398A /* GoalSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSectionType.swift; sourceTree = "<group>"; };
 		ABED441D2C66793C0073398A /* DetailGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewController.swift; sourceTree = "<group>"; };
 		ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGoalViewModel.swift; sourceTree = "<group>"; };
+		ABEF812D2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomHotTrendRequestDTO.swift; path = BookTalk/Sources/Util/Extension/CustomHotTrendRequestDTO.swift; sourceTree = SOURCE_ROOT; };
+		ABEF81322C7BD156007D1DC7 /* HomeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTarget.swift; sourceTree = "<group>"; };
+		ABEF81342C7BD15C007D1DC7 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		ABEF81372C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotTrendResponseDTO.swift; sourceTree = "<group>"; };
 		ABF5D4252C7B4E49004E625C /* ChatSendRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendRequestDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -428,8 +428,6 @@
 			isa = PBXGroup;
 			children = (
 				0579D10C2C6C9E230032AC1C /* Keyword.swift */,
-				0545439A2C574B9000E64948 /* HomeSection.swift */,
-				0545439F2C5750B200E64948 /* HomeMockData.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -445,7 +443,6 @@
 		054543942C57491800E64948 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0579D1172C6C9FC30032AC1C /* KeywordViewModel.swift */,
 				054543982C5749F300E64948 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
@@ -493,14 +490,6 @@
 				054543F52C5A245700E64948 /* Cell */,
 				054543F32C5A23FA00E64948 /* View */,
 				054543F42C5A244A00E64948 /* ViewModel */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		054543EE2C5A22F100E64948 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				054543F12C5A233600E64948 /* SearchMockData.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -926,7 +915,6 @@
 				AB5D35532C775AA30028995C /* User */,
 				054544132C5AA7F100E64948 /* BookInfo */,
 				0545438C2C5747E300E64948 /* Home */,
-				054543EE2C5A22F100E64948 /* Search */,
 				AB2E7BEE2C53DB6100CE43CB /* Category */,
 				AB0C0F682C5BFDB0007812C5 /* OpenTalk */,
 				ABED44112C665DC20073398A /* Goal */,
@@ -1010,6 +998,7 @@
 				ABB901C82C7398AC00727875 /* OpenTalk */,
 				ABAAFDB32C76FDD800FDA084 /* Search */,
 				AB8224B52C7847F40082CD30 /* Library */,
+				ABEF81312C7BD146007D1DC7 /* Home */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1180,6 +1169,7 @@
 				AB82055A2C6E666D0014C5A5 /* Genre */,
 				ABB901A92C72799400727875 /* Book */,
 				ABB901C22C7397E700727875 /* OpenTalk */,
+				ABEF812A2C7BD02B007D1DC7 /* Home */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1526,6 +1516,40 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		ABEF812A2C7BD02B007D1DC7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF812C2C7BD041007D1DC7 /* Request */,
+				ABEF81362C7BD4A2007D1DC7 /* Response */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ABEF812C2C7BD041007D1DC7 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF812D2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		ABEF81312C7BD146007D1DC7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF81322C7BD156007D1DC7 /* HomeTarget.swift */,
+				ABEF81342C7BD15C007D1DC7 /* HomeService.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ABEF81362C7BD4A2007D1DC7 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				ABEF81372C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1660,6 +1684,7 @@
 				AB5D35632C7797050028995C /* LibrariesResponseDTO.swift in Sources */,
 				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
+				ABEF81382C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift in Sources */,
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
 				ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */,
@@ -1682,6 +1707,8 @@
 				ABAAFDBD2C76FEFA00FDA084 /* UITableView+.swift in Sources */,
 				AB9C5D652C78A9C900CE44AF /* MyLibraryViewModel.swift in Sources */,
 				AB5D355B2C775DF70028995C /* UserTarget.swift in Sources */,
+				ABEF812E2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift in Sources */,
+				ABEF81332C7BD156007D1DC7 /* HomeTarget.swift in Sources */,
 				AB5D35502C7759E60028995C /* EditUserInfoRequestDTO.swift in Sources */,
 				AB22AD3C2C4E8D9D00C9A0F3 /* AppDelegate.swift in Sources */,
 				AB2E7BE72C53D2A300CE43CB /* ShowAllBookCell.swift in Sources */,
@@ -1709,7 +1736,6 @@
 				AB2E7BF62C53F68200CE43CB /* BookSortType.swift in Sources */,
 				AB0C0F822C5F6E2D007812C5 /* ChatMenuSectionType.swift in Sources */,
 				AB963F022C78A6AE0098F092 /* LibrarySimpleCell.swift in Sources */,
-				054543A02C5750B200E64948 /* HomeMockData.swift in Sources */,
 				058B77B72C78581000A1110B /* FinishedBook.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				AB4CBA7B2C6E0755009A2AB6 /* SettingViewModel.swift in Sources */,
@@ -1743,21 +1769,19 @@
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
 				AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */,
+				ABEF81352C7BD15C007D1DC7 /* HomeService.swift in Sources */,
 				054FA17F2C7465490007D9C9 /* StickyHeaderFlowLayout.swift in Sources */,
 				AB9C5D732C78C4C100CE44AF /* AuthService.swift in Sources */,
 				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,
 				AB2E7C042C565B3A00CE43CB /* FirstCategoryViewController.swift in Sources */,
-				0545439B2C574B9000E64948 /* HomeSection.swift in Sources */,
 				AB2E7BDC2C53B64800CE43CB /* CategorySectionKind.swift in Sources */,
 				AB0C0F7E2C5F6D83007812C5 /* CompletedReadingCell.swift in Sources */,
 				054FA17D2C7465260007D9C9 /* SocialLoginButton.swift in Sources */,
-				0579D1182C6C9FC30032AC1C /* KeywordViewModel.swift in Sources */,
 				ABED44202C667F6F0073398A /* DetailGoalViewModel.swift in Sources */,
 				ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */,
 				058B77BC2C7858FF00A1110B /* FavoriteBook.swift in Sources */,
 				AB6C19D32C79D3B100BF844C /* String+.swift in Sources */,
 				AB9C5D762C78C80600CE44AF /* Tokens.swift in Sources */,
-				054543F22C5A233600E64948 /* SearchMockData.swift in Sources */,
 				051155F12C64B08F00230CFE /* ReusableIdentifier.swift in Sources */,
 				AB2E7BCE2C53ADF700CE43CB /* BaseViewController.swift in Sources */,
 				05CB069E2C769A1700673947 /* UserInfoViewController.swift in Sources */,

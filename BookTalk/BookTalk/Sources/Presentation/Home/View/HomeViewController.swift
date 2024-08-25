@@ -24,13 +24,29 @@ final class HomeViewController: BaseViewController {
         setDelegate()
         bind()
 
-        viewModel.send(action: .loadKeyword)
+        viewModel.send(action: .loadBooks)
     }
 
     // MARK: - Bind
 
     private func bind() {
+        viewModel.thisWeekRecommendOb.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.weekRecommendation.rawValue
+            self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+        }
 
+        viewModel.ageTrendOb.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.ageRecommend.rawValue
+            self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+        }
+
+        viewModel.popularLoansOb.subscribe { [weak self] _ in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.popularLoan.rawValue
+            self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+        }
     }
 
     // MARK: - Actions
@@ -158,11 +174,25 @@ extension HomeViewController: UITableViewDataSource {
         case .weekRecommendation, .ageRecommend, .popularLoan:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
-            cell.bind(.init(headerTitle: "하이",
-                            books: [.init(isbn: "어쩔", imageURL: "", title: "gmasifld"),
-                                    .init(isbn: "에에에", imageURL: "", title: "aslkdjlsfjlakjlfsd")
-                            ])
-            )
+            if sectionKind == .weekRecommendation {
+                cell.bind(
+                    .init(
+                        headerTitle: "이번 주 인기 도서를 확인해 보세요",
+                        books: viewModel.thisWeekRecommendOb.value.books
+                    ))
+            } else if sectionKind == .popularLoan {
+                cell.bind(
+                    .init(
+                        headerTitle: "대출 급상승 🔥",
+                        books: viewModel.popularLoansOb.value.books
+                    ))
+            } else if sectionKind == .ageRecommend {
+                cell.bind(
+                    .init(
+                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님 나이대에서 인기 있는 도서",
+                        books: viewModel.ageTrendOb.value.books
+                    ))
+            }
 
             cell.delegate = self
 
@@ -287,11 +317,7 @@ extension HomeViewController: KeywordCellDelegate {
 extension HomeViewController: BookWithHeaderCellDelegate {
 
     func bookImageTapped(of isbn: String) {
-        // TODO: isbn 추가
-//        let selectedBook = bookInfo[indexPath.row]
-        let detailViewModel = BookDetailViewModel(
-            isbn: ""
-        )
+        let detailViewModel = BookDetailViewModel(isbn: isbn)
         let detailVC = BookDetailViewController(viewModel: detailViewModel)
         detailVC.hidesBottomBarWhenPushed = true
 

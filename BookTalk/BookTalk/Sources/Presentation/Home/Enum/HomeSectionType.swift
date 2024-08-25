@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HomeSectionKind: CaseIterable {
+enum HomeSectionKind: Int, CaseIterable {
     case suggestion
     case keyword
     case weekRecommendation
