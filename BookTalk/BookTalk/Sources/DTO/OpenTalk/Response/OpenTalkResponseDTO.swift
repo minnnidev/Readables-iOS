@@ -26,7 +26,7 @@ struct OpenTalkResponseDTO: Decodable {
 
 extension OpenTalkResponseDTO {
 
-    func toModel() -> OpenTalkModel {
+    func toModel() -> OpenTalkBookModel {
         return .init(
             id: id,
             isbn: isbn13,

@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct OpenTalkModel {
+struct OpenTalkBookModel {
     let id: Int
     let isbn: String
     let bookName: String
     let bookImageURL: String
 }
 
-extension OpenTalkModel {
+extension OpenTalkBookModel {
 
-    static var stubOpenTalk1: OpenTalkModel {
+    static var stubOpenTalk1: OpenTalkBookModel {
         return .init(
             id: 5,
             isbn: "9788936434267",
@@ -25,7 +25,7 @@ extension OpenTalkModel {
         )
     }
 
-    static var stubOpenTalk2: OpenTalkModel {
+    static var stubOpenTalk2: OpenTalkBookModel {
         return .init(
             id: 10,
             isbn: "9791195522125",

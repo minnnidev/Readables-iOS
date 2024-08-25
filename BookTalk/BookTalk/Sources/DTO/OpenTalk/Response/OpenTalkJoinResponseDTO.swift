@@ -8,16 +8,24 @@
 import Foundation
 
 struct OpenTalkJoinResponseDTO: Decodable {
-    let opentalkId: Int
-    let messageResponseDto: [ChatResponseDTO]
+    let openTalkId: Int
+    let messageResponseDTO: [ChatResponseDTO]
+    let favorite: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case openTalkId = "opentalkId"
+        case messageResponseDTO = "messageResponseDto"
+        case favorite 
+    }
 }
 
 extension OpenTalkJoinResponseDTO {
 
     func toModel() -> OpenTalkModel {
         return .init(
-            openTalkId: opentalkId,
-            messages: messageResponseDto.map { $0.toModel() }
+            openTalkId: openTalkId,
+            chats: messageResponseDTO.map { $0.toModel() },
+            isFavorite: favorite
         )
     }
 }

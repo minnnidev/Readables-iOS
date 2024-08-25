@@ -46,6 +46,8 @@ final class ChatViewController: BaseViewController {
         addTapGesture()
         addTarget()
         bind()
+        
+        viewModel.send(action: .joinToOpenTalk(isbn: viewModel.isbn))
     }
 
     // MARK: - UI Setup

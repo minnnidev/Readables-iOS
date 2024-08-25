@@ -9,5 +9,6 @@ import Foundation
 
 struct OpenTalkModel {
     let openTalkId: Int
-    let messages: [ChatModel]
+    let chats: [ChatModel]
+    let isFavorite: Bool
 }

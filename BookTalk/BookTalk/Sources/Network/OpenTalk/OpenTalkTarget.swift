@@ -11,6 +11,7 @@ import Alamofire
 
 enum OpenTalkTarget {
     case getOpenTalkMain
+    case postOpenTalkJoin(params: OpenTalkJoinRequestDTO)
 }
 
 extension OpenTalkTarget: TargetType {
@@ -19,6 +20,9 @@ extension OpenTalkTarget: TargetType {
         switch self {
         case .getOpenTalkMain:
             return "/api/opentalk/main"
+
+        case .postOpenTalkJoin:
+            return "/api/opentalk/join"
         }
     }
     
@@ -26,6 +30,8 @@ extension OpenTalkTarget: TargetType {
         switch self {
         case .getOpenTalkMain:
             return .get
+        case .postOpenTalkJoin:
+            return .post
         }
     }
     
@@ -33,6 +39,9 @@ extension OpenTalkTarget: TargetType {
         switch self {
         case .getOpenTalkMain:
             return .requestPlain
+
+        case let .postOpenTalkJoin(params):
+            return .requestParameters(parameters: params.toDictionary())
         }
     }
 }
