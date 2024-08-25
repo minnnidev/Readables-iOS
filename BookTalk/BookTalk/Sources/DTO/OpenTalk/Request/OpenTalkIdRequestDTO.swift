@@ -1,5 +1,5 @@
 //
-//  OpenTalkReqeustDTO.swift
+//  OpenTalkIdRequestDTO.swift
 //  BookTalk
 //
 //  Created by 김민 on 8/25/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OpenTalkReqeustDTO: Encodable {
+struct OpenTalkIdRequestDTO: Encodable {
     let openTalkId: Int
 
     enum CodingKeys: String, CodingKey {

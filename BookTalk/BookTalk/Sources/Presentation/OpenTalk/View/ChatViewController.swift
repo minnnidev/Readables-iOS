@@ -46,12 +46,13 @@ final class ChatViewController: BaseViewController {
         addTapGesture()
         addTarget()
         bind()
+        
+        viewModel.send(action: .joinToOpenTalk(isbn: viewModel.isbn))
     }
 
     // MARK: - UI Setup
 
     override func setNavigationBar() {
-        navigationItem.title = "책 제목"
         navigationItem.backButtonTitle = ""
 
         let _ = UIBarButtonItem(
@@ -170,8 +171,6 @@ final class ChatViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.send(action: .loadChats)
-        
         viewModel.chats.subscribe { [weak self] chats in
             self?.chatTableView.reloadData()
         }
@@ -219,7 +218,9 @@ final class ChatViewController: BaseViewController {
     }
 
     @objc private func bookmarkButtonDidTapped() {
-        viewModel.send(action: .toggleBookmark)
+        viewModel.send(
+            action: .toggleBookmark(isFavorite: viewModel.isBookmarked.value)
+        )
     }
 
     @objc private func textFieldDidChanged(_ textField: UITextField) {

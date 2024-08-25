@@ -126,6 +126,8 @@
 		AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */; };
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
+		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
+		AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */; };
 		AB5D35502C7759E60028995C /* EditUserInfoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D354F2C7759E60028995C /* EditUserInfoRequestDTO.swift */; };
 		AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */; };
 		AB5D35552C775AB20028995C /* UserBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D35542C775AB20028995C /* UserBasicInfo.swift */; };
@@ -181,6 +183,9 @@
 		ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C92C7398C100727875 /* OpenTalkTarget.swift */; };
 		ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CB2C7398CA00727875 /* OpenTalkService.swift */; };
 		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
+		ABC820322C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */; };
+		ABC820342C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820332C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift */; };
+		ABC820362C7B279C001AB371 /* ChatResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820352C7B279C001AB371 /* ChatResponseDTO.swift */; };
 		ABD10DF82C52514F005F290E /* FirstCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */; };
 		ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDADA3D2C70A6A3009ED3BB /* Date+.swift */; };
 		ABED440D2C66549E0073398A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ABED440C2C66549E0073398A /* DGCharts */; };
@@ -308,6 +313,8 @@
 		AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
+		AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkIdRequestDTO.swift; sourceTree = "<group>"; };
 		AB5D354F2C7759E60028995C /* EditUserInfoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoRequestDTO.swift; sourceTree = "<group>"; };
 		AB5D35512C7759F00028995C /* EditUserInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoResponseDTO.swift; sourceTree = "<group>"; };
 		AB5D35542C775AB20028995C /* UserBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBasicInfo.swift; sourceTree = "<group>"; };
@@ -363,6 +370,9 @@
 		ABB901C92C7398C100727875 /* OpenTalkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkTarget.swift; sourceTree = "<group>"; };
 		ABB901CB2C7398CA00727875 /* OpenTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkService.swift; sourceTree = "<group>"; };
 		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
+		ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkJoinRequestDTO.swift; sourceTree = "<group>"; };
+		ABC820332C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkJoinResponseDTO.swift; sourceTree = "<group>"; };
+		ABC820352C7B279C001AB371 /* ChatResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseDTO.swift; sourceTree = "<group>"; };
 		ABD10DF72C52514F005F290E /* FirstCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCategoryCell.swift; sourceTree = "<group>"; };
 		ABDADA3D2C70A6A3009ED3BB /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ABED440F2C665CDB0073398A /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
@@ -793,6 +803,7 @@
 			children = (
 				AB0C0F692C5BFDBE007812C5 /* ChatModel.swift */,
 				ABB901C62C73983700727875 /* OpenTalkBookModel.swift */,
+				AB5712F62C7B2872007058FC /* OpenTalkModel.swift */,
 			);
 			path = OpenTalk;
 			sourceTree = "<group>";
@@ -1347,6 +1358,7 @@
 		ABB901C22C7397E700727875 /* OpenTalk */ = {
 			isa = PBXGroup;
 			children = (
+				ABC820302C7B26CC001AB371 /* Request */,
 				ABB901C52C73982800727875 /* Response */,
 			);
 			path = OpenTalk;
@@ -1356,6 +1368,8 @@
 			isa = PBXGroup;
 			children = (
 				ABB901C32C73980600727875 /* OpenTalkResponseDTO.swift */,
+				ABC820332C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift */,
+				ABC820352C7B279C001AB371 /* ChatResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1367,6 +1381,15 @@
 				ABB901CB2C7398CA00727875 /* OpenTalkService.swift */,
 			);
 			path = OpenTalk;
+			sourceTree = "<group>";
+		};
+		ABC820302C7B26CC001AB371 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */,
+				AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		ABD10DE62C516D26005F290E /* Category */ = {
@@ -1600,13 +1623,17 @@
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */,
+				ABC820342C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift in Sources */,
+				ABC820362C7B279C001AB371 /* ChatResponseDTO.swift in Sources */,
 				AB8224BC2C7849610082CD30 /* SearchLibraryViewModel.swift in Sources */,
 				AB8224B72C7847FE0082CD30 /* LibraryTarget.swift in Sources */,
 				AB23BF102C64A02900E12702 /* ReadingPeopleCell.swift in Sources */,
 				AB2E7BE52C53C97800CE43CB /* BookWithHeaderCell.swift in Sources */,
 				ABB901B12C727A3400727875 /* BookService.swift in Sources */,
+				AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */,
 				AB2E7BEA2C53D69600CE43CB /* BookImageCell.swift in Sources */,
 				AB5D355F2C7767A00028995C /* DateFormatter+.swift in Sources */,
+				AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */,
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
@@ -1693,6 +1720,7 @@
 				AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */,
 				054FA17B2C7464E30007D9C9 /* SegmentedProgressBar.swift in Sources */,
 				AB5D355D2C775DFF0028995C /* UserService.swift in Sources */,
+				ABC820322C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift in Sources */,
 				AB4CBA6C2C6DD8E7009A2AB6 /* NetworkService.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
