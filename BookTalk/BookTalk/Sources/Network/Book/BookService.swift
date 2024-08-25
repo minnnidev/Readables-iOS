@@ -34,7 +34,7 @@ struct BookService {
             bookImgURL: book.coverImageURL
         )
 
-        let _: [DibResponseDTO] = try await NetworkService.shared.request(
+        let _: [UserBookResponseDTO] = try await NetworkService.shared.request(
             target: BookTarget.postFavoriteBook(params: params)
         )
     }
@@ -42,7 +42,7 @@ struct BookService {
     static func deleteFavoriteBook(of book: BasicBookInfo) async throws {
         let params: ISBNRequestDTO = .init(isbn: book.isbn)
 
-        let _: [DibResponseDTO] = try await NetworkService.shared.request(
+        let _: [UserBookResponseDTO] = try await NetworkService.shared.request(
             target: BookTarget.deleteFavoriteBook(params: params)
         )
     }

@@ -45,7 +45,7 @@ struct UserService {
             target: UserTarget.getUserInfo
         )
 
-        return result.dibs.map { $0.toModel() }
+        return result.dibsBooks.map { $0.toModel() }
     }
 
     static func getUserLibraries() async throws -> [LibraryInfo] {
@@ -59,8 +59,8 @@ struct UserService {
     static func editUserLibraries(newLibraries: [LibraryInfo]) async throws -> [LibraryInfo] {
         let body: EditLibraryRequestDTO = .init(
             libraries: newLibraries.map {
-            .init(code: $0.code, name: $0.name)
-        }
+                .init(code: $0.code, name: $0.name)
+            }
         )
 
         let result: UserLibraryResponseDTO = try await NetworkService.shared.request(

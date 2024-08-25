@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DibResponseDTO: Decodable {
+struct UserBookResponseDTO: Decodable {
     let isbn: String
     let bookName: String
     let bookImageURL: String
@@ -19,7 +19,7 @@ struct DibResponseDTO: Decodable {
     }
 }
 
-extension DibResponseDTO {
+extension UserBookResponseDTO {
 
     func toModel() -> Book {
         return .init(

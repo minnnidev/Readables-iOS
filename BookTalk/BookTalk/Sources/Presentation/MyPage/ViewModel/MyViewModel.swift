@@ -29,6 +29,7 @@ final class MyPageViewModel {
                     let userInfo = try await UserService.getUserInfo()
                     userInfoOb.value = userInfo
                     dibBooksOb.value = userInfo.dibs
+                    readBooksOb.value = userInfo.readBooks
 
                     // TODO: 읽은 책 추가
 

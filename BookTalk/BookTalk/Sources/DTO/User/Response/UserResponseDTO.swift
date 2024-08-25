@@ -10,7 +10,8 @@ import Foundation
 struct UserInfoResponseDTO: Decodable {
     let userDto: UserResponseDTO
     let libraries: [LibraryResponseDTO]
-    let dibs: [DibResponseDTO]
+    let dibsBooks: [UserBookResponseDTO]
+    let readBooks: [UserBookResponseDTO]
 }
 
 extension UserInfoResponseDTO {
@@ -18,7 +19,8 @@ extension UserInfoResponseDTO {
     func toModel() -> UserInfo {
         return .init(
             userInfo: userDto.toModel(),
-            dibs: dibs.map { $0.toModel() }
+            dibs: dibsBooks.map { $0.toModel() },
+            readBooks: readBooks.map { $0.toModel() }
         )
     }
 }
