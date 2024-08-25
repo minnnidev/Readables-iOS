@@ -23,6 +23,7 @@ final class AddBookViewModel {
     private(set) var loadState = Observable(LoadState.initial)
     private(set) var hasMoreResult = Observable(true)
     private(set) var addBookSucceed = Observable(false)
+    private(set) var presentAlert = Observable(false)
 
     private var currentPage = 1
     private var pageSize = 50
@@ -79,7 +80,15 @@ final class AddBookViewModel {
                         addBookSucceed.value = true
                     }
                 } catch let error as NetworkError {
-                    print(error.localizedDescription)
+                    switch error {
+                    case let .invalidStatusCode(statusCode, message):
+                        if statusCode == 400 &&
+                            message == "이미 추가된 값입니다" {
+                            presentAlert.value = true
+                        }
+                    default:
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }
