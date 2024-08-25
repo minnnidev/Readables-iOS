@@ -325,6 +325,7 @@ extension BookDetailViewController: UITableViewDataSource {
             }
             cell.selectionStyle = .none
             cell.bind(viewModel)
+            cell.delegate = self
             return cell
 
         } else {
@@ -366,5 +367,17 @@ extension BookDetailViewController: BorrowableLibraryCellDelegate {
     func pushToMyLibraryVC() {
         let myLibraryVC = MyLibraryViewController()
         navigationController?.pushViewController(myLibraryVC, animated: true)
+    }
+}
+
+// MARK: - BookInfoCellDelegate
+extension BookDetailViewController: BookInfoCellDelegate {
+
+    func openTalkButtonDidTapped() {
+        let viewModel = ChatViewModel(
+            isbn: viewModel.output.detailBook.value?.basicBookInfo.isbn ?? ""
+        )
+        let chatVC = ChatViewController(viewModel: viewModel)
+        navigationController?.pushViewController(chatVC, animated: true)
     }
 }

@@ -51,4 +51,32 @@ struct OpenTalkService {
             target: OpenTalkTarget.deleteFavoriteOpenTalk(params: params)
         )
     }
+
+    static func getChatList(
+        of id: Int,
+        pageNo: Int,
+        pageSize: Int)
+    async throws -> [ChatModel] {
+        let params: ChatListRequestDTO = .init(
+            opentalkId: id,
+            pageNo: pageNo,
+            pageSize: pageSize
+        )
+
+        let result: [ChatResponseDTO] = try await NetworkService.shared.request(
+            target: OpenTalkTarget.getOpenTalkChatList(params: params)
+        )
+
+        return result.map { $0.toModel() }
+    }
+
+    static func sendMessage(of id: Int, text: String) async throws -> ChatModel {
+        let params: ChatSendRequestDTO = .init(opentalkId: id, text: text)
+
+        let result: ChatResponseDTO = try await NetworkService.shared.request(
+            target: OpenTalkTarget.postChatMessage(params: params)
+        )
+
+        return result.toModel()
+    }
 }

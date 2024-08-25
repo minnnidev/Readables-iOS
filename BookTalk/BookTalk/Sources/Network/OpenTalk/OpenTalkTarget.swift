@@ -14,6 +14,8 @@ enum OpenTalkTarget {
     case postOpenTalkJoin(params: OpenTalkJoinRequestDTO)
     case postFavoriteOpenTalk(params: OpenTalkIdRequestDTO)
     case deleteFavoriteOpenTalk(params: OpenTalkIdRequestDTO)
+    case getOpenTalkChatList(params: ChatListRequestDTO)
+    case postChatMessage(params: ChatSendRequestDTO)
 }
 
 extension OpenTalkTarget: TargetType {
@@ -28,15 +30,20 @@ extension OpenTalkTarget: TargetType {
             return "/api/opentalk/favorite"
         case .deleteFavoriteOpenTalk:
             return "/api/opentalk/favorite"
+        case .getOpenTalkChatList:
+            return "/api/message/get"
+        case .postChatMessage:
+            return "/api/message/save"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getOpenTalkMain:
+        case .getOpenTalkMain, .getOpenTalkChatList:
             return .get
         case .postOpenTalkJoin, 
-                .postFavoriteOpenTalk:
+                .postFavoriteOpenTalk,
+                .postChatMessage:
             return .post
         case .deleteFavoriteOpenTalk:
             return .delete
@@ -53,6 +60,12 @@ extension OpenTalkTarget: TargetType {
             
         case let .postFavoriteOpenTalk(params),
             let .deleteFavoriteOpenTalk(params):
+            return .requestParameters(parameters: params.toDictionary())
+
+        case let .getOpenTalkChatList(params):
+            return .requestParameters(parameters: params.toDictionary())
+
+        case let .postChatMessage(params):
             return .requestParameters(parameters: params.toDictionary())
         }
     }

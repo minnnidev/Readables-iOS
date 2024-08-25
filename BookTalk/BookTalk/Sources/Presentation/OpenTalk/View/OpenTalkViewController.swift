@@ -32,13 +32,7 @@ final class OpenTalkViewController: BaseViewController {
     }
     
     // MARK: - Lifecycle
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +40,8 @@ final class OpenTalkViewController: BaseViewController {
         registerCell()
         bind()
         addTarget()
+
+        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
     }
 
     // MARK: - UI Setup
