@@ -47,11 +47,11 @@ struct BookService {
         )
     }
 
-    static func postReadBook(of book: BasicBookInfo) async throws {
+    static func postReadBook(of book: Book) async throws {
         let params: BookRequestDTO = .init(
             isbn: book.isbn,
             bookName: book.title,
-            bookImgURL: book.coverImageURL
+            bookImgURL: book.imageURL
         )
 
         let _: [UserBookResponseDTO] = try await NetworkService.shared.request(
@@ -59,7 +59,7 @@ struct BookService {
         )
     }
 
-    static func deleteReadBook(of book: BasicBookInfo) async throws {
+    static func deleteReadBook(of book: Book) async throws {
         let params: ISBNRequestDTO = .init(isbn: book.isbn)
 
         let _: [UserBookResponseDTO] = try await NetworkService.shared.request(
