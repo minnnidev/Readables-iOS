@@ -243,7 +243,7 @@ extension OpenTalkViewController: UICollectionViewDataSource {
             let openTalk = viewModel.openTalks.value[indexPath.item]
             cell.bind(
                 with: Book(
-                    isbn: "",
+                    isbn: openTalk.isbn,
                     imageURL: openTalk.bookImageURL,
                     title: openTalk.bookName
                 )
@@ -280,7 +280,8 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == pageCollectionView {
             viewModel.send(action: .setPageType(OpenTalkPageType.allCases[indexPath.item]))
         } else {
-            let viewModel = ChatViewModel()
+            let book = viewModel.openTalks.value[indexPath.item]
+            let viewModel = ChatViewModel(isbn: book.isbn)
             let chattingVC = ChatViewController(viewModel: viewModel)
             chattingVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(chattingVC, animated: true)

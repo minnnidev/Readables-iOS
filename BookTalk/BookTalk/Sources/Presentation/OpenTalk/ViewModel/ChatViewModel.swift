@@ -9,16 +9,24 @@ import Foundation
 
 final class ChatViewModel {
 
+    var isBookmarked = Observable(false) // TODO: 임시로 false 설정
+    var chats = Observable<[ChatModel]>([])
+    var message = Observable("")
+
+    private let isbn: String
+
+    // MARK: - Initializer
+
+    init(isbn: String) {
+        self.isbn = isbn
+    }
+
     enum Action {
         case loadChats
         case toggleBookmark
         case textFieldChanged(text: String)
         case sendMessage(text: String)
     }
-
-    var isBookmarked = Observable(false) // TODO: 임시로 false 설정
-    var chats = Observable<[ChatModel]>([])
-    var message = Observable("")
 
     func send(action: Action) {
 
