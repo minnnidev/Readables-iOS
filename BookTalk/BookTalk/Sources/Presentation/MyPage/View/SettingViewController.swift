@@ -100,7 +100,25 @@ final class SettingViewController: BaseViewController {
     }
 
     private func presentWithdrawActionSheet() {
-        // TODO: 탈퇴 UI - 사유 선택?
+        let alertVC = UIAlertController(
+            title: "탈퇴하시겠습니까?",
+            message: "탈퇴 시, 모든 개인 정보와 데이터가 영구적으로 삭제되며 복구가 불가능합니다. 계속 진행하시겠습니까?",
+            preferredStyle: .alert
+        )
+
+        let withdrawAction = UIAlertAction(
+            title: "탈퇴하기",
+            style: .destructive) { [weak self] _ in
+                self?.viewModel.send(action: .withdraw)
+            }
+
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+
+        [withdrawAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+
+        present(alertVC, animated: true)
     }
 }
 

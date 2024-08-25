@@ -33,4 +33,33 @@ struct AuthService {
         KeychainManager.shared.save(key: TokenKey.refreshToken, token: result.refreshToken)
 
         return result.isNewUser
-    }}
+    }
+
+    static func logout() async throws {
+        let _ : String = try await NetworkService.shared.request(
+            target: AuthTarget.logout
+        )
+
+        KeychainManager.shared.delete(key: TokenKey.accessToken)
+        KeychainManager.shared.delete(key: TokenKey.refreshToken)
+    }
+
+    static func withdraw() async throws {
+        let _ : String = try await NetworkService.shared.request(
+            target: AuthTarget.withdraw
+        )
+
+        KeychainManager.shared.delete(key: TokenKey.accessToken)
+        KeychainManager.shared.delete(key: TokenKey.refreshToken)
+    }
+
+    static func reissueToken(with refreshToken: String) async throws -> Tokens {
+        let params: ReissueTokenRequestDTO = .init(refreshToken: refreshToken)
+
+        let newTokens: TokenResponseDTO = try await NetworkService.shared.request(
+            target: AuthTarget.reissueToken(params: params)
+        )
+
+        return newTokens.toModel()
+    }
+}

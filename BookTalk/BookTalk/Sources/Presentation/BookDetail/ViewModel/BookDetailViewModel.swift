@@ -59,7 +59,12 @@ final class BookDetailViewModel {
     private func bindInput() -> Input {
         return Input(
             markAsReadButtonTap: { [weak self] in
-                self?.toggle(self?.output.isMarkAsRead)
+                guard let self = self else { return }
+                if isMarkAsReadOb.value { // 읽은 책이면
+                    deleteReadBook(of: bookDetailOb.value?.basicBookInfo)
+                } else { // 읽지 않은 책이면
+                    addReadBook(of: bookDetailOb.value?.basicBookInfo)
+                }
             },
             favoriteButtonTap: { [weak self] in
                 guard let self = self else { return }
@@ -93,6 +98,7 @@ final class BookDetailViewModel {
                             bookDetailOb.value = bookDetail
                             availableLibs.value = bookDetail.registeredLibraries
                             isFavoriteOb.value = bookDetail.isFavorite
+                            isMarkAsReadOb.value = bookDetail.isRead ?? false
 
                             loadStateOb.value = .completed
                         }
@@ -168,6 +174,48 @@ extension BookDetailViewModel {
             do {
                 try await BookService.deleteFavoriteBook(of: book)
                 isFavoriteOb.value = false
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func addReadBook(of basicBook: BasicBookInfo?) {
+        guard let basicBook = basicBook else { return }
+
+        let book: Book = .init(
+            isbn: basicBook.isbn,
+            imageURL: basicBook.coverImageURL,
+            title: basicBook.title
+        )
+        Task {
+            do {
+                try await BookService.postReadBook(of: book)
+
+                await MainActor.run {
+                    toggle(output.isMarkAsRead)
+                }
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    private func deleteReadBook(of basicBook: BasicBookInfo?) {
+        guard let basicBook = basicBook else { return }
+
+        let book: Book = .init(
+            isbn: basicBook.isbn,
+            imageURL: basicBook.coverImageURL,
+            title: basicBook.title
+        )
+        Task {
+            do {
+                try await BookService.deleteReadBook(of: book)
+
+                await MainActor.run {
+                    toggle(output.isMarkAsRead)
+                }
             } catch let error as NetworkError {
                 print(error.localizedDescription)
             }

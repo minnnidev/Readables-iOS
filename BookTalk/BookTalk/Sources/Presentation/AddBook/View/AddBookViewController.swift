@@ -151,6 +151,12 @@ final class AddBookViewController: BaseViewController {
 
             self?.navigationController?.popViewController(animated: true)
         }
+
+        viewModel.presentAlert.subscribe { [weak self] isPresented in
+            guard isPresented else { return }
+
+            self?.showAutoDismissAlert(title: "이미 읽은 책으로 추가되어 있어요!")
+        }
     }
 }
 

@@ -42,22 +42,30 @@ final class AppFlowController {
     }
 
     private func goToHome() {
-        let mainTabVC = MainTabBarController()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
 
-        UIView.transition(
-            with: window,
-            duration: 0.5,
-            options: .transitionCrossDissolve, 
-            animations: {
-                self.rootViewController = mainTabVC
-            },
-            completion: nil
-        )
+            let mainTabVC = MainTabBarController()
+
+            UIView.transition(
+                with: window,
+                duration: 0.5,
+                options: .transitionCrossDissolve,
+                animations: {
+                    self.rootViewController = mainTabVC
+                },
+                completion: nil
+            )
+        }
     }
 
     private func goToLogin() {
-        let loginVC = LoginViewController()
-        rootViewController = UINavigationController(rootViewController: loginVC)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            let loginVC = LoginViewController()
+            rootViewController = UINavigationController(rootViewController: loginVC)
+        }
     }
 
     @objc private func checkLoginState() {

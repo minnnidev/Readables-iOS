@@ -21,6 +21,7 @@ struct DetailBookInfo: Equatable {
     let publicationDate: String
     var isFavorite: Bool
     let registeredLibraries: [Library]?
+    let isRead: Bool?
 }
 
 struct Library: Equatable {

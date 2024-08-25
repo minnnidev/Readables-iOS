@@ -126,6 +126,7 @@
 		AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */; };
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
+		AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54682C2C7B936B0062F899 /* UIViewController+.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
 		AB5712F92C7B3057007058FC /* OpenTalkIdRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */; };
 		AB5712FB2C7B49AC007058FC /* ChatListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */; };
@@ -184,6 +185,8 @@
 		ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C92C7398C100727875 /* OpenTalkTarget.swift */; };
 		ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CB2C7398CA00727875 /* OpenTalkService.swift */; };
 		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
+		ABC8202A2C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */; };
+		ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */; };
 		ABC820322C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */; };
 		ABC820342C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820332C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift */; };
 		ABC820362C7B279C001AB371 /* ChatResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820352C7B279C001AB371 /* ChatResponseDTO.swift */; };
@@ -315,6 +318,7 @@
 		AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		AB54682C2C7B936B0062F899 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
 		AB5712F82C7B3057007058FC /* OpenTalkIdRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkIdRequestDTO.swift; sourceTree = "<group>"; };
 		AB5712FA2C7B49AC007058FC /* ChatListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRequestDTO.swift; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 		ABB901C92C7398C100727875 /* OpenTalkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkTarget.swift; sourceTree = "<group>"; };
 		ABB901CB2C7398CA00727875 /* OpenTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkService.swift; sourceTree = "<group>"; };
 		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
+		ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueTokenRequestDTO.swift; sourceTree = "<group>"; };
+		ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponseDTO.swift; sourceTree = "<group>"; };
 		ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkJoinRequestDTO.swift; sourceTree = "<group>"; };
 		ABC820332C7B2711001AB371 /* OpenTalkJoinResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkJoinResponseDTO.swift; sourceTree = "<group>"; };
 		ABC820352C7B279C001AB371 /* ChatResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseDTO.swift; sourceTree = "<group>"; };
@@ -875,6 +881,7 @@
 				ABAAFDBC2C76FEFA00FDA084 /* UITableView+.swift */,
 				AB5D355E2C7767A00028995C /* DateFormatter+.swift */,
 				AB6C19D22C79D3B100BF844C /* String+.swift */,
+				AB54682C2C7B936B0062F899 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1268,6 +1275,7 @@
 			isa = PBXGroup;
 			children = (
 				AB9C5D6B2C78C1F900CE44AF /* LoginRequestDTO.swift */,
+				ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1276,6 +1284,7 @@
 			isa = PBXGroup;
 			children = (
 				AB9C5D6D2C78C42A00CE44AF /* LoginResponseDTO.swift */,
+				ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1653,6 +1662,7 @@
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
+				ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */,
 				054FA18C2C748D1F0007D9C9 /* FullScreenViewController.swift in Sources */,
 				AB2E7BF22C53EDD800CE43CB /* AllBooksViewController.swift in Sources */,
 				ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */,
@@ -1713,6 +1723,7 @@
 				ABB901A82C7241AD00727875 /* IndicatorFooterView.swift in Sources */,
 				AB4CBA562C6B44D7009A2AB6 /* LikedTitleHeaderView.swift in Sources */,
 				AB8205602C6E67850014C5A5 /* LoanItemResponseDTO.swift in Sources */,
+				ABC8202A2C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift in Sources */,
 				051156052C64C73F00230CFE /* BaseCollectionViewCell.swift in Sources */,
 				ABED44132C665DD90073398A /* GoalModel.swift in Sources */,
 				057925392C4FF34A00834EC6 /* MainTabBarController.swift in Sources */,
@@ -1731,6 +1742,7 @@
 				AB4CBA6C2C6DD8E7009A2AB6 /* NetworkService.swift in Sources */,
 				054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */,
 				AB8205552C6E661B0014C5A5 /* GenreTarget.swift in Sources */,
+				AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */,
 				054FA17F2C7465490007D9C9 /* StickyHeaderFlowLayout.swift in Sources */,
 				AB9C5D732C78C4C100CE44AF /* AuthService.swift in Sources */,
 				0579D10D2C6C9E230032AC1C /* Keyword.swift in Sources */,
