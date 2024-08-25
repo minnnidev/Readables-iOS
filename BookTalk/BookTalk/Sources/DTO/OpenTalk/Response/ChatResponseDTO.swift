@@ -9,6 +9,7 @@ import Foundation
 
 struct ChatResponseDTO: Decodable {
     let nickname: String?
+    let profileImageUrl: String?
     let content: String
     let createdAt: String
 }
