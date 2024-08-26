@@ -9,7 +9,6 @@ import Foundation
 
 enum SettingType: CaseIterable {
     case version
-    case terms
     case logout
     case withdraw
 
@@ -17,8 +16,6 @@ enum SettingType: CaseIterable {
         switch self {
         case .version:
             "버전 정보"
-        case .terms:
-            "이용 약관"
         case .logout:
             "로그아웃"
         case .withdraw:
@@ -30,7 +27,7 @@ enum SettingType: CaseIterable {
         switch self {
         case .version:
             return Constant.appVersion
-        case .terms, .logout, .withdraw:
+        case .logout, .withdraw:
             return nil
         }
     }

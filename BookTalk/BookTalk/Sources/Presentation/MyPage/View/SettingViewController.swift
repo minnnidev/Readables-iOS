@@ -153,10 +153,6 @@ extension SettingViewController: UITableViewDataSource {
         didSelectRowAt indexPath: IndexPath
     ) {
         switch SettingType.allCases[indexPath.row] {
-        case .terms:
-            // TODO: 이용약관 뷰로 이동 (ex. 노션, 앱 뷰)
-            return
-
         case .logout:
             presentLogoutActionSheet()
             return
