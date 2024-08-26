@@ -14,7 +14,7 @@ final class OpenTalkViewModel {
     var selectedPageType = OpenTalkPageType.hot
     var hotOpenTalks = Observable<[OpenTalkBookModel]>([])
     var favoriteOpenTalks = Observable<[OpenTalkBookModel]>([])
-    var isLoading = Observable(true)
+    var loadState = Observable(LoadState.initial)
 
     // MARK: - Helpers
 
@@ -27,6 +27,9 @@ final class OpenTalkViewModel {
         case let .setPageType(selectedPage):
             selectedPageType = selectedPage
 
+            favoriteOpenTalks.value.removeAll()
+            hotOpenTalks.value.removeAll()
+
             switch selectedPage {
             case .hot:
                 loadHotOpenTalk()
@@ -37,7 +40,7 @@ final class OpenTalkViewModel {
     }
 
     private func loadHotOpenTalk() {
-        isLoading.value = true
+        loadState.value = .loading
 
         Task {
             do {
@@ -45,18 +48,18 @@ final class OpenTalkViewModel {
 
                 await MainActor.run {
                     hotOpenTalks.value = result
-                    isLoading.value = false
+                    loadState.value = .completed
                 }
 
             } catch let error as NetworkError {
                 print(error.localizedDescription)
-                isLoading.value = false
+                loadState.value = .completed
             }
         }
     }
 
     private func loadFavoriteOpenTalk() {
-        isLoading.value = true
+        loadState.value = .loading
 
         Task {
             do {
@@ -64,12 +67,12 @@ final class OpenTalkViewModel {
 
                 await MainActor.run {
                     favoriteOpenTalks.value = result
-                    isLoading.value = false
+                    loadState.value = .completed
                 }
 
             } catch let error as NetworkError {
                 print(error.localizedDescription)
-                isLoading.value = false
+                loadState.value = .completed
             }
         }
     }

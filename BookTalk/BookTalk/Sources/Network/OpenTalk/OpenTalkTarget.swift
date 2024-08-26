@@ -36,7 +36,7 @@ extension OpenTalkTarget: TargetType {
         case .getHotOpenTalk:
             return "/api/opentalk/hot"
         case .getFavoriteOpenTalk:
-            return "/api/message/favorite"
+            return "/api/opentalk/favorite"
         }
     }
     

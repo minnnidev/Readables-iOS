@@ -150,54 +150,39 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.hotOpenTalks.subscribe { [weak self] result in
+        viewModel.loadState.subscribe { [weak self] state in
             guard let self = self else { return }
 
-            guard !viewModel.isLoading.value else {
+            switch state {
+            case .initial:
+                break
+
+            case .loading:
+                indicatorView.startAnimating()
+                bookCollectionView.isHidden = true
+
+            case .completed:
+                indicatorView.stopAnimating()
+                bookCollectionView.isHidden = false
+
+                var result: [OpenTalkBookModel] = .init()
+
+                switch viewModel.selectedPageType {
+                case .hot:
+                    result = viewModel.hotOpenTalks.value
+                case .liked:
+                    result = viewModel.favoriteOpenTalks.value
+                }
+
+                if result.isEmpty {
+                    bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
+                } else {
+                    bookCollectionView.restore()
+                }
+
                 bookCollectionView.reloadData()
-                return
             }
-
-            if result.isEmpty {
-                bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
-            } else {
-                bookCollectionView.restore()
-            }
-
-            bookCollectionView.reloadData()
         }
-
-        viewModel.favoriteOpenTalks.subscribe { [weak self] result in
-            guard let self = self else { return }
-
-            guard !viewModel.isLoading.value else {
-                bookCollectionView.reloadData()
-                return
-            }
-
-            if result.isEmpty {
-                bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
-            } else {
-                bookCollectionView.restore()
-            }
-
-            bookCollectionView.reloadData()
-        }
-
-         viewModel.isLoading.subscribe { [weak self] isLoading in
-             DispatchQueue.main.async { [weak self] in
-                 guard let self = self else { return }
-
-                 if isLoading {
-                     if !refreshControl.isRefreshing {
-                         indicatorView.startAnimating()
-                     }
-                 } else {
-                     refreshControl.endRefreshing()
-                     indicatorView.stopAnimating()
-                 }
-             }
-         }
      }
 
     // MARK: - Actions
