@@ -41,7 +41,7 @@ final class OpenTalkViewController: BaseViewController {
         bind()
         addTarget()
 
-        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
+        viewModel.send(action: .setPageType(.hot))
     }
 
     // MARK: - UI Setup
@@ -150,21 +150,39 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func bind() {
-         viewModel.openTalks.subscribe { [weak self] openTalkResult in
-             guard let self = self else { return }
+        viewModel.hotOpenTalks.subscribe { [weak self] result in
+            guard let self = self else { return }
 
-             guard !viewModel.isLoading.value else {
-                 bookCollectionView.reloadData()
-                 return
-             }
+            guard !viewModel.isLoading.value else {
+                bookCollectionView.reloadData()
+                return
+            }
 
-             if openTalkResult.isEmpty {
-                 self.bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
-             } else {
-                 self.bookCollectionView.restore()
-             }
-             bookCollectionView.reloadData()
-         }
+            if result.isEmpty {
+                bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
+            } else {
+                bookCollectionView.restore()
+            }
+
+            bookCollectionView.reloadData()
+        }
+
+        viewModel.favoriteOpenTalks.subscribe { [weak self] result in
+            guard let self = self else { return }
+
+            guard !viewModel.isLoading.value else {
+                bookCollectionView.reloadData()
+                return
+            }
+
+            if result.isEmpty {
+                bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
+            } else {
+                bookCollectionView.restore()
+            }
+
+            bookCollectionView.reloadData()
+        }
 
          viewModel.isLoading.subscribe { [weak self] isLoading in
              DispatchQueue.main.async { [weak self] in
@@ -193,7 +211,7 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     @objc private func refreshCollectionView() {
-        viewModel.send(action: .loadOpenTalks(viewModel.selectedPageType))
+        viewModel.send(action: .setPageType(.hot))
 
         refreshControl.endRefreshing()
     }
@@ -210,7 +228,13 @@ extension OpenTalkViewController: UICollectionViewDataSource {
         if collectionView == pageCollectionView {
             return OpenTalkPageType.allCases.count
         } else {
-            return viewModel.openTalks.value.count
+            switch viewModel.selectedPageType {
+            case .hot:
+                return viewModel.hotOpenTalks.value.count
+
+            case .liked:
+                return viewModel.favoriteOpenTalks.value.count
+            }
         }
     }
 
@@ -242,7 +266,16 @@ extension OpenTalkViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? BookImageCell else { return UICollectionViewCell() }
 
-            let openTalk = viewModel.openTalks.value[indexPath.item]
+            var openTalk: OpenTalkBookModel = .init(id: 0, isbn: "", bookName: "", bookImageURL: "")
+
+            switch viewModel.selectedPageType {
+            case .hot:
+                openTalk = viewModel.hotOpenTalks.value[indexPath.item]
+
+            case .liked:
+                openTalk = viewModel.favoriteOpenTalks.value[indexPath.item]
+            }
+
             cell.bind(
                 with: Book(
                     isbn: openTalk.isbn,
@@ -250,6 +283,7 @@ extension OpenTalkViewController: UICollectionViewDataSource {
                     title: openTalk.bookName
                 )
             )
+
             return cell
         }
     }
@@ -282,7 +316,17 @@ extension OpenTalkViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == pageCollectionView {
             viewModel.send(action: .setPageType(OpenTalkPageType.allCases[indexPath.item]))
         } else {
-            let book = viewModel.openTalks.value[indexPath.item]
+            var book: OpenTalkBookModel = .init(id: 0, isbn: "", bookName: "", bookImageURL: "")
+
+
+            switch viewModel.selectedPageType {
+            case .hot:
+                book = viewModel.hotOpenTalks.value[indexPath.item]
+
+            case .liked:
+                book = viewModel.favoriteOpenTalks.value[indexPath.item]
+            }
+
             let viewModel = ChatViewModel(isbn: book.isbn)
             let chattingVC = ChatViewController(viewModel: viewModel)
             chattingVC.hidesBottomBarWhenPushed = true
