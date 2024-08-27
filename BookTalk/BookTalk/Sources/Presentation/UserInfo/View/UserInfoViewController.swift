@@ -69,7 +69,7 @@ final class UserInfoViewController: BaseViewController {
     }
 
     @objc private func unselectedGender() {
-        viewModel.updateGender(.notSelcted)
+        viewModel.updateGender(.notSelected)
     }
 
     @objc private func dateChanged(_ sender: UIDatePicker) {
@@ -83,12 +83,18 @@ final class UserInfoViewController: BaseViewController {
     }
 
     @objc private func registerButtonDidTapped() {
+        let birthString: String = {
+            if let birthDate = viewModel.birthDate.value {
+                return DateFormatter.koreanDateFormat.string(from: birthDate)
+            } else {
+                return ""
+            }
+        }()
+
         viewModel.registerUserInfo(
             nickname: viewModel.nickname.value,
-            gender: viewModel.selectedGender.value ?? .man,
-            birth: DateFormatter.koreanDateFormat.string(
-                from: viewModel.birthDate.value ?? Date()
-            )
+            gender: viewModel.selectedGender.value,
+            birth: birthString
         )
     }
 
@@ -198,7 +204,7 @@ final class UserInfoViewController: BaseViewController {
             .accentOrange : .accentOrange.withAlphaComponent(0.2)
         femaleButton.backgroundColor = gender ==
             .woman ? .accentOrange : .accentOrange.withAlphaComponent(0.2)
-        unselectedGenderButton.backgroundColor = gender == .notSelcted ?
+        unselectedGenderButton.backgroundColor = gender == .notSelected ?
             .accentOrange : .accentOrange.withAlphaComponent(0.2)
     }
     
