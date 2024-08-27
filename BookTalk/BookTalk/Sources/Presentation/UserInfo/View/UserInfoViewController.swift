@@ -213,7 +213,7 @@ final class UserInfoViewController: BaseViewController {
             )
         } else {
             return NSAttributedString(
-                string: "생일을 선택해주세요.",
+                string: "생일을 선택해주세요. - 선택",
                 attributes: [.foregroundColor: UIColor.gray100]
             )
         }
@@ -245,7 +245,7 @@ final class UserInfoViewController: BaseViewController {
         
         setupTextField(
             textField: nicknameTextField,
-            placeholder: "닉네임 (한글 2자 이상, 영어 3자 이상)",
+            placeholder: "닉네임 (한글 2자 이상, 영어 3자 이상) - 필수",
             spacerWidth: 12
         )
         
