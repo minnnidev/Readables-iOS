@@ -42,8 +42,8 @@ extension UserResponseDTO {
         return .init(
             profileImage: "", // TODO: 
             nickname: nickname,
-            gender: GenderType(code: gender ?? "G0"),
-            birth: birthDate ?? ""
+            gender: GenderType(code: gender),
+            birth: birthDate
         )
     }
 }

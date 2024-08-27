@@ -16,6 +16,6 @@ struct UserInfo {
 struct UserBasicInfo: Codable {
     let profileImage: String
     let nickname: String?
-    let gender: GenderType
-    let birth: String
+    let gender: GenderType?
+    let birth: String?
 }
