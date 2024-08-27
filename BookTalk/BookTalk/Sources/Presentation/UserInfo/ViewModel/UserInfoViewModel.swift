@@ -38,7 +38,7 @@ struct UserInfoViewModel {
 
         nickname.value = oldUserInfo.nickname
         selectedGender.value = oldUserInfo.gender
-        birthDate.value = oldUserInfo.birth.toDate()
+        birthDate.value = oldUserInfo.birth?.toDate() ?? nil
     }
 
 
@@ -54,6 +54,7 @@ struct UserInfoViewModel {
     
     func updateBirthDate(_ date: Date?) {
         birthDate.value = date
+        validateForm()
     }
 
     func registerUserInfo(
@@ -98,9 +99,7 @@ struct UserInfoViewModel {
     // MARK: - Helpers
     
     private func validateForm() {
-        isFormValid.value =
-            isNicknameValid() && selectedGender.value != nil
-
+        isFormValid.value = isNicknameValid()
     }
     
     private func isNicknameValid() -> Bool {

@@ -74,7 +74,7 @@ final class HomeViewModel {
     }
 
     private func loadAgeTrend() async {
-        let age = UserData.shared.getUser()?.birth?.toKoreanAge()
+        let age = UserData.shared.getUser()?.birth?.toKoreanAge() ?? ""
 
         do {
             let result = try await HomeService.getAgeTrend(of: age)

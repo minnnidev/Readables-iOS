@@ -30,8 +30,8 @@ struct UserResponseDTO: Decodable {
     let kakaoId: String?
     let appleId: String?
     let regDate: String
-    let nickname: String?
-    let gender: String?
+    let nickname: String
+    let gender: String
     let birthDate: String?
     let profileImageUrl: String?
 }

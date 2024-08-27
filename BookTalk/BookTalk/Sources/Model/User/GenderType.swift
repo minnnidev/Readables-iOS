@@ -26,7 +26,7 @@ enum GenderType: String, Codable {
     var koreanTitle: String {
         switch self {
         case .notSelected:
-            return "선택없음"
+            return "선택 없음"
         case .man:
             return "남"
         case .woman:

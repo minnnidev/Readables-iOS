@@ -37,8 +37,8 @@ struct HomeService {
         return result.map { $0.toModel() }
     }
 
-    static func getAgeTrend(of age: String?) async throws -> [Book] {
-        let params: CustomHotTrendRequestDTO = .init(peerAge: age)
+    static func getAgeTrend(of age: String) async throws -> [Book] {
+        let params: CustomHotTrendRequestDTO = .init(peerAge: age.isEmpty ? nil : age)
 
         let result: [LoanItemResponseDTO] = try await NetworkService.shared.request(
             target: HomeTarget.getCustomHotTrend(params: params)
