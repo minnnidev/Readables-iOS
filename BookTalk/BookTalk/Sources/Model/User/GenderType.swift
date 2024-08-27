@@ -34,11 +34,7 @@ enum GenderType: String, Codable {
         }
     }
 
-    init?(code: String?) {
-        guard let code = code else {
-            return nil
-        }
-
+    init(code: String) {
         switch code {
         case "G0":
             self = .notSelected
@@ -47,7 +43,7 @@ enum GenderType: String, Codable {
         case "G2":
             self = .woman
         default:
-            return nil
+            self = .notSelected
         }
     }
 }

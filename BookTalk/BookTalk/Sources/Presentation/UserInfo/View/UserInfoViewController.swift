@@ -80,7 +80,7 @@ final class UserInfoViewController: BaseViewController {
     @objc private func registerButtonDidTapped() {
         viewModel.registerUserInfo(
             nickname: viewModel.nickname.value,
-            gender: viewModel.selectedGender.value ?? .man,
+            gender: viewModel.selectedGender.value,
             birth: DateFormatter.koreanDateFormat.string(
                 from: viewModel.birthDate.value ?? Date()
             )

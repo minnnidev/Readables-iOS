@@ -9,6 +9,7 @@ import Foundation
 
 struct EditUserInfoRequestDTO: Encodable {
     let nickname: String
-    let gender: String?
-    let birthDate: String?
+    let gender: String
+    let birthDate: String
+    let profileImageUrl: String
 }
