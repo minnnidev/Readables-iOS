@@ -14,6 +14,7 @@ final class UserInfoViewController: BaseViewController {
     private let nicknameTextField = UITextField()
     private let maleButton = UIButton(type: .system)
     private let femaleButton = UIButton(type: .system)
+    private let unselectedGenderButton = UIButton(type: .system)
     private let selectGenderButtonStackView = UIStackView()
     private let birthTextField = UITextField()
     private let datePicker = UIDatePicker()
@@ -66,7 +67,11 @@ final class UserInfoViewController: BaseViewController {
     @objc private func selectFemaleGender() {
         viewModel.updateGender(.woman)
     }
-    
+
+    @objc private func unselectedGender() {
+        viewModel.updateGender(.notSelcted)
+    }
+
     @objc private func dateChanged(_ sender: UIDatePicker) {
         viewModel.updateBirthDate(sender.date)
     }
@@ -124,6 +129,11 @@ final class UserInfoViewController: BaseViewController {
         femaleButton.addTarget(
             self,
             action: #selector(selectFemaleGender),
+            for: .touchUpInside
+        )
+        unselectedGenderButton.addTarget(
+            self,
+            action: #selector(unselectedGender),
             for: .touchUpInside
         )
         datePicker.addTarget(
@@ -188,6 +198,8 @@ final class UserInfoViewController: BaseViewController {
             .accentOrange : .accentOrange.withAlphaComponent(0.2)
         femaleButton.backgroundColor = gender ==
             .woman ? .accentOrange : .accentOrange.withAlphaComponent(0.2)
+        unselectedGenderButton.backgroundColor = gender == .notSelcted ?
+            .accentOrange : .accentOrange.withAlphaComponent(0.2)
     }
     
     private func dateFormat(date: Date?) -> NSAttributedString {
@@ -239,8 +251,10 @@ final class UserInfoViewController: BaseViewController {
         
         setupGenderButton(maleButton, title: "남")
         setupGenderButton(femaleButton, title: "여")
-        
+        setupGenderButton(unselectedGenderButton, title: "선택 안 함")
+
         selectGenderButtonStackView.do {
+            $0.addArrangedSubview(unselectedGenderButton)
             $0.addArrangedSubview(maleButton)
             $0.addArrangedSubview(femaleButton)
             $0.axis = .horizontal
