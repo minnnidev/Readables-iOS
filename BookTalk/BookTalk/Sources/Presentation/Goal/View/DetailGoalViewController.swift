@@ -345,13 +345,15 @@ final class DetailGoalViewController: BaseViewController {
         let completedAction = UIAlertAction(
             title: "목표 완료",
             style: .default) { [weak self] _ in
-                self?.goalDeleteButtonDidTapped()
+                guard let self = self else { return }
+                viewModel.send(action: .completeGoal(goalId: viewModel.goalId))
             }
 
         let deleteAction = UIAlertAction(
             title: "목표 삭제",
             style: .default) { [weak self] _ in
-                self?.goalCompletedButtonDidTapped()
+                guard let self = self else { return }
+                viewModel.send(action: .deleteGoal(goalId: viewModel.goalId))
             }
 
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
@@ -362,15 +364,6 @@ final class DetailGoalViewController: BaseViewController {
 
         present(alertVC, animated: true)
     }
-
-    private func goalDeleteButtonDidTapped() {
-        // TODO: 목표 삭제 action
-    }
-
-    private func goalCompletedButtonDidTapped() {
-        // TODO: 목표 완료 action
-    }
-
 }
 
 extension DetailGoalViewController {

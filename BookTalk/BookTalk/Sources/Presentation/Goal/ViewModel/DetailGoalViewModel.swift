@@ -26,6 +26,8 @@ final class DetailGoalViewModel {
     enum Action {
         case loadGoalDetail(goalId: Int)
         case loadGoalData(goalData: [GoalModel])
+        case deleteGoal(goalId: Int)
+        case completeGoal(goalId: Int)
     }
 
     func send(action: Action) {
@@ -57,6 +59,12 @@ final class DetailGoalViewModel {
 
             goalChartData.value = entryDatas
             goalLabelData.value = goalData.map { $0.day }
+
+        case let .deleteGoal(goalId):
+            return
+
+        case let .completeGoal(goalId):
+            return
         }
     }
 }
