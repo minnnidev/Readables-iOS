@@ -32,6 +32,7 @@ final class DetailGoalViewController: BaseViewController {
     private let goalChart = BarChartView()
     private let firstSeparatorLine = UIView()
     private let secondSeparatorLine = UIView()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: DetailGoalViewModel
 
@@ -80,6 +81,22 @@ final class DetailGoalViewController: BaseViewController {
 
             if let imageURL = URL(string: detail.bookInfo.coverImageURL) {
                 bookImageView.kf.setImage(with: imageURL)
+            }
+        }
+
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .initial:
+                contentView.isHidden = true
+
+            case .loading:
+                indicatorView.startAnimating()
+
+            case .completed:
+                contentView.isHidden = false
+                indicatorView.stopAnimating()
             }
         }
     }
@@ -194,10 +211,16 @@ final class DetailGoalViewController: BaseViewController {
         [firstSeparatorLine, secondSeparatorLine].forEach {
             $0.backgroundColor = .gray100
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
-        view.addSubview(scrollView)
+        [scrollView, indicatorView].forEach {
+            view.addSubview($0)
+        }
 
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -217,6 +240,10 @@ final class DetailGoalViewController: BaseViewController {
             goalChartLabel, goalChart
         ].forEach {
             contentView.addSubview($0)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         bookImageView.snp.makeConstraints {

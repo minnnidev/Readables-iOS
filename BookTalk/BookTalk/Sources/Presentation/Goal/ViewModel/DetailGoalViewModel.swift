@@ -14,6 +14,7 @@ final class DetailGoalViewModel {
     private(set) var goalChartData = Observable<[BarChartDataEntry]>([])
     private(set) var goalLabelData = Observable<[String]>([])
     private(set) var goalDetail = Observable<GoalDetailModel?>(nil)
+    private(set) var loadState = Observable(LoadState.initial)
 
     let goalId: Int
 
@@ -31,12 +32,15 @@ final class DetailGoalViewModel {
 
         switch action {
         case let .loadGoalDetail(goalId):
+            loadState.value = .loading
+
             Task {
                 do {
                     let detailResult = try await GoalService.getGoalDetail(of: goalId)
 
                     await MainActor.run {
                         goalDetail.value = detailResult
+                        loadState.value = .completed
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
