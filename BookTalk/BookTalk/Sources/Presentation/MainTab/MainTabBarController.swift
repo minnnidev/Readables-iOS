@@ -40,15 +40,14 @@ final class MainTabBarController: UITabBarController {
             selectedImage: "message.fill",
             rootViewController: OpenTalkViewController(viewModel: openTalkViewModel)
         )
-        
-        // TODO: 목표 탭 추가
-//        let goalViewModel = GoalViewModel()
-//        let goal = createNavigationController(
-//            title: "목표",
-//            unselectedImage: "chart.xyaxis.line",
-//            selectedImage: "chart.xyaxis.line",
-//            rootViewController: GoalViewController(viewModel: goalViewModel)
-//        )
+
+        let goalViewModel = GoalViewModel()
+        let goal = createNavigationController(
+            title: "목표",
+            unselectedImage: "chart.xyaxis.line",
+            selectedImage: "chart.xyaxis.line",
+            rootViewController: GoalViewController(viewModel: goalViewModel)
+        )
         
         let my = createNavigationController(
             title: "마이",
@@ -57,7 +56,7 @@ final class MainTabBarController: UITabBarController {
             rootViewController: MyViewController()
         )
         
-        viewControllers = [home, category, openTalk, my]
+        viewControllers = [home, category, openTalk, goal, my]
     }
     
     private func createNavigationController(

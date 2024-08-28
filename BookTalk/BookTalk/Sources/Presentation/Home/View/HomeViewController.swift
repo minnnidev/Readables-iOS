@@ -25,8 +25,6 @@ final class HomeViewController: BaseViewController {
         bind()
 
         viewModel.send(action: .loadBooks)
-
-        print(KeychainManager.shared.read(key: TokenKey.accessToken))
     }
 
     // MARK: - Bind
