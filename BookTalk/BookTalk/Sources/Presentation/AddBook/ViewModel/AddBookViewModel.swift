@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum AddBookType {
+    case readBook
+    case goalBook
+}
+
 final class AddBookViewModel {
 
     enum Action {
@@ -29,10 +34,15 @@ final class AddBookViewModel {
     private var pageSize = 50
 
     private let bookName: String?
+    private let addBookType: AddBookType
 
     // MARK: - Initializer
 
-    init(bookName: String? = nil) {
+    init(
+        addBookType: AddBookType,
+        bookName: String? = nil
+    ) {
+        self.addBookType = addBookType
         self.bookName = bookName
 
         searchText.value = bookName ?? ""

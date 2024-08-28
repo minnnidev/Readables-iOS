@@ -44,6 +44,7 @@ final class AddBookViewController: BaseViewController {
 
     override func setNavigationBar() {
         navigationItem.titleView = searchBar
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     override func setViews() {

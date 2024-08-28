@@ -44,6 +44,7 @@ final class GoalViewController: BaseViewController {
 
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "목표"
+        navigationItem.backButtonTitle = ""
 
         let plusButton = UIBarButtonItem(
             image: UIImage(systemName: "plus"),
@@ -109,7 +110,10 @@ final class GoalViewController: BaseViewController {
     // MARK: - Actions
 
     @objc private func addButtonDidTapped() {
-        // TODO: 목표 추가로 이동
+        let viewModel = AddBookViewModel(addBookType: .goalBook)
+        let addBookVC = AddBookViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(addBookVC, animated: true)
     }
 }
 

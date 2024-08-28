@@ -113,7 +113,7 @@ final class ChatMenuViewController: BaseViewController {
     }
 
     private func pushToAddBookViewController(of bookName: String) {
-        let viewModel = AddBookViewModel(bookName: bookName)
+        let viewModel = AddBookViewModel(addBookType: .goalBook, bookName: bookName)
         let addBookVC = AddBookViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(addBookVC, animated: true)
