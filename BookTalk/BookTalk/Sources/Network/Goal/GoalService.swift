@@ -12,9 +12,8 @@ struct GoalService {
     static func createGoal(with isbn: String, totalPage: Int) async throws {
         let params: CreateGoalRequestDTO = .init(isbn: isbn, totalPage: totalPage)
 
-        let result: GoalResponseDTO = try await NetworkService.shared.request(
+        let _: GoalResponseDTO = try await NetworkService.shared.request(
             target: GoalTarget.postGoalCreate(params: params)
         )
-
     }
 }
