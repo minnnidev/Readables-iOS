@@ -18,12 +18,28 @@ struct GoalService {
     }
 
     static func getGoalDetail(of goalId: Int) async throws -> GoalDetailModel {
-        let params: GoalDetailRequestDTO = .init(goalId: goalId)
+        let params: GoalRequestDTO = .init(goalId: goalId)
 
         let result: GoalResponseDTO = try await NetworkService.shared.request(
             target: GoalTarget.getGoalDetail(params: params)
         )
 
         return result.toModel()
+    }
+
+    static func completeGoal(of goalId: Int) async throws {
+        let params: GoalRequestDTO = .init(goalId: goalId)
+
+        let _: GoalResponseDTO = try await NetworkService.shared.request(
+            target: GoalTarget.putCompleteGoal(params: params)
+        )
+    }
+
+    static func deleteGoal(of goalId: Int) async throws {
+        let params: GoalRequestDTO = .init(goalId: goalId)
+
+        let _: String = try await NetworkService.shared.request(
+            target: GoalTarget.deleteGoal(params: params)
+        )
     }
 }

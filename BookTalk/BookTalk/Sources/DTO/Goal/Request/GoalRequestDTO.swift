@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct GoalDetailRequestDTO: Encodable {
+struct GoalRequestDTO: Encodable {
     let goalId: Int
 }

@@ -11,17 +11,23 @@ import Alamofire
 
 enum GoalTarget {
     case postGoalCreate(params: CreateGoalRequestDTO)
-    case getGoalDetail(params: GoalDetailRequestDTO)
+    case getGoalDetail(params: GoalRequestDTO)
+    case deleteGoal(params: GoalRequestDTO)
+    case putCompleteGoal(params: GoalRequestDTO)
 }
 
 extension GoalTarget: TargetType {
-
+    
     var path: String {
         switch self {
         case .postGoalCreate:
-            return "api/goal/create"
+            return "/api/goal/create"
         case .getGoalDetail:
-            return "api/goal/get"
+            return "/api/goal/get"
+        case .deleteGoal:
+            return "/api/goal/delete"
+        case .putCompleteGoal:
+            return "/api/goal/finish"
         }
     }
     
@@ -31,6 +37,10 @@ extension GoalTarget: TargetType {
             return .post
         case .getGoalDetail:
             return .get
+        case .deleteGoal:
+            return .delete
+        case .putCompleteGoal:
+            return .put
         }
     }
     
@@ -38,7 +48,9 @@ extension GoalTarget: TargetType {
         switch self {
         case let .postGoalCreate(params):
             return .requestParameters(parameters: params.toDictionary())
-        case let .getGoalDetail(params):
+        case let .getGoalDetail(params),
+            let .deleteGoal(params),
+            let .putCompleteGoal(params):
             return .requestParameters(parameters: params.toDictionary())
         }
     }

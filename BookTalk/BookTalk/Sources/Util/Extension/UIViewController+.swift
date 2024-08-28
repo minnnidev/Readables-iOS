@@ -12,7 +12,8 @@ extension UIViewController {
     func showAutoDismissAlert(
         title: String,
         message: String? = nil,
-        dismissAfter seconds: Double = 3.0
+        dismissAfter seconds: Double = 1.0,
+        completion: (() -> Void)? = nil
     ) {
         let alertVC = UIAlertController(
             title: title,
@@ -24,7 +25,7 @@ extension UIViewController {
             guard let self = self else { return }
             present(alertVC, animated: true) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                    alertVC.dismiss(animated: true, completion: nil)
+                    alertVC.dismiss(animated: true, completion: completion)
                 }
             }
         }

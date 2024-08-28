@@ -185,7 +185,7 @@
 		ABB993622C7F811600E6DB67 /* GoalResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */; };
 		ABB993652C7F81E100E6DB67 /* GoalTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993642C7F81E100E6DB67 /* GoalTarget.swift */; };
 		ABB993672C7F81E800E6DB67 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993662C7F81E800E6DB67 /* GoalService.swift */; };
-		ABB993692C7F871500E6DB67 /* GoalDetailRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993682C7F871500E6DB67 /* GoalDetailRequestDTO.swift */; };
+		ABB993692C7F871500E6DB67 /* GoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */; };
 		ABB9936B2C7F878B00E6DB67 /* GoalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */; };
 		ABC8202A2C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */; };
 		ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */; };
@@ -383,7 +383,7 @@
 		ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalResponseDTO.swift; sourceTree = "<group>"; };
 		ABB993642C7F81E100E6DB67 /* GoalTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTarget.swift; sourceTree = "<group>"; };
 		ABB993662C7F81E800E6DB67 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
-		ABB993682C7F871500E6DB67 /* GoalDetailRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailRequestDTO.swift; sourceTree = "<group>"; };
+		ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequestDTO.swift; sourceTree = "<group>"; };
 		ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailModel.swift; sourceTree = "<group>"; };
 		ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueTokenRequestDTO.swift; sourceTree = "<group>"; };
 		ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponseDTO.swift; sourceTree = "<group>"; };
@@ -1413,7 +1413,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */,
-				ABB993682C7F871500E6DB67 /* GoalDetailRequestDTO.swift */,
+				ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1759,7 +1759,7 @@
 				AB8205622C6E687D0014C5A5 /* Encodable+.swift in Sources */,
 				ABAAFDBD2C76FEFA00FDA084 /* UITableView+.swift in Sources */,
 				AB9C5D652C78A9C900CE44AF /* MyLibraryViewModel.swift in Sources */,
-				ABB993692C7F871500E6DB67 /* GoalDetailRequestDTO.swift in Sources */,
+				ABB993692C7F871500E6DB67 /* GoalRequestDTO.swift in Sources */,
 				AB5D355B2C775DF70028995C /* UserTarget.swift in Sources */,
 				ABEF812E2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift in Sources */,
 				ABEF81332C7BD156007D1DC7 /* HomeTarget.swift in Sources */,

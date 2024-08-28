@@ -15,11 +15,13 @@ final class DetailGoalViewModel {
     private(set) var goalLabelData = Observable<[String]>([])
     private(set) var goalDetail = Observable<GoalDetailModel?>(nil)
     private(set) var loadState = Observable(LoadState.initial)
+    private(set) var deleteSucceed = Observable(false)
+    private(set) var completeSucced = Observable(false)
 
     let goalId: Int
 
     // TODO: 수정 / 현재 임의로 넣어둠
-    init(goalId: Int = 3) {
+    init(goalId: Int = 7) {
         self.goalId = goalId
     }
 
@@ -61,10 +63,26 @@ final class DetailGoalViewModel {
             goalLabelData.value = goalData.map { $0.day }
 
         case let .deleteGoal(goalId):
-            return
+            Task {
+                do {
+                    try await GoalService.deleteGoal(of: goalId)
+
+                    deleteSucceed.value = true
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
 
         case let .completeGoal(goalId):
-            return
+            Task {
+                do {
+                    try await GoalService.completeGoal(of: goalId)
+
+                    completeSucced.value = true
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }

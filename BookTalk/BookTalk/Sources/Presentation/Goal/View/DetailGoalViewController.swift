@@ -99,6 +99,29 @@ final class DetailGoalViewController: BaseViewController {
                 indicatorView.stopAnimating()
             }
         }
+
+        viewModel.deleteSucceed.subscribe { [weak self] isSucceed in
+            guard isSucceed else { return }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
+                showAutoDismissAlert(title: "목표 삭제가 완료되었어요.") {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+
+        viewModel.completeSucced.subscribe { [weak self] isSucceed in
+            guard isSucceed else { return }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                showAutoDismissAlert(title: "완료된 목표에 추가되었어요!")
+
+               // TODO: 완료됐을 때의 UI?
+            }
+        }
     }
 
     // MARK: - UI Setup
