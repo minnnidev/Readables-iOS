@@ -16,4 +16,14 @@ struct GoalService {
             target: GoalTarget.postGoalCreate(params: params)
         )
     }
+
+    static func getGoalDetail(of goalId: Int) async throws -> GoalDetailModel {
+        let params: GoalDetailRequestDTO = .init(goalId: goalId)
+
+        let result: GoalResponseDTO = try await NetworkService.shared.request(
+            target: GoalTarget.getGoalDetail(params: params)
+        )
+
+        return result.toModel()
+    }
 }

@@ -42,4 +42,9 @@ extension String {
 
         return dateFormatter.date(from: self)
     }
+
+    func toExtractDateString() -> String {
+        let dateTimeParts = self.split(separator: "T")
+        return dateTimeParts.first.map { String($0) } ?? ""
+    }
 }

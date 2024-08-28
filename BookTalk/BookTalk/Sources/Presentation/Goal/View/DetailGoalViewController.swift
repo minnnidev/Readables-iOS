@@ -8,6 +8,7 @@
 import UIKit
 
 import DGCharts
+import Kingfisher
 
 final class DetailGoalViewController: BaseViewController {
 
@@ -15,13 +16,9 @@ final class DetailGoalViewController: BaseViewController {
 
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let bookNameLabel = UILabel()
     private let bookImageView = UIImageView()
     private let bookTitlelabel = UILabel()
-    private let bookAuthorLabel = UILabel()
-    private let bookPublisherLabel = UILabel()
-    private let bookPublishedDate = UILabel()
-    private let startReadingDate = UILabel()
+    private let startReadingDateLabel = UILabel()
     private let archiveView = UIView()
     private let archiveLabel = UILabel()
     private let todayDateLabel = UILabel()
@@ -56,6 +53,8 @@ final class DetailGoalViewController: BaseViewController {
         super.viewDidLoad()
 
         bind()
+
+        viewModel.send(action: .loadGoalDetail(goalId: viewModel.goalId))
     }
 
     // MARK: - Helpers
@@ -70,6 +69,18 @@ final class DetailGoalViewController: BaseViewController {
         viewModel.goalLabelData.subscribe { [weak self] labels in
             self?.goalChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
             self?.goalChart.xAxis.setLabelCount(labels.count, force: false)
+        }
+
+        viewModel.goalDetail.subscribe { [weak self] detail in
+            guard let detail = detail else { return }
+            guard let self = self else { return }
+
+            bookTitlelabel.text = detail.bookInfo.title
+            startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"
+
+            if let imageURL = URL(string: detail.bookInfo.coverImageURL) {
+                bookImageView.kf.setImage(with: imageURL)
+            }
         }
     }
 
@@ -98,11 +109,6 @@ final class DetailGoalViewController: BaseViewController {
             $0.isScrollEnabled = true
         }
 
-        bookNameLabel.do {
-            $0.text = "나미야 잡화점의 기적"
-            $0.font = .systemFont(ofSize: 20, weight: .semibold)
-        }
-
         archiveLabel.do {
             $0.text = "오늘 이만큼 읽었어요 📚"
             $0.font = .systemFont(ofSize: 20, weight: .semibold)
@@ -117,13 +123,17 @@ final class DetailGoalViewController: BaseViewController {
             $0.backgroundColor = .gray100
         }
 
-        [
-            bookTitlelabel, bookAuthorLabel, bookPublisherLabel,
-            bookPublishedDate, startReadingDate
-        ].forEach {
+        bookTitlelabel.do {
             $0.textColor = .black
-            $0.font = .systemFont(ofSize: 16, weight: .medium)
-            $0.text = "책 정보"
+            $0.font = .systemFont(ofSize: 16, weight: .semibold)
+            $0.lineBreakMode = .byCharWrapping
+            $0.numberOfLines = 0
+        }
+
+        startReadingDateLabel.do {
+            $0.textColor = .accentOrange
+            $0.font = .systemFont(ofSize: 16, weight: .semibold)
+            $0.text = "시작 날짜"
         }
 
         goalChart.do {
@@ -201,48 +211,29 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         [
-            bookNameLabel, bookImageView, bookTitlelabel, bookAuthorLabel, bookPublisherLabel,
-            bookPublishedDate, startReadingDate, archiveView, goalChart, datePicker,
-            startPageTextField, startTitleLabel, endPageTextField, endTitleLabel, addReadPageButton,
-            goalChartLabel, archiveLabel, firstSeparatorLine, secondSeparatorLine
+            bookImageView, bookTitlelabel, startReadingDateLabel, firstSeparatorLine, 
+            archiveLabel, datePicker, archiveView, startPageTextField, startTitleLabel,
+            endPageTextField, endTitleLabel, addReadPageButton, secondSeparatorLine,
+            goalChartLabel, goalChart
         ].forEach {
             contentView.addSubview($0)
         }
 
-        bookNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(20)
-        }
-
         bookImageView.snp.makeConstraints {
-            $0.top.equalTo(bookNameLabel.snp.bottom).offset(12)
+            $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.width.equalTo(100)
             $0.height.equalTo(150)
         }
 
         bookTitlelabel.snp.makeConstraints {
-            $0.top.equalTo(bookImageView).offset(12)
-            $0.leading.equalTo(bookImageView.snp.trailing).offset(12)
+            $0.top.equalTo(bookImageView)
+            $0.leading.equalTo(bookImageView.snp.trailing).offset(4)
+            $0.centerX.equalToSuperview()
         }
 
-        bookAuthorLabel.snp.makeConstraints {
-            $0.top.equalTo(bookTitlelabel.snp.bottom)
-            $0.leading.equalTo(bookTitlelabel)
-        }
-
-        bookPublisherLabel.snp.makeConstraints {
-            $0.top.equalTo(bookAuthorLabel.snp.bottom)
-            $0.leading.equalTo(bookTitlelabel)
-        }
-
-        bookPublishedDate.snp.makeConstraints {
-            $0.top.equalTo(bookPublisherLabel.snp.bottom)
-            $0.leading.equalTo(bookTitlelabel)
-        }
-
-        startReadingDate.snp.makeConstraints {
-            $0.top.equalTo(bookPublishedDate.snp.bottom).offset(12)
+        startReadingDateLabel.snp.makeConstraints {
+            $0.top.equalTo(bookTitlelabel.snp.bottom).offset(8)
             $0.leading.equalTo(bookTitlelabel)
         }
 

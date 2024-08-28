@@ -31,6 +31,16 @@ struct GoalResponseDTO: Decodable {
     }
 }
 
+extension GoalResponseDTO {
+
+    func toModel() -> GoalDetailModel {
+        return .init(
+            bookInfo: bookSummary.toModel(),
+            startDate: createdAt.toExtractDateString()
+        )
+    }
+}
+
 struct BookSummaryDTO: Decodable {
     let isbn: String
     let title: String
@@ -42,6 +52,18 @@ struct BookSummaryDTO: Decodable {
         case title
         case author
         case imageURL = "imageUrl"
+    }
+}
+
+extension BookSummaryDTO {
+
+    func toModel() -> BasicBookInfo {
+        return .init(
+            isbn: isbn,
+            coverImageURL: imageURL,
+            title: title,
+            author: author
+        )
     }
 }
 

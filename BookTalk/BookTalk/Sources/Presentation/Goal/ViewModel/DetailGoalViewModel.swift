@@ -5,21 +5,45 @@
 //  Created by 김민 on 8/10/24.
 //
 
+
 import Foundation
 import DGCharts
 
 final class DetailGoalViewModel {
 
-    enum Action {
-        case loadGoalData(goalData: [GoalModel])
+    private(set) var goalChartData = Observable<[BarChartDataEntry]>([])
+    private(set) var goalLabelData = Observable<[String]>([])
+    private(set) var goalDetail = Observable<GoalDetailModel?>(nil)
+
+    let goalId: Int
+
+    // TODO: 수정 / 현재 임의로 넣어둠
+    init(goalId: Int = 3) {
+        self.goalId = goalId
     }
 
-    var goalChartData = Observable<[BarChartDataEntry]>([])
-    var goalLabelData = Observable<[String]>([])
+    enum Action {
+        case loadGoalDetail(goalId: Int)
+        case loadGoalData(goalData: [GoalModel])
+    }
 
     func send(action: Action) {
 
         switch action {
+        case let .loadGoalDetail(goalId):
+            Task {
+                do {
+                    let detailResult = try await GoalService.getGoalDetail(of: goalId)
+
+                    await MainActor.run {
+                        goalDetail.value = detailResult
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
+            return
+            
         case let .loadGoalData(goalData):
             var entryDatas: [BarChartDataEntry] = .init()
 

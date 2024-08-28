@@ -11,6 +11,7 @@ import Alamofire
 
 enum GoalTarget {
     case postGoalCreate(params: CreateGoalRequestDTO)
+    case getGoalDetail(params: GoalDetailRequestDTO)
 }
 
 extension GoalTarget: TargetType {
@@ -19,6 +20,8 @@ extension GoalTarget: TargetType {
         switch self {
         case .postGoalCreate:
             return "api/goal/create"
+        case .getGoalDetail:
+            return "api/goal/get"
         }
     }
     
@@ -26,12 +29,16 @@ extension GoalTarget: TargetType {
         switch self {
         case .postGoalCreate:
             return .post
+        case .getGoalDetail:
+            return .get
         }
     }
     
     var task: APITask {
         switch self {
         case let .postGoalCreate(params):
+            return .requestParameters(parameters: params.toDictionary())
+        case let .getGoalDetail(params):
             return .requestParameters(parameters: params.toDictionary())
         }
     }

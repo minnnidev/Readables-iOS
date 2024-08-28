@@ -157,7 +157,9 @@ extension GoalViewController: UITableViewDataSource {
 
             if sectionType == .progressGoal {
                 cell.bind(
-                    .init(headerTitle: "애벌래 님이 진행중인 목표 ⚡", books: [])
+                    .init(headerTitle: "애벌래 님이 진행중인 목표 ⚡", 
+                          books: [.init(isbn: "", imageURL: "", title: "")] // TODO: 수정
+                         )
                 )
             } else if sectionType == .completedGoal {
                 cell.bind(
