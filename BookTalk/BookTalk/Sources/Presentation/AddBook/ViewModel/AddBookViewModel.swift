@@ -93,7 +93,19 @@ final class AddBookViewModel {
             }
 
         case let .addToGoalBooks(book, totalPage):
-            return
+            guard let book = book else { return }
+            Task {
+                do {
+                    try await GoalService.createGoal(with: book.isbn, totalPage: Int(totalPage)!)
+
+                    await MainActor.run {
+                        addBookSucceed.value = true
+                    }
+                    
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 

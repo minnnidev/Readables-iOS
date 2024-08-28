@@ -181,6 +181,10 @@
 		ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C92C7398C100727875 /* OpenTalkTarget.swift */; };
 		ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CB2C7398CA00727875 /* OpenTalkService.swift */; };
 		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
+		ABB993602C7F80C900E6DB67 /* CreateGoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */; };
+		ABB993622C7F811600E6DB67 /* GoalResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */; };
+		ABB993652C7F81E100E6DB67 /* GoalTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993642C7F81E100E6DB67 /* GoalTarget.swift */; };
+		ABB993672C7F81E800E6DB67 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993662C7F81E800E6DB67 /* GoalService.swift */; };
 		ABC8202A2C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */; };
 		ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */; };
 		ABC820322C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */; };
@@ -373,6 +377,10 @@
 		ABB901C92C7398C100727875 /* OpenTalkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkTarget.swift; sourceTree = "<group>"; };
 		ABB901CB2C7398CA00727875 /* OpenTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkService.swift; sourceTree = "<group>"; };
 		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
+		ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalRequestDTO.swift; sourceTree = "<group>"; };
+		ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalResponseDTO.swift; sourceTree = "<group>"; };
+		ABB993642C7F81E100E6DB67 /* GoalTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTarget.swift; sourceTree = "<group>"; };
+		ABB993662C7F81E800E6DB67 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
 		ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueTokenRequestDTO.swift; sourceTree = "<group>"; };
 		ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponseDTO.swift; sourceTree = "<group>"; };
 		ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkJoinRequestDTO.swift; sourceTree = "<group>"; };
@@ -999,6 +1007,7 @@
 				ABAAFDB32C76FDD800FDA084 /* Search */,
 				AB8224B52C7847F40082CD30 /* Library */,
 				ABEF81312C7BD146007D1DC7 /* Home */,
+				ABB993632C7F81D900E6DB67 /* Goal */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1170,6 +1179,7 @@
 				ABB901A92C72799400727875 /* Book */,
 				ABB901C22C7397E700727875 /* OpenTalk */,
 				ABEF812A2C7BD02B007D1DC7 /* Home */,
+				ABB9935C2C7F80A500E6DB67 /* Goal */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1384,6 +1394,40 @@
 				ABB901CB2C7398CA00727875 /* OpenTalkService.swift */,
 			);
 			path = OpenTalk;
+			sourceTree = "<group>";
+		};
+		ABB9935C2C7F80A500E6DB67 /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				ABB9935D2C7F80B000E6DB67 /* Request */,
+				ABB9935E2C7F80B400E6DB67 /* Response */,
+			);
+			path = Goal;
+			sourceTree = "<group>";
+		};
+		ABB9935D2C7F80B000E6DB67 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		ABB9935E2C7F80B400E6DB67 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		ABB993632C7F81D900E6DB67 /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				ABB993642C7F81E100E6DB67 /* GoalTarget.swift */,
+				ABB993662C7F81E800E6DB67 /* GoalService.swift */,
+			);
+			path = Goal;
 			sourceTree = "<group>";
 		};
 		ABC820302C7B26CC001AB371 /* Request */ = {
@@ -1684,6 +1728,7 @@
 				AB5D35632C7797050028995C /* LibrariesResponseDTO.swift in Sources */,
 				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
+				ABB993602C7F80C900E6DB67 /* CreateGoalRequestDTO.swift in Sources */,
 				ABEF81382C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift in Sources */,
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
@@ -1693,6 +1738,7 @@
 				ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */,
 				AB8224A52C7842AD0082CD30 /* RegionType.swift in Sources */,
 				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
+				ABB993672C7F81E800E6DB67 /* GoalService.swift in Sources */,
 				AB5712FB2C7B49AC007058FC /* ChatListRequestDTO.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */,
@@ -1721,6 +1767,7 @@
 				054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
 				AB9C5D6C2C78C1F900CE44AF /* LoginRequestDTO.swift in Sources */,
+				ABB993652C7F81E100E6DB67 /* GoalTarget.swift in Sources */,
 				AB4CBA602C6BB0E9009A2AB6 /* TargetType.swift in Sources */,
 				AB07848B2C75A89E0017812F /* ISBNRequestDTO.swift in Sources */,
 				0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */,
@@ -1817,6 +1864,7 @@
 				054FA1832C7465B40007D9C9 /* LoginViewController.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
 				AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */,
+				ABB993622C7F811600E6DB67 /* GoalResponseDTO.swift in Sources */,
 				ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */,
 				AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
