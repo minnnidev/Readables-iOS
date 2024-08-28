@@ -158,6 +158,61 @@ final class AddBookViewController: BaseViewController {
 
             self?.showAutoDismissAlert(title: "이미 읽은 책으로 추가되어 있어요!")
         }
+
+        viewModel.presentPageAlert.subscribe { [weak self] isPresented in
+            guard isPresented else { return }
+            guard let self = self else { return }
+
+            configurePageInputAlert()
+        }
+    }
+
+    private func configurePageInputAlert() {
+        let alertVC = UIAlertController(
+            title: "목표 추가",
+            message: "총 페이지 수를 입력해 주세요.",
+            preferredStyle: .alert
+        )
+
+        alertVC.addTextField { tf in
+            tf.placeholder = "페이지 수"
+            tf.addTarget(
+                self,
+                action: #selector(self.textDidChange(_:)),
+                for: .editingChanged
+            )
+        }
+
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
+
+        let okAction = UIAlertAction(title: "완료", style: .default) { _ in
+            if let textField = alertVC.textFields?.first {
+                self.viewModel.send(
+                    action: .addToGoalBooks(
+                        book: self.viewModel.goalBook,
+                        totalPage: textField.text ?? ""
+                    )
+                )
+            }
+        }
+
+        okAction.isEnabled = false
+
+        [cancelAction, okAction].forEach { alertVC.addAction($0) }
+
+        present(alertVC, animated: true)
+    }
+
+    @objc private func textDidChange(_ textField: UITextField) {
+        guard let alertVC = self.presentedViewController as? UIAlertController,
+              let okAction = alertVC.actions.last else {
+            return
+        }
+        okAction.isEnabled = !(textField.text?.isEmpty ?? true)
     }
 }
 
@@ -190,7 +245,7 @@ extension AddBookViewController: UICollectionViewDataSource {
         didSelectItemAt indexPath: IndexPath
     ) {
         let book = viewModel.books.value[indexPath.item]
-        viewModel.send(action: .addToReadBooks(book: book))
+        viewModel.send(action: .tapBookImage(book: book))
     }
 }
 

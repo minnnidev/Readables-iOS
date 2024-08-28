@@ -18,7 +18,8 @@ final class AddBookViewModel {
         case loadFavoriteBooks
         case loadResult(query: String)
         case loadMoreResult(query: String)
-        case addToReadBooks(book: Book)
+        case tapBookImage(book: Book)
+        case addToGoalBooks(book: Book?, totalPage: String)
     }
 
     // MARK: - Properties
@@ -29,6 +30,8 @@ final class AddBookViewModel {
     private(set) var hasMoreResult = Observable(true)
     private(set) var addBookSucceed = Observable(false)
     private(set) var presentAlert = Observable(false)
+    private(set) var presentPageAlert = Observable(false)
+    private(set) var goalBook: Book?
 
     private var currentPage = 1
     private var pageSize = 50
@@ -79,28 +82,18 @@ final class AddBookViewModel {
             currentPage += 1
             loadResults(query: query, pageNum: currentPage, pageSize: pageSize)
 
-            return
 
-        case let .addToReadBooks(book):
-            Task {
-                do {
-                    try await BookService.postReadBook(of: book)
+        case let .tapBookImage(book):
+            switch addBookType {
+            case .readBook:
+                addToReadBooks(of: book)
 
-                    await MainActor.run {
-                        addBookSucceed.value = true
-                    }
-                } catch let error as NetworkError {
-                    switch error {
-                    case let .invalidStatusCode(statusCode, message):
-                        if statusCode == 400 &&
-                            message == "이미 추가된 값입니다" {
-                            presentAlert.value = true
-                        }
-                    default:
-                        print(error.localizedDescription)
-                    }
-                }
+            case .goalBook:
+                presentPageInputAlert(of: book)
             }
+
+        case let .addToGoalBooks(book, totalPage):
+            return
         }
     }
 
@@ -132,6 +125,33 @@ final class AddBookViewModel {
                 loadState.value = .completed
             }
         }
+    }
 
+    private func addToReadBooks(of book: Book) {
+        Task {
+            do {
+                try await BookService.postReadBook(of: book)
+
+                await MainActor.run {
+                    addBookSucceed.value = true
+                }
+            } catch let error as NetworkError {
+                switch error {
+                case let .invalidStatusCode(statusCode, message):
+                    if statusCode == 400 &&
+                        message == "이미 추가된 값입니다" {
+                        presentAlert.value = true
+                    }
+                default:
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    private func presentPageInputAlert(of book: Book) {
+        presentPageAlert.value = true
+
+        goalBook = book
     }
 }
