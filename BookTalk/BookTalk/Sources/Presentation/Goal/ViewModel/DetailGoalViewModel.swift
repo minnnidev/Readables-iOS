@@ -16,6 +16,13 @@ final class DetailGoalViewModel {
     private(set) var loadState = Observable(LoadState.initial)
     private(set) var deleteSucceed = Observable(false)
     private(set) var completeSucced = Observable(false)
+    private(set) var isAddButtonEnabled = Observable(false)
+
+    var endPage: String = "" {
+        didSet {
+            validatePageNumbers()
+        }
+    }
 
     let goalId: Int
 
@@ -91,6 +98,16 @@ final class DetailGoalViewModel {
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+
+    private func validatePageNumbers() {
+        guard let startPage = goalDetail.value?.recentPage else { return }
+
+        if let end = Int(endPage) {
+            isAddButtonEnabled.value = end > startPage
+        } else {
+            isAddButtonEnabled.value = false
         }
     }
 }

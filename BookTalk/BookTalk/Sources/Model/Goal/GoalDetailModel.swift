@@ -11,4 +11,5 @@ struct GoalDetailModel {
     let goalId: Int
     let bookInfo: BasicBookInfo
     let startDate: String
+    let recentPage: Int
 }

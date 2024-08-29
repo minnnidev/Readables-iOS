@@ -11,7 +11,7 @@ struct GoalResponseDTO: Decodable {
     let goalId: Int
     let userNickname: String
     let bookSummary: BookSummaryDTO
-    let recentPage: Int?
+    let recentPage: Int
     let totalPage: Int
     let createdAt: String
     let updatedAt: String
@@ -37,7 +37,8 @@ extension GoalResponseDTO {
         return .init(
             goalId: goalId,
             bookInfo: bookSummary.toModel(),
-            startDate: createdAt.toExtractDateString()
+            startDate: createdAt.toExtractDateString(),
+            recentPage: recentPage
         )
     }
 }

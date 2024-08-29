@@ -22,7 +22,6 @@ final class DetailGoalViewController: BaseViewController {
     private let archiveView = UIView()
     private let archiveLabel = UILabel()
     private let todayDateLabel = UILabel()
-    private let datePicker = UIDatePicker()
     private let startPageTextField = UITextField()
     private let startTitleLabel = UILabel()
     private let endPageTextField = UITextField()
@@ -43,7 +42,7 @@ final class DetailGoalViewController: BaseViewController {
 
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,6 +53,7 @@ final class DetailGoalViewController: BaseViewController {
         super.viewDidLoad()
 
         bind()
+        addTarget()
 
         viewModel.send(action: .loadGoalDetail(goalId: viewModel.goalId))
     }
@@ -78,6 +78,7 @@ final class DetailGoalViewController: BaseViewController {
 
             bookTitlelabel.text = detail.bookInfo.title
             startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"
+            startPageTextField.text = "\(detail.recentPage)"
 
             if let imageURL = URL(string: detail.bookInfo.coverImageURL) {
                 bookImageView.kf.setImage(with: imageURL)
@@ -105,7 +106,7 @@ final class DetailGoalViewController: BaseViewController {
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                
+
                 showAutoDismissAlert(title: "목표 삭제가 완료되었어요.") {
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -119,7 +120,24 @@ final class DetailGoalViewController: BaseViewController {
                 guard let self = self else { return }
                 showAutoDismissAlert(title: "완료된 목표에 추가되었어요!")
 
-               // TODO: 완료됐을 때의 UI?
+                showAutoDismissAlert(
+                    title: "완료된 목표에 추가되었어요!",
+                    message: "완독을 축하드립니다. 🙌"
+                ) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+
+        viewModel.isAddButtonEnabled.subscribe { [weak self] isEnabled in
+            guard let self = self else { return }
+
+            if isEnabled {
+                addReadPageButton.isEnabled = true
+                addReadPageButton.backgroundColor = .black
+            } else {
+                addReadPageButton.isEnabled = false
+                addReadPageButton.backgroundColor = .gray100
             }
         }
     }
@@ -193,19 +211,17 @@ final class DetailGoalViewController: BaseViewController {
             $0.doubleTapToZoomEnabled = false
         }
 
-        datePicker.do {
-            $0.preferredDatePickerStyle = .automatic
-            $0.datePickerMode = .date
-            $0.locale = Locale(identifier: "ko-KR")
-            $0.timeZone = .autoupdatingCurrent
-        }
-
         [startPageTextField, endPageTextField].forEach{
             $0.backgroundColor = .clear
             $0.keyboardType = .numberPad
             $0.layer.borderColor = UIColor.lightGray.cgColor
             $0.layer.borderWidth = 1.0
             $0.layer.cornerRadius = 5
+            $0.addLeftPadding()
+        }
+
+        startPageTextField.do {
+            $0.isEnabled = false
         }
 
         startTitleLabel.do {
@@ -224,11 +240,12 @@ final class DetailGoalViewController: BaseViewController {
             $0.font = .systemFont(ofSize: 15)
         }
 
-        addReadPageButton.do { 
+        addReadPageButton.do {
             $0.backgroundColor = .black
             $0.setTitle("기록 추가하기", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.isEnabled = false
         }
 
         [firstSeparatorLine, secondSeparatorLine].forEach {
@@ -257,8 +274,8 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         [
-            bookImageView, bookTitlelabel, startReadingDateLabel, firstSeparatorLine, 
-            archiveLabel, datePicker, archiveView, startPageTextField, startTitleLabel,
+            bookImageView, bookTitlelabel, startReadingDateLabel, firstSeparatorLine,
+            archiveLabel, archiveView, startPageTextField, startTitleLabel,
             endPageTextField, endTitleLabel, addReadPageButton, secondSeparatorLine,
             goalChartLabel, goalChart
         ].forEach {
@@ -299,14 +316,9 @@ final class DetailGoalViewController: BaseViewController {
             $0.leading.equalToSuperview().offset(20)
         }
 
-        datePicker.snp.makeConstraints {
-            $0.top.equalTo(archiveLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(20)
-        }
-
         startPageTextField.snp.makeConstraints {
-            $0.top.equalTo(datePicker.snp.bottom).offset(12)
-            $0.leading.equalTo(datePicker)
+            $0.top.equalTo(archiveLabel.snp.bottom).offset(12)
+            $0.leading.equalTo(bookImageView)
             $0.height.equalTo(30)
             $0.width.equalTo(50)
         }
@@ -386,6 +398,29 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         present(alertVC, animated: true)
+    }
+
+    @objc private func addPageButtonDidTapped() {
+        viewModel.send(action: .addRecord(goalId: viewModel.goalId, page: Int(viewModel.endPage)!))
+    }
+
+    @objc private func endPageTextFieldDidChange(_ textField: UITextField) {
+        viewModel.endPage = textField.text ?? ""
+    }
+
+    private func addTarget() {
+        addReadPageButton.addTarget(
+            self,
+            action: #selector(addPageButtonDidTapped),
+            for: .touchUpInside
+        )
+
+        endPageTextField.addTarget(
+            self,
+            action: #selector(endPageTextFieldDidChange(_:)),
+            for: .editingChanged
+        )
+
     }
 }
 

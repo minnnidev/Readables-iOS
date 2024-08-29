@@ -123,6 +123,7 @@
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
 		AB4F962A2C805DE800DE55E6 /* LoadGoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */; };
 		AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */; };
+		AB4F962E2C8090FE00DE55E6 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
 		AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54682C2C7B936B0062F899 /* UIViewController+.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
@@ -323,6 +324,7 @@
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGoalRequestDTO.swift; sourceTree = "<group>"; };
 		AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordReqeustDTO.swift; sourceTree = "<group>"; };
+		AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		AB54682C2C7B936B0062F899 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
@@ -887,6 +889,7 @@
 				AB5D355E2C7767A00028995C /* DateFormatter+.swift */,
 				AB6C19D22C79D3B100BF844C /* String+.swift */,
 				AB54682C2C7B936B0062F899 /* UIViewController+.swift */,
+				AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1858,6 +1861,7 @@
 				AB2E7BF82C53F71B00CE43CB /* AllBooksViewModel.swift in Sources */,
 				AB8224AF2C7847430082CD30 /* LibrarySearchRequestDTO.swift in Sources */,
 				054FA1772C74649B0007D9C9 /* LoginType.swift in Sources */,
+				AB4F962E2C8090FE00DE55E6 /* UITextField+.swift in Sources */,
 				0551400D2C78A3ED009D3B4E /* FinishedBookCell.swift in Sources */,
 				AB6C19D12C79C01C00BF844C /* MyViewModel.swift in Sources */,
 				AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */,
