@@ -239,7 +239,10 @@ extension OpenTalkViewController: UICollectionViewDataSource {
                     animated: false,
                     scrollPosition: .init()
                 )
-                cell.isSelected = true
+
+                UIView.animate(withDuration: 0.3) {
+                    cell.isSelected = true
+                }
             }
 
             cell.bind(OpenTalkPageType.allCases[indexPath.row].title)
