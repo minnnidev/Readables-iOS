@@ -44,6 +44,8 @@ final class MyLibraryViewModel {
                 do {
                     let _ = try await UserService.editUserLibraries(newLibraries: newLibraries)
 
+                    NotificationCenter.default.post(name: .detailChanged, object: nil)
+
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                 }

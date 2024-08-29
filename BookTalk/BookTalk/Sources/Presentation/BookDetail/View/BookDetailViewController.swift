@@ -34,12 +34,6 @@ final class BookDetailViewController: BaseViewController {
     
     // MARK: - Lifecycle
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        viewModel.input.loadDetailInfo()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +41,8 @@ final class BookDetailViewController: BaseViewController {
         bind()
         registerCell()
         setDelegate()
+
+        viewModel.input.loadDetailInfo()
     }
 
     // MARK: - Actions

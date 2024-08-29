@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class BookDetailViewModel {
     
@@ -46,16 +47,30 @@ final class BookDetailViewModel {
     lazy var input: Input = { return bindInput() }()
     lazy var output: Output = { return bindOutput() }()
 
+    private var cancellables = Set<AnyCancellable>()
+
     private let isbn: String
 
     // MARK: - Initializer
     
     init(isbn: String) {
         self.isbn = isbn
+
+        bind()
     }
     
     // MARK: - Helpers
-    
+
+    private func bind() {
+        NotificationCenter.default.publisher(for: .detailChanged)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                
+                loadDetail(of: isbn)
+            }
+            .store(in: &cancellables)
+    }
+
     private func bindInput() -> Input {
         return Input(
             markAsReadButtonTap: { [weak self] in
@@ -85,29 +100,7 @@ final class BookDetailViewModel {
                 guard let self = self else { return }
 
                 loadStateOb.value = .loading
-
-                Task { [weak self] in
-                    guard let self = self else { return }
-
-                    do {
-                        let bookDetail = try await BookService.getBookDetail(of: isbn)
-
-                        await MainActor.run { [weak self] in
-                            guard let self = self else { return }
-
-                            bookDetailOb.value = bookDetail
-                            availableLibs.value = bookDetail.registeredLibraries
-                            isFavoriteOb.value = bookDetail.isFavorite
-                            isMarkAsReadOb.value = bookDetail.isRead ?? false
-
-                            loadStateOb.value = .completed
-                        }
-
-                    } catch let error as NetworkError {
-                        print(error.localizedDescription)
-                        loadStateOb.value = .completed
-                    }
-                }
+                loadDetail(of: isbn)
             }
         )
     }
@@ -152,6 +145,31 @@ extension BookDetailViewModel {
             isAvailable ? "대출 가능" : "대출 불가능",
             isAvailable ? .systemGreen : .systemRed
         )
+    }
+
+    private func loadDetail(of isbn: String) {
+        Task { [weak self] in
+            guard let self = self else { return }
+
+            do {
+                let bookDetail = try await BookService.getBookDetail(of: isbn)
+
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+
+                    bookDetailOb.value = bookDetail
+                    availableLibs.value = bookDetail.registeredLibraries
+                    isFavoriteOb.value = bookDetail.isFavorite
+                    isMarkAsReadOb.value = bookDetail.isRead ?? false
+
+                    loadStateOb.value = .completed
+                }
+
+            } catch let error as NetworkError {
+                print(error.localizedDescription)
+                loadStateOb.value = .completed
+            }
+        }
     }
 
     private func addFavoriteBook(of book: BasicBookInfo?) {
