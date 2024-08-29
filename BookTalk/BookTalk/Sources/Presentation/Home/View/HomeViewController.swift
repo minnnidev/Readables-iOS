@@ -267,6 +267,7 @@ extension HomeViewController: UITableViewDelegate {
         let sectionType = HomeSectionKind.allCases[indexPath.section]
 
         switch sectionType {
+        case .suggestion: return 250
         case .keyword: return viewModel.isKeywordOpened.value ?
             UITableView.automaticDimension : 0
         default:
