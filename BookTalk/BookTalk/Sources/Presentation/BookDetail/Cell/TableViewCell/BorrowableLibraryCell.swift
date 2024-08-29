@@ -145,7 +145,7 @@ final class BorrowableLibraryCell: BaseTableViewCell {
         registerLibraryButton.snp.makeConstraints {
             $0.centerX.left.equalTo(libraryStackView)
             $0.top.equalTo(titleLabel.snp.bottom).offset(15)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(-30)
             $0.height.equalTo(50)
         }
     }
