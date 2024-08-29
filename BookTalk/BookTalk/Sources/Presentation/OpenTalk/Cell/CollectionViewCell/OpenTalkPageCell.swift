@@ -32,7 +32,7 @@ final class OpenTalkPageCell: BaseCollectionViewCell {
         }
 
         lineView.do {
-            $0.backgroundColor = .black
+            $0.backgroundColor = .accentOrange
             $0.isHidden = true
         }
     }

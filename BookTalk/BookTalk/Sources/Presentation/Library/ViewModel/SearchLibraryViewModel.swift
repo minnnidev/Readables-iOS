@@ -82,7 +82,8 @@ final class SearchLibraryViewModel {
             Task {
                 do {
                     let _ = try await UserService.editUserLibraries(newLibraries: myLibraries)
-                    
+                    NotificationCenter.default.post(name: .detailChanged, object: nil)
+
                     await MainActor.run {
                         popToMyLibrary.value = true
                     }

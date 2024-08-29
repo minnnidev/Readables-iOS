@@ -47,6 +47,8 @@ final class SearchViewModel {
 
     init(searchText: String? = nil) {
         self.searchText = searchText
+
+        if searchText != nil { input.keywordButtonTapped(true) }
     }
 
     // MARK: - Helpers

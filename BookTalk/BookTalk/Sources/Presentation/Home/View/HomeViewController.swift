@@ -12,6 +12,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
 
     private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let refreshControl = UIRefreshControl()
 
     private let viewModel = HomeViewModel()
 
@@ -22,6 +23,7 @@ final class HomeViewController: BaseViewController {
 
         registerCell()
         setDelegate()
+        addTarget()
         bind()
 
         viewModel.send(action: .loadBooks)
@@ -59,6 +61,15 @@ final class HomeViewController: BaseViewController {
         navigationController?.pushViewController(searchVC, animated: true)
     }
 
+
+    @objc private func refreshTableView() {
+        viewModel.send(action: .loadBooks)
+
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
+    }
+
     // MARK: - Set UI
 
     override func setNavigationBar() {
@@ -84,6 +95,7 @@ final class HomeViewController: BaseViewController {
             $0.backgroundColor = .clear
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init(top: 0, left: 12, bottom: 0, right: 12)
+            $0.refreshControl = refreshControl
         }
     }
 
@@ -117,6 +129,13 @@ final class HomeViewController: BaseViewController {
     private func setDelegate() {
         tableView.dataSource = self
         tableView.delegate = self
+    }
+
+    private func addTarget() {
+        refreshControl.addTarget(
+            self,
+            action: #selector(refreshTableView),
+            for: .valueChanged)
     }
 }
 
@@ -178,22 +197,22 @@ extension HomeViewController: UITableViewDataSource {
 
             if sectionKind == .weekRecommendation {
                 cell.bind(book:
-                    .init(
-                        headerTitle: "이번 주 인기 도서를 확인해 보세요",
-                        books: viewModel.thisWeekRecommendOb.value.books
-                ))
+                        .init(
+                            headerTitle: "이번 주 인기 도서를 확인해 보세요",
+                            books: viewModel.thisWeekRecommendOb.value.books
+                        ))
             } else if sectionKind == .popularLoan {
                 cell.bind(book:
-                    .init(
-                        headerTitle: "대출 급상승 🔥",
-                        books: viewModel.popularLoansOb.value.books
-                ))
+                        .init(
+                            headerTitle: "대출 급상승 🔥",
+                            books: viewModel.popularLoansOb.value.books
+                        ))
             } else if sectionKind == .ageRecommend {
                 cell.bind(book:.init(
-                        headerTitle:
-                            UserData.shared.getUser()?.birth != nil ?
-                        "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님 나이대에서 인기 있는 도서" : "인기 대출 도서",
-                        books: viewModel.ageTrendOb.value.books
+                    headerTitle:
+                        UserData.shared.getUser()?.birth != nil ?
+                    "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님 나이대에서 인기 있는 도서" : "인기 대출 도서",
+                    books: viewModel.ageTrendOb.value.books
                 ))
             }
 
