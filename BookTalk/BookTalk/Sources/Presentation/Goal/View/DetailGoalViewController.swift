@@ -184,7 +184,7 @@ final class DetailGoalViewController: BaseViewController {
         bookTitlelabel.do {
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 16, weight: .semibold)
-            $0.lineBreakMode = .byCharWrapping
+            $0.lineBreakMode = .byWordWrapping
             $0.numberOfLines = 0
         }
 
@@ -296,7 +296,7 @@ final class DetailGoalViewController: BaseViewController {
         bookTitlelabel.snp.makeConstraints {
             $0.top.equalTo(bookImageView)
             $0.leading.equalTo(bookImageView.snp.trailing).offset(4)
-            $0.centerX.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
 
         startReadingDateLabel.snp.makeConstraints {
@@ -348,7 +348,7 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         secondSeparatorLine.snp.makeConstraints {
-            $0.top.equalTo(addReadPageButton.snp.bottom).offset(40)
+            $0.top.equalTo(addReadPageButton.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(1)
@@ -401,6 +401,8 @@ final class DetailGoalViewController: BaseViewController {
     }
 
     @objc private func addPageButtonDidTapped() {
+        endPageTextField.resignFirstResponder()
+
         viewModel.send(action: .addRecord(goalId: viewModel.goalId, page: Int(viewModel.endPage)!))
     }
 
@@ -420,7 +422,6 @@ final class DetailGoalViewController: BaseViewController {
             action: #selector(endPageTextFieldDidChange(_:)),
             for: .editingChanged
         )
-
     }
 }
 
