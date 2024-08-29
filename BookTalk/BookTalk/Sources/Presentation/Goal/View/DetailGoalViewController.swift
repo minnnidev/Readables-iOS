@@ -32,6 +32,7 @@ final class DetailGoalViewController: BaseViewController {
     private let firstSeparatorLine = UIView()
     private let secondSeparatorLine = UIView()
     private let indicatorView = UIActivityIndicatorView(style: .medium)
+    private let alreadyRecordLabel = UILabel()
 
     private let viewModel: DetailGoalViewModel
 
@@ -76,28 +77,42 @@ final class DetailGoalViewController: BaseViewController {
             guard let detail = detail else { return }
             guard let self = self else { return }
 
+            let isAlreadyRecord = detail.updateDate.isToday() && detail.updateDate != detail.createDate
+
             bookTitlelabel.text = detail.bookInfo.title
             startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"
             startPageTextField.text = "\(detail.recentPage)"
+
+
+            [
+                startTitleLabel, startPageTextField, endPageTextField,
+                endTitleLabel, addReadPageButton
+            ].forEach {
+                $0.isHidden = isAlreadyRecord
+            }
+
+            alreadyRecordLabel.isHidden = !isAlreadyRecord
 
             if let imageURL = URL(string: detail.bookInfo.coverImageURL) {
                 bookImageView.kf.setImage(with: imageURL)
             }
         }
 
-        viewModel.loadState.subscribe { [weak self] state in
-            guard let self = self else { return }
+        viewModel.loadState.subscribe { state in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
 
-            switch state {
-            case .initial:
-                contentView.isHidden = true
+                switch state {
+                case .initial:
+                    contentView.isHidden = true
 
-            case .loading:
-                indicatorView.startAnimating()
+                case .loading:
+                    indicatorView.startAnimating()
 
-            case .completed:
-                contentView.isHidden = false
-                indicatorView.stopAnimating()
+                case .completed:
+                    contentView.isHidden = false
+                    indicatorView.stopAnimating()
+                }
             }
         }
 
@@ -138,6 +153,13 @@ final class DetailGoalViewController: BaseViewController {
                 addReadPageButton.isEnabled = false
                 addReadPageButton.backgroundColor = .gray100
             }
+        }
+
+        viewModel.recordSucceed.subscribe { [weak self] isSucceed in
+            guard isSucceed else { return }
+            guard let self = self else { return }
+
+            viewModel.send(action: .loadGoalDetail(goalId: viewModel.goalId))
         }
     }
 
@@ -254,6 +276,13 @@ final class DetailGoalViewController: BaseViewController {
         indicatorView.do {
             $0.hidesWhenStopped = true
         }
+
+        alreadyRecordLabel.do {
+            $0.text = "오늘은 기록은 이미 추가되었어요."
+            $0.font = .systemFont(ofSize: 15)
+            $0.textColor = .lightGray
+            $0.isHidden = true
+        }
     }
 
     override func setConstraints() {
@@ -273,10 +302,16 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         [
+            startPageTextField, startTitleLabel, endPageTextField,
+            endTitleLabel, addReadPageButton, alreadyRecordLabel
+        ].forEach {
+            archiveView.addSubview($0)
+        }
+
+
+        [
             bookImageView, bookTitlelabel, startReadingDateLabel, firstSeparatorLine,
-            archiveLabel, archiveView, startPageTextField, startTitleLabel,
-            endPageTextField, endTitleLabel, addReadPageButton, secondSeparatorLine,
-            goalChartLabel, goalChart
+            archiveLabel, archiveView, secondSeparatorLine, goalChartLabel, goalChart
         ].forEach {
             contentView.addSubview($0)
         }
@@ -315,8 +350,14 @@ final class DetailGoalViewController: BaseViewController {
             $0.leading.equalToSuperview().offset(20)
         }
 
-        startPageTextField.snp.makeConstraints {
+        archiveView.snp.makeConstraints {
             $0.top.equalTo(archiveLabel.snp.bottom).offset(12)
+            $0.left.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(100)
+        }
+
+        startPageTextField.snp.makeConstraints {
+            $0.top.equalToSuperview()
             $0.leading.equalTo(bookImageView)
             $0.height.equalTo(30)
             $0.width.equalTo(50)
@@ -340,10 +381,10 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         addReadPageButton.snp.makeConstraints {
-            $0.top.equalTo(startPageTextField.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(40)
+            $0.bottom.equalToSuperview()
         }
 
         secondSeparatorLine.snp.makeConstraints {
@@ -364,6 +405,10 @@ final class DetailGoalViewController: BaseViewController {
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(200)
             $0.bottom.equalToSuperview().offset(-20)
+        }
+
+        alreadyRecordLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 

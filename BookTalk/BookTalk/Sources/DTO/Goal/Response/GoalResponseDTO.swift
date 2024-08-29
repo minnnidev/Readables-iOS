@@ -39,7 +39,9 @@ extension GoalResponseDTO {
             bookInfo: bookSummary.toModel(),
             startDate: createdAt.toExtractDateString(),
             recentPage: recentPage,
-            goalModel: aWeekRecords?.map { $0.toModel() } ?? [] 
+            goalModel: aWeekRecords?.map { $0.toModel() } ?? [] ,
+            updateDate: updatedAt.toExtractDateString(),
+            createDate: createdAt.toExtractDateString()
         )
     }
 }

@@ -13,4 +13,6 @@ struct GoalDetailModel {
     let startDate: String
     let recentPage: Int
     let goalModel: [GoalModel]
+    let updateDate: String
+    let createDate: String
 }

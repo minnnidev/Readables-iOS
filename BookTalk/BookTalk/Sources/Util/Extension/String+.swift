@@ -60,4 +60,19 @@ extension String {
             return self
         }
     }
+    
+    func isToday() -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+
+        guard let date = dateFormatter.date(from: self) else {
+            return false
+        }
+
+        let today = Date()
+        let calendar = Calendar.current
+        return calendar.isDate(date, inSameDayAs: today)
+    }
 }

@@ -16,6 +16,7 @@ final class DetailGoalViewModel {
     private(set) var loadState = Observable(LoadState.initial)
     private(set) var deleteSucceed = Observable(false)
     private(set) var completeSucced = Observable(false)
+    private(set) var recordSucceed = Observable(false)
     private(set) var isAddButtonEnabled = Observable(false)
 
     var endPage: String = "" {
@@ -105,6 +106,8 @@ final class DetailGoalViewModel {
             Task {
                 do {
                     try await GoalService.postTodayRecord(of: goalId, page: page)
+
+                    recordSucceed.value = true
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                 }
