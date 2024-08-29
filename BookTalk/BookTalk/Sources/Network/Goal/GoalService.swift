@@ -60,12 +60,14 @@ struct GoalService {
         return result.map { $0.toModel() }
     }
 
-    static func postTodayRecord(of goalId: Int, page: Int) async throws {
+    static func postTodayRecord(of goalId: Int, page: Int) async throws -> GoalDetailModel {
         let params: AddRecordReqeustDTO = .init(goalId: goalId, recentPage: page)
 
-        let _: GoalResponseDTO = try await NetworkService.shared.request(
+        let result: GoalResponseDTO = try await NetworkService.shared.request(
             target: GoalTarget.postRecord(params: params)
         )
+
+        return result.toModel()
     }
 
     static func getGoalUserState(of isbn: String, isFinished: Bool) async throws -> [GoalUserModel] {

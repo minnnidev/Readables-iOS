@@ -48,24 +48,11 @@ final class DetailGoalViewModel {
             Task {
                 do {
                     let detailResult = try await GoalService.getGoalDetail(of: goalId)
-                    let pageData = detailResult.goalModel.map { $0.amout }
 
-                    await MainActor.run {
-                        goalDetail.value = detailResult
-
-                        var entryDatas: [BarChartDataEntry] = .init()
-
-                        pageData.enumerated().forEach { idx, page in
-                            entryDatas.append(.init(x: Double(idx), y: Double(page)))
-                        }
-
-                        goalLabelData.value = detailResult.goalModel.map { $0.day.toShortDateFormat() }
-                        goalChartData.value = entryDatas
-
-                        loadState.value = .completed
-                    }
+                    setDetail(detailResult: detailResult)
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
+                    loadState.value = .completed
                 }
             }
             return
@@ -105,11 +92,13 @@ final class DetailGoalViewModel {
         case let .addRecord(goalId, page):
             Task {
                 do {
-                    try await GoalService.postTodayRecord(of: goalId, page: page)
+                    let result = try await GoalService.postTodayRecord(of: goalId, page: page)
 
+                    setDetail(detailResult: result)
                     recordSucceed.value = true
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
+                    loadState.value = .completed
                 }
             }
         }
@@ -122,6 +111,27 @@ final class DetailGoalViewModel {
             isAddButtonEnabled.value = end > startPage
         } else {
             isAddButtonEnabled.value = false
+        }
+    }
+
+    private func setDetail(detailResult: GoalDetailModel) {
+        Task {
+            await MainActor.run {
+                let pageData = detailResult.goalModel.map { $0.amout }
+
+                goalDetail.value = detailResult
+
+                var entryDatas: [BarChartDataEntry] = .init()
+
+                pageData.enumerated().forEach { idx, page in
+                    entryDatas.append(.init(x: Double(idx), y: Double(page)))
+                }
+
+                goalLabelData.value = detailResult.goalModel.map { $0.day.toShortDateFormat() }
+                goalChartData.value = entryDatas
+
+                loadState.value = .completed
+            }
         }
     }
 }

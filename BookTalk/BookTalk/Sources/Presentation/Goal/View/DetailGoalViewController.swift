@@ -73,28 +73,31 @@ final class DetailGoalViewController: BaseViewController {
             self?.goalChart.xAxis.setLabelCount(labels.count, force: false)
         }
 
-        viewModel.goalDetail.subscribe { [weak self] detail in
-            guard let detail = detail else { return }
-            guard let self = self else { return }
+        viewModel.goalDetail.subscribe { detail in
+            DispatchQueue.main.async { [weak self] in
+                guard let detail = detail else { return }
 
-            let isAlreadyRecord = detail.updateDate.isToday() && detail.updateDate != detail.createDate
+                guard let self = self else { return }
 
-            bookTitlelabel.text = detail.bookInfo.title
-            startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"
-            startPageTextField.text = "\(detail.recentPage)"
+                let isAlreadyRecord = detail.updateDate.isToday() && detail.updateDate != detail.createDate
+
+                bookTitlelabel.text = detail.bookInfo.title
+                startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"
+                startPageTextField.text = "\(detail.recentPage)"
 
 
-            [
-                startTitleLabel, startPageTextField, endPageTextField,
-                endTitleLabel, addReadPageButton
-            ].forEach {
-                $0.isHidden = isAlreadyRecord
-            }
+                [
+                    startTitleLabel, startPageTextField, endPageTextField,
+                    endTitleLabel, addReadPageButton
+                ].forEach {
+                    $0.isHidden = isAlreadyRecord
+                }
 
-            alreadyRecordLabel.isHidden = !isAlreadyRecord
+                alreadyRecordLabel.isHidden = !isAlreadyRecord
 
-            if let imageURL = URL(string: detail.bookInfo.coverImageURL) {
-                bookImageView.kf.setImage(with: imageURL)
+                if let imageURL = URL(string: detail.bookInfo.coverImageURL) {
+                    bookImageView.kf.setImage(with: imageURL)
+                }
             }
         }
 
@@ -448,6 +451,7 @@ final class DetailGoalViewController: BaseViewController {
         endPageTextField.resignFirstResponder()
 
         viewModel.send(action: .addRecord(goalId: viewModel.goalId, page: Int(viewModel.endPage)!))
+        endPageTextField.text?.removeAll()
     }
 
     @objc private func endPageTextFieldDidChange(_ textField: UITextField) {
