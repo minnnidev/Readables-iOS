@@ -41,7 +41,9 @@ extension GoalResponseDTO {
             recentPage: recentPage,
             goalModel: aWeekRecords?.map { $0.toModel() } ?? [] ,
             updateDate: updatedAt.toExtractDateString(),
-            createDate: createdAt.toExtractDateString()
+            createDate: createdAt.toExtractDateString(),
+            isFinished: isFinished,
+            totalPage: totalPage
         )
     }
 }

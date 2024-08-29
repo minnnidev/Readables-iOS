@@ -85,12 +85,11 @@ final class DetailGoalViewController: BaseViewController {
                 startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"
                 startPageTextField.text = "\(detail.recentPage)"
 
-
                 [
                     startTitleLabel, startPageTextField, endPageTextField,
                     endTitleLabel, addReadPageButton
                 ].forEach {
-                    $0.isHidden = isAlreadyRecord
+                    $0.isHidden = isAlreadyRecord 
                 }
 
                 alreadyRecordLabel.isHidden = !isAlreadyRecord
@@ -313,8 +312,9 @@ final class DetailGoalViewController: BaseViewController {
 
 
         [
-            bookImageView, bookTitlelabel, startReadingDateLabel, firstSeparatorLine,
-            archiveLabel, archiveView, secondSeparatorLine, goalChartLabel, goalChart
+            bookImageView, bookTitlelabel, startReadingDateLabel,
+            firstSeparatorLine, archiveLabel, archiveView, secondSeparatorLine,
+            goalChartLabel, goalChart
         ].forEach {
             contentView.addSubview($0)
         }

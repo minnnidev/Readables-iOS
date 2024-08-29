@@ -224,7 +224,11 @@ extension GoalViewController: BookWithHeaderCellDelegate {
 
     func goalTapped(of goalId: Int, isFinished: Bool) {
         if isFinished {
-            return
+            let viewModel = FinishedGoalViewModel(goalId: goalId)
+            let finishedGoalVC = FInishedGoalViewController(viewModel: viewModel)
+            finishedGoalVC.hidesBottomBarWhenPushed = true
+
+            navigationController?.pushViewController(finishedGoalVC, animated: true)
         } else {
             let viewModel = DetailGoalViewModel(goalId: goalId)
             let detailVC = DetailGoalViewController(viewModel: viewModel)

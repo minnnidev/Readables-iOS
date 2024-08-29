@@ -147,10 +147,12 @@ final class AddBookViewController: BaseViewController {
             }
         }
 
-        viewModel.addBookSucceed.subscribe { [weak self] isSucceed in
+        viewModel.addBookSucceed.subscribe { isSucceed in
             guard isSucceed else { return }
 
-            self?.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
 
         viewModel.presentAlert.subscribe { [weak self] isPresented in
@@ -176,6 +178,7 @@ final class AddBookViewController: BaseViewController {
 
         alertVC.addTextField { tf in
             tf.placeholder = "페이지 수"
+            tf.keyboardType = .numberPad
             tf.addTarget(
                 self,
                 action: #selector(self.textDidChange(_:)),

@@ -15,4 +15,6 @@ struct GoalDetailModel {
     let goalModel: [GoalModel]
     let updateDate: String
     let createDate: String
+    let isFinished: Bool
+    let totalPage: Int
 }

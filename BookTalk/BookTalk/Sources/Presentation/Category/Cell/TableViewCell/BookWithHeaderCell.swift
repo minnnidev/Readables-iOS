@@ -11,7 +11,7 @@ import Kingfisher
 
 @objc protocol BookWithHeaderCellDelegate {
     @objc optional func bookImageTapped(of isbn: String)
-    @objc optional func goalTapped(of goalId: Int)
+    @objc optional func goalTapped(of goalId: Int, isFinished: Bool)
 }
 
 final class BookWithHeaderCell: BaseTableViewCell {
@@ -165,7 +165,8 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
         if let books = books {
             delegate?.bookImageTapped?(of: books[indexPath.item].isbn)
         } else if let goals = goals {
-            delegate?.goalTapped?(of: goals[indexPath.item].goalId)
+            let goal = goals[indexPath.item]
+            delegate?.goalTapped?(of: goal.goalId, isFinished: goal.isFinished)
         }
     }
 }

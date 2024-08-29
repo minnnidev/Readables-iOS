@@ -48,8 +48,12 @@ final class AddBookViewModel {
         self.addBookType = addBookType
         self.bookName = bookName
 
-        searchText.value = bookName ?? ""
+        bind()
     }
+
+   private func bind() {
+       searchText.value = bookName ?? ""
+   }
 
     // MARK: - Helpers
 
@@ -98,10 +102,9 @@ final class AddBookViewModel {
                 do {
                     try await GoalService.createGoal(with: book.isbn, totalPage: Int(totalPage)!)
 
-                    await MainActor.run {
-                        addBookSucceed.value = true
-                    }
-                    
+                    NotificationCenter.default.post(name: .goalChanged, object: nil)
+                    addBookSucceed.value = true
+
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                 }
