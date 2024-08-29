@@ -20,6 +20,7 @@ final class BookInfoCell: BaseTableViewCell {
     private var viewModel: BookDetailViewModel?
     private let bookImageView = UIImageView()
     private let titleLabel = UILabel()
+    private let descriptionLabel = UILabel()
     private let authorLabel = UILabel()
     private let publisherLabel = UILabel()
     private let publicationDateLabel = UILabel()
@@ -142,26 +143,33 @@ final class BookInfoCell: BaseTableViewCell {
             $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 23, weight: .bold)
         }
-        
-        authorLabel.do {
+
+        descriptionLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
             $0.numberOfLines = 0
             $0.font = .systemFont(ofSize: 15, weight: .medium)
+        }
+
+        authorLabel.do {
+            $0.textColor = .black
+            $0.textAlignment = .left
+            $0.numberOfLines = 0
+            $0.font = .systemFont(ofSize: 13, weight: .regular)
         }
         
         publisherLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
             $0.numberOfLines = 0
-            $0.font = .systemFont(ofSize: 15, weight: .medium)
+            $0.font = .systemFont(ofSize: 13, weight: .regular)
         }
         
         publicationDateLabel.do {
             $0.textColor = .black
             $0.textAlignment = .left
             $0.numberOfLines = 0
-            $0.font = .systemFont(ofSize: 15, weight: .medium)
+            $0.font = .systemFont(ofSize: 13, weight: .regular)
         }
         
         availabilityLabel.do {
@@ -173,13 +181,14 @@ final class BookInfoCell: BaseTableViewCell {
         
         bookInfoStackView.do {
             $0.addArrangedSubview(titleLabel)
+            $0.addArrangedSubview(descriptionLabel)
             $0.addArrangedSubview(authorLabel)
             $0.addArrangedSubview(publisherLabel)
             $0.addArrangedSubview(publicationDateLabel)
             $0.addArrangedSubview(availabilityLabel)
             $0.axis = .vertical
             $0.alignment = .fill
-            $0.distribution = .fillProportionally
+            $0.distribution = .fill
             $0.spacing = 5
         }
         
