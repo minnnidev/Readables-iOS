@@ -11,20 +11,33 @@ final class SuggestionCell: BaseTableViewCell {
     
     // MARK: - Properties
     
-    let backgroundImageView = UIImageView()
-    let suggestionLabel = UILabel()
-    
+    private let backgroundImageView = UIImageView()
+    private let suggestionLabel = UILabel()
+    private var viewModel = HomeViewModel()
+
     // MARK: - Bind
     
     func bind(_ text: String) {
         suggestionLabel.text = text
+
+        viewModel.currentBackgroundImage.subscribe { [weak self] imageName in
+            guard let self = self else { return }
+            UIView.transition(
+                with: backgroundImageView,
+                duration: 0.5,
+                options: .transitionCrossDissolve
+            ) {
+                self.backgroundImageView.image = UIImage(named: imageName)
+            }
+        }
+
+        viewModel.send(action: .loadBackgroundImageView)
     }
     
     // MARK: - Set UI
     
     override func setViews() {
         backgroundImageView.do {
-            $0.image = UIImage(named: "homeBackgroundImage")
             $0.contentMode = .scaleAspectFill
         }
         
@@ -40,8 +53,7 @@ final class SuggestionCell: BaseTableViewCell {
         backgroundImageView.addSubview(suggestionLabel)
         
         backgroundImageView.snp.makeConstraints {
-            $0.centerX.left.bottom.equalToSuperview()
-            $0.top.equalTo(contentView.safeAreaLayoutGuide.snp.top)
+            $0.edges.equalToSuperview()
         }
         
         suggestionLabel.snp.makeConstraints {

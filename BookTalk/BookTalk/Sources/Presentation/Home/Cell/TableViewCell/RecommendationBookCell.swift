@@ -122,20 +122,4 @@ extension RecommendationBookCell: UICollectionViewDelegateFlowLayout {
         let width = (ScreenSize.width - 36) / 3
         return CGSize(width: width, height: collectionView.frame.height)
     }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 10
-    }
 }

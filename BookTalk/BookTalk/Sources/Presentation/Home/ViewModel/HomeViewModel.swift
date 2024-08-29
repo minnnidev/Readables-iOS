@@ -15,10 +15,14 @@ final class HomeViewModel {
     private(set) var popularLoansOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     private(set) var ageTrendOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     private(set) var loadState = Observable(LoadState.initial)
+    private(set) var currentBackgroundImage = Observable<String>(WeatherImage.images.first ?? "clear")
+    private var imageTimer: Timer?
+    private var currentImageIndex = 0
 
     enum Action {
         case setKeywordExpandState(newState: Bool)
         case loadBooks
+        case loadBackgroundImageView
     }
 
     func send(action: Action) {
@@ -33,6 +37,9 @@ final class HomeViewModel {
                 await loadThisWeekTrend()
                 await loadAgeTrend()
             }
+
+        case .loadBackgroundImageView:
+            setImageTimer()
         }
     }
 
@@ -85,5 +92,21 @@ final class HomeViewModel {
         } catch {
             print(error.localizedDescription)
         }
+    }
+
+    private func setImageTimer() {
+        imageTimer?.invalidate()
+        imageTimer = Timer.scheduledTimer(
+            timeInterval: 5,
+            target: self,
+            selector: #selector(changeBackgroundImage),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    @objc private func changeBackgroundImage() {
+        currentImageIndex = (currentImageIndex + 1) % WeatherImage.images.count
+        currentBackgroundImage.value = WeatherImage.images[currentImageIndex]
     }
 }
