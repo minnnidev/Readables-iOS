@@ -243,7 +243,7 @@ extension HomeViewController: UITableViewDelegate {
 
         switch sectionType {
         case .keyword:
-            return 60
+            return 50
         default:
             return .zero
         }
