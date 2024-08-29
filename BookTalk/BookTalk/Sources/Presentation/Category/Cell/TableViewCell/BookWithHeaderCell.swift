@@ -68,15 +68,13 @@ final class BookWithHeaderCell: BaseTableViewCell {
         }
 
         headerLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
-            $0.leading.equalToSuperview().offset(12)
+            $0.top.left.equalTo(15)
         }
 
         bookCollectionView.snp.makeConstraints {
-            $0.top.equalTo(headerLabel.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(headerLabel.snp.bottom).offset(15)
+            $0.left.bottom.right.equalToSuperview()
             $0.height.equalTo(220)
-            $0.bottom.equalToSuperview().offset(-16)
         }
     }
 

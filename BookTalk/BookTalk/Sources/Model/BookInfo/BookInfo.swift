@@ -11,6 +11,7 @@ struct BasicBookInfo: Equatable {
     let isbn: String
     let coverImageURL: String
     let title: String
+    let description: String
     let author: String
 }
 

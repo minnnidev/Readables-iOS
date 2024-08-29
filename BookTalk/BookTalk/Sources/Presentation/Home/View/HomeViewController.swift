@@ -168,7 +168,9 @@ extension HomeViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.bind(keywords: viewModel.keywordOb.value.map { $0.keyword })
+            DispatchQueue.main.async {
+                cell.bind(keywords: self.viewModel.keywordOb.value.map { $0.keyword })
+            }
             return cell
 
         case .weekRecommendation, .ageRecommend, .popularLoan:
@@ -238,7 +240,7 @@ extension HomeViewController: UITableViewDelegate {
 
         switch sectionType {
         case .keyword:
-            return 60
+            return 50
         default:
             return .zero
         }
@@ -262,6 +264,7 @@ extension HomeViewController: UITableViewDelegate {
         let sectionType = HomeSectionKind.allCases[indexPath.section]
 
         switch sectionType {
+        case .suggestion: return 250
         case .keyword: return viewModel.isKeywordOpened.value ?
             UITableView.automaticDimension : 0
         default:
