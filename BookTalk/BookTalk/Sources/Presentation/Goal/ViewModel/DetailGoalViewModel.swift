@@ -19,7 +19,6 @@ final class DetailGoalViewModel {
 
     let goalId: Int
 
-    // TODO: 수정 / 현재 임의로 넣어둠
     init(goalId: Int) {
         self.goalId = goalId
     }
@@ -29,6 +28,7 @@ final class DetailGoalViewModel {
         case loadGoalData(goalData: [GoalModel])
         case deleteGoal(goalId: Int)
         case completeGoal(goalId: Int)
+        case addRecord(goalId: Int, page: Int)
     }
 
     func send(action: Action) {
@@ -78,6 +78,15 @@ final class DetailGoalViewModel {
                     try await GoalService.completeGoal(of: goalId)
 
                     completeSucced.value = true
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
+
+        case let .addRecord(goalId, page):
+            Task {
+                do {
+                    try await GoalService.postTodayRecord(of: goalId, page: page)
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                 }

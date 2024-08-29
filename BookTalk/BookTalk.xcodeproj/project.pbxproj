@@ -122,6 +122,7 @@
 		AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */; };
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
 		AB4F962A2C805DE800DE55E6 /* LoadGoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */; };
+		AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
 		AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54682C2C7B936B0062F899 /* UIViewController+.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
@@ -321,6 +322,7 @@
 		AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGoalRequestDTO.swift; sourceTree = "<group>"; };
+		AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordReqeustDTO.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		AB54682C2C7B936B0062F899 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
@@ -1417,6 +1419,7 @@
 				ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */,
 				ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */,
 				AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */,
+				AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1857,6 +1860,7 @@
 				054FA1772C74649B0007D9C9 /* LoginType.swift in Sources */,
 				0551400D2C78A3ED009D3B4E /* FinishedBookCell.swift in Sources */,
 				AB6C19D12C79C01C00BF844C /* MyViewModel.swift in Sources */,
+				AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,
 				0579D1092C6C9D5C0032AC1C /* PaddedLabel.swift in Sources */,
