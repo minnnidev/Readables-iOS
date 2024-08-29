@@ -24,7 +24,6 @@ final class SuggestionCell: BaseTableViewCell {
     
     override func setViews() {
         backgroundImageView.do {
-            $0.image = UIImage(named: "homeBackgroundImage")
             $0.contentMode = .scaleAspectFill
         }
         
