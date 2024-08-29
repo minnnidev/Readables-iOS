@@ -124,6 +124,9 @@
 		AB4F962A2C805DE800DE55E6 /* LoadGoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */; };
 		AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */; };
 		AB4F962E2C8090FE00DE55E6 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */; };
+		AB4F96302C80AE2700DE55E6 /* GoalUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962F2C80AE2700DE55E6 /* GoalUserRequestDTO.swift */; };
+		AB4F96322C80AE4600DE55E6 /* GoalUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */; };
+		AB4F96342C80AF2600DE55E6 /* GoalUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
 		AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54682C2C7B936B0062F899 /* UIViewController+.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
@@ -325,6 +328,9 @@
 		AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGoalRequestDTO.swift; sourceTree = "<group>"; };
 		AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordReqeustDTO.swift; sourceTree = "<group>"; };
 		AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		AB4F962F2C80AE2700DE55E6 /* GoalUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUserRequestDTO.swift; sourceTree = "<group>"; };
+		AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUserResponseDTO.swift; sourceTree = "<group>"; };
+		AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUserModel.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		AB54682C2C7B936B0062F899 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
@@ -654,9 +660,9 @@
 			children = (
 				057925372C4FF31D00834EC6 /* Application */,
 				AB2E7BEB2C53DAFE00CE43CB /* Model */,
-				AB8205592C6E665B0014C5A5 /* DTO */,
 				057925442C4FF51400834EC6 /* Presentation */,
 				AB4CBA5B2C6BAF92009A2AB6 /* Network */,
+				AB8205592C6E665B0014C5A5 /* DTO */,
 				AB2E7BC22C5260A100CE43CB /* Util */,
 			);
 			path = Sources;
@@ -1423,6 +1429,7 @@
 				ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */,
 				AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */,
 				AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */,
+				AB4F962F2C80AE2700DE55E6 /* GoalUserRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1431,6 +1438,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */,
+				AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1540,6 +1548,7 @@
 			children = (
 				ABED44122C665DD90073398A /* GoalModel.swift */,
 				ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */,
+				AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */,
 			);
 			path = Goal;
 			sourceTree = "<group>";
@@ -1736,6 +1745,7 @@
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
+				AB4F96302C80AE2700DE55E6 /* GoalUserRequestDTO.swift in Sources */,
 				054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */,
 				ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */,
 				ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */,
@@ -1853,6 +1863,7 @@
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */,
 				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
+				AB4F96342C80AF2600DE55E6 /* GoalUserModel.swift in Sources */,
 				054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */,
 				AB8224B92C7848070082CD30 /* LibraryService.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
@@ -1865,6 +1876,7 @@
 				0551400D2C78A3ED009D3B4E /* FinishedBookCell.swift in Sources */,
 				AB6C19D12C79C01C00BF844C /* MyViewModel.swift in Sources */,
 				AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */,
+				AB4F96322C80AE4600DE55E6 /* GoalUserResponseDTO.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,
 				0579D1092C6C9D5C0032AC1C /* PaddedLabel.swift in Sources */,

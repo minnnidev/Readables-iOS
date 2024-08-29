@@ -67,4 +67,14 @@ struct GoalService {
             target: GoalTarget.postRecord(params: params)
         )
     }
+
+    static func getGoalUserState(of isbn: String, isFinished: Bool) async throws -> [GoalUserModel] {
+        let params: GoalUserRequestDTO = .init(isbn: isbn, isFinished: isFinished)
+
+        let result: [GoalUserResponseDTO] = try await NetworkService.shared.request(
+            target: GoalTarget.getGoalUsersState(params: params)
+        )
+
+        return result.map { $0.toModel() }
+    }
 }

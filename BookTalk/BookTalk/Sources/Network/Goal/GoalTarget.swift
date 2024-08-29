@@ -17,6 +17,7 @@ enum GoalTarget {
     case getUserGoals(params: LoadGoalRequestDTO)
     case getTotalWeekGoals
     case postRecord(params: AddRecordReqeustDTO)
+    case getGoalUsersState(params: GoalUserRequestDTO)
 }
 
 extension GoalTarget: TargetType {
@@ -37,6 +38,8 @@ extension GoalTarget: TargetType {
             return "/api/goal/get/totalAWeek"
         case .postRecord:
             return "/api/goal/addRecord"
+        case .getGoalUsersState:
+            return "/api/goal/get/usersInGoal"
         }
     }
     
@@ -44,7 +47,10 @@ extension GoalTarget: TargetType {
         switch self {
         case .postGoalCreate, .postRecord:
             return .post
-        case .getGoalDetail, .getUserGoals, .getTotalWeekGoals:
+        case .getGoalDetail,
+                .getUserGoals,
+                .getTotalWeekGoals,
+                .getGoalUsersState:
             return .get
         case .deleteGoal:
             return .delete
@@ -70,6 +76,9 @@ extension GoalTarget: TargetType {
             return .requestPlain
 
         case let .postRecord(params):
+            return .requestParameters(parameters: params.toDictionary())
+
+        case let .getGoalUsersState(params):
             return .requestParameters(parameters: params.toDictionary())
         }
     }
