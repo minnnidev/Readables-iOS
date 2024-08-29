@@ -42,10 +42,21 @@ final class GoalViewModel {
                 do {
                     let progressingGoals = try await GoalService.getUserGoal(isFinished: false)
                     let completedGoals = try await GoalService.getUserGoal(isFinished: true)
+                    let weekRecord = try await GoalService.getAWeekTotal()
+                    let pageData = weekRecord.map { $0.amout }
 
                     await MainActor.run {
+                        var entryDatas: [BarChartDataEntry] = .init()
+
+                        pageData.enumerated().forEach { idx, page in
+                            entryDatas.append(.init(x: Double(idx), y: Double(page)))
+                        }
+                        
                         self.progressingGoals.value = progressingGoals
                         self.completedGoals.value = completedGoals
+                        
+                        goalLabelData.value = weekRecord.map { $0.day.toShortDateFormat() }
+                        goalChartData.value = entryDatas
 
                         loadState.value = .completed
                     }

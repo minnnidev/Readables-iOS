@@ -52,4 +52,11 @@ struct GoalService {
 
         return result.map { $0.toModel() }
     }
+
+    static func getAWeekTotal() async throws -> [GoalModel] {
+        let result: [AweekRecordDTO] = try await NetworkService.shared.request(
+            target: GoalTarget.getTotalWeekGoals
+        )
+        return result.map { $0.toModel() }
+    }
 }

@@ -47,4 +47,17 @@ extension String {
         let dateTimeParts = self.split(separator: "T")
         return dateTimeParts.first.map { String($0) } ?? ""
     }
+
+    func toShortDateFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "M/d"
+            return dateFormatter.string(from: date)
+        } else {
+            // 변환에 실패하면 원래 문자열을 반환
+            return self
+        }
+    }
 }

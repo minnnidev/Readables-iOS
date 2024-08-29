@@ -2030,6 +2030,7 @@
 				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "읽을거리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2068,6 +2069,7 @@
 				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "읽을거리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

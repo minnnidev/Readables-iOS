@@ -72,3 +72,13 @@ struct AweekRecordDTO: Decodable {
     let date: String
     let pageInterval: Int
 }
+
+extension AweekRecordDTO {
+
+    func toModel() -> GoalModel {
+        return .init(
+            day: date,
+            amout: pageInterval
+        )
+    }
+}
