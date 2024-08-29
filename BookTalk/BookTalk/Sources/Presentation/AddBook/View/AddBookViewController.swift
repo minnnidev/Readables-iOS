@@ -339,6 +339,8 @@ extension AddBookViewController: UICollectionViewDelegateFlowLayout {
 extension AddBookViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
         viewModel.send(action: .loadResult(query: searchBar.text ?? ""))
     }
 }
