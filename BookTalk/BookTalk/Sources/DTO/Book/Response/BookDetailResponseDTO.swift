@@ -50,7 +50,7 @@ struct BookInfoDTO: Codable {
     let vol: String
     let class_no: String
     let class_nm: String
-    let loanCnt: String
+    let loanCnt: String?
 }
 
 struct Top3LoanUserDTO: Codable {
