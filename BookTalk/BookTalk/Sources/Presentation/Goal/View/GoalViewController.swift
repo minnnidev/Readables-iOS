@@ -30,14 +30,18 @@ final class GoalViewController: BaseViewController {
 
     // MARK: - Lifecycle
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.send(action: .loadGoalPage)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerCell()
         setDelegate()
         bind()
-
-        viewModel.send(action: .loadGoalPage)
     }
 
     // MARK: - UI Setup

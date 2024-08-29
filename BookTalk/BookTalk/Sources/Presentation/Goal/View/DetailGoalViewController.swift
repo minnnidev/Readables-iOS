@@ -118,7 +118,6 @@ final class DetailGoalViewController: BaseViewController {
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                showAutoDismissAlert(title: "완료된 목표에 추가되었어요!")
 
                 showAutoDismissAlert(
                     title: "완료된 목표에 추가되었어요!",
