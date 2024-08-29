@@ -73,6 +73,7 @@ final class BookInfoCell: BaseTableViewCell {
             guard let detail = detail else { return }
 
             titleLabel.text = detail.basicBookInfo.title
+            descriptionLabel.text = String(htmlEncodedString: detail.basicBookInfo.description)
             authorLabel.text = detail.basicBookInfo.author
             publisherLabel.text = detail.publisher
             publicationDateLabel.text = detail.publicationDate
