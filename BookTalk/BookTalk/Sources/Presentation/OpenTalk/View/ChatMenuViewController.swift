@@ -15,6 +15,7 @@ final class ChatMenuViewController: BaseViewController {
     private let bottomLineView = UIView()
     private let bottomView = UIView()
     private let shareGoalButton = UIButton()
+
     private let viewModel: ChatMenuViewModel
 
     // MARK: - Initializer
@@ -36,6 +37,30 @@ final class ChatMenuViewController: BaseViewController {
 
         setDelegate()
         registerCell()
+        bind()
+
+        viewModel.send(action: .loadChatMenu(isbn: viewModel.isbn))
+    }
+
+    // MARK: - Bind
+
+    private func bind() {
+        viewModel.loadState.subscribe { state in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
+                switch state {
+                case .initial:
+                    break
+                case .loading:
+                    chatMenuTableView.isHidden = true
+
+                case .completed:
+                    chatMenuTableView.reloadData()
+                    chatMenuTableView.isHidden = false
+                }
+            }
+        }
     }
 
     // MARK: - UI Setup
@@ -62,7 +87,7 @@ final class ChatMenuViewController: BaseViewController {
     }
 
     override func setConstraints() {
-        [chatMenuTableView, shareGoalButton].forEach {
+        [chatMenuTableView].forEach {
             view.addSubview($0)
         }
 
@@ -71,11 +96,11 @@ final class ChatMenuViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
 
-        shareGoalButton.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(70)
-        }
+//        shareGoalButton.snp.makeConstraints {
+//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+//            $0.bottom.equalToSuperview()
+//            $0.height.equalTo(70)
+//        }
     }
 
     // MARK: - Helpers
@@ -105,15 +130,15 @@ final class ChatMenuViewController: BaseViewController {
     }
 
     private func pushToDetailGoalViewController() {
-        // TODO: book number와 같은 id값 뷰모델로 넘겨주기
-        let viewModel = DetailGoalViewModel()
+        // TODO: goalId 수정
+        let viewModel = DetailGoalViewModel(goalId: 7)
         let detailGoalVC = DetailGoalViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(detailGoalVC, animated: true)
     }
 
-    private func pushToAddBookViewController(of bookName: String) {
-        let viewModel = AddBookViewModel(bookName: bookName)
+    private func pushToAddBookViewController() {
+        let viewModel = AddBookViewModel(addBookType: .goalBook)
         let addBookVC = AddBookViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(addBookVC, animated: true)
@@ -158,11 +183,12 @@ extension ChatMenuViewController: UITableViewDataSource {
 
         switch sectionType {
         case .nowReading:
+            nowReadingCell.bind(with: viewModel.progressingUsers.value)
             return nowReadingCell
 
         case .myProgress:
-            if viewModel.myPercent != nil {
-                readingProgressCell.bind(percent: 50)
+            if let rate = viewModel.myProgress.value?.progressRate {
+                readingProgressCell.bind(percent: Int(rate))
 
                 readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }
@@ -175,13 +201,13 @@ extension ChatMenuViewController: UITableViewDataSource {
                 notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }
 
-                    // TODO: 책 제목 수정
-                    self?.pushToAddBookViewController(of: "나미야 잡화점의 기적")
+                    self?.pushToAddBookViewController()
                 }
                 return notStartedReadingCell
             }
 
         case .completedReading:
+            completedReadingCell.bind(with: viewModel.completedUsers.value)
             return completedReadingCell
         }
     }

@@ -36,7 +36,7 @@ final class NotStartedReadingCell: BaseTableViewCell {
         contentView.backgroundColor = .clear
         
         titleLabel.do {
-            $0.text = "나미야 잡화점의 기적\n나도 같이 읽기 📚"
+            $0.text = "나도 같이 읽기 📚"
             $0.numberOfLines = 2
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
         }

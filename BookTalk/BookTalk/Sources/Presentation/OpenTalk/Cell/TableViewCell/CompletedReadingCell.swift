@@ -14,6 +14,8 @@ final class CompletedReadingCell: BaseTableViewCell {
     private let titleLabel = UILabel()
     private let completedReadingPeopleTableView = UITableView()
 
+    private var users: [GoalUserModel]?
+
     // MARK: - Initializer
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,13 +29,33 @@ final class CompletedReadingCell: BaseTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Bind
+
+    func bind(with goalUsers: [GoalUserModel]) {
+        titleLabel.text = "지금까지 \(goalUsers.count)명이 이 책을 다 읽었어요!"
+        users = goalUsers
+
+        updateEmptyState()
+        completedReadingPeopleTableView.reloadData()
+    }
+
+    private func updateEmptyState() {
+        if let users = users, users.isEmpty {
+            completedReadingPeopleTableView.setEmptyMessage("아직 완독한 사람이 없어요.")
+        } else {
+            completedReadingPeopleTableView.restore()
+        }
+    }
+
     // MARK: - UI Setup
 
     override func setViews() {
+        selectionStyle = .none
+        
         contentView.backgroundColor = .clear
 
         titleLabel.do {
-            $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.font = .systemFont(ofSize: 19, weight: .semibold)
             $0.text = "지금까지 17명이 이 책을 다 읽었어요!"
         }
 
@@ -84,7 +106,7 @@ extension CompletedReadingCell: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 5
+        return min(users?.count ?? 0, 5)
     }
 
     func tableView(
@@ -95,6 +117,8 @@ extension CompletedReadingCell: UITableViewDataSource {
             withIdentifier: ReadingPeopleCell.identifier,
             for: indexPath
         ) as? ReadingPeopleCell else { return UITableViewCell() }
+
+        cell.bind(with: users?[indexPath.row])
 
         return cell
     }

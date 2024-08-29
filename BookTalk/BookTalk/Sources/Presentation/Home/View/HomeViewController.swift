@@ -25,8 +25,6 @@ final class HomeViewController: BaseViewController {
         bind()
 
         viewModel.send(action: .loadBooks)
-
-        print(KeychainManager.shared.read(key: TokenKey.accessToken))
     }
 
     // MARK: - Bind
@@ -179,25 +177,24 @@ extension HomeViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
             if sectionKind == .weekRecommendation {
-                cell.bind(
+                cell.bind(book:
                     .init(
                         headerTitle: "이번 주 인기 도서를 확인해 보세요",
                         books: viewModel.thisWeekRecommendOb.value.books
-                    ))
+                ))
             } else if sectionKind == .popularLoan {
-                cell.bind(
+                cell.bind(book:
                     .init(
                         headerTitle: "대출 급상승 🔥",
                         books: viewModel.popularLoansOb.value.books
-                    ))
+                ))
             } else if sectionKind == .ageRecommend {
-                cell.bind(
-                    .init(
+                cell.bind(book:.init(
                         headerTitle:
                             UserData.shared.getUser()?.birth != nil ?
                         "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님 나이대에서 인기 있는 도서" : "인기 대출 도서",
                         books: viewModel.ageTrendOb.value.books
-                    ))
+                ))
             }
 
             cell.delegate = self

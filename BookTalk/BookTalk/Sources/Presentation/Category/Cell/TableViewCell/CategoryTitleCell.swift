@@ -14,6 +14,7 @@ final class CategoryTitleCell: BaseTableViewCell {
     private let firstCategoryTitleLabel = UILabel()
     private let chevronImageView = UIImageView()
     private let subcategoryTitleLabel = UILabel()
+    private let selectIcon = UIImageView()
 
     // MARK: - UI Setup
 
@@ -37,10 +38,19 @@ final class CategoryTitleCell: BaseTableViewCell {
             $0.font = .systemFont(ofSize: 23, weight: .bold)
             $0.textColor = .accentOrange
         }
+
+        selectIcon.do {
+            $0.image = UIImage(systemName: "chevron.up.chevron.down")
+            $0.tintColor = .black
+            $0.contentMode = .scaleAspectFit
+        }
     }
 
     override func setConstraints() {
-        [firstCategoryTitleLabel, chevronImageView, subcategoryTitleLabel].forEach {
+        [
+            firstCategoryTitleLabel, chevronImageView,
+            subcategoryTitleLabel, selectIcon
+        ].forEach {
             contentView.addSubview($0)
         }
 
@@ -53,12 +63,17 @@ final class CategoryTitleCell: BaseTableViewCell {
         chevronImageView.snp.makeConstraints {
             $0.centerY.equalTo(firstCategoryTitleLabel)
             $0.leading.equalTo(firstCategoryTitleLabel.snp.trailing).offset(4)
-            $0.height.equalTo(15)
         }
 
         subcategoryTitleLabel.snp.makeConstraints {
             $0.centerY.equalTo(firstCategoryTitleLabel)
             $0.leading.equalTo(chevronImageView.snp.trailing).offset(4)
+        }
+
+        selectIcon.snp.makeConstraints {
+            $0.centerY.equalTo(firstCategoryTitleLabel)
+            $0.leading.equalTo(subcategoryTitleLabel.snp.trailing).offset(8)
+            $0.height.equalTo(25)
         }
     }
 

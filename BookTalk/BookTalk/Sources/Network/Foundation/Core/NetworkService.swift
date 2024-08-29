@@ -43,7 +43,7 @@ final class NetworkService: NetworkServiceType {
             let decodedData = try JSONDecoder().decode(BaseResponse<T>.self, from: data)
 
             switch decodedData.statusCode {
-            case 200:
+            case 200..<300:
                 updateAccessToken(response.response?.headers)
 
                 guard let result = decodedData.data else {

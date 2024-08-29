@@ -39,12 +39,13 @@ final class MyReadingProgressCell: BaseTableViewCell {
         contentView.backgroundColor = .clear
 
         titleLabel.do {
-            $0.text = "내 진행도"
-            $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.text = "내 진행도 "
+            $0.font = .systemFont(ofSize: 19, weight: .semibold)
         }
 
         percentLabel.do {
             $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.textColor = .accentOrange
         }
 
         myProfileImage.do {
@@ -64,7 +65,7 @@ final class MyReadingProgressCell: BaseTableViewCell {
     }
 
     override func setConstraints() {
-        [titleLabel, percentLabel, myProfileImage, progressView, updateButton].forEach {
+        [titleLabel, percentLabel, progressView].forEach {
             contentView.addSubview($0)
         }
 
@@ -72,30 +73,31 @@ final class MyReadingProgressCell: BaseTableViewCell {
             $0.top.leading.equalToSuperview().offset(20)
         }
 
-        percentLabel.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel)
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(8)
-        }
-
-        myProfileImage.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(titleLabel)
-            $0.width.height.equalTo(45)
-        }
+//        myProfileImage.snp.makeConstraints {
+//            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+//            $0.leading.equalTo(titleLabel)
+//            $0.width.height.equalTo(45)
+//        }
 
         progressView.snp.makeConstraints {
-            $0.centerY.equalTo(myProfileImage)
-            $0.leading.equalTo(myProfileImage.snp.trailing).offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.leading.equalTo(titleLabel)
         }
 
-        updateButton.snp.makeConstraints {
-            $0.top.equalTo(myProfileImage.snp.bottom).offset(20)
-            $0.leading.equalTo(myProfileImage)
-            $0.trailing.equalTo(progressView)
-            $0.height.equalTo(50)
+        percentLabel.snp.makeConstraints {
+            $0.centerY.equalTo(progressView)
+            $0.leading.equalTo(progressView.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalToSuperview().offset(-20)
         }
+
+//        updateButton.snp.makeConstraints {
+//            $0.top.equalTo(progressView.snp.bottom).offset(20)
+//            $0.leading.equalTo(progressView)
+//            $0.trailing.equalTo(progressView)
+//            $0.height.equalTo(50)
+//            $0.bottom.equalToSuperview().offset(-20)
+//        }
     }
 
     // MARK: - Actions

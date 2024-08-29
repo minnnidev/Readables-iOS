@@ -9,8 +9,9 @@ import UIKit
 
 import Kingfisher
 
-protocol BookWithHeaderCellDelegate: AnyObject {
-    func bookImageTapped(of isbn: String)
+@objc protocol BookWithHeaderCellDelegate {
+    @objc optional func bookImageTapped(of isbn: String)
+    @objc optional func goalTapped(of goalId: Int, isFinished: Bool)
 }
 
 final class BookWithHeaderCell: BaseTableViewCell {
@@ -19,7 +20,9 @@ final class BookWithHeaderCell: BaseTableViewCell {
 
     private let headerLabel = UILabel()
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-    private var books = [Book]()
+
+    private var books: [Book]?
+    private var goals: [GoalDetailModel]?
 
     weak var delegate: BookWithHeaderCellDelegate?
 
@@ -40,7 +43,7 @@ final class BookWithHeaderCell: BaseTableViewCell {
 
     override func setViews() {
         selectionStyle = .none
-        
+
         contentView.backgroundColor = .clear
 
         headerLabel.do {
@@ -50,7 +53,7 @@ final class BookWithHeaderCell: BaseTableViewCell {
         bookCollectionView.do {
             let flowLayout: UICollectionViewFlowLayout = .init()
             flowLayout.scrollDirection = .horizontal
-            
+
             $0.collectionViewLayout = flowLayout
             $0.backgroundColor = .clear
             $0.showsHorizontalScrollIndicator = false
@@ -78,7 +81,10 @@ final class BookWithHeaderCell: BaseTableViewCell {
     // MARK: - Helpers
 
     private func registerCell() {
-        bookCollectionView.register(BookImageCell.self, forCellWithReuseIdentifier: BookImageCell.identifier)
+        bookCollectionView.register(
+            BookImageCell.self,
+            forCellWithReuseIdentifier: BookImageCell.identifier
+        )
     }
 
     private func setCollectionView() {
@@ -86,11 +92,27 @@ final class BookWithHeaderCell: BaseTableViewCell {
         bookCollectionView.delegate = self
     }
 
-    func bind(_ model: BooksWithHeader) {
+    func bind(book model: BooksWithHeader) {
         headerLabel.text = "\(model.headerTitle)"
         books = model.books
 
         bookCollectionView.reloadData()
+    }
+
+    func bind(goal model: GoalsWithHeader) {
+        headerLabel.text = "\(model.headerTitle)"
+        goals = model.goals
+
+        updateEmptyState()
+        bookCollectionView.reloadData()
+    }
+
+    func updateEmptyState() {
+        if let goals = goals, goals.isEmpty {
+            bookCollectionView.setEmptyMessage("목표가 없습니다.")
+        } else {
+            bookCollectionView.restore()
+        }
     }
 }
 
@@ -100,7 +122,13 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return books.count
+        if let books = books {
+            return books.count
+        } else if let goals = goals {
+            return goals.count
+        }
+
+        return 0
     }
 
     func collectionView(
@@ -112,7 +140,18 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
             for: indexPath
         ) as? BookImageCell else { return UICollectionViewCell() }
 
-        cell.bind(with: books[indexPath.row])
+        if let books = books {
+            cell.bind(with: books[indexPath.item])
+        } else if let goals = goals {
+            let books = goals.map {
+                Book.init(
+                    isbn: $0.bookInfo.isbn,
+                    imageURL: $0.bookInfo.coverImageURL,
+                    title: $0.bookInfo.title)
+            }
+
+            cell.bind(with: books[indexPath.item])
+        }
 
         return cell
     }
@@ -121,7 +160,12 @@ extension BookWithHeaderCell: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        delegate?.bookImageTapped(of: books[indexPath.item].isbn)
+        if let books = books {
+            delegate?.bookImageTapped?(of: books[indexPath.item].isbn)
+        } else if let goals = goals {
+            let goal = goals[indexPath.item]
+            delegate?.goalTapped?(of: goal.goalId, isFinished: goal.isFinished)
+        }
     }
 }
 

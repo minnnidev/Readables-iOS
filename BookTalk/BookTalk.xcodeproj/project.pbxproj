@@ -62,6 +62,10 @@
 		AB0784852C74FA1D0017812F /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0784842C74FA1D0017812F /* OAuthManager.swift */; };
 		AB07848B2C75A89E0017812F /* ISBNRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07848A2C75A89E0017812F /* ISBNRequestDTO.swift */; };
 		AB07848D2C75A92D0017812F /* BookDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */; };
+		AB09F38C2C80D4760098A53D /* FInishedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F38B2C80D4760098A53D /* FInishedGoalViewController.swift */; };
+		AB09F38E2C80D4AA0098A53D /* FinishedGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F38D2C80D4AA0098A53D /* FinishedGoalViewModel.swift */; };
+		AB09F3902C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F38F2C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift */; };
+		AB09F3922C80DBA40098A53D /* MyGoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F3912C80DBA40098A53D /* MyGoalModel.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -122,6 +126,12 @@
 		AB4CBA812C6E09CD009A2AB6 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */; };
 		AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */; };
 		AB4ECF462C70848C00DC24A0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AB4ECF452C70848C00DC24A0 /* Kingfisher */; };
+		AB4F962A2C805DE800DE55E6 /* LoadGoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */; };
+		AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */; };
+		AB4F962E2C8090FE00DE55E6 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */; };
+		AB4F96302C80AE2700DE55E6 /* GoalUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F962F2C80AE2700DE55E6 /* GoalUserRequestDTO.swift */; };
+		AB4F96322C80AE4600DE55E6 /* GoalUserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */; };
+		AB4F96342C80AF2600DE55E6 /* GoalUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */; };
 		AB516B602C7A052C00168EEF /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB516B5F2C7A052C00168EEF /* UserData.swift */; };
 		AB54682D2C7B936B0062F899 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54682C2C7B936B0062F899 /* UIViewController+.swift */; };
 		AB5712F72C7B2872007058FC /* OpenTalkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5712F62C7B2872007058FC /* OpenTalkModel.swift */; };
@@ -182,6 +192,12 @@
 		ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901C92C7398C100727875 /* OpenTalkTarget.swift */; };
 		ABB901CC2C7398CA00727875 /* OpenTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CB2C7398CA00727875 /* OpenTalkService.swift */; };
 		ABB901CE2C739FFD00727875 /* OpenTalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */; };
+		ABB993602C7F80C900E6DB67 /* CreateGoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */; };
+		ABB993622C7F811600E6DB67 /* GoalResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */; };
+		ABB993652C7F81E100E6DB67 /* GoalTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993642C7F81E100E6DB67 /* GoalTarget.swift */; };
+		ABB993672C7F81E800E6DB67 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993662C7F81E800E6DB67 /* GoalService.swift */; };
+		ABB993692C7F871500E6DB67 /* GoalRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */; };
+		ABB9936B2C7F878B00E6DB67 /* GoalDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */; };
 		ABC8202A2C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */; };
 		ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */; };
 		ABC820322C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */; };
@@ -257,6 +273,10 @@
 		AB0784862C74FF2C0017812F /* BookTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookTalk.entitlements; sourceTree = "<group>"; };
 		AB07848A2C75A89E0017812F /* ISBNRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNRequestDTO.swift; sourceTree = "<group>"; };
 		AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailResponseDTO.swift; sourceTree = "<group>"; };
+		AB09F38B2C80D4760098A53D /* FInishedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FInishedGoalViewController.swift; sourceTree = "<group>"; };
+		AB09F38D2C80D4AA0098A53D /* FinishedGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedGoalViewModel.swift; sourceTree = "<group>"; };
+		AB09F38F2C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalMyProgressResponseDTO.swift; sourceTree = "<group>"; };
+		AB09F3912C80DBA40098A53D /* MyGoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGoalModel.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +335,12 @@
 		AB4CBA7A2C6E0755009A2AB6 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		AB4CBA802C6E09CD009A2AB6 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		AB4CBA832C6E3320009A2AB6 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadGoalRequestDTO.swift; sourceTree = "<group>"; };
+		AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordReqeustDTO.swift; sourceTree = "<group>"; };
+		AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		AB4F962F2C80AE2700DE55E6 /* GoalUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUserRequestDTO.swift; sourceTree = "<group>"; };
+		AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUserResponseDTO.swift; sourceTree = "<group>"; };
+		AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUserModel.swift; sourceTree = "<group>"; };
 		AB516B5F2C7A052C00168EEF /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		AB54682C2C7B936B0062F899 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB5712F62C7B2872007058FC /* OpenTalkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkModel.swift; sourceTree = "<group>"; };
@@ -375,6 +401,12 @@
 		ABB901C92C7398C100727875 /* OpenTalkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkTarget.swift; sourceTree = "<group>"; };
 		ABB901CB2C7398CA00727875 /* OpenTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkService.swift; sourceTree = "<group>"; };
 		ABB901CD2C739FFD00727875 /* OpenTalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkViewModel.swift; sourceTree = "<group>"; };
+		ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalRequestDTO.swift; sourceTree = "<group>"; };
+		ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalResponseDTO.swift; sourceTree = "<group>"; };
+		ABB993642C7F81E100E6DB67 /* GoalTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTarget.swift; sourceTree = "<group>"; };
+		ABB993662C7F81E800E6DB67 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
+		ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequestDTO.swift; sourceTree = "<group>"; };
+		ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailModel.swift; sourceTree = "<group>"; };
 		ABC820292C7B0C6A001AB371 /* ReissueTokenRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueTokenRequestDTO.swift; sourceTree = "<group>"; };
 		ABC8202B2C7B0C85001AB371 /* TokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponseDTO.swift; sourceTree = "<group>"; };
 		ABC820312C7B26E8001AB371 /* OpenTalkJoinRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkJoinRequestDTO.swift; sourceTree = "<group>"; };
@@ -639,9 +671,9 @@
 			children = (
 				057925372C4FF31D00834EC6 /* Application */,
 				AB2E7BEB2C53DAFE00CE43CB /* Model */,
-				AB8205592C6E665B0014C5A5 /* DTO */,
 				057925442C4FF51400834EC6 /* Presentation */,
 				AB4CBA5B2C6BAF92009A2AB6 /* Network */,
+				AB8205592C6E665B0014C5A5 /* DTO */,
 				AB2E7BC22C5260A100CE43CB /* Util */,
 			);
 			path = Sources;
@@ -874,6 +906,7 @@
 				AB5D355E2C7767A00028995C /* DateFormatter+.swift */,
 				AB6C19D22C79D3B100BF844C /* String+.swift */,
 				AB54682C2C7B936B0062F899 /* UIViewController+.swift */,
+				AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1002,6 +1035,7 @@
 				ABAAFDB32C76FDD800FDA084 /* Search */,
 				AB8224B52C7847F40082CD30 /* Library */,
 				ABEF81312C7BD146007D1DC7 /* Home */,
+				ABB993632C7F81D900E6DB67 /* Goal */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1173,6 +1207,7 @@
 				ABB901A92C72799400727875 /* Book */,
 				ABB901C22C7397E700727875 /* OpenTalk */,
 				ABEF812A2C7BD02B007D1DC7 /* Home */,
+				ABB9935C2C7F80A500E6DB67 /* Goal */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1389,6 +1424,46 @@
 			path = OpenTalk;
 			sourceTree = "<group>";
 		};
+		ABB9935C2C7F80A500E6DB67 /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				ABB9935D2C7F80B000E6DB67 /* Request */,
+				ABB9935E2C7F80B400E6DB67 /* Response */,
+			);
+			path = Goal;
+			sourceTree = "<group>";
+		};
+		ABB9935D2C7F80B000E6DB67 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				ABB9935F2C7F80C900E6DB67 /* CreateGoalRequestDTO.swift */,
+				ABB993682C7F871500E6DB67 /* GoalRequestDTO.swift */,
+				AB4F96292C805DE800DE55E6 /* LoadGoalRequestDTO.swift */,
+				AB4F962B2C808DB000DE55E6 /* AddRecordReqeustDTO.swift */,
+				AB4F962F2C80AE2700DE55E6 /* GoalUserRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		ABB9935E2C7F80B400E6DB67 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */,
+				AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */,
+				AB09F38F2C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		ABB993632C7F81D900E6DB67 /* Goal */ = {
+			isa = PBXGroup;
+			children = (
+				ABB993642C7F81E100E6DB67 /* GoalTarget.swift */,
+				ABB993662C7F81E800E6DB67 /* GoalService.swift */,
+			);
+			path = Goal;
+			sourceTree = "<group>";
+		};
 		ABC820302C7B26CC001AB371 /* Request */ = {
 			isa = PBXGroup;
 			children = (
@@ -1467,6 +1542,7 @@
 			children = (
 				057925402C4FF4DC00834EC6 /* GoalViewController.swift */,
 				ABED441D2C66793C0073398A /* DetailGoalViewController.swift */,
+				AB09F38B2C80D4760098A53D /* FInishedGoalViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1476,6 +1552,7 @@
 			children = (
 				ABED440F2C665CDB0073398A /* GoalViewModel.swift */,
 				ABED441F2C667F6F0073398A /* DetailGoalViewModel.swift */,
+				AB09F38D2C80D4AA0098A53D /* FinishedGoalViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1484,6 +1561,9 @@
 			isa = PBXGroup;
 			children = (
 				ABED44122C665DD90073398A /* GoalModel.swift */,
+				ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */,
+				AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */,
+				AB09F3912C80DBA40098A53D /* MyGoalModel.swift */,
 			);
 			path = Goal;
 			sourceTree = "<group>";
@@ -1660,9 +1740,12 @@
 				054FA1792C7464C50007D9C9 /* LoginViewModel.swift in Sources */,
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
+				AB4F962A2C805DE800DE55E6 /* LoadGoalRequestDTO.swift in Sources */,
+				AB09F3922C80DBA40098A53D /* MyGoalModel.swift in Sources */,
 				0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */,
 				AB4CBA812C6E09CD009A2AB6 /* SettingType.swift in Sources */,
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
+				AB09F38C2C80D4760098A53D /* FInishedGoalViewController.swift in Sources */,
 				05C2F11E2C8041A100ACFBAE /* WeatherImage.swift in Sources */,
 				054544232C5AAEFC00E64948 /* SearchHistoryCell.swift in Sources */,
 				AB8224B42C7847B70082CD30 /* LibraryInfo.swift in Sources */,
@@ -1680,6 +1763,7 @@
 				AB4CBA752C6E00FC009A2AB6 /* SettingViewController.swift in Sources */,
 				AB4CBA842C6E3320009A2AB6 /* BaseResponse.swift in Sources */,
 				AB8205572C6E66240014C5A5 /* GenreService.swift in Sources */,
+				AB4F96302C80AE2700DE55E6 /* GoalUserRequestDTO.swift in Sources */,
 				054FA18E2C748D8D0007D9C9 /* MyPageStickyTabView.swift in Sources */,
 				ABDADA3E2C70A6A3009ED3BB /* Date+.swift in Sources */,
 				ABAAFDB52C76FDE300FDA084 /* SearchService.swift in Sources */,
@@ -1688,6 +1772,7 @@
 				AB5D35632C7797050028995C /* LibrariesResponseDTO.swift in Sources */,
 				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
+				ABB993602C7F80C900E6DB67 /* CreateGoalRequestDTO.swift in Sources */,
 				ABEF81382C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift in Sources */,
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
@@ -1697,6 +1782,8 @@
 				ABAAFDB72C76FDED00FDA084 /* SearchTarget.swift in Sources */,
 				AB8224A52C7842AD0082CD30 /* RegionType.swift in Sources */,
 				ABED44192C666F6E0073398A /* GoalChartCell.swift in Sources */,
+				ABB993672C7F81E800E6DB67 /* GoalService.swift in Sources */,
+				ABB9936B2C7F878B00E6DB67 /* GoalDetailModel.swift in Sources */,
 				AB5712FB2C7B49AC007058FC /* ChatListRequestDTO.swift in Sources */,
 				AB2E7BE32C53C17100CE43CB /* CategoryTitleCell.swift in Sources */,
 				AB4CBA6A2C6DD6E3009A2AB6 /* ServerRequestInterceptor.swift in Sources */,
@@ -1710,6 +1797,7 @@
 				AB8205622C6E687D0014C5A5 /* Encodable+.swift in Sources */,
 				ABAAFDBD2C76FEFA00FDA084 /* UITableView+.swift in Sources */,
 				AB9C5D652C78A9C900CE44AF /* MyLibraryViewModel.swift in Sources */,
+				ABB993692C7F871500E6DB67 /* GoalRequestDTO.swift in Sources */,
 				AB5D355B2C775DF70028995C /* UserTarget.swift in Sources */,
 				ABEF812E2C7BD064007D1DC7 /* CustomHotTrendRequestDTO.swift in Sources */,
 				ABEF81332C7BD156007D1DC7 /* HomeTarget.swift in Sources */,
@@ -1725,6 +1813,7 @@
 				054FA1882C748CEE0007D9C9 /* ProfileInfoView.swift in Sources */,
 				AB4CBA522C6B31BC009A2AB6 /* AddBookViewController.swift in Sources */,
 				AB9C5D6C2C78C1F900CE44AF /* LoginRequestDTO.swift in Sources */,
+				ABB993652C7F81E100E6DB67 /* GoalTarget.swift in Sources */,
 				AB4CBA602C6BB0E9009A2AB6 /* TargetType.swift in Sources */,
 				AB07848B2C75A89E0017812F /* ISBNRequestDTO.swift in Sources */,
 				0579D1102C6C9E410032AC1C /* HomeSectionType.swift in Sources */,
@@ -1743,6 +1832,7 @@
 				058B77B72C78581000A1110B /* FinishedBook.swift in Sources */,
 				054543992C5749F300E64948 /* HomeViewModel.swift in Sources */,
 				AB4CBA7B2C6E0755009A2AB6 /* SettingViewModel.swift in Sources */,
+				AB09F38E2C80D4AA0098A53D /* FinishedGoalViewModel.swift in Sources */,
 				054543A42C57520C00E64948 /* RecommendationBookCell.swift in Sources */,
 				ABB901CA2C7398C100727875 /* OpenTalkTarget.swift in Sources */,
 				AB0C0F652C5BF3E3007812C5 /* OtherChatBubbleCell.swift in Sources */,
@@ -1792,6 +1882,7 @@
 				0579253F2C4FF4D700834EC6 /* OpenTalkViewController.swift in Sources */,
 				AB5D35522C7759F00028995C /* EditUserInfoResponseDTO.swift in Sources */,
 				AB4CBA4D2C6B2E4B009A2AB6 /* ChatMenuViewModel.swift in Sources */,
+				AB4F96342C80AF2600DE55E6 /* GoalUserModel.swift in Sources */,
 				054FA1982C748E9F0007D9C9 /* MyLibraryViewController.swift in Sources */,
 				AB8224B92C7848070082CD30 /* LibraryService.swift in Sources */,
 				057925432C4FF4E100834EC6 /* MyViewController.swift in Sources */,
@@ -1800,8 +1891,11 @@
 				AB2E7BF82C53F71B00CE43CB /* AllBooksViewModel.swift in Sources */,
 				AB8224AF2C7847430082CD30 /* LibrarySearchRequestDTO.swift in Sources */,
 				054FA1772C74649B0007D9C9 /* LoginType.swift in Sources */,
+				AB4F962E2C8090FE00DE55E6 /* UITextField+.swift in Sources */,
 				0551400D2C78A3ED009D3B4E /* FinishedBookCell.swift in Sources */,
 				AB6C19D12C79C01C00BF844C /* MyViewModel.swift in Sources */,
+				AB4F962C2C808DB000DE55E6 /* AddRecordReqeustDTO.swift in Sources */,
+				AB4F96322C80AE4600DE55E6 /* GoalUserResponseDTO.swift in Sources */,
 				AB2E7BD82C53B37500CE43CB /* Constant.swift in Sources */,
 				AB0C0F782C5F639C007812C5 /* ChatMenuViewController.swift in Sources */,
 				0579D1092C6C9D5C0032AC1C /* PaddedLabel.swift in Sources */,
@@ -1821,11 +1915,13 @@
 				054FA1832C7465B40007D9C9 /* LoginViewController.swift in Sources */,
 				AB2E7BC72C5260E000CE43CB /* UIColor+.swift in Sources */,
 				AB949A352C7484F80005C543 /* UICollectionView+.swift in Sources */,
+				ABB993622C7F811600E6DB67 /* GoalResponseDTO.swift in Sources */,
 				ABED44102C665CDB0073398A /* GoalViewModel.swift in Sources */,
 				AB4CBA4F2C6B2ED8009A2AB6 /* NotStartedReadingCell.swift in Sources */,
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
 				ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */,
+				AB09F3902C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1974,6 +2070,7 @@
 				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "읽을거리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2012,6 +2109,7 @@
 				DEVELOPMENT_TEAM = U6TKDM29D9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookTalk/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "읽을거리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

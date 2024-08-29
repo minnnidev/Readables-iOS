@@ -12,6 +12,7 @@ final class GoalViewController: BaseViewController {
     // MARK: - Properties
 
     private let goalTableView = UITableView()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: GoalViewModel
 
@@ -35,6 +36,8 @@ final class GoalViewController: BaseViewController {
         registerCell()
         setDelegate()
         bind()
+
+        viewModel.send(action: .loadGoalPage)
     }
 
     // MARK: - UI Setup
@@ -44,6 +47,7 @@ final class GoalViewController: BaseViewController {
 
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = "목표"
+        navigationItem.backButtonTitle = ""
 
         let plusButton = UIBarButtonItem(
             image: UIImage(systemName: "plus"),
@@ -63,11 +67,22 @@ final class GoalViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init()
             $0.separatorStyle = .none
+            $0.isHidden = true
+        }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
         }
     }
 
     override func setConstraints() {
-        view.addSubview(goalTableView)
+        [goalTableView, indicatorView].forEach {
+            view.addSubview($0)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
 
         goalTableView.snp.makeConstraints { 
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -79,6 +94,23 @@ final class GoalViewController: BaseViewController {
 
     private func bind() {
         viewModel.send(action: .loadGoalData(goalData: GoalModel.stubGoals))
+
+        viewModel.loadState.subscribe { state in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+
+                switch state {
+                case .initial, .loading:
+                    goalTableView.isHidden = true
+                    indicatorView.startAnimating()
+
+                case .completed:
+                    indicatorView.stopAnimating()
+                    goalTableView.reloadData()
+                    goalTableView.isHidden = false
+                }
+            }
+        }
 
         viewModel.goalChartData.subscribe { [weak self] _ in
             self?.goalTableView.reloadData()
@@ -109,7 +141,10 @@ final class GoalViewController: BaseViewController {
     // MARK: - Actions
 
     @objc private func addButtonDidTapped() {
-        // TODO: 목표 추가로 이동
+        let viewModel = AddBookViewModel(addBookType: .goalBook)
+        let addBookVC = AddBookViewController(viewModel: viewModel)
+
+        navigationController?.pushViewController(addBookVC, animated: true)
     }
 }
 
@@ -153,11 +188,17 @@ extension GoalViewController: UITableViewDataSource {
 
             if sectionType == .progressGoal {
                 cell.bind(
-                    .init(headerTitle: "애벌래 님이 진행중인 목표 ⚡", books: [])
+                    goal: .init(
+                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "")님이 진행중인 목표 ⚡",
+                        goals: viewModel.progressingGoals.value
+                    )
                 )
             } else if sectionType == .completedGoal {
                 cell.bind(
-                    .init(headerTitle: "애벌래 님이 완료한 목표 📚", books: [])
+                    goal: .init(
+                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "") 님이 완료한 목표 📚",
+                        goals: viewModel.completedGoals.value
+                    )
                 )
             }
 
@@ -181,13 +222,19 @@ extension GoalViewController: UITableViewDelegate {
 
 extension GoalViewController: BookWithHeaderCellDelegate {
 
-    func bookImageTapped(of isbn: String) {
-        // TODO: book id 등 구별할 수 있는 요소로 수정 - isbn 사용하여
+    func goalTapped(of goalId: Int, isFinished: Bool) {
+        if isFinished {
+            let viewModel = FinishedGoalViewModel(goalId: goalId)
+            let finishedGoalVC = FInishedGoalViewController(viewModel: viewModel)
+            finishedGoalVC.hidesBottomBarWhenPushed = true
 
-        let viewModel = DetailGoalViewModel()
-        let detailVC = DetailGoalViewController(viewModel: viewModel)
-        detailVC.hidesBottomBarWhenPushed = true
-        
-        navigationController?.pushViewController(detailVC, animated: true)
+            navigationController?.pushViewController(finishedGoalVC, animated: true)
+        } else {
+            let viewModel = DetailGoalViewModel(goalId: goalId)
+            let detailVC = DetailGoalViewController(viewModel: viewModel)
+            detailVC.hidesBottomBarWhenPushed = true
+
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }

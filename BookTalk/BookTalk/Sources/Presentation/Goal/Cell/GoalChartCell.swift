@@ -29,6 +29,9 @@ final class GoalChartCell: BaseTableViewCell {
             $0.xAxis.drawGridLinesEnabled = false
             $0.xAxis.drawAxisLineEnabled = false
 
+            $0.leftAxis.granularity = 5
+            $0.leftAxis.axisMinimum = 0
+
             $0.backgroundColor = .clear
             $0.doubleTapToZoomEnabled = false
             $0.rightAxis.enabled = false

@@ -271,7 +271,7 @@ extension MyViewController: MyPageStickyTabViewDelegate {
 extension MyViewController: ProfileInfoViewDelegate {
 
     func didTapAddFinishedBookButton() {
-        let viewModel = AddBookViewModel()
+        let viewModel = AddBookViewModel(addBookType: .readBook)
         let addBookVC = AddBookViewController(viewModel: viewModel)
         addBookVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(addBookVC, animated: true)

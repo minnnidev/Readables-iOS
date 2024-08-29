@@ -61,4 +61,37 @@ extension String {
 
         return dateFormatter.date(from: self)
     }
+
+    func toExtractDateString() -> String {
+        let dateTimeParts = self.split(separator: "T")
+        return dateTimeParts.first.map { String($0) } ?? ""
+    }
+
+    func toShortDateFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "M/d"
+            return dateFormatter.string(from: date)
+        } else {
+            // 변환에 실패하면 원래 문자열을 반환
+            return self
+        }
+    }
+    
+    func isToday() -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+
+        guard let date = dateFormatter.date(from: self) else {
+            return false
+        }
+
+        let today = Date()
+        let calendar = Calendar.current
+        return calendar.isDate(date, inSameDayAs: today)
+    }
 }

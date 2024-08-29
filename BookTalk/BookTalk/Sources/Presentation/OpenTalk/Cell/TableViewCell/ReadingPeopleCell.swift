@@ -18,6 +18,15 @@ final class ReadingPeopleCell: BaseTableViewCell {
     private let nicknameLabel = UILabel()
     private let percentLabel = UILabel()
 
+    // MARK: - Bind
+
+    func bind(with user: GoalUserModel?) {
+        guard let user = user else { return }
+        
+        nicknameLabel.text = "\(user.nickname)"
+        percentLabel.text = "\(Int(user.progressRate))%"
+    }
+
     // MARK: - UI Setup
 
     override func setViews() {
@@ -25,9 +34,10 @@ final class ReadingPeopleCell: BaseTableViewCell {
         
         contentView.backgroundColor = .clear
 
-        profileImageView.do {
-            $0.backgroundColor = .gray100
-        }
+        // TODO: 프로필 이미지 이후 추가
+//        profileImageView.do {
+//            $0.backgroundColor = .gray100
+//        }
 
         nicknameLabel.do {
             $0.font = .systemFont(ofSize: 15, weight: .regular)
@@ -36,28 +46,29 @@ final class ReadingPeopleCell: BaseTableViewCell {
 
         percentLabel.do {
             $0.font = .systemFont(ofSize: 15, weight: .regular)
+            $0.textColor = .accentOrange
             $0.text = "80%"
         }
     }
 
     override func setConstraints() {
-        [profileImageView, nicknameLabel, percentLabel].forEach {
+        [nicknameLabel, percentLabel].forEach {
             contentView.addSubview($0)
         }
 
-        profileImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
-            $0.width.height.equalTo(45)
-        }
+//        profileImageView.snp.makeConstraints {
+//            $0.centerY.equalToSuperview()
+//            $0.leading.equalToSuperview().offset(20)
+//            $0.width.height.equalTo(45)
+//        }
 
         nicknameLabel.snp.makeConstraints {
-            $0.centerY.equalTo(profileImageView)
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(16)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
         }
 
         percentLabel.snp.makeConstraints {
-            $0.centerY.equalTo(profileImageView)
+            $0.centerY.equalTo(nicknameLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
     }

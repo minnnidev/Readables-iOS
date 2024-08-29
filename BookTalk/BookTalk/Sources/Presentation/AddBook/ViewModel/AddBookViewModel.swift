@@ -7,13 +7,19 @@
 
 import Foundation
 
+enum AddBookType {
+    case readBook
+    case goalBook
+}
+
 final class AddBookViewModel {
 
     enum Action {
         case loadFavoriteBooks
         case loadResult(query: String)
         case loadMoreResult(query: String)
-        case addToReadBooks(book: Book)
+        case tapBookImage(book: Book)
+        case addToGoalBooks(book: Book?, totalPage: String)
     }
 
     // MARK: - Properties
@@ -24,19 +30,30 @@ final class AddBookViewModel {
     private(set) var hasMoreResult = Observable(true)
     private(set) var addBookSucceed = Observable(false)
     private(set) var presentAlert = Observable(false)
+    private(set) var presentPageAlert = Observable(false)
+    private(set) var goalBook: Book?
 
     private var currentPage = 1
     private var pageSize = 50
 
     private let bookName: String?
+    private let addBookType: AddBookType
 
     // MARK: - Initializer
 
-    init(bookName: String? = nil) {
+    init(
+        addBookType: AddBookType,
+        bookName: String? = nil
+    ) {
+        self.addBookType = addBookType
         self.bookName = bookName
 
-        searchText.value = bookName ?? ""
+        bind()
     }
+
+   private func bind() {
+       searchText.value = bookName ?? ""
+   }
 
     // MARK: - Helpers
 
@@ -69,26 +86,28 @@ final class AddBookViewModel {
             currentPage += 1
             loadResults(query: query, pageNum: currentPage, pageSize: pageSize)
 
-            return
 
-        case let .addToReadBooks(book):
+        case let .tapBookImage(book):
+            switch addBookType {
+            case .readBook:
+                addToReadBooks(of: book)
+
+            case .goalBook:
+                presentPageInputAlert(of: book)
+            }
+
+        case let .addToGoalBooks(book, totalPage):
+            guard let book = book else { return }
             Task {
                 do {
-                    try await BookService.postReadBook(of: book)
+                    try await GoalService.createGoal(with: book.isbn, totalPage: Int(totalPage)!)
 
-                    await MainActor.run {
-                        addBookSucceed.value = true
-                    }
+                    NotificationCenter.default.post(name: .goalChanged, object: nil)
+                    NotificationCenter.default.post(name: .progressChanged, object: nil)
+                    addBookSucceed.value = true
+
                 } catch let error as NetworkError {
-                    switch error {
-                    case let .invalidStatusCode(statusCode, message):
-                        if statusCode == 400 &&
-                            message == "이미 추가된 값입니다" {
-                            presentAlert.value = true
-                        }
-                    default:
-                        print(error.localizedDescription)
-                    }
+                    print(error.localizedDescription)
                 }
             }
         }
@@ -122,6 +141,33 @@ final class AddBookViewModel {
                 loadState.value = .completed
             }
         }
+    }
 
+    private func addToReadBooks(of book: Book) {
+        Task {
+            do {
+                try await BookService.postReadBook(of: book)
+
+                await MainActor.run {
+                    addBookSucceed.value = true
+                }
+            } catch let error as NetworkError {
+                switch error {
+                case let .invalidStatusCode(statusCode, message):
+                    if statusCode == 400 &&
+                        message == "이미 추가된 값입니다" {
+                        presentAlert.value = true
+                    }
+                default:
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    private func presentPageInputAlert(of book: Book) {
+        presentPageAlert.value = true
+
+        goalBook = book
     }
 }
