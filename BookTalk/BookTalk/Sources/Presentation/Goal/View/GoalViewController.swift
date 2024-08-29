@@ -105,9 +105,9 @@ final class GoalViewController: BaseViewController {
                     break
 
                 case .completed:
-                    goalTableView.isHidden = false
                     indicatorView.stopAnimating()
                     goalTableView.reloadData()
+                    goalTableView.isHidden = false
                 }
             }
         }

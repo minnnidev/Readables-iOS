@@ -97,6 +97,7 @@ final class DetailGoalViewModel {
                     let result = try await GoalService.postTodayRecord(of: goalId, page: page)
 
                     setDetail(detailResult: result)
+                    NotificationCenter.default.post(name: .goalChanged, object: nil)
                     recordSucceed.value = true
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
