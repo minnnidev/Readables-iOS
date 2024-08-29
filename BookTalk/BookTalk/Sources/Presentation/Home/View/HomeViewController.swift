@@ -170,7 +170,9 @@ extension HomeViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.delegate = self
-            cell.bind(keywords: viewModel.keywordOb.value.map { $0.keyword })
+            DispatchQueue.main.async {
+                cell.bind(keywords: self.viewModel.keywordOb.value.map { $0.keyword })
+            }
             return cell
 
         case .weekRecommendation, .ageRecommend, .popularLoan:
