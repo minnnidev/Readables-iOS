@@ -15,6 +15,7 @@ final class ChatMenuViewController: BaseViewController {
     private let bottomLineView = UIView()
     private let bottomView = UIView()
     private let shareGoalButton = UIButton()
+
     private let viewModel: ChatMenuViewModel
 
     // MARK: - Initializer
@@ -71,7 +72,7 @@ final class ChatMenuViewController: BaseViewController {
     }
 
     override func setConstraints() {
-        [chatMenuTableView, shareGoalButton].forEach {
+        [chatMenuTableView].forEach {
             view.addSubview($0)
         }
 
@@ -80,11 +81,11 @@ final class ChatMenuViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
 
-        shareGoalButton.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(70)
-        }
+//        shareGoalButton.snp.makeConstraints {
+//            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+//            $0.bottom.equalToSuperview()
+//            $0.height.equalTo(70)
+//        }
     }
 
     // MARK: - Helpers
