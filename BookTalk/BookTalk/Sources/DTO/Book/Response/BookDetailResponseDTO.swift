@@ -25,7 +25,8 @@ extension BookDetailResponseDTO {
             basicBookInfo: .init(
                 isbn: bookInfoDto.isbn13, 
                 coverImageURL: bookInfoDto.bookImageURL,
-                title: bookInfoDto.bookname,
+                title: bookInfoDto.bookname, 
+                description: bookInfoDto.description,
                 author: bookInfoDto.authors
             ),
             keywords: keywordDtoList,
