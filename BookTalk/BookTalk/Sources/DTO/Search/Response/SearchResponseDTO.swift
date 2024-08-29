@@ -9,7 +9,6 @@ import Foundation
 
 struct SearchResponseDTO: Decodable {
     let bookName: String
-    let description: String
     let authors: String
     let publisher: String
     let publicationYear: String
@@ -23,7 +22,6 @@ struct SearchResponseDTO: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case bookName = "bookname"
-        case description
         case authors
         case publisher
         case publicationYear = "publication_year"
@@ -45,7 +43,7 @@ extension SearchResponseDTO {
                 isbn: isbn13,
                 coverImageURL: bookImageURL,
                 title: bookName, 
-                description: description,
+                description: "",
                 author: authors
             ),
             keywords: .init(),

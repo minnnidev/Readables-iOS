@@ -69,6 +69,7 @@ extension BookSummaryDTO {
             isbn: isbn,
             coverImageURL: imageURL,
             title: title,
+            description: "",
             author: author
         )
     }

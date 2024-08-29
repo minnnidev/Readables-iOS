@@ -67,6 +67,7 @@ final class GoalViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = false
             $0.separatorInset = .init()
             $0.separatorStyle = .none
+            $0.isHidden = true
         }
 
         indicatorView.do {
@@ -102,7 +103,6 @@ final class GoalViewController: BaseViewController {
                 case .initial, .loading:
                     goalTableView.isHidden = true
                     indicatorView.startAnimating()
-                    break
 
                 case .completed:
                     indicatorView.stopAnimating()

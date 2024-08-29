@@ -67,7 +67,7 @@ final class GoalViewModel {
                             entryDatas.append(.init(x: Double(idx), y: Double(page)))
                         }
                         
-                        self.progressingGoals.value = progressingGoals
+                        self.progressingGoals.value = progressingGoals.reversed()
                         self.completedGoals.value = completedGoals
                         
                         goalLabelData.value = weekRecord.map { $0.day.toShortDateFormat() }

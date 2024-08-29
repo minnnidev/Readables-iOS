@@ -106,6 +106,7 @@ final class AddBookViewController: BaseViewController {
         )
     }
 
+    @MainActor
     private func bind() {
         viewModel.books.subscribe { [weak self] _ in
             self?.resultCollectionView.reloadData()
