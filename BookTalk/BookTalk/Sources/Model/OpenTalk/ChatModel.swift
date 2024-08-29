@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ChatType: String {
+    case text = "text"
+    case img = "img"
+}
+
 struct ChatModel {
     let nickname: String
     let message: String
