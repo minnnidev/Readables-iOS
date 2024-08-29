@@ -45,7 +45,20 @@ final class ChatMenuViewController: BaseViewController {
     // MARK: - Bind
 
     private func bind() {
-
+        viewModel.loadState.subscribe { state in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                
+                switch state {
+                case .initial:
+                    break
+                case .loading:
+                    break
+                case .completed:
+                    chatMenuTableView.reloadData()
+                }
+            }
+        }
     }
 
     // MARK: - UI Setup
@@ -172,8 +185,8 @@ extension ChatMenuViewController: UITableViewDataSource {
             return nowReadingCell
 
         case .myProgress:
-            if viewModel.myPercent != nil {
-                readingProgressCell.bind(percent: 50)
+            if let rate = viewModel.myProgress.value?.progressRate {
+                readingProgressCell.bind(percent: Int(rate))
 
                 readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }

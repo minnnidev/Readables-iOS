@@ -11,4 +11,5 @@ extension Notification.Name {
 
     static let authStateChanged = Notification.Name(rawValue: "authStateChanged")
     static let goalChanged = Notification.Name(rawValue: "goalChanged")
+    static let progressChanged = Notification.Name(rawValue: "progressChanged")
 }

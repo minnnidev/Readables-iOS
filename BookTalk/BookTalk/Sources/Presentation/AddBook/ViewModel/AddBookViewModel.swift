@@ -103,6 +103,7 @@ final class AddBookViewModel {
                     try await GoalService.createGoal(with: book.isbn, totalPage: Int(totalPage)!)
 
                     NotificationCenter.default.post(name: .goalChanged, object: nil)
+                    NotificationCenter.default.post(name: .progressChanged, object: nil)
                     addBookSucceed.value = true
 
                 } catch let error as NetworkError {
