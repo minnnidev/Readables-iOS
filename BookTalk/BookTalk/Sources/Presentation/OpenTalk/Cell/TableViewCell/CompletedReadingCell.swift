@@ -35,16 +35,27 @@ final class CompletedReadingCell: BaseTableViewCell {
         titleLabel.text = "지금까지 \(goalUsers.count)명이 이 책을 다 읽었어요!"
         users = goalUsers
 
+        updateEmptyState()
         completedReadingPeopleTableView.reloadData()
+    }
+
+    private func updateEmptyState() {
+        if let users = users, users.isEmpty {
+            completedReadingPeopleTableView.setEmptyMessage("아직 완독한 사람이 없어요.")
+        } else {
+            completedReadingPeopleTableView.restore()
+        }
     }
 
     // MARK: - UI Setup
 
     override func setViews() {
+        selectionStyle = .none
+        
         contentView.backgroundColor = .clear
 
         titleLabel.do {
-            $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.font = .systemFont(ofSize: 19, weight: .semibold)
             $0.text = "지금까지 17명이 이 책을 다 읽었어요!"
         }
 

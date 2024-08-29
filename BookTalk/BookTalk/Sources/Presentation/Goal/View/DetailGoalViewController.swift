@@ -79,7 +79,7 @@ final class DetailGoalViewController: BaseViewController {
 
                 guard let self = self else { return }
 
-                let isAlreadyRecord = detail.updateDate.isToday() && detail.updateDate != detail.createDate
+                let isAlreadyRecord = detail.updateDate.isToday() && detail.recentPage != 0
 
                 bookTitlelabel.text = detail.bookInfo.title
                 startReadingDateLabel.text = "시작 날짜: \(detail.startDate)"

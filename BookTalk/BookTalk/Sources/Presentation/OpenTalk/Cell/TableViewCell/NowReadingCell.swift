@@ -35,7 +35,16 @@ final class NowReadingCell: BaseTableViewCell {
         titleLabel.text = "현재 \(goalUsers.count)명이 이 책을 읽고 있어요!"
         users = goalUsers
 
+        updateEmptyState()
         nowReadingPeopleTableView.reloadData()
+    }
+
+    private func updateEmptyState() {
+        if let users = users, users.isEmpty {
+            nowReadingPeopleTableView.setEmptyMessage("목표를 추가해 같이 읽어봐요.")
+        } else {
+            nowReadingPeopleTableView.restore()
+        }
     }
 
     // MARK: - UI Setup
@@ -46,7 +55,7 @@ final class NowReadingCell: BaseTableViewCell {
         contentView.backgroundColor = .white
 
         titleLabel.do {
-            $0.font = .systemFont(ofSize: 17, weight: .semibold)
+            $0.font = .systemFont(ofSize: 19, weight: .semibold)
             $0.text = "현재 17명이 이 책을 읽고 있어요!"
         }
 

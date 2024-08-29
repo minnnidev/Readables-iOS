@@ -53,9 +53,11 @@ final class ChatMenuViewController: BaseViewController {
                 case .initial:
                     break
                 case .loading:
-                    break
+                    chatMenuTableView.isHidden = true
+
                 case .completed:
                     chatMenuTableView.reloadData()
+                    chatMenuTableView.isHidden = false
                 }
             }
         }
