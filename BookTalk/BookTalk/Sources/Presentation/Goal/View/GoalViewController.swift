@@ -30,18 +30,14 @@ final class GoalViewController: BaseViewController {
 
     // MARK: - Lifecycle
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        viewModel.send(action: .loadGoalPage)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         registerCell()
         setDelegate()
         bind()
+
+        viewModel.send(action: .loadGoalPage)
     }
 
     // MARK: - UI Setup
@@ -98,19 +94,21 @@ final class GoalViewController: BaseViewController {
     private func bind() {
         viewModel.send(action: .loadGoalData(goalData: GoalModel.stubGoals))
 
-        viewModel.loadState.subscribe { [weak self] state in
-            guard let self = self else { return }
+        viewModel.loadState.subscribe { state in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
 
-            switch state {
-            case .initial, .loading:
-                goalTableView.isHidden = true
-                indicatorView.startAnimating()
-                break
+                switch state {
+                case .initial, .loading:
+                    goalTableView.isHidden = true
+                    indicatorView.startAnimating()
+                    break
 
-            case .completed:
-                goalTableView.isHidden = false
-                indicatorView.stopAnimating()
-                goalTableView.reloadData()
+                case .completed:
+                    goalTableView.isHidden = false
+                    indicatorView.stopAnimating()
+                    goalTableView.reloadData()
+                }
             }
         }
 
@@ -224,11 +222,15 @@ extension GoalViewController: UITableViewDelegate {
 
 extension GoalViewController: BookWithHeaderCellDelegate {
 
-    func goalTapped(of goalId: Int) {
-        let viewModel = DetailGoalViewModel(goalId: goalId)
-        let detailVC = DetailGoalViewController(viewModel: viewModel)
-        detailVC.hidesBottomBarWhenPushed = true
+    func goalTapped(of goalId: Int, isFinished: Bool) {
+        if isFinished {
+            return
+        } else {
+            let viewModel = DetailGoalViewModel(goalId: goalId)
+            let detailVC = DetailGoalViewController(viewModel: viewModel)
+            detailVC.hidesBottomBarWhenPushed = true
 
-        navigationController?.pushViewController(detailVC, animated: true)
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine 
 import DGCharts
 
 final class GoalViewModel {
@@ -17,9 +18,23 @@ final class GoalViewModel {
     private(set) var completedGoals = Observable<[GoalDetailModel]>([])
     private(set) var loadState = Observable(LoadState.initial)
 
+    private var cancellables = Set<AnyCancellable>()
+
     enum Action {
         case loadGoalData(goalData: [GoalModel])
         case loadGoalPage
+    }
+
+    init() {
+        bind()
+    }
+
+    private func bind() {
+        NotificationCenter.default.publisher(for: .goalChanged)
+            .sink { [weak self] _ in
+                self?.send(action: .loadGoalPage)
+            }
+            .store(in: &cancellables)
     }
 
     func send(action: Action) {

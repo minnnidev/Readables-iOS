@@ -72,6 +72,7 @@ final class DetailGoalViewModel {
                 do {
                     try await GoalService.deleteGoal(of: goalId)
 
+                    NotificationCenter.default.post(name: .goalChanged, object: nil)
                     deleteSucceed.value = true
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
@@ -83,6 +84,7 @@ final class DetailGoalViewModel {
                 do {
                     try await GoalService.completeGoal(of: goalId)
 
+                    NotificationCenter.default.post(name: .goalChanged, object: nil)
                     completeSucced.value = true
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
