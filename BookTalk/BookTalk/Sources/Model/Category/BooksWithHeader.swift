@@ -14,7 +14,7 @@ struct BooksWithHeader {
 
 struct GoalsWithHeader {
     var headerTitle: String
-    var books: [GoalDetailModel]
+    var goals: [GoalDetailModel]
 }
 
 struct Book {

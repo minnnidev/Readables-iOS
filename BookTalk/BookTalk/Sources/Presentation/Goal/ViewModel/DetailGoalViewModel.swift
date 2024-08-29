@@ -5,7 +5,6 @@
 //  Created by 김민 on 8/10/24.
 //
 
-
 import Foundation
 import DGCharts
 
@@ -21,7 +20,7 @@ final class DetailGoalViewModel {
     let goalId: Int
 
     // TODO: 수정 / 현재 임의로 넣어둠
-    init(goalId: Int = 7) {
+    init(goalId: Int) {
         self.goalId = goalId
     }
 

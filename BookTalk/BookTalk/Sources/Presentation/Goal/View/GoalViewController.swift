@@ -12,6 +12,7 @@ final class GoalViewController: BaseViewController {
     // MARK: - Properties
 
     private let goalTableView = UITableView()
+    private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: GoalViewModel
 
@@ -67,10 +68,20 @@ final class GoalViewController: BaseViewController {
             $0.separatorInset = .init()
             $0.separatorStyle = .none
         }
+
+        indicatorView.do {
+            $0.hidesWhenStopped = true
+        }
     }
 
     override func setConstraints() {
-        view.addSubview(goalTableView)
+        [goalTableView, indicatorView].forEach {
+            view.addSubview($0)
+        }
+
+        indicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
 
         goalTableView.snp.makeConstraints { 
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -83,32 +94,28 @@ final class GoalViewController: BaseViewController {
     private func bind() {
         viewModel.send(action: .loadGoalData(goalData: GoalModel.stubGoals))
 
+        viewModel.loadState.subscribe { [weak self] state in
+            guard let self = self else { return }
+
+            switch state {
+            case .initial, .loading:
+                goalTableView.isHidden = true
+                indicatorView.startAnimating()
+                break
+
+            case .completed:
+                goalTableView.isHidden = false
+                indicatorView.stopAnimating()
+                goalTableView.reloadData()
+            }
+        }
+
         viewModel.goalChartData.subscribe { [weak self] _ in
             self?.goalTableView.reloadData()
         }
 
         viewModel.goalLabelData.subscribe { [weak self] _ in
             self?.goalTableView.reloadData()
-        }
-
-        viewModel.progressingGoals.subscribe { _ in
-            Task { [weak self] in
-                await MainActor.run {
-                    self?.goalTableView.reloadSections(
-                        IndexSet(integer: GoalSectionType.progressGoal.rawValue), with: .automatic
-                    )
-                }
-            }
-        }
-
-        viewModel.completedGoals.subscribe { _ in
-            Task { [weak self] in
-                await MainActor.run {
-                    self?.goalTableView.reloadSections(
-                        IndexSet(integer: GoalSectionType.completedGoal.rawValue), with: .automatic
-                    )
-                }
-            }
         }
     }
 
@@ -179,16 +186,16 @@ extension GoalViewController: UITableViewDataSource {
 
             if sectionType == .progressGoal {
                 cell.bind(
-                    with: .init(
+                    goal: .init(
                         headerTitle: "애벌래 님이 진행중인 목표 ⚡",
-                        books: viewModel.progressingGoals.value
+                        goals: viewModel.progressingGoals.value
                     )
                 )
             } else if sectionType == .completedGoal {
                 cell.bind(
-                    with: .init(
+                    goal: .init(
                         headerTitle:  "애벌래 님이 완료한 목표 📚",
-                        books: viewModel.completedGoals.value
+                        goals: viewModel.completedGoals.value
                     )
                 )
             }
@@ -213,13 +220,11 @@ extension GoalViewController: UITableViewDelegate {
 
 extension GoalViewController: BookWithHeaderCellDelegate {
 
-    func bookImageTapped(of isbn: String) {
-        // TODO: book id 등 구별할 수 있는 요소로 수정 - isbn 사용하여
-
-        let viewModel = DetailGoalViewModel()
+    func goalTapped(of goalId: Int) {
+        let viewModel = DetailGoalViewModel(goalId: goalId)
         let detailVC = DetailGoalViewController(viewModel: viewModel)
         detailVC.hidesBottomBarWhenPushed = true
-        
+
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

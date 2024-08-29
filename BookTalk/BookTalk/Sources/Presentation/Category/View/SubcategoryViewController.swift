@@ -24,7 +24,7 @@ final class SubcategoryViewController: BaseViewController {
 
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -177,7 +177,7 @@ extension SubcategoryViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookWithHeaderCell.identifier, for: indexPath) as? BookWithHeaderCell else { return UITableViewCell() }
 
             cell.bind(
-                section == .popularBooks ?
+                book:section == .popularBooks ?
                 viewModel.popularBooks.value : viewModel.newBooks.value
             )
 

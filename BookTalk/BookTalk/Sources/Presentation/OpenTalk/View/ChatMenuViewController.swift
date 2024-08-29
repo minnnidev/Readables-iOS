@@ -105,8 +105,8 @@ final class ChatMenuViewController: BaseViewController {
     }
 
     private func pushToDetailGoalViewController() {
-        // TODO: book number와 같은 id값 뷰모델로 넘겨주기
-        let viewModel = DetailGoalViewModel()
+        // TODO: goalId 수정
+        let viewModel = DetailGoalViewModel(goalId: 7)
         let detailGoalVC = DetailGoalViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(detailGoalVC, animated: true)

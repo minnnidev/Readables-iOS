@@ -15,6 +15,7 @@ final class GoalViewModel {
     private(set) var goalLabelData = Observable<[String]>([])
     private(set) var progressingGoals = Observable<[GoalDetailModel]>([])
     private(set) var completedGoals = Observable<[GoalDetailModel]>([])
+    private(set) var loadState = Observable(LoadState.initial)
 
     enum Action {
         case loadGoalData(goalData: [GoalModel])
@@ -35,6 +36,8 @@ final class GoalViewModel {
             goalLabelData.value = goalData.map { $0.day }
 
         case .loadGoalPage:
+            loadState.value = .loading
+
             Task {
                 do {
                     let progressingGoals = try await GoalService.getUserGoal(isFinished: false)
@@ -43,6 +46,8 @@ final class GoalViewModel {
                     await MainActor.run {
                         self.progressingGoals.value = progressingGoals
                         self.completedGoals.value = completedGoals
+
+                        loadState.value = .completed
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
