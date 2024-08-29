@@ -47,9 +47,20 @@ final class DetailGoalViewModel {
             Task {
                 do {
                     let detailResult = try await GoalService.getGoalDetail(of: goalId)
+                    let pageData = detailResult.goalModel.map { $0.amout }
 
                     await MainActor.run {
                         goalDetail.value = detailResult
+
+                        var entryDatas: [BarChartDataEntry] = .init()
+
+                        pageData.enumerated().forEach { idx, page in
+                            entryDatas.append(.init(x: Double(idx), y: Double(page)))
+                        }
+
+                        goalLabelData.value = detailResult.goalModel.map { $0.day.toShortDateFormat() }
+                        goalChartData.value = entryDatas
+
                         loadState.value = .completed
                     }
                 } catch let error as NetworkError {
