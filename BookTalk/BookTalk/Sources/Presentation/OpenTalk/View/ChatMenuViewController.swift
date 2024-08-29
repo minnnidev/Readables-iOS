@@ -36,6 +36,15 @@ final class ChatMenuViewController: BaseViewController {
 
         setDelegate()
         registerCell()
+        bind()
+
+        viewModel.send(action: .loadUserStates(isbn: viewModel.isbn))
+    }
+
+    // MARK: - Bind
+
+    private func bind() {
+
     }
 
     // MARK: - UI Setup
@@ -112,8 +121,8 @@ final class ChatMenuViewController: BaseViewController {
         navigationController?.pushViewController(detailGoalVC, animated: true)
     }
 
-    private func pushToAddBookViewController(of bookName: String) {
-        let viewModel = AddBookViewModel(addBookType: .goalBook, bookName: bookName)
+    private func pushToAddBookViewController() {
+        let viewModel = AddBookViewModel(addBookType: .goalBook)
         let addBookVC = AddBookViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(addBookVC, animated: true)
@@ -158,6 +167,7 @@ extension ChatMenuViewController: UITableViewDataSource {
 
         switch sectionType {
         case .nowReading:
+            nowReadingCell.bind(with: viewModel.progressingUsers.value)
             return nowReadingCell
 
         case .myProgress:
@@ -175,13 +185,13 @@ extension ChatMenuViewController: UITableViewDataSource {
                 notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }
 
-                    // TODO: 책 제목 수정
-                    self?.pushToAddBookViewController(of: "나미야 잡화점의 기적")
+                    self?.pushToAddBookViewController()
                 }
                 return notStartedReadingCell
             }
 
         case .completedReading:
+            completedReadingCell.bind(with: viewModel.completedUsers.value)
             return completedReadingCell
         }
     }

@@ -14,6 +14,8 @@ final class NowReadingCell: BaseTableViewCell {
     private let titleLabel = UILabel()
     private let nowReadingPeopleTableView = UITableView()
 
+    private var users: [GoalUserModel]?
+
     // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,6 +27,15 @@ final class NowReadingCell: BaseTableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Bind
+
+    func bind(with goalUsers: [GoalUserModel]) {
+        titleLabel.text = "현재 \(goalUsers.count)명이 이 책을 읽고 있어요!"
+        users = goalUsers
+
+        nowReadingPeopleTableView.reloadData()
     }
 
     // MARK: - UI Setup
@@ -86,7 +97,7 @@ extension NowReadingCell: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 5
+        return min(users?.count ?? 0, 5)
     }
 
     func tableView(
@@ -97,6 +108,8 @@ extension NowReadingCell: UITableViewDataSource {
             withIdentifier: ReadingPeopleCell.identifier,
             for: indexPath
         ) as? ReadingPeopleCell else { return UITableViewCell() }
+
+        cell.bind(with: users?[indexPath.row])
 
         return cell
     }

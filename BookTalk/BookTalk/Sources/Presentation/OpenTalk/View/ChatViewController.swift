@@ -274,7 +274,7 @@ final class ChatViewController: BaseViewController {
     }
 
     @objc private func menuButtonDidTapped() {
-        let viewModel = ChatMenuViewModel()
+        let viewModel = ChatMenuViewModel(isbn: viewModel.isbn)
         let chatMenuVC = ChatMenuViewController(viewModel: viewModel)
         navigationController?.pushViewController(chatMenuVC, animated: true)
     }

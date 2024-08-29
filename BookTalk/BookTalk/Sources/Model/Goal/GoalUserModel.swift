@@ -12,3 +12,14 @@ struct GoalUserModel {
     let nickname: String
     let progressRate: Double
 }
+
+extension GoalUserModel {
+
+    static var goalUserStub1: GoalUserModel {
+        return .init(profileImageURL: "", nickname: "닉네임1", progressRate: 45.32)
+    }
+
+    static var goalUserStub2: GoalUserModel {
+        return .init(profileImageURL: "", nickname: "닉네임2", progressRate: 22.33)
+    }
+}

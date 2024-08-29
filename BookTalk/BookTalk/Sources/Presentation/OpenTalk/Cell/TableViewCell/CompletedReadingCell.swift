@@ -14,6 +14,8 @@ final class CompletedReadingCell: BaseTableViewCell {
     private let titleLabel = UILabel()
     private let completedReadingPeopleTableView = UITableView()
 
+    private var users: [GoalUserModel]?
+
     // MARK: - Initializer
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,6 +27,15 @@ final class CompletedReadingCell: BaseTableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Bind
+
+    func bind(with goalUsers: [GoalUserModel]) {
+        titleLabel.text = "지금까지 \(goalUsers.count)명이 이 책을 다 읽었어요!"
+        users = goalUsers
+
+        completedReadingPeopleTableView.reloadData()
     }
 
     // MARK: - UI Setup
@@ -84,7 +95,7 @@ extension CompletedReadingCell: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 5
+        return min(users?.count ?? 0, 5)
     }
 
     func tableView(
@@ -95,6 +106,8 @@ extension CompletedReadingCell: UITableViewDataSource {
             withIdentifier: ReadingPeopleCell.identifier,
             for: indexPath
         ) as? ReadingPeopleCell else { return UITableViewCell() }
+
+        cell.bind(with: users?[indexPath.row])
 
         return cell
     }
