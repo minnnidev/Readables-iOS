@@ -11,8 +11,8 @@ struct GoalResponseDTO: Decodable {
     let goalId: Int
     let userNickname: String
     let bookSummary: BookSummaryDTO
-    let recentPage: String?
-    let totalPage: String
+    let recentPage: Int?
+    let totalPage: Int
     let createdAt: String
     let updatedAt: String
     let isFinished: Bool
@@ -69,5 +69,5 @@ extension BookSummaryDTO {
 
 struct AweekRecordDTO: Decodable {
     let date: String
-    let recentPage: Int
+    let pageInterval: Int
 }
