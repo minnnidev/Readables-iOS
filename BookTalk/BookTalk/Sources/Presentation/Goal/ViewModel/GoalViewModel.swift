@@ -10,14 +10,16 @@ import DGCharts
 
 final class GoalViewModel {
 
+    private(set) var goalSections = GoalSectionType.allCases
+    private(set) var goalChartData = Observable<[BarChartDataEntry]>([])
+    private(set) var goalLabelData = Observable<[String]>([])
+    private(set) var progressingGoals = Observable<[GoalDetailModel]>([])
+    private(set) var completedGoals = Observable<[GoalDetailModel]>([])
+
     enum Action {
         case loadGoalData(goalData: [GoalModel])
+        case loadGoalPage
     }
-
-    var goalChartData = Observable<[BarChartDataEntry]>([])
-    var goalLabelData = Observable<[String]>([])
-
-    let goalSections = GoalSectionType.allCases
 
     func send(action: Action) {
 
@@ -31,6 +33,21 @@ final class GoalViewModel {
 
             goalChartData.value = entryDatas
             goalLabelData.value = goalData.map { $0.day }
+
+        case .loadGoalPage:
+            Task {
+                do {
+                    let progressingGoals = try await GoalService.getUserGoal(isFinished: false)
+                    let completedGoals = try await GoalService.getUserGoal(isFinished: true)
+
+                    await MainActor.run {
+                        self.progressingGoals.value = progressingGoals
+                        self.completedGoals.value = completedGoals
+                    }
+                } catch let error as NetworkError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }

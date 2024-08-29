@@ -94,6 +94,19 @@ final class BookWithHeaderCell: BaseTableViewCell {
 
         bookCollectionView.reloadData()
     }
+
+    func bind(with model: GoalsWithHeader) {
+        headerLabel.text = "\(model.headerTitle)"
+        books = model.books.map {
+            .init(
+                isbn: $0.bookInfo.isbn,
+                imageURL: $0.bookInfo.coverImageURL,
+                title: $0.bookInfo.title
+            )
+        }
+
+        bookCollectionView.reloadData()
+    }
 }
 
 extension BookWithHeaderCell: UICollectionViewDataSource {

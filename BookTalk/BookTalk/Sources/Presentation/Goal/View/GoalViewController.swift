@@ -35,6 +35,8 @@ final class GoalViewController: BaseViewController {
         registerCell()
         setDelegate()
         bind()
+
+        viewModel.send(action: .loadGoalPage)
     }
 
     // MARK: - UI Setup
@@ -87,6 +89,26 @@ final class GoalViewController: BaseViewController {
 
         viewModel.goalLabelData.subscribe { [weak self] _ in
             self?.goalTableView.reloadData()
+        }
+
+        viewModel.progressingGoals.subscribe { _ in
+            Task { [weak self] in
+                await MainActor.run {
+                    self?.goalTableView.reloadSections(
+                        IndexSet(integer: GoalSectionType.progressGoal.rawValue), with: .automatic
+                    )
+                }
+            }
+        }
+
+        viewModel.completedGoals.subscribe { _ in
+            Task { [weak self] in
+                await MainActor.run {
+                    self?.goalTableView.reloadSections(
+                        IndexSet(integer: GoalSectionType.completedGoal.rawValue), with: .automatic
+                    )
+                }
+            }
         }
     }
 
@@ -157,13 +179,17 @@ extension GoalViewController: UITableViewDataSource {
 
             if sectionType == .progressGoal {
                 cell.bind(
-                    .init(headerTitle: "애벌래 님이 진행중인 목표 ⚡", 
-                          books: [.init(isbn: "", imageURL: "", title: "")] // TODO: 수정
-                         )
+                    with: .init(
+                        headerTitle: "애벌래 님이 진행중인 목표 ⚡",
+                        books: viewModel.progressingGoals.value
+                    )
                 )
             } else if sectionType == .completedGoal {
                 cell.bind(
-                    .init(headerTitle: "애벌래 님이 완료한 목표 📚", books: [])
+                    with: .init(
+                        headerTitle:  "애벌래 님이 완료한 목표 📚",
+                        books: viewModel.completedGoals.value
+                    )
                 )
             }
 

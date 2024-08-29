@@ -12,6 +12,11 @@ struct BooksWithHeader {
     var books: [Book]
 }
 
+struct GoalsWithHeader {
+    var headerTitle: String
+    var books: [GoalDetailModel]
+}
+
 struct Book {
     var isbn: String
     var imageURL: String

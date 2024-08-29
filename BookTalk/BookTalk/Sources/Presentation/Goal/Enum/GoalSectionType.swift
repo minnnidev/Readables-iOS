@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GoalSectionType: CaseIterable {
+enum GoalSectionType: Int, CaseIterable {
     case chart
     case progressGoal
     case completedGoal

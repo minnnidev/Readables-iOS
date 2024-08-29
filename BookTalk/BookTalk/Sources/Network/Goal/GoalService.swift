@@ -42,4 +42,14 @@ struct GoalService {
             target: GoalTarget.deleteGoal(params: params)
         )
     }
+
+    static func getUserGoal(isFinished: Bool) async throws -> [GoalDetailModel] {
+        let params: LoadGoalRequestDTO = .init(isFalsed: isFinished)
+
+        let result: [GoalResponseDTO] = try await NetworkService.shared.request(
+            target: GoalTarget.getUserGoals(params: params)
+        )
+
+        return result.map { $0.toModel() }
+    }
 }

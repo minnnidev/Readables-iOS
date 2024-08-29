@@ -35,6 +35,7 @@ extension GoalResponseDTO {
 
     func toModel() -> GoalDetailModel {
         return .init(
+            goalId: goalId,
             bookInfo: bookSummary.toModel(),
             startDate: createdAt.toExtractDateString()
         )
