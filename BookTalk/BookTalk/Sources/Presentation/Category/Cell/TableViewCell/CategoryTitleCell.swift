@@ -14,7 +14,7 @@ final class CategoryTitleCell: BaseTableViewCell {
     private let firstCategoryTitleLabel = UILabel()
     private let chevronImageView = UIImageView()
     private let subcategoryTitleLabel = UILabel()
-    private let selectLabel = PaddedLabel()
+    private let selectIcon = UIImageView()
 
     // MARK: - UI Setup
 
@@ -39,22 +39,17 @@ final class CategoryTitleCell: BaseTableViewCell {
             $0.textColor = .accentOrange
         }
 
-        selectLabel.do {
-            $0.text = "선택"
-            $0.font = .systemFont(ofSize: 12, weight: .medium)
-            $0.textAlignment = .center
-            $0.textColor = .white
-            $0.backgroundColor = .accentOrange
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 10
-            $0.textInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        selectIcon.do {
+            $0.image = UIImage(systemName: "chevron.up.chevron.down")
+            $0.tintColor = .black
+            $0.contentMode = .scaleAspectFit
         }
     }
 
     override func setConstraints() {
         [
             firstCategoryTitleLabel, chevronImageView,
-            subcategoryTitleLabel, selectLabel
+            subcategoryTitleLabel, selectIcon
         ].forEach {
             contentView.addSubview($0)
         }
@@ -68,7 +63,6 @@ final class CategoryTitleCell: BaseTableViewCell {
         chevronImageView.snp.makeConstraints {
             $0.centerY.equalTo(firstCategoryTitleLabel)
             $0.leading.equalTo(firstCategoryTitleLabel.snp.trailing).offset(4)
-            $0.height.equalTo(15)
         }
 
         subcategoryTitleLabel.snp.makeConstraints {
@@ -76,9 +70,10 @@ final class CategoryTitleCell: BaseTableViewCell {
             $0.leading.equalTo(chevronImageView.snp.trailing).offset(4)
         }
 
-        selectLabel.snp.makeConstraints {
+        selectIcon.snp.makeConstraints {
             $0.centerY.equalTo(firstCategoryTitleLabel)
-            $0.trailing.equalToSuperview().offset(-12)
+            $0.leading.equalTo(subcategoryTitleLabel.snp.trailing).offset(8)
+            $0.height.equalTo(25)
         }
     }
 
