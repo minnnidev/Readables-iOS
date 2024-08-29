@@ -8,5 +8,5 @@
 import Foundation
 
 struct LoadGoalRequestDTO: Encodable {
-    let isFalsed: Bool
+    let isFinished: Bool
 }
