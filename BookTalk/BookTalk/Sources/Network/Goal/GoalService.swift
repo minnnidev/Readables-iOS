@@ -79,4 +79,14 @@ struct GoalService {
 
         return result.map { $0.toModel() }
     }
+
+    static func getMyProgress(of isbn: String) async throws -> MyGoalModel {
+        let params: ISBNRequestDTO = .init(isbn: isbn)
+
+        let reuslt: GoalMyProgressResponseDTO = try await NetworkService.shared.request(
+            target: GoalTarget.getMyProgress(params: params)
+        )
+
+        return reuslt.toModel()
+    }
 }

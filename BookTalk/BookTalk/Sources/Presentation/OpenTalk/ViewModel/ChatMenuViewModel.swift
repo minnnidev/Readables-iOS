@@ -25,27 +25,24 @@ final class ChatMenuViewModel {
     // MARK: - Actions
 
     enum Action {
-        case loadUserStates(isbn: String)
+        case loadChatMenu(isbn: String)
     }
 
     func send(action: Action) {
         switch action {
-        case let .loadUserStates(isbn):
+        case let .loadChatMenu(isbn):
             Task {
                 do {
-                    // TODO: 더미데이터 삭제
-                    self.progressingUsers.value = [.goalUserStub1, .goalUserStub2]
-                    self.completedUsers.value = [.goalUserStub1, .goalUserStub2]
+                    let progressingUsers = try await GoalService.getGoalUserState(of: isbn, isFinished: false)
+                    let completedUsers = try await GoalService.getGoalUserState(of: isbn, isFinished: true)
+                    let myProgress = try await GoalService.getMyProgress(of: isbn)
 
+                    print(myProgress)
 
-//                    let progressingUsers = try await GoalService.getGoalUserState(of: isbn, isFinished: false)
-//                    let completedUsers = try await GoalService.getGoalUserState(of: isbn, isFinished: true)
-//
-//                    await MainActor.run {
-//                        self.progressingUsers.value = progressingUsers
-//                        self.completedUsers.value = completedUsers
-//                    }
-
+                    await MainActor.run {
+                        self.progressingUsers.value = progressingUsers
+                        self.completedUsers.value = completedUsers
+                    }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                 }

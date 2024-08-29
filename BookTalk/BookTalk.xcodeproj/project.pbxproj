@@ -63,6 +63,8 @@
 		AB07848D2C75A92D0017812F /* BookDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */; };
 		AB09F38C2C80D4760098A53D /* FInishedGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F38B2C80D4760098A53D /* FInishedGoalViewController.swift */; };
 		AB09F38E2C80D4AA0098A53D /* FinishedGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F38D2C80D4AA0098A53D /* FinishedGoalViewModel.swift */; };
+		AB09F3902C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F38F2C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift */; };
+		AB09F3922C80DBA40098A53D /* MyGoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB09F3912C80DBA40098A53D /* MyGoalModel.swift */; };
 		AB0C0F592C5BD98B007812C5 /* OpenTalkPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */; };
 		AB0C0F5F2C5BE285007812C5 /* OpenTalkPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */; };
 		AB0C0F612C5BE9B1007812C5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */; };
@@ -271,6 +273,8 @@
 		AB07848C2C75A92D0017812F /* BookDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailResponseDTO.swift; sourceTree = "<group>"; };
 		AB09F38B2C80D4760098A53D /* FInishedGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FInishedGoalViewController.swift; sourceTree = "<group>"; };
 		AB09F38D2C80D4AA0098A53D /* FinishedGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedGoalViewModel.swift; sourceTree = "<group>"; };
+		AB09F38F2C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalMyProgressResponseDTO.swift; sourceTree = "<group>"; };
+		AB09F3912C80DBA40098A53D /* MyGoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGoalModel.swift; sourceTree = "<group>"; };
 		AB0C0F582C5BD98B007812C5 /* OpenTalkPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageCell.swift; sourceTree = "<group>"; };
 		AB0C0F5E2C5BE285007812C5 /* OpenTalkPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTalkPageType.swift; sourceTree = "<group>"; };
 		AB0C0F602C5BE9B1007812C5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -1443,6 +1447,7 @@
 			children = (
 				ABB993612C7F811600E6DB67 /* GoalResponseDTO.swift */,
 				AB4F96312C80AE4600DE55E6 /* GoalUserResponseDTO.swift */,
+				AB09F38F2C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1555,6 +1560,7 @@
 				ABED44122C665DD90073398A /* GoalModel.swift */,
 				ABB9936A2C7F878B00E6DB67 /* GoalDetailModel.swift */,
 				AB4F96332C80AF2600DE55E6 /* GoalUserModel.swift */,
+				AB09F3912C80DBA40098A53D /* MyGoalModel.swift */,
 			);
 			path = Goal;
 			sourceTree = "<group>";
@@ -1732,6 +1738,7 @@
 				054543F92C5A24D000E64948 /* SearchResultCell.swift in Sources */,
 				056F30542C60D5D400931302 /* BookDetailViewController.swift in Sources */,
 				AB4F962A2C805DE800DE55E6 /* LoadGoalRequestDTO.swift in Sources */,
+				AB09F3922C80DBA40098A53D /* MyGoalModel.swift in Sources */,
 				0579D1162C6C9FA30032AC1C /* KeywordCollectionCell.swift in Sources */,
 				AB4CBA812C6E09CD009A2AB6 /* SettingType.swift in Sources */,
 				056F30522C60D5A100931302 /* BorrowableLibraryCell.swift in Sources */,
@@ -1910,6 +1917,7 @@
 				054544152C5AA80700E64948 /* BookInfo.swift in Sources */,
 				AB23BF0A2C638EA300E12702 /* CategorySelectModalViewModel.swift in Sources */,
 				ABB901C72C73983700727875 /* OpenTalkBookModel.swift in Sources */,
+				AB09F3902C80DB7E0098A53D /* GoalMyProgressResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 import Foundation
 
 struct GoalUserResponseDTO: Decodable {
+    let profileImageUrl: String
     let nickname: String
     let progressRate: Double
 }
@@ -16,7 +17,7 @@ extension GoalUserResponseDTO {
 
     func toModel() -> GoalUserModel {
         return .init(
-            profileImageURL: "", // TODO: 수정
+            profileImageURL: profileImageUrl, 
             nickname: nickname,
             progressRate: progressRate
         )

@@ -39,7 +39,7 @@ final class ChatMenuViewController: BaseViewController {
         registerCell()
         bind()
 
-        viewModel.send(action: .loadUserStates(isbn: viewModel.isbn))
+        viewModel.send(action: .loadChatMenu(isbn: viewModel.isbn))
     }
 
     // MARK: - Bind
