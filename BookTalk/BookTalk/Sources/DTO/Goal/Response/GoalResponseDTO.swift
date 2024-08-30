@@ -11,7 +11,7 @@ struct GoalResponseDTO: Decodable {
     let goalId: Int
     let userNickname: String
     let bookSummary: BookSummaryDTO
-    let recentPage: Int
+    let recentPage: Int?
     let totalPage: Int
     let createdAt: String
     let updatedAt: String
@@ -38,7 +38,7 @@ extension GoalResponseDTO {
             goalId: goalId,
             bookInfo: bookSummary.toModel(),
             startDate: createdAt.toExtractDateString(),
-            recentPage: recentPage,
+            recentPage: recentPage ?? 0,
             goalModel: aWeekRecords?.map { $0.toModel() } ?? [] ,
             updateDate: updatedAt.toExtractDateString(),
             createDate: createdAt.toExtractDateString(),
@@ -77,7 +77,7 @@ extension BookSummaryDTO {
 
 struct AweekRecordDTO: Decodable {
     let date: String
-    let pageInterval: Int
+    let pageInterval: Int?
 }
 
 extension AweekRecordDTO {
@@ -85,7 +85,7 @@ extension AweekRecordDTO {
     func toModel() -> GoalModel {
         return .init(
             day: date,
-            amout: pageInterval
+            amout: pageInterval ?? 0
         )
     }
 }

@@ -77,6 +77,7 @@ final class GoalViewModel {
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
+                    loadState.value = .completed
                 }
             }
         }
