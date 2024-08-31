@@ -106,9 +106,9 @@ struct UserInfoViewModel {
         guard !nickname.value.isEmpty else { return false }
         
         if isKorean(nickname.value) {
-            return nickname.value.count >= 2
+            return nickname.value.count >= 2 && nickname.value.count <= 8
         } else {
-            return nickname.value.count >= 3
+            return nickname.value.count >= 3 && nickname.value.count <= 16
         }
     }
     

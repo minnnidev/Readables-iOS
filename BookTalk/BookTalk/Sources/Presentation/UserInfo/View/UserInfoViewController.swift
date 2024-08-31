@@ -251,7 +251,7 @@ final class UserInfoViewController: BaseViewController {
         
         setupTextField(
             textField: nicknameTextField,
-            placeholder: "닉네임 (한글 2자 이상, 영어 3자 이상) - 필수",
+            placeholder: "닉네임 (한글 2자~8자, 영어 3자~16자) - 필수",
             spacerWidth: 12
         )
         
