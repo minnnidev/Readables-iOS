@@ -61,6 +61,17 @@ final class ChatMenuViewController: BaseViewController {
                 }
             }
         }
+
+        viewModel.createGoalSucceed.subscribe { isSucceed in
+            guard isSucceed else { return }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                guard let goalId = viewModel.createdGoalId else { return }
+
+                pushToDetailGoalViewController(goalId: goalId)
+            }
+        }
     }
 
     // MARK: - UI Setup
@@ -129,9 +140,8 @@ final class ChatMenuViewController: BaseViewController {
         )
     }
 
-    private func pushToDetailGoalViewController() {
-        // TODO: goalId 수정
-        let viewModel = DetailGoalViewModel(goalId: 7)
+    private func pushToDetailGoalViewController(goalId: Int) {
+        let viewModel = DetailGoalViewModel(goalId: goalId)
         let detailGoalVC = DetailGoalViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(detailGoalVC, animated: true)
@@ -167,9 +177,13 @@ final class ChatMenuViewController: BaseViewController {
             handler: nil
         )
 
-        let okAction = UIAlertAction(title: "완료", style: .default) { _ in
+        let okAction = UIAlertAction(title: "완료", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
             if let textField = alertVC.textFields?.first {
-                print(textField)
+                viewModel.send(
+                    action: .addGoal(isbn: viewModel.isbn, totalPage: textField.text ?? "0")
+                )
             }
         }
 
@@ -233,12 +247,6 @@ extension ChatMenuViewController: UITableViewDataSource {
         case .myProgress:
             if let rate = viewModel.myProgress.value?.progressRate {
                 readingProgressCell.bind(percent: Int(rate))
-
-                readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
-                    guard isTapped else { return }
-
-                    self?.pushToDetailGoalViewController()
-                }
 
                 return readingProgressCell
             } else {
