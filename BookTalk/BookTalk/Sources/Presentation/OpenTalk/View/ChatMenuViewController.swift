@@ -143,6 +143,50 @@ final class ChatMenuViewController: BaseViewController {
 
         navigationController?.pushViewController(addBookVC, animated: true)
     }
+
+    private func configureCreateGoalAlert() {
+        let alertVC = UIAlertController(
+            title: "목표 추가",
+            message: "총 페이지 수를 입력해 주세요.",
+            preferredStyle: .alert
+        )
+
+        alertVC.addTextField { tf in
+            tf.placeholder = "페이지 수"
+            tf.keyboardType = .numberPad
+            tf.addTarget(
+                self,
+                action: #selector(self.textDidChange(_:)),
+                for: .editingChanged
+            )
+        }
+
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
+
+        let okAction = UIAlertAction(title: "완료", style: .default) { _ in
+            if let textField = alertVC.textFields?.first {
+                print(textField)
+            }
+        }
+
+        okAction.isEnabled = false
+
+        [cancelAction, okAction].forEach { alertVC.addAction($0) }
+
+        present(alertVC, animated: true)
+    }
+
+    @objc private func textDidChange(_ textField: UITextField) {
+        guard let alertVC = self.presentedViewController as? UIAlertController,
+              let okAction = alertVC.actions.last else {
+            return
+        }
+        okAction.isEnabled = !(textField.text?.isEmpty ?? true)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -201,7 +245,7 @@ extension ChatMenuViewController: UITableViewDataSource {
                 notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }
 
-                    self?.pushToAddBookViewController()
+                    self?.configureCreateGoalAlert()
                 }
                 return notStartedReadingCell
             }
