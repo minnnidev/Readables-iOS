@@ -31,10 +31,8 @@ final class MyPageViewModel {
                     dibBooksOb.value = userInfo.dibs
                     readBooksOb.value = userInfo.readBooks
 
-                    // TODO: 읽은 책 추가
-
                 } catch let error as NetworkError {
-                   
+                    print(error.localizedDescription)
                 }
             }
         }
