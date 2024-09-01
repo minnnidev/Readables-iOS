@@ -138,6 +138,8 @@ final class ChatViewModel {
 
                 await MainActor.run {
                     isBookmarked.value = true
+
+                    NotificationCenter.default.post(name: .openTalkChanged, object: nil)
                 }
             } catch let error as NetworkError {
                 print(error.localizedDescription)
@@ -152,6 +154,8 @@ final class ChatViewModel {
 
                 await MainActor.run {
                     isBookmarked.value = false
+
+                    NotificationCenter.default.post(name: .openTalkChanged, object: nil)
                 }
             } catch let error as NetworkError {
                 print(error.localizedDescription)

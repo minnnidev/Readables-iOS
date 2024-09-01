@@ -5,6 +5,7 @@
 //  Created by 김민 on 8/20/24.
 //
 
+import Combine
 import Foundation
 
 final class OpenTalkViewModel {
@@ -16,7 +17,23 @@ final class OpenTalkViewModel {
     var favoriteOpenTalks = Observable<[OpenTalkBookModel]>([])
     var loadState = Observable(LoadState.initial)
 
+    private var cancellables = Set<AnyCancellable>()
+
+    // MARK: - Initializer
+
+    init() {
+        bind()
+    }
+
     // MARK: - Helpers
+
+    private func bind() {
+        NotificationCenter.default.publisher(for: .openTalkChanged)
+            .sink { [weak self] _ in
+                self?.loadFavoriteOpenTalk()
+            }
+            .store(in: &cancellables)
+    }
 
     enum Action {
         case setPageType(_ pageType: OpenTalkPageType)
