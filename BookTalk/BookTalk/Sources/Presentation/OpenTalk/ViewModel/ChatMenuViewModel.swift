@@ -52,16 +52,18 @@ final class ChatMenuViewModel {
             loadChatMenu(isbn: isbn)
 
         case let .addGoal(isbn, totalPage):
+
             Task {
                 do {
                     let response = try await GoalService.createGoal(with: isbn, totalPage: Int(totalPage)!)
 
-
-                    NotificationCenter.default.post(name: .goalChanged, object: nil)
-                    createdGoalId = response.goalId
-                    createGoalSucceed.value = true
-
-                    loadChatMenu(isbn: isbn)
+                    await MainActor.run {
+                        createdGoalId = response.goalId
+                        
+                        NotificationCenter.default.post(name: .goalChanged, object: nil)
+                        createGoalSucceed.value = true
+                        loadChatMenu(isbn: isbn)
+                    }
 
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
