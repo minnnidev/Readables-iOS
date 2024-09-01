@@ -14,7 +14,6 @@ final class OpenTalkViewController: BaseViewController {
     private let bookBanner = UIImageView()
     private let pageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
     private let bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-    private let refreshControl = UIRefreshControl()
     private let indicatorView = UIActivityIndicatorView(style: .medium)
 
     private let viewModel: OpenTalkViewModel
@@ -39,7 +38,6 @@ final class OpenTalkViewController: BaseViewController {
         setDelegate()
         registerCell()
         bind()
-        addTarget()
 
         viewModel.send(action: .setPageType(.hot))
     }
@@ -87,7 +85,6 @@ final class OpenTalkViewController: BaseViewController {
             $0.backgroundColor = .clear
             $0.contentInset = .init(top: 10, left: 10, bottom: 10, right: 10)
             $0.showsVerticalScrollIndicator = false
-            $0.refreshControl = refreshControl
         }
 
         indicatorView.do {
@@ -142,14 +139,6 @@ final class OpenTalkViewController: BaseViewController {
         )
     }
 
-    private func addTarget() {
-        refreshControl.addTarget(
-            self,
-            action: #selector(refreshCollectionView),
-            for: .valueChanged
-        )
-    }
-
     private func bind() {
         viewModel.loadState.subscribe { [weak self] state in
             guard let self = self else { return }
@@ -194,12 +183,6 @@ final class OpenTalkViewController: BaseViewController {
 
         searchVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchVC, animated: true)
-    }
-
-    @objc private func refreshCollectionView() {
-        viewModel.send(action: .setPageType(.hot))
-
-        refreshControl.endRefreshing()
     }
 }
 

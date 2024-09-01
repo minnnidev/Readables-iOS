@@ -49,7 +49,7 @@ final class OpenTalkPageCell: BaseCollectionViewCell {
         lineView.snp.makeConstraints {
             $0.leading.trailing.equalTo(contentView.safeAreaLayoutGuide)
             $0.bottom.equalTo(contentView)
-            $0.height.equalTo(1)
+            $0.height.equalTo(2)
         }
     }
 

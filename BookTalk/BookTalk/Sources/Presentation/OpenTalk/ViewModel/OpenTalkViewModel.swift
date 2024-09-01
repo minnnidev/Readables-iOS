@@ -27,9 +27,6 @@ final class OpenTalkViewModel {
         case let .setPageType(selectedPage):
             selectedPageType = selectedPage
 
-            favoriteOpenTalks.value.removeAll()
-            hotOpenTalks.value.removeAll()
-
             switch selectedPage {
             case .hot:
                 loadHotOpenTalk()
