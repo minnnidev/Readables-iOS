@@ -72,6 +72,7 @@ final class OpenTalkViewController: BaseViewController {
             flowLayout.scrollDirection = .horizontal
 
             $0.collectionViewLayout = flowLayout
+            $0.isScrollEnabled = false
             $0.backgroundColor = .clear
             $0.contentInset = .init()
         }
