@@ -61,6 +61,17 @@ final class ChatMenuViewController: BaseViewController {
                 }
             }
         }
+
+        viewModel.createGoalSucceed.subscribe { isSucceed in
+            guard isSucceed else { return }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                guard let goalId = viewModel.createdGoalId else { return }
+
+                pushToDetailGoalViewController(goalId: goalId)
+            }
+        }
     }
 
     // MARK: - UI Setup
@@ -129,9 +140,8 @@ final class ChatMenuViewController: BaseViewController {
         )
     }
 
-    private func pushToDetailGoalViewController() {
-        // TODO: goalId 수정
-        let viewModel = DetailGoalViewModel(goalId: 7)
+    private func pushToDetailGoalViewController(goalId: Int) {
+        let viewModel = DetailGoalViewModel(goalId: goalId)
         let detailGoalVC = DetailGoalViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(detailGoalVC, animated: true)
@@ -142,6 +152,54 @@ final class ChatMenuViewController: BaseViewController {
         let addBookVC = AddBookViewController(viewModel: viewModel)
 
         navigationController?.pushViewController(addBookVC, animated: true)
+    }
+
+    private func configureCreateGoalAlert() {
+        let alertVC = UIAlertController(
+            title: "목표 추가",
+            message: "총 페이지 수를 입력해 주세요.",
+            preferredStyle: .alert
+        )
+
+        alertVC.addTextField { tf in
+            tf.placeholder = "페이지 수"
+            tf.keyboardType = .numberPad
+            tf.addTarget(
+                self,
+                action: #selector(self.textDidChange(_:)),
+                for: .editingChanged
+            )
+        }
+
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel,
+            handler: nil
+        )
+
+        let okAction = UIAlertAction(title: "완료", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
+            if let textField = alertVC.textFields?.first {
+                viewModel.send(
+                    action: .addGoal(isbn: viewModel.isbn, totalPage: textField.text ?? "0")
+                )
+            }
+        }
+
+        okAction.isEnabled = false
+
+        [cancelAction, okAction].forEach { alertVC.addAction($0) }
+
+        present(alertVC, animated: true)
+    }
+
+    @objc private func textDidChange(_ textField: UITextField) {
+        guard let alertVC = self.presentedViewController as? UIAlertController,
+              let okAction = alertVC.actions.last else {
+            return
+        }
+        okAction.isEnabled = !(textField.text?.isEmpty ?? true)
     }
 }
 
@@ -190,18 +248,12 @@ extension ChatMenuViewController: UITableViewDataSource {
             if let rate = viewModel.myProgress.value?.progressRate {
                 readingProgressCell.bind(percent: Int(rate))
 
-                readingProgressCell.updateButtonDidTappedObservable.subscribe { [weak self] isTapped in
-                    guard isTapped else { return }
-
-                    self?.pushToDetailGoalViewController()
-                }
-
                 return readingProgressCell
             } else {
                 notStartedReadingCell.addButtonDidTappedObservable.subscribe { [weak self] isTapped in
                     guard isTapped else { return }
 
-                    self?.pushToAddBookViewController()
+                    self?.configureCreateGoalAlert()
                 }
                 return notStartedReadingCell
             }

@@ -9,12 +9,14 @@ import Foundation
 
 struct GoalService {
 
-    static func createGoal(with isbn: String, totalPage: Int) async throws {
+    static func createGoal(with isbn: String, totalPage: Int) async throws -> GoalDetailModel {
         let params: CreateGoalRequestDTO = .init(isbn: isbn, totalPage: totalPage)
 
-        let _: GoalResponseDTO = try await NetworkService.shared.request(
+        let result: GoalResponseDTO = try await NetworkService.shared.request(
             target: GoalTarget.postGoalCreate(params: params)
         )
+
+        return result.toModel()
     }
 
     static func getGoalDetail(of goalId: Int) async throws -> GoalDetailModel {
