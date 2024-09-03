@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum LoginType {
-    case apple, kakao
+enum LoginType: String {
+    case apple = "apple"
+    case kakao = "kakao"
 }

@@ -30,7 +30,7 @@ struct UserResponseDTO: Decodable {
     let kakaoId: String?
     let appleId: String?
     let regDate: String
-    let nickname: String
+    let nickname: String?
     let gender: String
     let birthDate: String?
     let profileImageUrl: String?
@@ -40,8 +40,8 @@ extension UserResponseDTO {
 
     func toModel() -> UserBasicInfo {
         return .init(
-            profileImage: "", // TODO: 
-            nickname: nickname,
+            profileImage: "", // TODO:
+            nickname: nickname ?? "",
             gender: GenderType(code: gender),
             birth: birthDate
         )

@@ -99,7 +99,10 @@ final class LoginViewController: BaseViewController {
             guard let self = self else { return }
             guard isLoginCompleted else { return }
 
-            let viewModel = UserInfoViewModel(isInitialEdit: true)
+            let viewModel = UserInfoViewModel(
+                isInitialEdit: true,
+                loginType: viewModel.loginType
+            )
             let registerVC = UserInfoViewController(viewModel: viewModel)
             navigationController?.pushViewController(registerVC, animated: true)
         }

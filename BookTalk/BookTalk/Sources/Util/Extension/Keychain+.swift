@@ -8,11 +8,16 @@
 import Foundation
 
 typealias TokenKey = KeychainManager.TokenKey
+typealias UserKey = KeychainManager.UserKey
 
 extension KeychainManager {
 
     enum TokenKey {
         static let accessToken = "accessToken"
         static let refreshToken = "refreshToken"
+    }
+
+    enum UserKey {
+        static let appleUserId = "appleUserId"
     }
 }
