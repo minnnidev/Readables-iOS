@@ -19,11 +19,13 @@ struct UserInfoViewModel {
     private(set) var presentAlert = Observable(false)
 
     private let isInitialEdit: Bool
+    private let loginType: LoginType?
 
     // MARK: - Initializer
 
-    init(isInitialEdit: Bool) {
+    init(isInitialEdit: Bool, loginType: LoginType? = nil) {
         self.isInitialEdit = isInitialEdit
+        self.loginType = loginType
 
         setUserInfoIfNeeded()
     }
@@ -46,12 +48,12 @@ struct UserInfoViewModel {
         nickname.value = text
         validateForm()
     }
-    
+
     func updateGender(_ gender: GenderType) {
         selectedGender.value = gender
         validateForm()
     }
-    
+
     func updateBirthDate(_ date: Date?) {
         birthDate.value = date
         validateForm()
@@ -72,7 +74,12 @@ struct UserInfoViewModel {
 
                 await MainActor.run {
                     if isInitialEdit {
-                        UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
+                        guard let loginType = loginType else { return }
+
+                        UserDefaults.standard.set(
+                            loginType.rawValue,
+                            forKey: UserDefaults.Key.loginType
+                        )
                         NotificationCenter.default.post(
                             name: Notification.Name.authStateChanged,
                             object: nil
@@ -97,21 +104,21 @@ struct UserInfoViewModel {
     }
 
     // MARK: - Helpers
-    
+
     private func validateForm() {
         isFormValid.value = isNicknameValid()
     }
-    
+
     private func isNicknameValid() -> Bool {
         guard !nickname.value.isEmpty else { return false }
-        
+
         if isKorean(nickname.value) {
             return nickname.value.count >= 2 && nickname.value.count <= 8
         } else {
             return nickname.value.count >= 3 && nickname.value.count <= 16
         }
     }
-    
+
     private func isKorean(_ text: String) -> Bool {
         let koreanRegex = "^[가-힣]*$"
         let koreanPredicate = NSPredicate(format: "SELF MATCHES %@", koreanRegex)

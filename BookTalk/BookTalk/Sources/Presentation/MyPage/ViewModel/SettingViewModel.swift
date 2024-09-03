@@ -22,9 +22,7 @@ final class SettingViewModel {
                     try await AuthService.logout()
 
                     await MainActor.run {
-                        // TODO: 삭제
-                        UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
-                        NotificationCenter.default.post(name: .authStateChanged, object: nil)
+                        deleteUserAuthState()
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
@@ -37,14 +35,17 @@ final class SettingViewModel {
                     try await AuthService.withdraw()
 
                     await MainActor.run {
-                        // TODO: 삭제
-                        UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
-                        NotificationCenter.default.post(name: .authStateChanged, object: nil)
+                        deleteUserAuthState()
                     }
                 } catch let error as NetworkError {
                     print(error.localizedDescription)
                 }
             }
         }
+    }
+
+    private func deleteUserAuthState() {
+        UserDefaults.standard.set(nil, forKey: UserDefaults.Key.loginType)
+        NotificationCenter.default.post(name: .authStateChanged, object: nil)
     }
 }

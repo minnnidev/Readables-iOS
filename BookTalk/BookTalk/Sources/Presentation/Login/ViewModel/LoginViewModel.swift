@@ -8,35 +8,36 @@
 import Foundation
 
 final class LoginViewModel {
-    
+
     // MARK: - Interactions
-    
+
     struct Input {
         let loginButtonTapped: (LoginType) -> Void
     }
-    
+
     struct Output {
         let onboardingMessage: Observable<String>
         let progressUpdate: Observable<(Int, Float)>
         let pushToRegister: Observable<Bool>
         let loadState: Observable<LoadState>
     }
-    
+
     // MARK: - Properties
 
-    private var pushToRegisterOB = Observable(false)
-    private var loadStateOb = Observable(LoadState.initial)
+    private(set) var pushToRegisterOB = Observable(false)
+    private(set) var loadStateOb = Observable(LoadState.initial)
+    private(set) var loginType: LoginType?
 
     private let oauthManager = OAuthManager()
 
     let onboardingMessageManager: OnboardingManager
-    
+
     lazy var input: Input = { bindInput() }()
     lazy var output: Output = { transform() }()
 
 
     // MARK: - Initializer
-    
+
     init(onboardingMessageManager:
          OnboardingManager = OnboardingManager(
             messages: [
@@ -52,24 +53,24 @@ final class LoginViewModel {
 
         onboardingMessageManager.startRotation()
     }
-    
+
     // MARK: - Helpers
-    
+
     private func bindInput() -> Input {
         return Input { [weak self] type in
             self?.handleLogin(type: type)
         }
     }
-    
+
     private func transform() -> Output {
         return Output(
             onboardingMessage: Observable(""),
             progressUpdate: Observable((0, 1.0)),
-            pushToRegister: pushToRegisterOB, 
+            pushToRegister: pushToRegisterOB,
             loadState: loadStateOb
         )
     }
-    
+
     private func setupBindings() {
         onboardingMessageManager.messageUpdate = { [weak self] message in
             self?.output.onboardingMessage.value = message
@@ -78,7 +79,7 @@ final class LoginViewModel {
             self?.output.progressUpdate.value = (index, progress)
         }
     }
-    
+
     private func handleLogin(type: LoginType) {
         switch type {
         case .apple:
@@ -96,9 +97,10 @@ final class LoginViewModel {
                             if let idTokenData = credential.identityToken,
                                let idTokenStr = String(data: idTokenData, encoding: .utf8) {
 
+                                KeychainManager.shared.save(key: UserKey.appleUserId, token: credential.user)
                                 let isNewUser = try await AuthService.loginWithApple(idToken: idTokenStr)
 
-                                await setAppFlow(with: isNewUser)
+                                await setAppFlow(with: isNewUser, loginType: .apple)
                                 loadStateOb.value = .completed
                             } else {
                                 print("idToken 변환 실패")
@@ -129,7 +131,7 @@ final class LoginViewModel {
                         do {
                             let isNewUser = try await AuthService.loginWithkakao(idToken: idToken)
 
-                            await setAppFlow(with: isNewUser)
+                            await setAppFlow(with: isNewUser, loginType: .kakao)
                             loadStateOb.value = .completed
 
                         } catch let error as NetworkError {
@@ -147,15 +149,20 @@ final class LoginViewModel {
     /// 신규 회원인지 여부에 따른 App flow 조정 메서드
     /// 1. 신규회원이면 입력폼으로 이동
     /// 2. 신규회원이 아닐 경우
-    ///     - 유저 정보가 존재하면 홈으로
-    ///     - 유저 정보가 존재하지 않으면 입력폼으로
+    ///     - 유저 정보가 존재하면 홈으로 이동 및  로그인 타입 저장
+    ///     - 유저 정보가 존재하지 않으면 입력폼으로 (서비스에 가입은 완료했지만, 아직 정보 입력을 하지 않은 경우)
     @MainActor
-    private func setAppFlow(with isNewUser: Bool) async {
+    private func setAppFlow(with isNewUser: Bool, loginType: LoginType) async {
+        self.loginType = loginType
+
         if isNewUser {
             pushToRegisterOB.value.toggle()
         } else {
             if await isUserInfoExist() {
-                UserDefaults.standard.set(true, forKey: UserDefaults.Key.isLoggedIn)
+                UserDefaults.standard.set(
+                    loginType.rawValue,
+                    forKey: UserDefaults.Key.loginType
+                )
                 NotificationCenter.default.post(name: .authStateChanged, object: nil)
             } else {
                 pushToRegisterOB.value.toggle()

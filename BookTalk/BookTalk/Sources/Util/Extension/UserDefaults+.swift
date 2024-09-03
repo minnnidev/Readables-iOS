@@ -9,8 +9,9 @@ import Foundation
 
 extension UserDefaults {
 
-    struct Key {
+    enum Key {
         static let isLoggedIn = "isLoggedIn"
         static let userData = "userData"
+        static let loginType = "loginType"
     }
 }
