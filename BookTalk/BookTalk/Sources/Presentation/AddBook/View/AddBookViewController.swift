@@ -156,6 +156,12 @@ final class AddBookViewController: BaseViewController {
             }
         }
 
+        viewModel.goalExistAlert.subscribe { [weak self] isExist in
+            guard isExist else { return }
+
+            self?.showAutoDismissAlert(title: "이미 완료된 목표로 추가되어 있어요!")
+        }
+
         viewModel.presentAlert.subscribe { [weak self] isPresented in
             guard isPresented else { return }
 

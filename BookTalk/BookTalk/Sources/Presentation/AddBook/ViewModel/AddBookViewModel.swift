@@ -31,6 +31,7 @@ final class AddBookViewModel {
     private(set) var addBookSucceed = Observable(false)
     private(set) var presentAlert = Observable(false)
     private(set) var presentPageAlert = Observable(false)
+    private(set) var goalExistAlert = Observable(false)
     private(set) var goalBook: Book?
 
     private var currentPage = 1
@@ -100,14 +101,22 @@ final class AddBookViewModel {
             guard let book = book else { return }
             Task {
                 do {
-                    try await GoalService.createGoal(with: book.isbn, totalPage: Int(totalPage)!)
+                    _ = try await GoalService.createGoal(with: book.isbn, totalPage: Int(totalPage)!)
 
                     NotificationCenter.default.post(name: .goalChanged, object: nil)
                     NotificationCenter.default.post(name: .progressChanged, object: nil)
                     addBookSucceed.value = true
 
                 } catch let error as NetworkError {
-                    print(error.localizedDescription)
+                    switch error {
+                    case let .invalidStatusCode(statusCode, message):
+                        if statusCode == 400 &&
+                            message == "해당 책에 대한 목표가 이미 존재합니다." {
+                            goalExistAlert.value = true
+                        }
+                    default:
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }

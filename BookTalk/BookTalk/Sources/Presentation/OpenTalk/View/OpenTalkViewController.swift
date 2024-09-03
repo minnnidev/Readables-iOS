@@ -140,37 +140,39 @@ final class OpenTalkViewController: BaseViewController {
     }
 
     private func bind() {
-        viewModel.loadState.subscribe { [weak self] state in
-            guard let self = self else { return }
+        viewModel.loadState.subscribe { state in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
 
-            switch state {
-            case .initial:
-                break
+                switch state {
+                case .initial:
+                    break
 
-            case .loading:
-                indicatorView.startAnimating()
-                bookCollectionView.isHidden = true
+                case .loading:
+                    indicatorView.startAnimating()
+                    bookCollectionView.isHidden = true
 
-            case .completed:
-                indicatorView.stopAnimating()
-                bookCollectionView.isHidden = false
+                case .completed:
+                    indicatorView.stopAnimating()
+                    bookCollectionView.isHidden = false
 
-                var result: [OpenTalkBookModel] = .init()
+                    var result: [OpenTalkBookModel] = .init()
 
-                switch viewModel.selectedPageType {
-                case .hot:
-                    result = viewModel.hotOpenTalks.value
-                case .liked:
-                    result = viewModel.favoriteOpenTalks.value
+                    switch viewModel.selectedPageType {
+                    case .hot:
+                        result = viewModel.hotOpenTalks.value
+                    case .liked:
+                        result = viewModel.favoriteOpenTalks.value
+                    }
+
+                    if result.isEmpty {
+                        bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
+                    } else {
+                        bookCollectionView.restore()
+                    }
+
+                    bookCollectionView.reloadData()
                 }
-
-                if result.isEmpty {
-                    bookCollectionView.setEmptyMessage("오픈톡이 없습니다.")
-                } else {
-                    bookCollectionView.restore()
-                }
-
-                bookCollectionView.reloadData()
             }
         }
      }
