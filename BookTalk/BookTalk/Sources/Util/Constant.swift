@@ -24,9 +24,18 @@ extension Constant {
 
     static var appVersion: String {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            return "v.\(version)"
+            let versionComponents = version.split(separator: ".").map(String.init)
+            var formattedVersion = versionComponents
+
+            while formattedVersion.count < 3 {
+                formattedVersion.append("0")
+            }
+
+            let fullVersion = formattedVersion.prefix(3).joined(separator: ".")
+
+            return "v.\(fullVersion)"
         }
-        return "v.0.0"
+        return "v.0.0.0"
     }
 }
 
