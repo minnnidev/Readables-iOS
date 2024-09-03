@@ -67,7 +67,7 @@ final class ServerRequestInterceptor: RequestInterceptor {
                 completion(.doNotRetryWithError(error))
                 
                 // 토큰 재발급 불가 시, 로그아웃 처리
-                UserDefaults.standard.set(false, forKey: UserDefaults.Key.isLoggedIn)
+                UserDefaults.standard.set(nil, forKey: UserDefaults.Key.loginType)
                 NotificationCenter.default.post(name: .authStateChanged, object: nil)
             }
         }
