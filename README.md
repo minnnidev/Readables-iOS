@@ -21,7 +21,7 @@
 
 | iOS Developer | iOS Developer | BackEnd Developer | BackEnd Developer |
 | --- | --- | --- | --- |
-| @minnnidev | @rafa-e1 | @chanwoo7 | @hyeesw |
+| [@minnnidev](https://github.com/minnnidev) | [@rafa-e1](https://github.com/rafa-e1) | [@chanwoo7](https://github.com/chanwoo7) | [@hyeesw](https://github.com/hyeesw) |
 
 </br>
 
