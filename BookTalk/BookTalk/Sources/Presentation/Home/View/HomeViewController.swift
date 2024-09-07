@@ -26,12 +26,21 @@ final class HomeViewController: BaseViewController {
         addTarget()
         bind()
 
+        viewModel.send(action: .fetchLocationAndWeather)
         viewModel.send(action: .loadBooks)
     }
 
     // MARK: - Bind
 
     private func bind() {
+        viewModel.weatherConditionOb.subscribe { [weak self] weatherCondition in
+            guard let self = self else { return }
+            let sectionIndex = HomeSectionKind.suggestion.rawValue
+            DispatchQueue.main.async {
+                self.tableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+            }
+        }
+
         viewModel.thisWeekRecommendOb.subscribe { [weak self] _ in
             guard let self = self else { return }
             let sectionIndex = HomeSectionKind.weekRecommendation.rawValue
@@ -64,6 +73,7 @@ final class HomeViewController: BaseViewController {
 
     @objc private func refreshTableView() {
         viewModel.send(action: .loadBooks)
+        viewModel.send(action: .fetchLocationAndWeather)
 
         DispatchQueue.main.async {
             self.refreshControl.endRefreshing()
@@ -175,7 +185,8 @@ extension HomeViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
             cell.bind(
-                "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님, 오늘의 추천 도서를 확인해보세요!"
+                "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님, 오늘의 추천 도서를 확인해보세요!",
+                weatherCondition: viewModel.weatherConditionOb.value
             )
             return cell
 

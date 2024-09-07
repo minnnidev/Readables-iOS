@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WeatherKit
 
 final class SuggestionCell: BaseTableViewCell {
     
@@ -17,23 +18,11 @@ final class SuggestionCell: BaseTableViewCell {
 
     // MARK: - Bind
     
-    func bind(_ text: String) {
+    func bind(_ text: String, weatherCondition: WeatherCondition?) {
         suggestionLabel.text = text
-
-        viewModel.currentBackgroundImage.subscribe { [weak self] imageName in
-            guard let self = self else { return }
-            UIView.transition(
-                with: backgroundImageView,
-                duration: 0.5,
-                options: .transitionCrossDissolve
-            ) {
-                self.backgroundImageView.image = UIImage(named: imageName)
-            }
-        }
-
-        viewModel.send(action: .loadBackgroundImageView)
+        backgroundImageView.image = viewModel.backgroundImage(for: weatherCondition)
     }
-    
+
     // MARK: - Set UI
     
     override func setViews() {
