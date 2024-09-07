@@ -5,7 +5,9 @@
 //  Created by RAFA on 7/29/24.
 //
 
+import CoreLocation
 import UIKit
+import WeatherKit
 
 final class HomeViewModel {
 
@@ -15,14 +17,20 @@ final class HomeViewModel {
     private(set) var popularLoansOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     private(set) var ageTrendOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     private(set) var loadState = Observable(LoadState.initial)
-    private(set) var currentBackgroundImage = Observable<String>(WeatherImage.images.first ?? "clear")
-    private var imageTimer: Timer?
-    private var currentImageIndex = 0
+    private(set) var weatherConditionOb = Observable<WeatherCondition?>(nil)
+
+    private let locationManager = LocationManager()
+    private let weatherService = WeatherServiceManager()
+
+    init() {
+        locationManager.delegate = self
+        weatherService.delegate = self
+    }
 
     enum Action {
         case setKeywordExpandState(newState: Bool)
         case loadBooks
-        case loadBackgroundImageView
+        case fetchLocationAndWeather
     }
 
     func send(action: Action) {
@@ -38,8 +46,85 @@ final class HomeViewModel {
                 await loadAgeTrend()
             }
 
-        case .loadBackgroundImageView:
-            setImageTimer()
+        case .fetchLocationAndWeather:
+            locationManager.requestLocation()
+        }
+    }
+
+    func backgroundImage(for condition: WeatherCondition?) -> UIImage? {
+        guard let condition = condition else { return UIImage(named: "sunny") }
+
+        switch condition {
+        case .blizzard:
+            return UIImage(named: "snow")
+        case .blowingDust:
+            return UIImage(named: "dust")
+        case .blowingSnow:
+            return UIImage(named: "snow")
+        case .breezy:
+            return UIImage(named: "windy")
+        case .clear:
+            return UIImage(named: "sunny")
+        case .cloudy:
+            return UIImage(named: "cloudy")
+        case .drizzle:
+            return UIImage(named: "rain")
+        case .flurries:
+            return UIImage(named: "snow")
+        case .foggy:
+            return UIImage(named: "foggy")
+        case .freezingDrizzle:
+            return UIImage(named: "snow")
+        case .freezingRain:
+            return UIImage(named: "hail")
+        case .frigid:
+            return UIImage(named: "snow")
+        case .hail:
+            return UIImage(named: "hail")
+        case .haze:
+            return UIImage(named: "foggy")
+        case .heavyRain:
+            return UIImage(named: "rain")
+        case .heavySnow:
+            return UIImage(named: "snow")
+        case .hot:
+            return UIImage(named: "sunny")
+        case .hurricane:
+            return UIImage(named: "tornado")
+        case .isolatedThunderstorms:
+            return UIImage(named: "thunder")
+        case .mostlyClear:
+            return UIImage(named: "sunny")
+        case .mostlyCloudy:
+            return UIImage(named: "cloudy")
+        case .partlyCloudy:
+            return UIImage(named: "cloudy")
+        case .rain:
+            return UIImage(named: "rain")
+        case .scatteredThunderstorms:
+            return UIImage(named: "thunder")
+        case .sleet:
+            return UIImage(named: "snow")
+        case .smoky:
+            return UIImage(named: "foggy")
+        case .snow:
+            return UIImage(named: "snow")
+        case .strongStorms:
+            return UIImage(named: "thunder")
+        case .sunFlurries:
+            return UIImage(named: "sunFlurries")
+        case .sunShowers:
+            return UIImage(named: "sunShowers")
+        case .thunderstorms:
+            return UIImage(named: "thunder")
+        case .tropicalStorm:
+            return UIImage(named: "thunder")
+        case .windy:
+            return UIImage(named: "windy")
+        case .wintryMix:
+            return UIImage(named: "snow")
+        default:
+            return UIImage(named: "sunny")
         }
     }
 
@@ -93,20 +178,24 @@ final class HomeViewModel {
             print(error.localizedDescription)
         }
     }
+}
 
-    private func setImageTimer() {
-        imageTimer?.invalidate()
-        imageTimer = Timer.scheduledTimer(
-            timeInterval: 5,
-            target: self,
-            selector: #selector(changeBackgroundImage),
-            userInfo: nil,
-            repeats: true
-        )
+// MARK: - LocationManagerDelegate
+
+extension HomeViewModel: LocationManagerDelegate {
+
+    func didUpdateLocation(_ location: CLLocation) {
+        Task {
+            await weatherService.fetchWeather(for: location)
+        }
     }
+}
 
-    @objc private func changeBackgroundImage() {
-        currentImageIndex = (currentImageIndex + 1) % WeatherImage.images.count
-        currentBackgroundImage.value = WeatherImage.images[currentImageIndex]
+// MARK: - WeatherServiceManagerDelegate
+
+extension HomeViewModel: WeatherServiceManagerDelegate {
+
+    func didUpdateWeatherCondition(_ condition: WeatherCondition?) {
+        weatherConditionOb.value = condition
     }
 }
