@@ -58,11 +58,6 @@ final class KeychainManager {
         save(key: TokenKey.refreshToken, token: refreshToken)
     }
 
-    func deleteTokens() {
-        delete(key: TokenKey.accessToken)
-        delete(key: TokenKey.refreshToken)
-    }
-
     func deleteAll() {
         let query: NSDictionary = [
             kSecClass: kSecClassInternetPassword
