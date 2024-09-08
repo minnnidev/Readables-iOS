@@ -42,6 +42,13 @@ final class SearchViewController: BaseViewController {
         setDelegate()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.loadSearchHistory()
+        tableView.reloadData()
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -235,7 +242,15 @@ final class SearchViewController: BaseViewController {
     }
 
     @objc private func toggleSearchMode() {
-        viewModel.input.keywordButtonTapped(switchSearchModeButton.isOn)
+        guard let searchText = searchBar.text, !searchText.isEmpty else { return }
+
+        if switchSearchModeButton.isOn {
+            viewModel.input.keywordButtonTapped(true)
+        } else {
+            viewModel.input.keywordButtonTapped(false)
+        }
+
+        tableView.reloadData()
     }
 }
 
@@ -251,36 +266,41 @@ extension SearchViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return viewModel.output.searchResult.value.count
+        if !viewModel.output.searchResult.value.isEmpty {
+            return viewModel.output.searchResult.value.count
+        } else {
+            return viewModel.output.searchHistory.value.count
+        }
     }
 
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        if viewModel.output.searchResult.value.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: SearchHistoryCell.identifier,
-                for: indexPath
-            ) as? SearchHistoryCell else {
-                return UITableViewCell()
-            }
-            cell.selectionStyle = .none
-
-            return cell
-        } else {
+        if !viewModel.output.searchResult.value.isEmpty {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: SearchResultCell.identifier,
                 for: indexPath
             ) as? SearchResultCell else {
                 return UITableViewCell()
             }
-            cell.delegate = self
-            cell.selectionStyle = .none
-            cell.separatorInset = .zero
 
             let book = viewModel.output.searchResult.value[indexPath.row]
             cell.bind(book: book)
+
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: SearchHistoryCell.identifier,
+                for: indexPath
+            ) as? SearchHistoryCell else {
+                return UITableViewCell()
+            }
+
+            let history = viewModel.output.searchHistory.value[indexPath.row]
+            cell.selectionStyle = .none
+            cell.bind(history)
+            cell.delegate = self
 
             return cell
         }
@@ -304,8 +324,10 @@ extension SearchViewController: UITableViewDelegate {
             navigateToBookDetail(with: selectedBook)
 
         case SearchHistoryCell.identifier:
-            // TODO: 최근 검색어
-            break
+            let selectedHistory = viewModel.output.searchHistory.value[indexPath.row]
+            viewModel.input.searchButtonTapped(selectedHistory)
+            searchBar.text = selectedHistory
+            tableView.reloadData()
 
         default:
             break
@@ -348,10 +370,16 @@ extension SearchViewController: UISearchBarDelegate {
 
         if let searchText = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             !searchText.isEmpty {
-            let sanitizedSearchText = searchText
-                .replacingOccurrences(of: " ", with: "").lowercased()
 
-            viewModel.input.searchButtonTapped(sanitizedSearchText)
+            viewModel.input.searchButtonTapped(searchText)
+        }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            viewModel.output.searchResult.value.removeAll()
+            viewModel.loadSearchHistory()
+            tableView.reloadData()
         }
     }
 }
@@ -361,7 +389,11 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchHistoryCellDelegate {
 
     func didTapDeleteButton(cell: SearchHistoryCell) {
-        // TODO: 최근 검색어 기능 구현 시 삭제 기능
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+
+        let searchTermToDelete = viewModel.output.searchHistory.value[indexPath.row]
+        viewModel.input.deleteSearchHistory(searchTermToDelete)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
