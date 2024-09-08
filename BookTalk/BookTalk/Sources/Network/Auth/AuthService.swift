@@ -44,7 +44,7 @@ struct AuthService {
             target: AuthTarget.logout
         )
 
-        KeychainManager.shared.deleteTokens()
+        AuthManager.shared.initAuthState()
     }
 
     static func withdraw() async throws {
@@ -52,7 +52,7 @@ struct AuthService {
             target: AuthTarget.withdraw
         )
 
-        KeychainManager.shared.deleteTokens()
+        AuthManager.shared.initAuthState()
     }
 
     static func reissueToken(with refreshToken: String) async throws {

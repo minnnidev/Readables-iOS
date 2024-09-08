@@ -9,13 +9,7 @@ import Foundation
 
 import Alamofire
 
-protocol NetworkServiceType {
-    func request<T: Decodable>(
-        target: TargetType
-    ) async throws -> T
-}
-
-final class NetworkService: NetworkServiceType {
+final class NetworkService {
 
     // MARK: - Properties
 
