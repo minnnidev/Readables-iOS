@@ -182,11 +182,12 @@ extension HomeViewController: UITableViewDataSource {
             ) as? SuggestionCell else {
                 return UITableViewCell()
             }
+            let weatherImage = viewModel.backgroundImage(for: viewModel.weatherConditionOb.value)
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
             cell.bind(
                 "\(UserData.shared.getUser()?.nickname ?? "이름 없음")님, 오늘의 추천 도서를 확인해보세요!",
-                weatherCondition: viewModel.weatherConditionOb.value
+                backgroundImage: weatherImage
             )
             return cell
 
