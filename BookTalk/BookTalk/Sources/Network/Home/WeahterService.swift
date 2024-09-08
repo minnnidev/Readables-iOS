@@ -8,23 +8,17 @@
 import CoreLocation
 import WeatherKit
 
-protocol WeatherServiceManagerDelegate: AnyObject {
-    
-    func didUpdateWeatherCondition(_ condition: WeatherCondition?)
-}
-
 final class WeatherServiceManager {
 
-    weak var delegate: WeatherServiceManagerDelegate?
-
-    func fetchWeather(for location: CLLocation) async {
+    func fetchWeather(for location: CLLocation) async -> WeatherCondition? {
         let weatherService = WeatherService()
 
         do {
             let weather = try await weatherService.weather(for: location)
-            delegate?.didUpdateWeatherCondition(weather.currentWeather.condition)
+            return weather.currentWeather.condition
         } catch {
             print("DEBUG: Weather fetching error \(error)")
+            return nil
         }
     }
 }

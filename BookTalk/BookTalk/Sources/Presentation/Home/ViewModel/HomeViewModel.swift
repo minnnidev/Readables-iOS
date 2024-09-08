@@ -24,7 +24,6 @@ final class HomeViewModel {
 
     init() {
         locationManager.delegate = self
-        weatherService.delegate = self
     }
 
     enum Action {
@@ -186,16 +185,9 @@ extension HomeViewModel: LocationManagerDelegate {
 
     func didUpdateLocation(_ location: CLLocation) {
         Task {
-            await weatherService.fetchWeather(for: location)
+            if let condition = await weatherService.fetchWeather(for: location) {
+                weatherConditionOb.value = condition
+            }
         }
-    }
-}
-
-// MARK: - WeatherServiceManagerDelegate
-
-extension HomeViewModel: WeatherServiceManagerDelegate {
-
-    func didUpdateWeatherCondition(_ condition: WeatherCondition?) {
-        weatherConditionOb.value = condition
     }
 }
