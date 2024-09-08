@@ -701,6 +701,7 @@
 				AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */,
 				AB949A2E2C7474580005C543 /* AppFlowController.swift */,
 				AB516B5F2C7A052C00168EEF /* UserData.swift */,
+				0511B1C52C89B77800433173 /* LocationManager.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1627,7 +1628,6 @@
 			children = (
 				ABEF81322C7BD156007D1DC7 /* HomeTarget.swift */,
 				ABEF81342C7BD15C007D1DC7 /* HomeService.swift */,
-				0511B1C52C89B77800433173 /* LocationManager.swift */,
 				05F48B7F2C8C767600DABF81 /* WeahterService.swift */,
 			);
 			path = Home;
