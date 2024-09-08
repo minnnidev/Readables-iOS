@@ -11,6 +11,7 @@
 		051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051156002C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift */; };
 		051156032C64C71B00230CFE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051156022C64C71B00230CFE /* BaseTableViewCell.swift */; };
 		051156052C64C73F00230CFE /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051156042C64C73F00230CFE /* BaseCollectionViewCell.swift */; };
+		0511B1C62C89B77800433173 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0511B1C52C89B77800433173 /* LocationManager.swift */; };
 		054543352C5374D900E64948 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543342C5374D900E64948 /* SearchViewController.swift */; };
 		054543992C5749F300E64948 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543982C5749F300E64948 /* HomeViewModel.swift */; };
 		054543A22C5751DD00E64948 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054543A12C5751DD00E64948 /* SuggestionCell.swift */; };
@@ -57,6 +58,8 @@
 		05C2F11E2C8041A100ACFBAE /* WeatherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C2F11D2C8041A100ACFBAE /* WeatherImage.swift */; };
 		05CB069C2C7699E100673947 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069B2C7699E100673947 /* UserInfoViewModel.swift */; };
 		05CB069E2C769A1700673947 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069D2C769A1700673947 /* UserInfoViewController.swift */; };
+		05F48B802C8C767600DABF81 /* WeahterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F48B7F2C8C767600DABF81 /* WeahterService.swift */; };
+		05F48B822C8D9AC800DABF81 /* UIImage+WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F48B812C8D9AC800DABF81 /* UIImage+WeatherCondition.swift */; };
 		AB0784812C74F8910017812F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784802C74F8910017812F /* KakaoSDKAuth */; };
 		AB0784832C74F8910017812F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784822C74F8910017812F /* KakaoSDKUser */; };
 		AB0784852C74FA1D0017812F /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0784842C74FA1D0017812F /* OAuthManager.swift */; };
@@ -224,6 +227,7 @@
 		051156002C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		051156022C64C71B00230CFE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		051156042C64C73F00230CFE /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		0511B1C52C89B77800433173 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		054543342C5374D900E64948 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		054543982C5749F300E64948 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		054543A12C5751DD00E64948 /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 		05C2F11D2C8041A100ACFBAE /* WeatherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImage.swift; sourceTree = "<group>"; };
 		05CB069B2C7699E100673947 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		05CB069D2C769A1700673947 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		05F48B7F2C8C767600DABF81 /* WeahterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeahterService.swift; sourceTree = "<group>"; };
+		05F48B812C8D9AC800DABF81 /* UIImage+WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+WeatherCondition.swift"; sourceTree = "<group>"; };
 		AB0784842C74FA1D0017812F /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		AB0784862C74FF2C0017812F /* BookTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookTalk.entitlements; sourceTree = "<group>"; };
 		AB07848A2C75A89E0017812F /* ISBNRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNRequestDTO.swift; sourceTree = "<group>"; };
@@ -697,6 +703,7 @@
 				AB22AD3D2C4E8D9D00C9A0F3 /* SceneDelegate.swift */,
 				AB949A2E2C7474580005C543 /* AppFlowController.swift */,
 				AB516B5F2C7A052C00168EEF /* UserData.swift */,
+				0511B1C52C89B77800433173 /* LocationManager.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -909,6 +916,7 @@
 				AB6C19D22C79D3B100BF844C /* String+.swift */,
 				AB54682C2C7B936B0062F899 /* UIViewController+.swift */,
 				AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */,
+				05F48B812C8D9AC800DABF81 /* UIImage+WeatherCondition.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1623,6 +1631,7 @@
 			children = (
 				ABEF81322C7BD156007D1DC7 /* HomeTarget.swift */,
 				ABEF81342C7BD15C007D1DC7 /* HomeService.swift */,
+				05F48B7F2C8C767600DABF81 /* WeahterService.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1773,10 +1782,12 @@
 				054FA1812C7465710007D9C9 /* WaveView.swift in Sources */,
 				AB5D35632C7797050028995C /* LibrariesResponseDTO.swift in Sources */,
 				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
+				05F48B822C8D9AC800DABF81 /* UIImage+WeatherCondition.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
 				ABB993602C7F80C900E6DB67 /* CreateGoalRequestDTO.swift in Sources */,
 				ABEF81382C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift in Sources */,
 				051156012C64C6F100230CFE /* BaseTableViewHeaderFooterView.swift in Sources */,
+				0511B1C62C89B77800433173 /* LocationManager.swift in Sources */,
 				AB0C0F7A2C5F6D19007812C5 /* NowReadingCell.swift in Sources */,
 				ABC8202C2C7B0C85001AB371 /* TokenResponseDTO.swift in Sources */,
 				054FA18C2C748D1F0007D9C9 /* FullScreenViewController.swift in Sources */,
@@ -1852,6 +1863,7 @@
 				AB5D35552C775AB20028995C /* UserBasicInfo.swift in Sources */,
 				AB0C0F6D2C5BFE5C007812C5 /* ChatViewModel.swift in Sources */,
 				054FA1752C74643C0007D9C9 /* OnboardingManager.swift in Sources */,
+				05F48B802C8C767600DABF81 /* WeahterService.swift in Sources */,
 				056F30502C60D57100931302 /* BookInfoCell.swift in Sources */,
 				051156032C64C71B00230CFE /* BaseTableViewCell.swift in Sources */,
 				AB2E7BE12C53C16500CE43CB /* BannerCell.swift in Sources */,
@@ -2082,7 +2094,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2122,7 +2134,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
