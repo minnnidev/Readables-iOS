@@ -59,6 +59,7 @@
 		05CB069C2C7699E100673947 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069B2C7699E100673947 /* UserInfoViewModel.swift */; };
 		05CB069E2C769A1700673947 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CB069D2C769A1700673947 /* UserInfoViewController.swift */; };
 		05F48B802C8C767600DABF81 /* WeahterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F48B7F2C8C767600DABF81 /* WeahterService.swift */; };
+		05F48B822C8D9AC800DABF81 /* UIImage+WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F48B812C8D9AC800DABF81 /* UIImage+WeatherCondition.swift */; };
 		AB0784812C74F8910017812F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784802C74F8910017812F /* KakaoSDKAuth */; };
 		AB0784832C74F8910017812F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = AB0784822C74F8910017812F /* KakaoSDKUser */; };
 		AB0784852C74FA1D0017812F /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0784842C74FA1D0017812F /* OAuthManager.swift */; };
@@ -274,6 +275,7 @@
 		05CB069B2C7699E100673947 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
 		05CB069D2C769A1700673947 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		05F48B7F2C8C767600DABF81 /* WeahterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeahterService.swift; sourceTree = "<group>"; };
+		05F48B812C8D9AC800DABF81 /* UIImage+WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+WeatherCondition.swift"; sourceTree = "<group>"; };
 		AB0784842C74FA1D0017812F /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		AB0784862C74FF2C0017812F /* BookTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookTalk.entitlements; sourceTree = "<group>"; };
 		AB07848A2C75A89E0017812F /* ISBNRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISBNRequestDTO.swift; sourceTree = "<group>"; };
@@ -914,6 +916,7 @@
 				AB6C19D22C79D3B100BF844C /* String+.swift */,
 				AB54682C2C7B936B0062F899 /* UIViewController+.swift */,
 				AB4F962D2C8090FE00DE55E6 /* UITextField+.swift */,
+				05F48B812C8D9AC800DABF81 /* UIImage+WeatherCondition.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1779,6 +1782,7 @@
 				054FA1812C7465710007D9C9 /* WaveView.swift in Sources */,
 				AB5D35632C7797050028995C /* LibrariesResponseDTO.swift in Sources */,
 				ABAAFDBB2C76FE9E00FDA084 /* LoadState.swift in Sources */,
+				05F48B822C8D9AC800DABF81 /* UIImage+WeatherCondition.swift in Sources */,
 				AB4CBA662C6BB398009A2AB6 /* KeychainManager.swift in Sources */,
 				ABB993602C7F80C900E6DB67 /* CreateGoalRequestDTO.swift in Sources */,
 				ABEF81382C7BD4B1007D1DC7 /* HotTrendResponseDTO.swift in Sources */,

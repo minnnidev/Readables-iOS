@@ -18,9 +18,9 @@ final class SuggestionCell: BaseTableViewCell {
 
     // MARK: - Bind
     
-    func bind(_ text: String, backgroundImage: UIImage?) {
+    func bind(_ text: String, weatherCondition: WeatherCondition?) {
         suggestionLabel.text = text
-        backgroundImageView.image = backgroundImage
+        backgroundImageView.image = UIImage.image(for: weatherCondition)
     }
 
     // MARK: - Set UI
