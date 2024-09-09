@@ -12,5 +12,6 @@ extension UserDefaults {
     enum Key {
         static let userData = "userData"
         static let loginType = "loginType"
+        static let searchHistory = "searchHistory"
     }
 }
