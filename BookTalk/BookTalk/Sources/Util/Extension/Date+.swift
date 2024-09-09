@@ -16,6 +16,7 @@ extension Date {
         var calendar = Calendar.current
         calendar.timeZone = koreaTimeZone
         calendar.firstWeekday = 2
+        calendar.minimumDaysInFirstWeek = 4  
 
         let components = calendar.dateComponents([.year, .month, .weekOfMonth], from: self)
         let month = components.month!

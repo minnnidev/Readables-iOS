@@ -37,4 +37,11 @@ final class UserData {
             return nil
         }
     }
+
+    func deleteUser() {
+        defaults.removeObject(forKey: key)
+        defaults.synchronize()
+        
+        print("유저 데이터 삭제 완료")
+    }
 }

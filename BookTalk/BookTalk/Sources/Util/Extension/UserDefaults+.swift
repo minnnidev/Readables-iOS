@@ -10,7 +10,6 @@ import Foundation
 extension UserDefaults {
 
     enum Key {
-        static let isLoggedIn = "isLoggedIn"
         static let userData = "userData"
         static let loginType = "loginType"
         static let searchHistory = "searchHistory"
