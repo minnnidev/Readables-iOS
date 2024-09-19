@@ -280,7 +280,7 @@ final class DetailGoalViewController: BaseViewController {
         }
 
         alreadyRecordLabel.do {
-            $0.text = "오늘은 기록은 이미 추가되었어요."
+            $0.text = "오늘 기록은 이미 추가되었어요!"
             $0.font = .systemFont(ofSize: 15)
             $0.textColor = .lightGray
             $0.isHidden = true

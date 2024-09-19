@@ -5,7 +5,9 @@
 //  Created by RAFA on 7/29/24.
 //
 
+import CoreLocation
 import UIKit
+import WeatherKit
 
 final class HomeViewModel {
 
@@ -15,14 +17,19 @@ final class HomeViewModel {
     private(set) var popularLoansOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     private(set) var ageTrendOb = Observable<BooksWithHeader>(.init(headerTitle: "", books: []))
     private(set) var loadState = Observable(LoadState.initial)
-    private(set) var currentBackgroundImage = Observable<String>(WeatherImage.images.first ?? "clear")
-    private var imageTimer: Timer?
-    private var currentImageIndex = 0
+    private(set) var weatherConditionOb = Observable<WeatherCondition?>(nil)
+
+    private let locationManager = LocationManager()
+    private let weatherService = WeatherServiceManager()
+
+    init() {
+        locationManager.delegate = self
+    }
 
     enum Action {
         case setKeywordExpandState(newState: Bool)
         case loadBooks
-        case loadBackgroundImageView
+        case fetchLocationAndWeather
     }
 
     func send(action: Action) {
@@ -38,8 +45,8 @@ final class HomeViewModel {
                 await loadAgeTrend()
             }
 
-        case .loadBackgroundImageView:
-            setImageTimer()
+        case .fetchLocationAndWeather:
+            locationManager.requestLocation()
         }
     }
 
@@ -93,20 +100,17 @@ final class HomeViewModel {
             print(error.localizedDescription)
         }
     }
+}
 
-    private func setImageTimer() {
-        imageTimer?.invalidate()
-        imageTimer = Timer.scheduledTimer(
-            timeInterval: 5,
-            target: self,
-            selector: #selector(changeBackgroundImage),
-            userInfo: nil,
-            repeats: true
-        )
-    }
+// MARK: - LocationManagerDelegate
 
-    @objc private func changeBackgroundImage() {
-        currentImageIndex = (currentImageIndex + 1) % WeatherImage.images.count
-        currentBackgroundImage.value = WeatherImage.images[currentImageIndex]
+extension HomeViewModel: LocationManagerDelegate {
+
+    func didUpdateLocation(_ location: CLLocation) {
+        Task {
+            if let condition = await weatherService.fetchWeather(for: location) {
+                weatherConditionOb.value = condition
+            }
+        }
     }
 }

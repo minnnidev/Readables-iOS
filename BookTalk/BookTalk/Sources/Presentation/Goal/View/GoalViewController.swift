@@ -189,14 +189,14 @@ extension GoalViewController: UITableViewDataSource {
             if sectionType == .progressGoal {
                 cell.bind(
                     goal: .init(
-                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "")님이 진행중인 목표 ⚡",
+                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "")님이 진행 중인 목표 ⚡",
                         goals: viewModel.progressingGoals.value
                     )
                 )
             } else if sectionType == .completedGoal {
                 cell.bind(
                     goal: .init(
-                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "") 님이 완료한 목표 📚",
+                        headerTitle: "\(UserData.shared.getUser()?.nickname ?? "")님이 완료한 목표 📚",
                         goals: viewModel.completedGoals.value
                     )
                 )

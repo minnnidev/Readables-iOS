@@ -12,6 +12,8 @@ final class SearchViewModel {
     // MARK: - Interactions
 
     struct Input {
+        let deleteSearchHistory: (String) -> Void
+        let clearSearchHistory: () -> Void
         let searchWithKeyword: (String?) -> Void
         let searchButtonTapped: (String) -> Void
         let keywordButtonTapped: (Bool) -> Void
@@ -20,6 +22,7 @@ final class SearchViewModel {
 
     struct Output {
         let searchResult: Observable<[DetailBookInfo]>
+        let searchHistory: Observable<[String]>
         let isKeywordSearch: Observable<Bool>
         let loadingState: Observable<LoadState>
         let keywordSearchText: Observable<String>
@@ -32,8 +35,11 @@ final class SearchViewModel {
     private let loadingState = Observable<LoadState>(.initial)
     private let placeholderText = Observable<String>("")
     private let searchTextOb = Observable<String>("")
+    private let searchHistoryOb = Observable<[String]>([])
 
     private var searchResult = Observable<[DetailBookInfo]>([])
+    private let userDefaults = UserDefaults.standard
+    private let searchHistoryKey = UserDefaults.Key.searchHistory
     private var currentPage = 1
     private var pageSize = 30
     private var hasMoreResult = true
@@ -52,6 +58,32 @@ final class SearchViewModel {
     }
 
     // MARK: - Helpers
+
+    func saveSearchHistory(_ text: String) {
+        var currentHistory = userDefaults.stringArray(forKey: searchHistoryKey) ?? []
+        currentHistory.removeAll { $0 == text }
+        currentHistory.insert(text, at: 0)
+
+        userDefaults.set(currentHistory, forKey: searchHistoryKey)
+        searchHistoryOb.value = currentHistory
+    }
+
+    func loadSearchHistory() {
+        let history = userDefaults.stringArray(forKey: searchHistoryKey) ?? []
+        searchHistoryOb.value = history
+    }
+
+    func deleteSearchHistoryItem(_ term: String) {
+        var currentHistory = userDefaults.stringArray(forKey: searchHistoryKey) ?? []
+        currentHistory.removeAll { $0 == term }
+        userDefaults.set(currentHistory, forKey: searchHistoryKey)
+        searchHistoryOb.value = currentHistory
+    }
+
+    func clearSearchHistory() {
+        userDefaults.removeObject(forKey: searchHistoryKey)
+        searchHistoryOb.value.removeAll()
+    }
 
     func loadResults(of searchText: String, page: Int = 1) {
         guard hasMoreResult else { return }
@@ -79,6 +111,8 @@ final class SearchViewModel {
                     loadingState.value = .completed
                     if searchResult.isEmpty { hasMoreResult = false }
                 }
+
+                saveSearchHistory(searchText)
 
             } catch let error as NetworkError {
                 print(error.localizedDescription)
@@ -111,6 +145,8 @@ final class SearchViewModel {
         let searchButtonTapped: (String) -> Void = { [weak self] searchText in
             guard let self = self else { return }
 
+            guard !searchText.isEmpty else { return }
+
             searchTextOb.value = searchText
             loadResultFirstTime(of: searchText)
         }
@@ -118,10 +154,14 @@ final class SearchViewModel {
         let keywordButtonTapped: (Bool) -> Void = { [weak self] isKeyword in
             guard let self = self else { return }
 
+            searchResult.value.removeAll()
+            hasMoreResult = true
             isKeywordSearchRelay.value = isKeyword
 
             placeholderText.value = isKeyword ?
                 "키워드를 입력해주세요." : "책 이름 또는 작가 이름을 입력해주세요."
+
+            guard !searchTextOb.value.isEmpty else { return }
 
             loadResultFirstTime(of: searchTextOb.value)
         }
@@ -133,8 +173,19 @@ final class SearchViewModel {
             loadResults(of: searchTextOb.value, page: currentPage)
         }
 
+
+        let deleteSearchHistoryItem: (String) -> Void = { [weak self] term in
+            self?.deleteSearchHistoryItem(term)
+        }
+
+        let clearSearchHistory: () -> Void = { [weak self] in
+            self?.clearSearchHistory()
+        }
+
         return Input(
-            searchWithKeyword: searchWithKeyword, 
+            deleteSearchHistory: deleteSearchHistoryItem,
+            clearSearchHistory: clearSearchHistory,
+            searchWithKeyword: searchWithKeyword,
             searchButtonTapped: searchButtonTapped,
             keywordButtonTapped: keywordButtonTapped,
             loadMoreResults: loadMoreResults
@@ -144,6 +195,7 @@ final class SearchViewModel {
     private func bindOutput() -> Output {
         return Output(
             searchResult: searchResult,
+            searchHistory: searchHistoryOb,
             isKeywordSearch: isKeywordSearchRelay,
             loadingState: loadingState,
             keywordSearchText: searchTextOb, 
